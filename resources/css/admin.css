@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&family=IBM+Plex+Sans+Arabic&family=Lobster&family=Kreon:wght@500&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+body
+{
+    font-family: 'Poppins',sans-serif;
+}
+
+.btn-circle
+{
+    padding: 5px 10px 5px;
+    border-radius: 50px;
+    width: 150px;
+}
+#double-btn{
+    text-align: center;
+}
+
+#btn-retour{
+    width: 110px;
+}
+
+
