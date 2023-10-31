@@ -198,6 +198,9 @@ return [
 
         // datatables
         Yajra\DataTables\DataTablesServiceProvider::class,
+
+        // DOMPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
