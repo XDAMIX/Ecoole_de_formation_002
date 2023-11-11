@@ -402,22 +402,22 @@
             <div class="social-links mt-3" data-aos="flip-up">
               @foreach($liens as $lien)
 
-              @if($lien->reseau_social == 'Twitter')
+              @if($lien->reseau_social == 'Twitter' && $lien->lien !== '' )
               <a href="{{$lien->lien}}" target="_blank" class="twitter"><i class="bx bxl-twitter"></i></a>
               @endif
-              @if($lien->reseau_social == 'Facebook')
+              @if($lien->reseau_social == 'Facebook' && $lien->lien !== '' )
               <a href="{{$lien->lien}}" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
               @endif
-              @if($lien->reseau_social == 'Instagram')
+              @if($lien->reseau_social == 'Instagram' && $lien->lien !== '' )
               <a href="{{$lien->lien}}" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
               @endif
-              @if($lien->reseau_social == 'Youtube')
+              @if($lien->reseau_social == 'Youtube' && $lien->lien !== '' )
               <a href="{{$lien->lien}}" target="_blank" class="Youtube"><i class="bx bxl-youtube"></i></a>
               @endif
-              @if($lien->reseau_social == 'Linkedin')
+              @if($lien->reseau_social == 'Linkedin' && $lien->lien !== '' )
               <a href="{{$lien->lien}}" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
               @endif
-              @if($lien->reseau_social == 'Tiktok')
+              @if($lien->reseau_social == 'Tiktok' && $lien->lien !== '' )
               <a href="{{$lien->lien}}" target="_blank" class="tiktok"><i class="bx bxl-tiktok"></i></a>
               @endif
 

@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Information;
 use App\Models\Lien;
 use App\Models\Telephone;
+use App\Models\Acceuil;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\InformationRequest;
+
+use RealRashid\SweetAlert\Facades\Alert;
 
 class InformationController extends Controller
 {
@@ -20,10 +23,14 @@ class InformationController extends Controller
         $listeinformations = Information::all();
         $listeliens = Lien::all();
         $listetelephones = Telephone::all();
+        $acceuils = Acceuil::all();
     
+        if ($listeinformations->isEmpty()) {
+            return redirect('/admin/ecole/save');
+        }
+        
 
-
-        return view('admin.ecole.index',[ 'informations'=>$listeinformations , 'liens'=>$listeliens , 'telephones'=>$listetelephones]);
+        return view('admin.ecole.index',[ 'informations'=>$listeinformations , 'liens'=>$listeliens , 'telephones'=>$listetelephones, 'acceuils' => $acceuils]);
     
 
 
@@ -35,7 +42,18 @@ class InformationController extends Controller
     }
 
     public function store() {
+        $information = new Information();
 
+        $information->nom = 'vide';
+        $information->adresse = 'vide';
+        $information->localisation = 'vide';
+        $information->email = 'vide';
+        $information->heure_travail = 'vide';
+        $information->logo = 'vide';
+
+        $information->save();
+
+        return redirect('/admin/ecole');
     }
 
     public function edit($id) {
@@ -55,6 +73,10 @@ class InformationController extends Controller
         }
 
         $information->save();
+
+        // message popup
+        Alert::success( 'Les informations ont été modifiées avec succès ! merci')->position('center')->autoClose(2000);
+
         return redirect('/admin/ecole');
 
     }

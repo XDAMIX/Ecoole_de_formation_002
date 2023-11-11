@@ -21,15 +21,27 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="../../css/actualites.css" rel="stylesheet">
+  {{-- <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"> --}}
+  {{-- <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet"> --}}
+  {{-- <link href="assets/vendor/aos/aos.css" rel="stylesheet"> --}}
+  {{-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --}}
+  {{-- <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> --}}
+  {{-- <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"> --}}
+  {{-- <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"> --}}
+  {{-- <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> --}}
+
+
+  {{-- avec l'aide de chatgpt --}}
+  <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+
   <!-- Scripts -->
   @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
 
@@ -37,6 +49,8 @@
 </head>
 
 <body>
+  
+  
 
 
 
@@ -125,29 +139,29 @@
           </div>
           <!-- offcanvas -->
 
-          <nav id="navbar" class="navbar">
+
+          {{-- <nav id="navbar" class="navbar">
             <ul>
               <li> <a class="nav-link scrollto " href="{{url('/')}}"> <i class="fa-solid fa-house"> </i> Retour à l'acceuil</a></li>
 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
 
-          </nav>
+          </nav> --}}
 
-          <!-- button inscription -->
-          {{-- <a class="btn-inscrir" href="{{('/inscription/nouveau')}}">
-            <h6><i class="bi bi-mortarboard-fill"></i>Inscription</h6>
-          </a> --}}
-          <!-- button inscription -->
 
-          <!-- navbar -->
-        </div>
+          <a class="btn btn-light" href="/">
+            <i class="bi bi-house"></i>
+            Retour à l'acceuil
+          </a>
+
+
+
+         </div>
       </div>
 
     </div>
   </header>
-  <!-- End Header -->
-
 
 
 
@@ -230,43 +244,28 @@
     }
   </style>
 
-  @yield('content')
-  @include('sweetalert::alert')
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
+
+@yield('content')
+@include('sweetalert::alert')
+
+<!-- Vendor JS Files -->
+{{-- <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script> --}}
+
+  {{-- avec l'aide de chatgpt --}}
+  <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}" rel="stylesheet"></script>
+  <script src="{{ asset('assets/vendor/aos/aos.js') }}" rel="stylesheet"></script>
+  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script>
+  <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}" rel="stylesheet"></script>
+  <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}" rel="stylesheet"></script>
 
 </body>
 
+
 </html>
-{{-- vite --}}
-
-{{-- bootstrap --}}
-@vite(['resources/autres/vendor/bootstrap-icons/bootstrap-icons.css'])
-@vite(['resources/autres/vendor/bootstrap/css/bootstrap.min.css','resources/autres/vendor/bootstrap/js/bootstrap.bundle.min.js','resources/autres/vendor/bootstrap/scss/bootstrap.scss'])
-
-{{-- datatables --}}
-@vite(['resources/autres/vendor/datatables/dataTables.bootstrap4.min.css','resources/autres/vendor/datatables/dataTables.bootstrap4.min.js'])
-@vite(['resources/autres/vendor/datatables/dataTables.bootstrap4.css','resources/autres/vendor/datatables/dataTables.bootstrap4.js'])
-@vite(['resources/autres/vendor/datatables/jquery.dataTables.js','resources/autres/vendor/datatables/jquery.dataTables.min.js'])
-
-{{-- jquery / jquery-easing--}}
-{{-- @vite(['resources/autres/vendor/jquery/jquery.min.js', 'resources/autres/vendor/jquery-easing/jquery.easing.min.js']) --}}
-
-{{-- chart --}}
-@vite(['resources/autres/vendor/chart.js/Chart.min.js', 'resources/js/demo/chart-area-demo.js', 'resources/js/demo/chart-pie-demo.js'])
-
-{{-- fontawesome --}}
-@vite(['resources/autres/vendor/fontawesome-free/css/all.min.css'])
-
-
-{{-- resources + template sb_admin --}}
-{{-- @vite(['resources/js/sb-admin-2.min.js', 'resources/js/sb-admin-2.js', 'resources/css/sb-admin-2.min.css', 'resources/css/sb-admin-2.css', 'resources/sass/sb-admin/sb-admin-2.scss']) --}}
-@vite(['resources/js/sb-admin-2.min.js', 'resources/css/sb-admin-2.min.css', 'resources/css/sb-admin-2.css', 'resources/sass/sb-admin/sb-admin-2.scss'])
-@vite(['resources/sass/admin.scss', 'resources/js/admin.js', 'resources/css/admin.css'])
 

@@ -1,0 +1,101 @@
+<div class="container" id="titre-page">
+    <div class="row justify-content-center">
+      <div class="col-12" style="text-align: center;">
+        <h2>Inscription en-ligne</h2>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container" style="padding-top: 10px;">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card" style="background-color: #fff;">
+          <div class="card-header" style="text-align: center;">
+            <a style="font-size: 20px;"><i class="fa-solid fa-file-pen icons"></i> Formulaire d'inscription</a>
+          </div>
+          <div class="card-body">
+            <form action="" method="POST">
+              @csrf
+  
+              <div class="row espace-inputs">
+                <h5 style="text-align: center">Informations personnelles</h5>
+                <hr>
+  
+                <div class="col-md-4 form-group" id="sexe">
+                  <label for="sexe">Sexe :</label>
+                  <select class="form-control" name="sexe">
+                    <option value="H">HOMME</option>
+                    <option value="F">FEMME</option>
+                  </select>
+                </div>
+  
+                <div class="col-md-4 form-group" id="nom">
+                  <label for="nom">Nom :</label>
+                  <input type="text" name="nom" class="form-control" placeholder="Veuillez saisir votre nom ici">
+                </div>
+  
+                <div class="col-md-4 form-group" id="prenom">
+                  <label for="prenom">Prénom :</label>
+                  <input type="text" name="prenom" class="form-control" placeholder="Veuillez saisir votre prénom ici">
+                </div>
+              </div>
+  
+              <div class="row espace-inputs">
+                <div class="col-md-4 form-group" id="age">
+                  <label for="age">Age :</label>
+                  <input type="number" name="age" class="form-control" placeholder="" min="18">
+                </div>
+  
+                <div class="col-md-8 form-group" id="wilaya">
+                  <label for="wilaya">Wilaya de résidence :</label>
+                  <select class="form-control" name="wilaya">
+                    <!-- Options de wilaya ici -->
+                  </select>
+                </div>
+              </div>
+  
+              <div class="row espace-inputs">
+                <div class="col-md-12 form-group" id="profession">
+                  <label for="profession">Votre profession :</label>
+                  <input type="text" name="profession" class="form-control" placeholder="Veuillez saisir votre profession ici">
+                </div>
+              </div>
+  
+              <div class="row espace-inputs">
+                <div class="col-md-6 form-group" id="telephone">
+                  <label for="telephone">Numéro de téléphone :</label>
+                  <input type="text" name="telephone" class="form-control" placeholder="Veuillez saisir votre numéro de téléphone ici">
+                </div>
+                <div class="col-md-6 form-group" id="email">
+                  <label for="email">Adresse e-mail :</label>
+                  <input type="text" name="email" class="form-control" placeholder="Veuillez saisir votre adresse e-mail ici">
+                </div>
+              </div>
+  
+              <div class="row espace-inputs justify-content-center">
+                <hr>
+                <h5 style="text-align: center">Formation</h5>
+                <hr>
+  
+                <div class="col-md-6 form-group" id="formation" style="text-align: center;">
+                  <label for="formation">Veuillez choisir la Formation à laquelle vous êtes intéressé :</label>
+                  <select class="form-control" name="formation">
+                    <!-- Options de formation ici -->
+                  </select>
+                </div>
+              </div>
+  
+              <hr>
+  
+              <div class="row formulaire-btn">
+                <div class="col-12 form-group">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,66 +1,115 @@
 @extends('layouts.admin_menu')
 @section('content')
 
-<div class="container" style="padding-top: 10px;">
+
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Réglages Informations</h2>
+        </div>
+    </div>
+</div>
 
 
-
+<div class="container-fluid" id="global" style="margin-top:20px;margin-bottom: 20px;">
 
 
 <!-- informations ecole -->
-<div class="container">
-<h3><i class="bi bi-buildings"></i>Informations de l'école:</h3>
-<div class="row">
-@foreach($informations as $information)
-<div class="col-md-2">
-<i class="bi bi-building-gear"></i><p>Nom de l'école:</p>
-</div>
-<div class="col-md-10">
-<p> {{ $information->nom }} </p>
-</div>
+<div class="container section">
 
-<div class="col-md-2">
-<i class="bi bi-geo-alt"></i><p>Adresse:</p>
-</div>
-<div class="col-md-10">
-<p> {{ $information->adresse }} </p>
-</div>
+    @foreach($informations as $information)
+    
+    
+    <div class="row">
 
-<!-- <div class="col-md-2">
-<i class="bi bi-map"></i><p>Localisation sur google-map (src):</p>
-</div>
-<div class="col-md-10" style="font: size 2vw;">
-<p> {{ $information->localisation }} </p>
-</div> -->
+        
+        <div class="row entete">
+            <div class="col-2 col-md-1 d-flex align-items-center">
+                <h4><i class="bi bi-buildings icons"></i></h4>            
+            </div>
+            <div class="col-8 col-md-11 d-flex align-items-center">
+                <h4>Informations de l'école :</h4>            
+            </div>
+        </div>
 
-<div class="col-md-2">
-<i class="bi bi-envelope-at"></i><p>E-Mail:</p>
-</div>
-<div class="col-md-10">
-<p> {{ $information->email }} </p>
-</div>
+        <div class="col-md-8" id="gauche">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <p class="titre"><i class="bi bi-building-gear icons"></i>Nom de l'école:</p>
+                </div>
+                <div class="col-12 col-md-8">
+                    <p class="data"> {{ $information->nom }} </p>
+                </div>
+            </div>
 
-<div class="col-md-2">
-<i class="bi bi-calendar-date"></i><p>Les heures de travail:</p>
-</div>
-<div class="col-md-10">
-<p> {{ $information->heure_travail }} </p>
-</div>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <p class="titre"><i class="bi bi-geo-alt icons"></i>Adresse:</p>
+                </div>
+                <div class="col-12 col-md-8">
+                    <p class="data"> {{ $information->adresse }} </p>
+                </div>
+            </div>
 
-<div class="col-md-2">
-<i class="bi bi-file-image"></i><p>Logo:</p>
-</div>
-<div class="col-md-10">
-<img src="{{ asset('storage/'.$information->logo ) }}" alt="..." class="img-fluid" style="height: 200px; width:auto;">
-</div>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <p class="titre"><i class="bi bi-map icons"></i>Localisation sur google-map (src):</p>
+                </div>
+                <div class="col-12 col-md-8">
+                    <p class="data"> {{ $information->localisation }} </p>
+                </div> 
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <p class="titre"><i class="bi bi-envelope-at icons"></i>E-Mail:</p>
+                </div>
+                <div class="col-12 col-md-8">
+                    <p class="data"> {{ $information->email }} </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <p class="titre"><i class="bi bi-calendar-date icons"></i>Les heures de travail:</p>
+                </div>
+                <div class="col-12 col-md-8">
+                    <p class="data"> {{ $information->heure_travail }} </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" id="droite">
+            <div class="col-12">
+                <p class="titre"><i class="bi bi-file-image icons"></i>Logo:</p>
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <img src="{{ asset('storage/'.$information->logo ) }}" alt="..." class="img-fluid" style="height: 250px; width:auto;">
+            </div>
+        </div>
+
+
+        {{-- bouton modifier --}}
+        <div class="row fin-section">
+            <div class="col-10 col-md-6 d-flex align-items-center">
+                <h6>Modifier les informations de l'école :</h6>            
+            </div>
+            <div class="col-2 col-md-6 d-flex align-items-center">
+                    <a href="{{ url('/admin/ecole/'.$information->id.'/edit') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+            </div>
+        </div>
+
+
+
 
 @endforeach
 
-<div class="col-md-12" style="text-align: center;">
-<a href="{{ url('/admin/ecole/'.$information->id.'/edit') }}" class="btn btn-primary" style="margin-bottom: 10px;margin-top: 10px;"><i class="bi bi-pencil-square"></i>Modifier</a>
-</div>
+
 <!-- row -->
-</div>
+    </div>
 </div>
 <!-- fin informations ecole -->
 
@@ -71,43 +120,48 @@
 
 
 <!-- Numéros de téléphones -->
-<div class="container">
+<div class="container section">
 
-<div class="row">
-    <div class="col-md-10">
-    <h3><i class="bi bi-buildings"></i>Numéros de téléphones:</h3>
+<div class="row entete">
+    <div class="col-2 col-md-1 d-flex align-items-center">
+        <h4><i class="bi bi-buildings icons"></i></h4>
     </div>
-    <div class="col-md-2">
-    <a href="{{url('/admin/tel/nouveau')}}" class="btn btn-success" style="margin-bottom: 10px;"><i class="bi bi-plus-circle">Ajouter</a>
+    <div class="col-10 col-md-11 d-flex align-items-center">
+        <h4>Numéros de téléphones :</h4>
     </div>
 </div>
 
 
-
     @foreach($telephones as $telephone)
-    <div class="row">
-    <div class="col-md-1">
-        <p><i class="bi bi-telephone"></i></p>
-    </div>
-    <div class="col-md-1">
-        <p>{{$telephone->operateur}} :</p>
-    </div>
-    <div class="col-md-3">
-        <p> {{ $telephone->numero }} </p>
-    </div>
-    <div class="col-md-7">
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-5 col-md-3">
+            <p class="titre"><i class="bi bi-telephone icons"></i>{{$telephone->operateur}}</p>
+        </div>
+        <div class="col-5 col-md-3">
+            <p class="numeros data"> {{ $telephone->numero }} </p>
+        </div>
+        <div class="col-2 col-md-6">
 
-                    <form action="{{ url('/admin/tel/'.$telephone->id.'/delete') }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                            <a href="{{ url('/admin/tel/'.$telephone->id.'/edit') }}" class="btn btn-primary" style="margin-bottom: 5px;" ><i class="bi bi-pen"></i>Modifier</a>
-                            <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-danger"><i class="bi bi-trash3"></i>Supprimer</button>
-                    </form>
+                        <form action="{{ url('/admin/tel/'.$telephone->id.'/delete') }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                                <a href="{{ url('/admin/tel/'.$telephone->id.'/edit') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+                                <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-outline-danger alpa"><i class="bi bi-trash"></i><span class="btn-description">Supprimer</span></button>
+                        </form>
 
-    </div>
+        </div>
     </div>
     @endforeach
 
+        {{-- bouton ajouter --}}
+        <div class="row fin-section">
+            <div class="col-10 col-md-6 d-flex align-items-center">
+                <h6>Ajouter un nouveau numéro de téléphone :</h6>            
+            </div>
+            <div class="col-2 col-md-6 d-flex align-items-center">
+                <a href="{{url('/admin/tel/nouveau')}}" class="btn btn-outline-success alpa"><i class="bi bi-plus"></i><span class="btn-description">Ajouter</span></a>
+            </div>
+        </div>
 
 <!-- fin Numéros de téléphones -->
 </div>
@@ -119,26 +173,51 @@
 
 
 <!-- LIENS -->
-<div class="container">
+<div class="container section">
 
-<div class="row">
-    <h3><i class="bi bi-buildings"></i>Liens vers vos comptes sur les réseaux sociaux:</h3>
+<div class="row entete">
+    <div class="col-2 col-md-1 d-flex align-items-center">
+        <h4><i class="bi bi-buildings icons"></i></h4>
+    </div>
+    <div class="col-10 col-md-11 d-flex align-items-center">
+        <h4>Liens vers vos comptes sur les réseaux sociaux :</h4>
+    </div>
+    {{-- <div class="col-12 col-md-3 d-flex align-items-center">
+        <h6>
+        <div class="row">
+            <div class="col-2"><i class="bi bi-twitter"></i></div>
+            <div class="col-2"><i class="bi bi-facebook"></i></div>
+            <div class="col-2"><i class="bi bi-instagram"></i></div>
+            <div class="col-2"><i class="bi bi-youtube"></i></div>
+            <div class="col-2"><i class="bi bi-linkedin"></i></div>
+            <div class="col-2"><i class="bi bi-tiktok"></i></div>
+        </div>
+        </h6>
+    </div> --}}
 </div>
 
 @foreach($liens as $lien)
 <div class="row">
-    <div class="col-md-1">
-    <p><i class="bi bi-globe"></i></p>
+    <div class="col-12">
+        <p class="titre"><i class="bi bi-globe icons"></i>{{$lien->reseau_social}}</p>
     </div>
-    <div class="col-md-1">
-    <p>{{$lien->reseau_social}}</p>
-    </div>
-    <div class="col-md-8">
+    <div class="col-10 col-md-6">
 
-    <p>Lien :<a href="{{url($lien->lien)}}" target="_blank">{{$lien->lien}}</a></p>
+        <p class="data">Lien :<a href="{{url($lien->lien)}}" target="_blank">{{$lien->lien}}</a></p>
     </div>
-    <div class="col-md-2">
-    <a href="{{ url('/admin/lien/'.$lien->id.'/'.$lien->reseau_social) }}" class="btn btn-primary" style="margin-bottom: 10px;"><i class="bi bi-pencil-square">Modifier</a>
+    <div class="col-2 col-md-6">
+        
+        <form action="{{ url('/admin/lien/'.$lien->id.'/vider') }}" method="POST">
+            @csrf
+            @method('DELETE')
+            
+                     <a href="{{ url('/admin/lien/'.$lien->id.'/vider') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+
+                    <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-outline-danger alpa"><i class="bi bi-trash"></i><span class="btn-description">Supprimer</span></button>
+            </form>
+        
+
+        
     </div>
 </div>
 @endforeach
@@ -151,49 +230,117 @@
 
 
 <!-- Autres informations -->
-<div class="container">
+<div class="container section">
+
+<div class="row entete">
+    <div class="col-2 col-md-1 d-flex align-items-center">
+        <h4><i class="bi bi-buildings icons"></i></h4>
+    </div>
+    <div class="col-10 col-md-11 d-flex align-items-center">
+        <h4>Autres informations :</h4>
+    </div>
+</div>
 
 <div class="row">
-<h3>autres informations:</h3>
+    <div class="col-12 col-md-12">
+        <p class="titre"><i class="bi bi-globe icons"></i>Banner d'acceuil sur le site web :</p>
+    </div>
 </div>
 
 <div class="row">
-<div class="col-md-3">
-<p><i class="bi bi-buildings"></i>Présentation de l'école:</p>
+@foreach($acceuils as $acceuil)
+        <div class="col-12" style="background-image: url(  {{asset('storage/'.$acceuil->photo)}} );background-size: cover;background-repeat: no-repeat; text-align:center ;height:500px;padding-top:50px;">
+          <div class="titres" style="width:100%;padding:50px;text-align: center;background-color: #ffff;opacity: 0.8;">
+            <h2>{{$acceuil->titre}}</h2>
+            <p>
+                {{$acceuil->sous_titre1}}
+                <br>
+                {{$acceuil->sous_titre2}}
+            </p>
+          </div>
+        </div>
+@endforeach
 </div>
-<div class="col-md-3">
-<a href="/admin/ecole/presentation" class="btn btn-primary"><i class="bi bi-arrow-right"></i>Ouvrir</a>
-</div>
+        {{-- bouton modifier --}}
+        <div class="row fin-section">
+            <div class="col-10 col-md-6 d-flex align-items-center">
+                <h6>Modifier le Banner d'acceuil sur le site web :</h6>            
+            </div>
+            <div class="col-2 col-md-6 d-flex align-items-center">
+                <a href="{{ url('/admin/ecole/acceuil/'.$acceuil->id.'/edit') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+            </div>
+        </div>
 
-<div class="col-md-3">
-<p><i class="bi bi-image"></i>Image d'acceuil sur le site web:</p>
-</div>
-<div class="col-md-3">
-<a href="/admin/ecole/acceuil" class="btn btn-primary"><i class="bi bi-arrow-right"></i>Ouvrir</a>
-</div>
+
 </div>
 
 <!-- fin Autres informations -->
+
+
+
+{{-- fin container global --}}
 </div>
 
+{{-- pied page --}}
+    <div class="container" id="pied-page">
+
+    </div>
 
 
+{{-- <style>
 
-</div>
-
-
-
-
-
-<style>
-    h3{
-        color:var(--color5);
+:root{
+    font-size:16px;
+}
+    p{
+        font-size: 1em;
     }
-</style>
+    .btn{
+        margin-bottom: 3px;
+    }
+    
+    .titre{
+        font-size: 1,5em;
+        font-weight: bold;
+    }
+    #global{
+        background-color: white;
+    }
+    #pied-page{
+        height: 100px;
+    }
+    .section{
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .entete{
+        margin-bottom: 30px;
+    }
+    .btn-description{
+        padding-left: 8px;
+    }
+    .icons{
+        padding-right: 8px;
+    }
+/* Extra small devices (portrait phones, less than 576px) */
+    @media (max-width: 575.98px)
+    { 
+        .btn-description{
+            display: none;
+        }
+    }
+    .alpa:hover{
+    box-shadow: 0 0 5px #383837;
+    text-shadow: 0 0 5px #383837;
+    }
+    .numeros{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style> --}}
 
 
 
-<!-- <script>
+ {{-- <script>
 var app=new Vue({
 el:'#repertoire',
 data:{
@@ -217,7 +364,7 @@ mounted:function(){
 
 
 });
-</script>     -->
+</script>    --}}
 
 
 @endsection

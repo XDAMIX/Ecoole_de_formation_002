@@ -26,7 +26,8 @@ class InscriptionRequest extends FormRequest
         return [
             'sexe'      => 'required|min:1|max:255',
             'nom'       => 'required|min:1|max:255',
-            'age'       => 'required|min:1|max:255',
+            'prenom'       => 'required|min:1|max:255',
+            'age'       => 'required',
             'wilaya'    => 'required|min:1|max:255',
             'formation' => 'required|min:1|max:255',
             'tel'       => 'required|min:1|max:255',

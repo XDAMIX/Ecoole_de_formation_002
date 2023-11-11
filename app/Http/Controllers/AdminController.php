@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Information;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $listeinformations = Information::all();
+        return view('admin.index',[ 'informations'=>$listeinformations]);
+        
     }
 
     public function connecter()

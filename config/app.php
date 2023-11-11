@@ -198,6 +198,9 @@ return [
 
         // datatables
         Yajra\DataTables\DataTablesServiceProvider::class,
+
+        // DOMPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -213,6 +216,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'datatables' => \Yajra\DataTables\Facades\DataTables::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 

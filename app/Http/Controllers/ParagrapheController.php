@@ -7,6 +7,8 @@ use App\Models\Paragraphe;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\ParagrapheRequest;
 
+use RealRashid\SweetAlert\Facades\Alert;
+
 class ParagrapheController extends Controller
 {
 
@@ -35,6 +37,10 @@ public function store(ParagrapheRequest $request) {
     }
 
     $nvParagraphe->save();
+
+            // message popup
+            Alert::success( 'votre bloc de présentation a été ajouté avec succès ! merci')->position('center')->autoClose(2000);
+
     return redirect('/admin/ecole/presentation');
 }
 
@@ -53,6 +59,10 @@ public function update(ParagrapheRequest $request,$id) {
     }
 
     $paragraphe->save();
+
+            // message popup
+            Alert::success( 'votre bloc de présentation a été modifié avec succès ! merci')->position('center')->autoClose(2000);
+    
     return redirect('/admin/ecole/presentation');
 
 }
@@ -63,3 +73,5 @@ public function destroy($id) {
     return redirect('/admin/ecole/presentation');
 }
 }
+
+

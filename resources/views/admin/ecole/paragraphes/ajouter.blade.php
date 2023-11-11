@@ -1,13 +1,39 @@
 @extends('layouts.admin_menu')
 @section('content')
 
-<div class="container" style="padding-top: 10px;">
+<script>
+    function previewImage(){
+        var file = document.getElementById("validationServer06").files;
+        if ( file.length > 0 ) {
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (event){
+                document.getElementById("preview").setAttribute("src", event.target.result)
+            };
+            fileReader.readAsDataURL(file[0]);
+        }
+    }
+    </script>
+
+
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/ecole/presentation') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span class="btn-description">Retour</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Ajouter un nouveau bloc de présentation</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
 
 <div class="row">
         <div class="col-md-12">
         <div class="card" style="background-color: #ffff;">
                 <div class="card-header"style="text-align:center;">
-                  <a style="font-size: 20px;"><i class="bi bi-person"></i>Nouveau paragraphe de présentation</a>
+                  <a style="font-size: 20px;">Nouveau bloc de présentation</a>
                 </div>
                 <div class="card-body">
 
@@ -56,7 +82,8 @@
 
     <div class="form-group">
         <label for="">Photo:</label>
-        <input type="file" name="photo" id="validationServer06" class="form-control @if($errors->get('photo')) is-invalid @endif">
+        <input type="file" name="photo" class="form-control @if($errors->get('photo')) is-invalid @endif" id="validationServer06" accept="image/*" onchange="previewImage();">
+        {{-- <input type="file" name="photo" id="validationServer06" class="form-control @if($errors->get('photo')) is-invalid @endif"> --}}
                 <div id="validationServer06Feedback" class="invalid-feedback">
                     @if($errors->get('photo'))
                     @foreach($errors->get('photo') as $message)
@@ -64,16 +91,24 @@
                     @endforeach
                     @endif
                 </div>
+
+        <div class="col-12" style="text-align: center;">
+        <img src="" class="img-fluid rounded" alt="" style="height:450px;width:auto; margin-top: 15px;margin-bottom: 15px;" id="preview">
+        </div>
+
     </div>
 
+
     <br>
-    <div class="form-group">
-        <input type="submit" class="form-control btn btn-success" value="Enregistrer">
+    <div class="row formulaire-btn">
+        <div class="form-group col-12">
+
+            <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button>
+
+        </div>
     </div>
-    <br>
-    <div class="">
-        <a href="{{ url('/admin/ecole/presentation') }}" class="btn btn-secondary">Annuler</a>
-    </div>
+
+
 
     </form>
 

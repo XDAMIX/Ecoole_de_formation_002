@@ -13,36 +13,106 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  {{-- <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
+  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-{{-- bootstrap --}}
-@vite(['resources/autres/vendor/bootstrap-icons/bootstrap-icons.css'])
-@vite(['resources/autres/vendor/bootstrap/css/bootstrap.min.css','resources/autres/vendor/bootstrap/js/bootstrap.bundle.min.js','resources/autres/vendor/bootstrap/scss/bootstrap.scss'])
-{{-- chart --}}
-@vite(['resources/autres/vendor/chart.js/Chart.min.js', 'resources/js/demo/chart-area-demo.js', 'resources/js/demo/chart-pie-demo.js'])
-{{-- fontawesome --}}
-@vite(['resources/autres/vendor/fontawesome-free/css/all.min.css'])
+  {{-- assets  --}}
+  <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  
+
+
+  {{-- bootstrap --}}
+  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  
+  
+  {{-- autres assets --}}
+  <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+
+  
+  
+  {{-- fichiers de theme  --}}
+  
+  {{-- template sb_admin  --}}
+  @vite([ 'resources/css/sb-admin-2.css', 'resources/sass/sb-admin/sb-admin-2.scss','resources/js/sb-admin-2.js', 'resources/js/sb-admin-2.min.js','resources/css/sb-admin-2.min.css' ])
+  
+  {{-- nos resources --}}
+  @vite(['resources/sass/admin.scss', 'resources/js/admin.js', 'resources/css/admin.css'])
+  
+
+{{-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
+
+
+{{-- avec l'aide de chatgpt --}}
+
+{{-- datatables imad --}}
+{{-- <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet"> --}}
 
 
 
-{{-- le problem de template  --}}
 
-{{-- resources + template sb_admin --}}
-{{-- @vite(['resources/js/sb-admin-2.min.js', 'resources/js/sb-admin-2.js', 'resources/css/sb-admin-2.min.css', 'resources/css/sb-admin-2.css', 'resources/sass/sb-admin/sb-admin-2.scss']) --}}
-@vite([ 'resources/css/sb-admin-2.min.css', 'resources/css/sb-admin-2.css', 'resources/sass/sb-admin/sb-admin-2.scss'])
-@vite(['resources/sass/admin.scss', 'resources/js/admin.js', 'resources/css/admin.css'])
+
+
+{{-- ---------------------------------------------------------------------------------------------------------------------------------------------------------   --}}
+
+{{-- REMARQUE !!  --}}
+
+{{-- Lire depuis le dossier ressource  --}}
+{{-- @vite(['resources/autres/vendor/.....']) --}}
+
+{{-- Lire depuis le dossier public --}}
+{{-- <link href="{{ asset('assets/vendor/......') }}" rel="stylesheet"> --}}
+
+
+
+{{-- tarika jadida  --}}
+
+{{-- css datatables  --}}
+
+<link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap4.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css" rel="stylesheet">
  
- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
- {{-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min."> --}}
- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 
- {{-- kookies --}}
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+                {{-- scripts par ordre --}}
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+    {{-- bootstrap js  --}}
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script>
+      
+    {{-- jquery-easing  --}}
+    {{-- <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script> --}}
+
+    {{-- datatables  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.js"></script>
+
+ 
+
 
 </head>
 
@@ -62,6 +132,7 @@
                                 <i class="fas fa-fw fa-tachometer-alt"></i>
                             </div>
                             <div class="sidebar-brand-text mx-2">{{ config('app.name', 'Laravel') }}</div>
+
                         </a>
 
                         <!-- Divider -->
@@ -91,10 +162,10 @@
                             </a>
                             <div id="collapseInfo" class="collapse" aria-labelledby="headingInfo" data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Menu :</h6>
-                                    <a class="collapse-item" href="{{ url('/admin/ecole') }}"><i class="fa-solid fa-bars submenu-i"></i>Informations Génerale</a>
-                                    <a class="collapse-item" href=""><i class="fa-solid fa-phone submenu-i"></i>Numéros de téléphones</a>
-                                    <a class="collapse-item" href=""><i class="fa-solid fa-share-from-square submenu-i"></i>Réseaux sociaux</a>
+                                    {{-- <h6 class="collapse-header">Menu :</h6> --}}
+                                    <a class="collapse-item" href="{{ url('/admin/ecole') }}"><i class="fa-solid fa-bars submenu-i"></i>Réglages Informations</a>
+                                    {{-- <a class="collapse-item" href=""><i class="fa-solid fa-phone submenu-i"></i>Numéros de téléphones</a>
+                                    <a class="collapse-item" href=""><i class="fa-solid fa-share-from-square submenu-i"></i>Réseaux sociaux</a> --}}
                                 </div>
                             </div>
                         </li>
@@ -109,9 +180,9 @@
                             <div id="collapseEcole" class="collapse" aria-labelledby="headingEcole"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Menu :</h6>
-                                    <a class="collapse-item" href=""><i class="fa-solid fa-bars submenu-i"></i>Page d'acceuil</a>
-                                    <a class="collapse-item" href=""><i class="fa-solid fa-bars submenu-i"></i>Présentations</a>
+                                    {{-- <h6 class="collapse-header">Menu :</h6> --}}
+                                    {{-- <a class="collapse-item" href=""><i class="fa-solid fa-bars submenu-i"></i>Page d'acceuil</a> --}}
+                                    <a class="collapse-item" href="/admin/ecole/presentation"><i class="fa-solid fa-bars submenu-i"></i>Présentation</a>
 
                                 </div>
                             </div>
@@ -127,7 +198,7 @@
                             <div id="collapseActualites" class="collapse" aria-labelledby="headingActualites"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Menu :</h6>
+                                    {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/gallerie') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des Actualites</a>
                                     <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
@@ -145,7 +216,7 @@
                             <div id="collapseFAQ" class="collapse" aria-labelledby="headingFAQ"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Menu :</h6>
+                                    {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/faq') }}"><i class="fa-solid fa-bars submenu-i"></i>FAQ</a>
                                     <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
@@ -163,7 +234,7 @@
                             <div id="collapseTemoignages" class="collapse" aria-labelledby="headingTemoignages"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Menu :</h6>
+                                    {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/temoignages') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des témoignages</a>
                                     <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
@@ -181,7 +252,7 @@
                             <div id="collapsePUB" class="collapse" aria-labelledby="headingPUB"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Menu :</h6>
+                                    {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/banners') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des Pubs</a>
                                     <a class="collapse-item" href="{{ url('/admin/banners/nouveau') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
@@ -199,7 +270,7 @@
                             <div id="collapseMessages" class="collapse" aria-labelledby="headingMessages"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Menu :</h6>
+                                    {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/messages') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des Messages</a>
                                     {{-- <a class="collapse-item" href="">Ajouter</a> --}}
 
@@ -217,9 +288,9 @@
                             <div id="collapseInscriptions" class="collapse" aria-labelledby="headingInscriptions"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Menu :</h6>
+                                    {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/inscriptions') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des Inscriptions</a>
-                                    <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
+                                    <a class="collapse-item" href="{{ url('/admin/inscriptions/nouveau') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
                                 </div>
                             </div>
@@ -243,7 +314,7 @@
                             <div id="collapseFormations" class="collapse" aria-labelledby="headingFormations"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Menu :</h6>
+                                {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                 <a class="collapse-item" href="{{ url('/admin/formations') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des formations</a>
                                 <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
                                 </div>
@@ -260,7 +331,7 @@
                             <div id="collapseProfs" class="collapse" aria-labelledby="headingProfs"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Menu :</h6>
+                                {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                 <a class="collapse-item" href="{{ url('/admin/prof') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des profésseurs</a>
                                 <a class="collapse-item" href="{{ url('admin/prof/ajouter') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
                                 </div>
@@ -277,7 +348,7 @@
                             <div id="collapseEmplyes" class="collapse" aria-labelledby="headingEmplyes"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Menu :</h6>
+                                {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                 <a class="collapse-item" href="{{ url('/admin/session') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des sessions</a>
                                 <a class="collapse-item" href="{{ url('/admin/session/ajouter') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Nouvelle session</a>
                                 </div>
@@ -294,7 +365,7 @@
                             <div id="collapseStagiaires" class="collapse" aria-labelledby="headingStagiaires"
                                 data-bs-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Menu :</h6>
+                                {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                 <a class="collapse-item" href="{{ url('/admin/etudiant') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des stagiaires</a>
                                 <a class="collapse-item" href="{{ url('/admin/etudiant/nouveau') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Nouveau Stagiaire</a>
                                 </div>
@@ -332,7 +403,7 @@
                                 </button>
 
                                 <!-- Topbar Navbar -->
-                                <ul class="navbar-nav ml-auto">
+                                <ul class="navbar-nav ml-auto" style="margin-right: 10px;">
 
                                     <div class="topbar-divider d-none d-sm-block"></div>
                                     <!-- Nav Item - User Information -->
@@ -341,12 +412,12 @@
                                             data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false">
                                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                             <img class="img-profile rounded-circle"
-                                                src="img/undraw_profile.svg">
+                                                src="{{ asset('storage/public/images/user.png' ) }}">
                                         </a>
                                         <!-- Dropdown - User Information -->
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                             aria-bs-labelledby="userDropdown">
-                                            <a class="dropdown-item" href="#">
+                                            {{-- <a class="dropdown-item" href="#">
                                                 <i class="fa-solid fa-user text-gray-400"></i>
                                                 Profil
                                             </a>
@@ -354,7 +425,7 @@
                                                 <i class="fa-solid fa-user-plus text-gray-400"></i>
                                                 Ajouter un nouveau utilisateur
                                             </a>
-                                            <div class="dropdown-divider"></div>
+                                            <div class="dropdown-divider"></div> --}}
                                             <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
                                                 <i class="fa-solid fa-right-from-bracket text-gray-400"></i>
                                                 Déconnecter
@@ -373,12 +444,6 @@
                             <!-- Begin Page Content -->
                             <div class="container-fluid">
 
-                                <!-- Page Heading -->
-                                {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                        <i class="fa-sharp fa-solid fa-arrow-left"></i> Retour</a>
-                                    <h1 class="h3 mb-0 text-gray-800">Nom de la page</h1>
-                                </div> --}}
 
 
 
@@ -404,10 +469,34 @@
                 </div>
                 <!-- End of Page Wrapper -->
 {{-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+<!-- Scroll to Top Button-->
+    {{-- <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a> --}}
+    
+    <a class="scroll-to-top btn btn-dark" id="scrollToTopButton" href="#page-top"><i class="bi bi-arrow-up"></i></a>
+{{-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
+
+    <style>
+    .scroll-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: #181919;
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s, opacity 0.3s;
+    font-size: 24px;
+    font-weight: bold;
+    }
+
+    .scroll-to-top:hover {
+        background: #424242;
+    }
+
+    </style>
 {{-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
 
 
@@ -433,7 +522,7 @@
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i>Annuler</button>
                                     </div>
                                     <div class="col-sm-6">
-                                        <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa-solid fa-right-from-bracket"></i>Déconnecter</a>
+                                        <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="width: 130px;"><i class="fa-solid fa-right-from-bracket"></i>Déconnecter</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
@@ -448,46 +537,45 @@
 
 
 
+                {{-- jquery  imad --}}
+                {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                
+                
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script> --}}
+                
+                
 
-{{-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
+
+     {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
+                
+                {{-- scripts par ordre --}}
+    <!-- Include jQuery -->
+    {{-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> --}}
+
+    {{-- bootstrap js  --}}
+    {{-- <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script> --}}
+      
+    {{-- jquery-easing  --}}
+    {{-- <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script> --}}
+
+    {{-- datatables  --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.js"></script> --}}
 
 
-<style>
-    .submenu-i{
-        margin-right: 5px;
-    }
-
-</style>
 
 
 </body>
-
-
-<script>
-    
-!function(l){
-    "use strict";
-l("#sidebarToggle, #sidebarToggleTop").on("click",function(e){l("body").toggleClass("sidebar-toggled"),
-l(".sidebar").toggleClass("toggled"),
-l(".sidebar").hasClass("toggled")&&l(".sidebar .collapse").collapse("hide")}),
-l(window).resize(function(){l(window).width()<768&&l(".sidebar .collapse").collapse("hide"),
-l(window).width()<480&&!l(".sidebar").hasClass("toggled")&&(l("body").addClass("sidebar-toggled"),
-l(".sidebar").addClass("toggled"),l(".sidebar .collapse").collapse("hide"))}),
-l("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel",
-function(e){
-    var o;
-    768<l(window).width()&&(o=(o=e.originalEvent).wheelDelta||-o.detail,this.scrollTop+=30*(o<0?1:-1),
-    e.preventDefault())}),l(document).on("scroll",
-    function(){
-        100<l(this).scrollTop()?l(".scroll-to-top").fadeIn():l(".scroll-to-top").fadeOut()}),l(document).on("click","a.scroll-to-top",
-        function(e){
-            var o=l(this);
-            l("html, body").stop().animate({scrollTop:l(o.attr("href")).offset().top},
-            1e3,"easeInOutExpo"),e.preventDefault()})}(jQuery);
-
-</script>
-{{-- le jquery --}}
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
 
 
