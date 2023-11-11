@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Inscription;
 use App\Models\Formation;
@@ -26,7 +25,8 @@ class InscriptionController extends Controller
 
     public function index() {
         $ListeFormations = Formation::all();
-        $ListeInscriptions = Inscription::orderBy('id', 'desc')->where('contact',false)->get();
+        // $ListeInscriptions = Inscription::orderBy('id', 'DESC')->get(); 
+        $ListeInscriptions = Inscription::all(); 
        
         $formation = '';
         $contact = '';
@@ -40,12 +40,16 @@ class InscriptionController extends Controller
 
 
 
-        return view('admin.inscriptions.index',['inscriptions'=>$ListeInscriptions,'formations'=>$ListeFormations,'valeur'=>$valeur
-                                            ,'laformation'=>$formation,'lecontact'=>$contact,'ladatedebut'=>$dateDebut,'ladatefin'=>$dateFin
-                                            ,'chformation'=>$chformation,'chdate'=>$chdate,'chcontact'=>$chcontact]);
+        // return view('admin.inscriptions.index',['inscriptions'=>$ListeInscriptions,'formations'=>$ListeFormations,'valeur'=>$valeur
+        //                                     ,'laformation'=>$formation,'lecontact'=>$contact,'ladatedebut'=>$dateDebut,'ladatefin'=>$dateFin
+        //                                     ,'chformation'=>$chformation,'chdate'=>$chdate,'chcontact'=>$chcontact]);
+
+
+        return view('admin.inscriptions.liste',['inscriptions'=>$ListeInscriptions]);
 
 
     }
+
 
 
 
@@ -59,6 +63,7 @@ class InscriptionController extends Controller
         $pdf->render();
 
         return $pdf->stream('inscriptions.pdf');
+        
     }
 
     public function create() {
@@ -67,13 +72,13 @@ class InscriptionController extends Controller
     }
 
     public function store(InscriptionRequest $request) {
-            $request->validate([
+            // $request->validate([
                
-                'nom'=>'required|max:40|string',
-                'age'=>'required|max:20|number',
+            //     'nom'=>'required|max:40|string',
+            //     'age'=>'required|max:20|number',
                 
-                'tel'=>'required|max:20|number'
-            ]);
+            //     'tel'=>'required|max:20|number'
+            // ]);
         $inscription = new Inscription();
 
         $inscription->sexe = $request->input('sexe');
@@ -89,6 +94,13 @@ class InscriptionController extends Controller
 
         $inscription->save();
 
+
+        $lenom = $request->input('nom');
+        $leprenom = $request->input('prenom');
+
+
+        $titre = $lenom.' '.$leprenom;
+        Alert::success('Votre inscription sous le nom : '.$titre.' a bien été enregistrer !, Merci');
 // ... Validation des données et téléchargements de fichiers ...
 
 $data = [
@@ -108,9 +120,16 @@ $data = [
 $pdf = PDF::loadView('pdf', $data);
 return $pdf->stream('pdf');
 
-  // return redirect('/admin/inscriptions');
+return redirect('/admin/inscriptions');
 
     }
+  
+
+
+
+
+
+
 
     public function edit($id) {
         $inscription =Inscription::find($id);
@@ -215,7 +234,7 @@ $pdfOutput = $pdf->output();
         $leprenom = $inscription->prenom;
 
         $inscription->save();
-        Alert::success('Votre preinscription de '.$lenom.' '. $leprenom .' a bien été modifiée');
+        Alert::success('Votre inscription de : '.$lenom.' '. $leprenom .' a bien été modifiée');
         return redirect('/admin/inscriptions');
 
     }
@@ -234,7 +253,7 @@ $pdfOutput = $pdf->output();
         $leprenom = $inscription->prenom;
 
         $inscription->delete();
-        Alert::success('le candidat '.$lenom.' '. $leprenom .' a été suprime de la session '.$sessionname);
+        Alert::success('le candidat '.$lenom.' '. $leprenom .' a été supprimé de la session '.$sessionname);
         return redirect('/admin/session/'.$session->id.'/voir');
 
     }
@@ -286,7 +305,7 @@ $pdfOutput = $pdf->output();
 // $pdf = PDF::loadView('pdf',$data, compact('informations') );
 
 
-Alert::success('Deplome de '.$sessionname.' pour le candidat '.$lenom.' '. $leprenom .' a bien été telecharger');
+Alert::success('Diplôme de : '.$sessionname.' pour le candidat : '.$lenom.' '. $leprenom .' a bien été télécharger');
 $pdf = PDF::loadView('admin\sessions\deplome1pdf',$data);
 $pdf->setPaper('A4', 'landscape'); // Définissez le format du papier en paysage (landscape)
 $pdfOutput = $pdf->output();
@@ -364,7 +383,7 @@ return $response;
                                 'Content-Length' => strlen($pdfOutput),
                             ]);
                         
-                            Alert::success('Les diplômes pour la session ' . $sessionname . ' ont été téléchargés avec succès.');
+                            Alert::success('Les diplômes pour la session : ' . $sessionname . ' ont été téléchargés avec succès.');
                             return $response;
                         }
                         

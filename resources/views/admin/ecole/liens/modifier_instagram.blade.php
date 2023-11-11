@@ -1,8 +1,27 @@
 @extends('layouts.admin_menu')
 @section('content')
 
+
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/ecole') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span class="btn-description">Retour</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Modifier le lien vers le compte</h2>
+        </div>
+    </div>
+</div>
+
 <div class="container" style="padding-top: 10px;">
-<div class="row">
+<div class="row justify-content-center">
+
+    <div class="col-md-8">
+        <div class="card" style="background-color: #ffff;">
+                <div class="card-header"style="text-align:center;">
+                  <a style="font-size: 20px;">Instagram</a>
+                </div>
+                <div class="card-body">
 
 <form action="{{ url('/admin/lien/'.$lien->id.'/Instagramsave') }}" method="post">
     @csrf
@@ -24,16 +43,21 @@
     </div>
 
     <br>
-    <div class="form-group">
-        <input type="submit" class="form-control btn btn-success" value="Enregistrer">
-    </div>
-    <br>
-    <div class="">
-        <a href="{{ url('/admin/ecole') }}" class="btn btn-secondary">Annuler</a>
+    <div class="row formulaire-btn">
+        <div class="form-group col-12">
+
+            <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button>
+
+        </div>
     </div>
 
 </form>
 
 </div>
+</div>
+
+</div>
+</div>
+
 </div>
 @endsection

@@ -6,6 +6,9 @@ use Illuminate\Http\UploadedFile;
 use App\Http\Requests\TelephoneRequest;
 use Illuminate\Http\Request;
 
+
+use RealRashid\SweetAlert\Facades\Alert;
+
 class TelephoneController extends Controller
 {
 
@@ -31,6 +34,10 @@ public function store(TelephoneRequest $request) {
 
 
     $nvtel->save();
+
+            // message popup
+            Alert::success( 'votre numéro de téléphone a été ajouté avec succès ! merci')->position('center')->autoClose(2000);
+
     return redirect('/admin/ecole');
 }
 
@@ -45,6 +52,10 @@ public function update(TelephoneRequest $request,$id) {
     $tel->operateur = $request->input('operateur');
 
     $tel->save();
+
+        // message popup
+        Alert::success( 'votre numéro de téléphone a été modifié avec succès ! merci')->position('center')->autoClose(2000);
+
     return redirect('/admin/ecole');
 
 }
@@ -54,6 +65,7 @@ public function destroy($id) {
     $tel->delete();     
     return redirect('/admin/ecole');
 }
+
 
 
 }

@@ -9,85 +9,41 @@
     <title>ficher de préinscription </title>
 </head>
 <header>
-    <h5 class="repub">REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE</h5>
-    <style>
-        .repub{
-            text-align: center;
-            font-size: 25px;
-        }
-        .divalig{
-            width: 125%; 
-            display: flex;
-            justify-content: space-between; 
-            position:absolute;
-        }
-        .titree{
-            font-size: 18px;
-            text-align: center;
-            width:40% ;
-        }
-    </style>
-    <div class="divalig">
-        <div class="entete">
-            <div class="logo">
-                    <img class="logoe" src="{{public_path('storage/'.$informations->logo)}}" alt="logo">
-            </div>  
-
-            
-         </div>  
-             <div>
-                    <h5 class="titree">MINSTER DE LA FORMATION ET DE L'ENSEIGNEMENT PROFESSIONNELS</h5>
-                    <h5 class="titree">ECOLE AGREEE N°2369 DU 07.09.2021</h5>
-             </div>
-        </div>
-   
+    <div class="entete">
+       <div class="logo">
+               <img class="logoe" src="{{public_path('storage/'.$informations->logo)}}" alt="logo">
+       </div>  
+       
+    </div>  
    </header>
 <body>
-<div>
-    <div style=" display: flex; justify-content: center; ">
-        <div style="width: 100%;">
-            <div style="width: 40%;">
-                <h2 class="titreat">ATTESTATION <span style="font-size: 30px;">DE FORMATION</span> </h2>
-            </div>  
-                <h2 class="" style="text-align: center; background-color: red;">DELEVREE A</h2>
-                <h2 class="" style="text-align: center; background-color: red; font-size: 35px;">{{ $nom }} {{ prenom  }}</h2>
-                <h2 class="" style="text-align: center; background-color: red; font-size: 30px;">POUR SA PARTICIPATIN AU WORKSHOPSUR</h2>
-                <h2 class="" style="text-align: center; background-color: red; font-size: 40px;">{{ $formation }} </h2>
-                <h2 class="" style="text-align: center; background-color: red; font-size: 20px;">{{ $fin }} </h2>
-         </div>
+<div >
+    <div>
+        <h2 class="titre">CERTIFICAT DE FORMATION</h2>
+        <h2 class="titreformation">{{ $formation }} </h2>
     </div>
-    <style>
-      
 
-/* Ajoutez une classe pour styliser la div conteneur */
+    <div>
+        <h3 style="font-size: 170%;"> Informations Personnel </h3>
+    </div>
+    <div class="infop">
+        <ul >
+            <li>Sexe :  {{ $sexe }} </li>
+            <li>Nom :  {{ $nom }} </li>
+            <li>Prenom :  {{ $prenom }} </li>
+            <li>date debut  :  {{ $date_deb }} </li>
+            <li>date fin  :  {{ $date_fin }} </li>
 
+                     <br>
+            <li style="font-weight: bold;">Formation choise :  {{ $formation }}  </li>
 
-.titreat {
-  text-align: center;
-  font-weight: bold;
-  font-size: 70px;
-  padding-top: 80px; 
-}
+        </ul>
+    </div>
+   
 
-.deformatin {
-  text-align: center;
-  font-weight: bold;
-  font-size: 30px;
-  background-color: red;
-  height: 30px;
-}
-
-.titreformation {
-  text-align: center;
-  font-size: 40px;
-  background-color: blue;
-}
-    </style>
-
-    
 </div>
 <div>     
-    <h5 id="date-inscription" class="date">ALGER LE : <span id="date-valeur">{{ $date }}</span></h5>
+    <h5 id="date-inscription" class="date">ALger le  :   <span id="date-valeur">{{ $date }}</span></h5>
 
 </div>
 
@@ -112,8 +68,11 @@
          width: 20%;
     }
     img.logo{
+       
+        
           align-items: center;
           background-color: rgb(180, 28, 28);
+         
     }
     .logoe{
         width: 200px;

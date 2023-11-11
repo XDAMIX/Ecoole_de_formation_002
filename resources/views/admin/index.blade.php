@@ -7,8 +7,11 @@
         <div class="col text-center ">
 
             <div class="logo">
-                <img src="{{asset('assets/images/logo/logo.png')}}" class="img-fluid" alt="logo" style="height: 200px;margin-bottom:30px;">
+                @foreach($informations as $information)
+                <img src="{{ asset('storage/'.$information->logo) }}" class="img-fluid" alt="logo" style="height: 200px;margin-bottom:30px;">
+                @endforeach
             </div>
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -21,16 +24,25 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="teste_dompdf" style="width: 100%; text-align:center;padding:100px;">
+    <a href="{{('/testepdf')}}" class="btn btn-warning">Teste Impression PDF</a>
+</div>
+
+
+
 {{-- --------------------------------------------------------------------------------------------------------------------------------------- --}}
 
                         <!-- Footer -->
-                        <footer class="sticky-footer bg-transparent">
-                            <div class="container my-auto">
-                                <div class="copyright text-center my-auto">
-                                    <span>Copyright &copy; Infinity-Concepts 2022</span>
+                        <div class="container" style="width:100%;position: fixed;bottom:0;">
+                                <div class="row">
+                                    <div class="col-12" style="text-align:center;">
+                                        <p>Copyright &copy; Infinity-Concepts 2022</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </footer>
+                        </div>
                         <!-- End of Footer -->
 
 {{-- --------------------------------------------------------------------------------------------------------------------------------------- --}}
