@@ -37,3 +37,7 @@ BUGS DE SITE COTé ADMINISTRATEUR:
 
 
 
+A AJOUTER A LA FIN INSCRIPTION
+-------------------------------
+ajouter un champs 'valide' de type 'boolean' => lorsqu'ont valide l'inscription => 'true'
+pour calculer plutard combien il ya l'argent aujourd'huit avec le teste => valide=true,sum_montant
