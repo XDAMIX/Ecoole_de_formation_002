@@ -11,8 +11,11 @@
 <header>
     <div class="entete">
        <div class="logo">
+               {{-- <img class="logoe" src="{{public_path('storage/'.$informations->logo)}}" alt="logo"> --}}
+
                <img class="logoe" src="{{public_path('storage/'.$informations->logo)}}" alt="logo">
-       </div>  
+            <h1>lien de logo: storage/{{ .$informations->logo }}</h1>
+            </div>  
        
     </div>  
    </header>

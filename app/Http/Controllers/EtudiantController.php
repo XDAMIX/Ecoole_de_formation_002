@@ -18,10 +18,10 @@ class EtudiantController extends Controller
     }
 
     public function index() {
-        $ListeEtudiants = Etudiant::all();
+        // $ListeEtudiants = Etudiant::all();
         // $ListeEtudiants = Etudiant::where('age','=',2)->get();
 
-        // $ListeEtudiants = Etudiant::select('nom', 'prenom')->distinct()->get();
+        $ListeEtudiants = Etudiant::select('nom', 'prenom')->distinct()->get();
 
         return view('admin/etudant/index',['etudiants'=>$ListeEtudiants]);
     }

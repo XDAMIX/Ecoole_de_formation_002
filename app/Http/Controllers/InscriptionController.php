@@ -148,6 +148,8 @@ return $pdf->stream('pdf');
         $lenom = $inscription->nom;
         $leprenom = $inscription->prenom;
 
+// ajouter l'etudiant sur la table etudiant et  save 
+        
         $inscription->save();
         Alert::success('le candidat '.$lenom.' '. $leprenom .' a bien été inscrtie');
 
@@ -314,61 +316,116 @@ return $response;
                         //    |---------------------------------------------------|    
                         //    |------ imprimer un deplome pour touts condidat---|
                         //    |---------------------------------------------------|
-                        public function imprimer_tout($id)
-                        {
-                            $session = Session::find($id);
-                            $sessionname = $session->nom;
-                            $date = date('d/m/20y');
-                            $inscriptions = Inscription::where('session', $sessionname)->get();
-                            $informations = Information::all()->first();
-                            $telephones = Telephone::all()->first();
+                        // public function imprimer_tout($id)
+                        // {
+                        //     $session = Session::find($id);
+                        //     $sessionname = $session->nom;
+                        //     $date = date('d/m/20y');
+                        //     $inscriptions = Inscription::where('session', $sessionname)->get();
+                        //     $informations = Information::all()->first();
+                        //     $telephones = Telephone::all()->first();
                         
-                            // Créez un objet Dompdf
-                            $pdf = new \Dompdf\Dompdf();
-                            $pdf->setPaper('A4', 'landscape');
+                        //     // Créez un objet Dompdf
+                        //     $pdf = new \Dompdf\Dompdf();
+                        //     $pdf->setPaper('A4', 'landscape');
                             
-                            // Créez une variable pour stocker le contenu HTML de toutes les pages
-                            $allHtmlPages = '';
+                        //     // Créez une variable pour stocker le contenu HTML de toutes les pages
+                        //     $allHtmlPages = '';
                         
-                            foreach ($inscriptions as $inscription) {
-                                $data = [
-                                    'sexe' => $inscription->sexe,
-                                    'nom' => $inscription->nom,
-                                    'prenom' => $inscription->prenom,
-                                    'formation' => $inscription->formation,
-                                    'date_deb' => $date,
-                                    'date_fin' => $date,
-                                    'informations' => $informations,
-                                    'telephones' => $telephones,
-                                    'date' => $date,
-                                ];
+                        //     foreach ($inscriptions as $inscription) {
+                        //         $data = [
+                        //             'sexe' => $inscription->sexe,
+                        //             'nom' => $inscription->nom,
+                        //             'prenom' => $inscription->prenom,
+                        //             'formation' => $inscription->formation,
+                        //             'date_deb' => $date,
+                        //             'date_fin' => $date,
+                        //             'informations' => $informations,
+                        //             'telephones' => $telephones,
+                        //             'date' => $date,
+                        //         ];
                         
-                                // Générez le diplôme individuel
-                                $htmlPage = view('admin\sessions\deplome1pdf', $data);
+                        //         // Générez le diplôme individuel
+                        //         $htmlPage = view('admin\sessions\deplome1pdf', $data);
                         
-                                // Ajoutez le contenu HTML de la page actuelle à la variable
-                                $allHtmlPages .= $htmlPage;
-                            }
+                        //         // Ajoutez le contenu HTML de la page actuelle à la variable
+                        //         $allHtmlPages .= $htmlPage;
+                        //     }
                         
-                            // Chargez toutes les pages HTML dans Dompdf
-                            $pdf->loadHtml($allHtmlPages);
+                        //     // Chargez toutes les pages HTML dans Dompdf
+                        //     $pdf->loadHtml($allHtmlPages);
                         
-                            // Rendez les pages disponibles pour la génération PDF
-                            $pdf->render();
+                        //     // Rendez les pages disponibles pour la génération PDF
+                        //     $pdf->render();
                         
-                            // Renvoyez le PDF final au navigateur en tant que téléchargement
-                            $pdfOutput = $pdf->output();
-                            $response = Response::make($pdfOutput, 200, [
-                                'Content-Type' => 'application/pdf',
-                                'Content-Disposition' => 'attachment; filename="tous_les_diplomes.pdf"',
-                                'Content-Length' => strlen($pdfOutput),
-                            ]);
+                        //     // Renvoyez le PDF final au navigateur en tant que téléchargement
+                        //     $pdfOutput = $pdf->output();
+                        //     $response = Response::make($pdfOutput, 200, [
+                        //         'Content-Type' => 'application/pdf',
+                        //         'Content-Disposition' => 'attachment; filename="tous_les_diplomes.pdf"',
+                        //         'Content-Length' => strlen($pdfOutput),
+                        //     ]);
                         
-                            Alert::success('Les diplômes pour la session ' . $sessionname . ' ont été téléchargés avec succès.');
-                            return $response;
-                        }
+                        //     Alert::success('Les diplômes pour la session ' . $sessionname . ' ont été téléchargés avec succès.');
+                        //     return $response;
+                        // }
                         
-                        
+                        //  new code 
+
+
+                        public function imprimer_tout($id)
+{
+    $session = Session::find($id);
+    $sessionname = $session->nom;
+    $date = date('d/m/Y'); // Modifier '20y' en 'Y' pour obtenir l'année complète
+    $inscriptions = Inscription::where('session', $sessionname)->get();
+    $informations = Information::first(); // Utilisation de first() pour récupérer le premier élément
+    $telephones = Telephone::first(); // Utilisation de first() pour récupérer le premier élément
+    
+    // Créer un objet Dompdf
+    $pdf = new \Dompdf\Dompdf();
+    $pdf->setPaper('A4', 'landscape');
+    
+    // Créer une variable pour stocker le contenu HTML de toutes les pages
+    $allHtmlPages = '';
+    
+    foreach ($inscriptions as $inscription) {
+        $data = [
+            'sexe' => $inscription->sexe,
+            'nom' => $inscription->nom,
+            'prenom' => $inscription->prenom,
+            'formation' => $inscription->formation,
+            'date_deb' => $date,
+            'date_fin' => $date,
+
+            'informations' => $informations,
+
+            'telephones' => $telephones,
+            'date' => $date,
+        ];
+        
+        // Générer le diplôme individuel
+        $htmlPage = view('admin.sessions.deplome1pdf', $data); // Utilisation de '/' pour le chemin
+        
+        // Ajouter le contenu HTML de la page actuelle à la variable
+        $allHtmlPages .= $htmlPage;
+    }
+    
+    // Charger toutes les pages HTML dans Dompdf
+    $pdf->loadHtml($allHtmlPages);
+    
+    // Rendre les pages disponibles pour la génération PDF
+    $pdf->render();
+    
+    // Renvoyer le PDF final au navigateur en tant que téléchargement
+    $pdfOutput = $pdf->output();
+    
+    // Envoie du PDF en téléchargement
+    return response($pdfOutput)
+        ->header('Content-Type', 'application/pdf')
+        ->header('Content-Disposition', 'attachment; filename="tous_les_diplomes.pdf"');
+}
+//  fin de new code 
 
 
 
