@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // if ($this->app->runningInConsole()) {
+        //     $this->commands([
+        //         \Barryvdh\DomPDF\Commands\InstallFont::class,
+        //         // other dompdf commands...
+        //     ]);
+        // }
     }
 }

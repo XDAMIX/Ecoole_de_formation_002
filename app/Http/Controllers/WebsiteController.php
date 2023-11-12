@@ -120,9 +120,6 @@ class WebsiteController extends Controller
         $leprenom = $request->input('prenom');
 
         $inscription->save();
-        
-
-        // return redirect('/');
 
         $titre = $lenom.' '.$leprenom;
 
@@ -160,8 +157,10 @@ $pdfOutput = $pdf->output();
   // Générer le PDF et définir l'entête de la réponse
   $response = Response::make($pdfOutput, 200, [
     'Content-Type' => 'application/pdf',
-    'Content-Disposition' => 'inline; filename="registration.pdf"', // L'option "inline" indique au navigateur d'ouvrir le fichier PDF directement.
-    'Content-Disposition' => 'attachment; filename="'.$lenom.'_'.$leprenom.'_inscription_formacorp.pdf"', // L'option "attachment" indique au navigateur de télécharger le fichier.
+    // 'Content-Disposition' => 'inline; filename="registration.pdf"',
+     // L'option "inline" indique au navigateur d'ouvrir le fichier PDF directement.
+    'Content-Disposition' => 'attachment; filename="'.$lenom.'_'.$leprenom.'_inscription_formacorp.pdf"', 
+    // L'option "attachment" indique au navigateur de télécharger le fichier.
     'Content-Length' => strlen($pdfOutput),
     
 ]);
@@ -177,9 +176,9 @@ return $response;
 // ]);
 
 // return $pdf->stream('pdf');
-return $pdf->download('pdf');
+// return $pdf->download('pdf');
 
-return redirect('/');
+// return redirect('/');
 
 
 }
