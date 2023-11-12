@@ -100,6 +100,7 @@ class InscriptionController extends Controller
 
 
         $titre = $lenom.' '.$leprenom;
+        
         Alert::success('Votre inscription sous le nom : '.$titre.' a bien été enregistrer !, Merci');
 // ... Validation des données et téléchargements de fichiers ...
 
@@ -120,7 +121,7 @@ $data = [
 $pdf = PDF::loadView('pdf', $data);
 return $pdf->stream('pdf');
 
-return redirect('/admin/inscriptions');
+// return redirect('/admin/inscriptions');
 
     }
   

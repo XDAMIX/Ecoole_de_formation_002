@@ -74,6 +74,7 @@
 
 {{-- Lire depuis le dossier public --}}
 {{-- <link href="{{ asset('assets/vendor/......') }}" rel="stylesheet"> --}}
+{{-- <link href="{{ public_path('assets/vendor/......') }}" rel="stylesheet"> --}}
 
 
 
