@@ -23,6 +23,12 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 class WebsiteController extends Controller
 {
+
+
+
+
+
+
     public function readfromdatabase()
     {
         $ListeFormations = Formation::all();
@@ -41,6 +47,12 @@ class WebsiteController extends Controller
         'paragraphes'=>$paragraphes]);
     }
 
+
+
+
+
+
+
     public function form_inscription()
     {
         $ListeFormations = Formation::all();
@@ -50,6 +62,13 @@ class WebsiteController extends Controller
 
         return view('inscription',['formations'=>$ListeFormations,'informations'=>$informations,'telephones'=>$telephones,'liens'=>$liens]);
     }
+
+
+
+
+
+
+
     public function form_inscription_parformation($id)
     {
         $LaFormation = formation::find($id);
@@ -60,6 +79,12 @@ class WebsiteController extends Controller
         return view('inscription_directe',['formation'=>$LaFormation,'informations'=>$informations,'telephones'=>$telephones,'liens'=>$liens]);
     }
 
+
+
+
+
+
+
     public function voir_formation($id){
         $LaFormation = formation::find($id);
         $informations= Information::all()->first();
@@ -67,6 +92,12 @@ class WebsiteController extends Controller
         $liens = Lien::all();
         return view('voirplus',['formation'=>$LaFormation,'informations'=>$informations,'telephones'=>$telephones,'liens'=>$liens]);
     }
+
+
+
+
+
+
 
     public function save_inscription(InscriptionRequest $request) {
         $inscription = new Inscription();
@@ -85,14 +116,14 @@ class WebsiteController extends Controller
         // $inscription->date = now();
         
         
-
-
         $lenom = $request->input('nom');
         $leprenom = $request->input('prenom');
 
         $inscription->save();
-        $titre = $request->input('nom');
-        Alert::success($titre, 'Inscription terminée avec success! merci')->position('center')->autoClose(7000);
+
+        $titre = $lenom.' '.$leprenom;
+
+        Alert::success($titre, 'Votre inscription en-ligne a été éffectuée avec succès! merci à bientôt')->position('center')->autoClose(7000);
 
 // ... Validation des données et téléchargements de fichiers ...
         
@@ -118,7 +149,6 @@ $data = [
 ];
 
 
-
 // $pdf = PDF::loadView('pdf',$data, compact('informations') );
 $pdf = PDF::loadView('pdf',$data);
 
@@ -127,8 +157,10 @@ $pdfOutput = $pdf->output();
   // Générer le PDF et définir l'entête de la réponse
   $response = Response::make($pdfOutput, 200, [
     'Content-Type' => 'application/pdf',
-    // 'Content-Disposition' => 'inline; filename="registration.pdf"', // L'option "inline" indique au navigateur d'ouvrir le fichier PDF directement.
-    'Content-Disposition' => 'attachment; filename="'.$lenom.'_'.$leprenom.'_inscription_formacorp.pdf"', // L'option "attachment" indique au navigateur de télécharger le fichier.
+    // 'Content-Disposition' => 'inline; filename="registration.pdf"',
+     // L'option "inline" indique au navigateur d'ouvrir le fichier PDF directement.
+    'Content-Disposition' => 'attachment; filename="'.$lenom.'_'.$leprenom.'_inscription_formacorp.pdf"', 
+    // L'option "attachment" indique au navigateur de télécharger le fichier.
     'Content-Length' => strlen($pdfOutput),
     
 ]);
@@ -149,9 +181,14 @@ return $response;
 // return redirect('/');
 
 
-        
+}
 
-    }
+
+
+
+
+
+
     public function send_the_message(MessageRequest $request) {
         $message = new Message();
 
@@ -163,9 +200,27 @@ return $response;
 
         $message->save();
 
+
         $titre = $request->input('name');
-        Alert::success($titre , 'votre message a été envoyé avec success ! merci')->position('center')->autoClose(2000);
+
+        Alert::success($titre , 'Votre message a été envoyé avec succès ! merci')->position('center')->autoClose(2000);
 
         return redirect('/');
      }
+
+
+
+    //  PACCINO TESTE DOM-PDF
+    
+    public function teste_pdf()
+{
+    $data = [
+        'title' => 'teste de PDF avec DOMPDF',
+        'content' => 'Contenu de mon PDF...'
+    ];
+
+    $pdf = PDF::loadView('template', $data);
+
+    return $pdf->download('teste-pdf.pdf');
+}
 }

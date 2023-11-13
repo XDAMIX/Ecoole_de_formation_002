@@ -15,12 +15,25 @@
     }
     </script>
 
+
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/ecole') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span class="btn-description">Retour</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Modification des Informations</h2>
+        </div>
+    </div>
+</div>
+
+
 <div class="container" style="padding-top: 10px;">
     <div class="row">
         <div class="col-md-12">
         <div class="card" style="background-color: #ffff;">
                 <div class="card-header"style="text-align:center;">
-                  <a style="font-size: 20px;"><i class="bi bi-person"></i>Modifier les informations de l'école'</a>
+                  <a style="font-size: 20px;">informations de l'école</a>
                 </div>
                 <div class="card-body">
 
@@ -90,7 +103,6 @@
 
     <div class="form-group">
         <label for="">Logo:</label>
-        <img src="{{ asset('storage/'.$information->logo ) }}" class="img-fluid rounded" alt="" style="margin-top: 5px;margin-bottom: 5px;" id="preview">
         <input type="file" name="logo" class="form-control @if($errors->get('logo')) is-invalid @endif" id="validationServer06" accept="image/*" onchange="previewImage();" value="{{ $information->logo }}">
 
 
@@ -102,15 +114,22 @@
                     @endforeach
                     @endif
                 </div>
+
+                <div class="col-12" style="text-align: center;">
+                    <img src="{{ asset('storage/'.$information->logo ) }}" class="img-fluid rounded" alt="" style="height:250px;width:auto; margin-top: 15px;margin-bottom: 15px;" id="preview">
+                </div>
+      
+    
+    
     </div>
 
     <br>
-    <div class="form-group">
-        <input type="submit" class="form-control btn btn-success" value="Enregistrer">
-    </div>
-    <br>
-    <div class="">
-        <a href="{{ url('/admin/ecole') }}" class="btn btn-secondary">Annuler</a>
+    <div class="row formulaire-btn">
+        <div class="form-group col-12">
+
+            <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button>
+
+        </div>
     </div>
 
 </form>
@@ -128,4 +147,6 @@
 </div>
 
 
+
 @endsection
+

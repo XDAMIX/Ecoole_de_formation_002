@@ -6,15 +6,26 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css',
-                'resources/js/app.js',
+                'resources/css/app.css','resources/css/admin.css',
+                'resources/js/app.js','resources/js/admin.js',
             ],
             refresh: true,
         }),
     ],
+    optimizeDeps: {
+        include: [
+          'jquery',
+          'jszip',
+          'pdfmake',
+        ],
+      },
     resolve: {
         alias: {
-            '$': 'jQuery'
+            'jquery': 'jQuery'
         },
     },
 });
+
+
+
+

@@ -178,6 +178,7 @@ Route::controller(QuestionController::class)->group(function () {
     // informations
 Route::controller(InformationController::class)->group(function () {
     Route::get('/admin/ecole','index');
+    Route::get('/admin/ecole/save','store');
     Route::get('/admin/ecole/{id}/edit','edit');
     Route::put('/admin/ecole/{id}/update','update');
     });
@@ -210,6 +211,9 @@ Route::controller(InformationController::class)->group(function () {
         // TIKTOK
         Route::get('/admin/lien/{id}/Tiktok','edittiktok');
         Route::put('/admin/lien/{id}/Tiktoksave','updatetiktok');
+
+        // vider le lien 
+        Route::delete('/admin/lien/{id}/vider','vider');
         });
 
     // acceuil photo
@@ -251,3 +255,18 @@ Route::get('/voirplus/{id}', [App\Http\Controllers\WebsiteController::class, 'vo
 // formulaire en pdf 
 Route::get('/formulaire', [App\Http\Controllers\FormulaireController::class, 'showformulaire'])->name('showformulaire');
 Route::post('/pdf', [App\Http\Controllers\FormulaireController::class, 'pdf'])->name('pdf');
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------------------------------------------------------------------------------
+// PACCINO TESTER LE DOM_PDF
+Route::get('/testepdf', [App\Http\Controllers\WebsiteController::class, 'teste_pdf'])->name('PACCINO_TESTE_PDF');
+// -----------------------------------------------------------------------------------------------------------------------------------------

@@ -2,6 +2,44 @@
 @section('content')
 
 
+                        <script>
+                            $(document).ready(function() {
+                            $('#example').DataTable( {
+                                dom: 'Bfrtip',
+                                buttons: [
+                                     'excel', 'pdf', 'print',
+                                                                        {
+                                            extend: 'spacer',
+                                            style: 'bar',
+                                            text: 'les colonnes a afficher'
+                                        },
+                                    'colvis'
+                                ]
+                          
+
+                                
+                            } );
+                        } );
+                      
+
+                        // showing colonnes
+
+                        </script>
+
+
+
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Liste des inscriptions</h2>
+        </div>
+    </div>
+</div>
+
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -82,38 +120,6 @@
                                 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
                                 
  
-                                <script>
-                                    $(document).ready(function() {
-                                    $('#example').DataTable( {
-                                        dom: 'Bfrtip',
-                                        buttons: [
-                                             'excel', 'pdf', 'print',
-                                                                                {
-                                                    extend: 'spacer',
-                                                    style: 'bar',
-                                                    text: 'les colon a afficher'
-                                                },
-                                            'colvis'
-                                        ]
-                                  
-
-                                        
-                                    } );
-                                } );
-                              
-
-                                // showing colon
-
-                                
-2
-3
-4
-5
-6
-7
-8
-
-                                </script>
                                 
 
                             </div>

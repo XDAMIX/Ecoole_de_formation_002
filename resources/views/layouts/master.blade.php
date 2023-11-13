@@ -14,21 +14,27 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  {{-- <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
+  <link href="{{ asset('school-icon.ico') }}" rel="icon" type="image/x-icon" >
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+ 
+
+
+  {{-- avec l'aide de chatgpt --}}
+
+  {{-- CSS  --}}
+  <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
   <!-- Scripts -->
   @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
@@ -94,22 +100,22 @@
                     <div class="social-links col-lg-12 col-md-12">
                       @foreach($liens as $lien)
 
-                      @if($lien->reseau_social == 'Twitter')
+                      @if($lien->reseau_social == 'Twitter' && $lien->lien !== '' )
                       <a href="{{$lien->lien}}" target="_blank" class="twitter"><i class="bx bxl-twitter"></i></a>
                       @endif
-                      @if($lien->reseau_social == 'Facebook')
+                      @if($lien->reseau_social == 'Facebook' && $lien->lien !== '' )
                       <a href="{{$lien->lien}}" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
                       @endif
-                      @if($lien->reseau_social == 'Instagram')
+                      @if($lien->reseau_social == 'Instagram' && $lien->lien !== '' )
                       <a href="{{$lien->lien}}" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
                       @endif
-                      @if($lien->reseau_social == 'Youtube')
+                      @if($lien->reseau_social == 'Youtube' && $lien->lien !== '' )
                       <a href="{{$lien->lien}}" target="_blank" class="Youtube"><i class="bx bxl-youtube"></i></a>
                       @endif
-                      @if($lien->reseau_social == 'Linkedin')
+                      @if($lien->reseau_social == 'Linkedin' && $lien->lien !== '' )
                       <a href="{{$lien->lien}}" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
                       @endif
-                      @if($lien->reseau_social == 'Tiktok')
+                      @if($lien->reseau_social == 'Tiktok' && $lien->lien !== '' )
                       <a href="{{$lien->lien}}" target="_blank" class="tiktok"><i class="bx bxl-tiktok"></i></a>
                       @endif
 
@@ -274,11 +280,19 @@
   @include('sweetalert::alert')
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  {{-- <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script> --}}
+
+
+  {{-- avec l'aide de chatgpt --}}
+  <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}" rel="stylesheet"></script>
+  <script src="{{ asset('assets/vendor/aos/aos.js') }}" rel="stylesheet"></script>
+  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script>
+  <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}" rel="stylesheet"></script>
+  <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}" rel="stylesheet"></script>
 
 
 </body>

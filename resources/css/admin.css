@@ -1,23 +1,137 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo&family=IBM+Plex+Sans+Arabic&family=Lobster&family=Kreon:wght@500&family=Roboto:wght@300&display=swap');
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
-body
-{
-    font-family: 'Poppins',sans-serif;
-}
-
-.btn-circle
-{
-    padding: 5px 10px 5px;
-    border-radius: 50px;
-    width: 150px;
-}
-#double-btn{
-    text-align: center;
-}
-
-#btn-retour{
-    width: 110px;
-}
+/* initialiser la taille de police standard */
+/* ------------------------------------------------------------------------------ */
+    #global{
+        font-size:16px;
+    }
+    body{
+        font-size:16px;
+        font-family: 'Poppins',sans-serif;
+    }
 
 
+/* définir les polices */
+/* ------------------------------------------------------------------------------ */
+    h1,h2,h3,h4,h5,h6{
+        font-family: 'Poppins',sans-serif;
+    }
+    p{
+        font-family: 'Roboto',sans-serif;
+    }
+    a{
+        font-family: 'Poppins',sans-serif;
+    }
+
+
+/* réglages font-size*/
+/* ------------------------------------------------------------------------------ */
+    .titre{
+        font-size: 1,2rem;
+        font-weight: bold;
+    }
+    .data{
+        font-size: 1rem;
+    }
+    .entete h4{
+        font-weight: bold;
+    }
+    .fin-section{
+        font-weight: bold;
+    }
+/* autres réglages (margin/padding)*/
+/* ------------------------------------------------------------------------------ */
+    .btn{
+        margin-bottom: 3px;
+    }
+    
+    #global{
+        background-color: white;
+    }
+    #pied-page{
+        height: 100px;
+    }
+    .section{
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .entete{
+        margin-bottom: 30px;
+    }
+    .btn-description{
+        padding-left: 8px;
+    }
+    .icons{
+        padding-right: 8px;
+    }
+    .fin-section{
+        margin-top: 40px;
+    }
+
+/* réglages sur smartphones (portrait phones, less than 576px) */
+/* ------------------------------------------------------------------------------ */
+    @media (max-width: 575.98px)
+    { 
+        .btn-description{
+            display: none;
+        }
+
+        .titre{
+            font-size: 1rem;
+        }
+        .data{
+            font-size: 0,5rem;
+        }
+    }
+
+
+/* réglages boutons */
+/* ------------------------------------------------------------------------------ */
+    .alpa:hover{
+    box-shadow: 0 0 5px #383837;
+    text-shadow: 0 0 5px #383837;
+    }
+    .alpa{
+        border-radius: 10px;
+    }
+/* réglages formulaire */
+/* ------------------------------------------------------------------------------ */
+    .formulaire-btn{
+        text-align: center;
+    }
+    .card{
+        margin-top:20px;
+        margin-bottom:50px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* dashbord menu  */
+    /* ----------------------------- */
+    .submenu-i{
+        margin-right: 5px;
+    }
+    .sidebar .nav-item .collapse .collapse-inner .collapse-item,
+    .sidebar .nav-item .collapsing .collapse-inner .collapse-item{
+        font-size: 12px !important; 
+    }

@@ -7,6 +7,8 @@ use App\Models\Acceuil;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\AcceuilRequest;
 
+use RealRashid\SweetAlert\Facades\Alert;
+
 class AcceuilController extends Controller
 {
     public function __construct()
@@ -33,6 +35,10 @@ class AcceuilController extends Controller
             $acceuil->photo = $request->photo->store('/public/images/acceuil');
         }
         $acceuil->save();
-        return redirect('/admin/ecole/acceuil');
+
+        // message popup
+        Alert::success( 'Le banner a été modifié avec succès ! merci')->position('center')->autoClose(2000);
+
+        return redirect('/admin/ecole');
     }
 }

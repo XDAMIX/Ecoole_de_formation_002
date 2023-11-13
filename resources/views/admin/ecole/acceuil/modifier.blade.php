@@ -15,12 +15,25 @@
     }
     </script>
 
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/ecole') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span class="btn-description">Retour</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Modification de Banner d'acceuil sur le site web</h2>
+        </div>
+    </div>
+</div>
+
+
 <div class="container" style="padding-top: 10px;">
     <div class="row">
+        
         <div class="col-md-12">
         <div class="card" style="background-color: #ffff;">
                 <div class="card-header"style="text-align:center;">
-                  <a style="font-size: 20px;"><i class="bi bi-person"></i>Modifier l'acceuil sur le site web:'</a>
+                  <a style="font-size: 20px;">Banner d'acceuil sur le site web</a>
                 </div>
                 <div class="card-body">
 
@@ -41,7 +54,7 @@
     </div>
 
     <div class="form-group">
-        <label for="">SousTitre1:</label>
+        <label for="">Sous Titre:</label>
         <input type="text" name="stitre1" class="form-control @if($errors->get('titre')) is-invalid @endif" id="validationServer02" placeholder="le titre" value="{{ $acceuil->sous_titre1 }}">
                 <div id="validationServer02Feedback" class="invalid-feedback">
                     @if($errors->get('stitre1'))
@@ -52,9 +65,22 @@
                 </div>
     </div>
 
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="">SousTitre2:</label>
         <input type="text" name="stitre2" class="form-control @if($errors->get('titre')) is-invalid @endif" id="validationServer03" placeholder="le titre" value="{{ $acceuil->sous_titre2 }}">
+                <div id="validationServer03Feedback" class="invalid-feedback">
+                    @if($errors->get('stitre2'))
+                    @foreach($errors->get('stitre2') as $message)
+                    {{ $message }}
+                    @endforeach
+                    @endif
+                </div>
+    </div> --}}
+
+
+    <div class="form-group">
+        <label for="">Petit paragraphe:</label>
+        <textarea type="text" name="stitre2" class="form-control @if($errors->get('titre')) is-invalid @endif" id="validationServer03" placeholder="le titre" value="{{ $acceuil->sous_titre2}}">{{ $acceuil->sous_titre2 }}"</textarea>
                 <div id="validationServer03Feedback" class="invalid-feedback">
                     @if($errors->get('stitre2'))
                     @foreach($errors->get('stitre2') as $message)
@@ -65,9 +91,9 @@
     </div>
 
 
+
     <div class="form-group">
         <label for="">Photo:</label>
-        <img src="{{ asset('storage/'.$acceuil->photo ) }}" class="img-fluid rounded" alt="" style="margin-top: 5px;margin-bottom: 5px;" id="preview">
         <input type="file" name="photo" class="form-control @if($errors->get('photo')) is-invalid @endif" id="validationServer06" accept="image/*" onchange="previewImage();" value="{{ $acceuil->photo }}">
 
 
@@ -79,15 +105,21 @@
                     @endforeach
                     @endif
                 </div>
+
+        <div class="col-12" style="text-align: center;">
+            <img src="{{ asset('storage/'.$acceuil->photo ) }}" class="img-fluid rounded" alt="" style="height:450px;width:auto; margin-top: 15px;margin-bottom: 15px;" id="preview">
+        </div>
+
+
     </div>
 
     <br>
-    <div class="form-group">
-        <input type="submit" class="form-control btn btn-success" value="Enregistrer">
-    </div>
-    <br>
-    <div class="">
-        <a href="{{ url('/admin/ecole/acceuil') }}" class="btn btn-secondary">Annuler</a>
+    <div class="row formulaire-btn">
+        <div class="form-group col-12">
+
+            <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button>
+
+        </div>
     </div>
 
 </form>

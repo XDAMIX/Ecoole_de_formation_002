@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Inscription;
 use App\Models\Formation;
@@ -26,7 +25,8 @@ class InscriptionController extends Controller
 
     public function index() {
         $ListeFormations = Formation::all();
-        $ListeInscriptions = Inscription::orderBy('id', 'desc')->where('contact',false)->get();
+        // $ListeInscriptions = Inscription::orderBy('id', 'DESC')->get(); 
+        $ListeInscriptions = Inscription::all(); 
        
         $formation = '';
         $contact = '';
@@ -40,12 +40,16 @@ class InscriptionController extends Controller
 
 
 
-        return view('admin.inscriptions.index',['inscriptions'=>$ListeInscriptions,'formations'=>$ListeFormations,'valeur'=>$valeur
-                                            ,'laformation'=>$formation,'lecontact'=>$contact,'ladatedebut'=>$dateDebut,'ladatefin'=>$dateFin
-                                            ,'chformation'=>$chformation,'chdate'=>$chdate,'chcontact'=>$chcontact]);
+        // return view('admin.inscriptions.index',['inscriptions'=>$ListeInscriptions,'formations'=>$ListeFormations,'valeur'=>$valeur
+        //                                     ,'laformation'=>$formation,'lecontact'=>$contact,'ladatedebut'=>$dateDebut,'ladatefin'=>$dateFin
+        //                                     ,'chformation'=>$chformation,'chdate'=>$chdate,'chcontact'=>$chcontact]);
+
+
+        return view('admin.inscriptions.liste',['inscriptions'=>$ListeInscriptions]);
 
 
     }
+
 
 
 
@@ -59,6 +63,7 @@ class InscriptionController extends Controller
         $pdf->render();
 
         return $pdf->stream('inscriptions.pdf');
+        
     }
 
     public function create() {
@@ -67,13 +72,13 @@ class InscriptionController extends Controller
     }
 
     public function store(InscriptionRequest $request) {
-            $request->validate([
+            // $request->validate([
                
-                'nom'=>'required|max:40|string',
-                'age'=>'required|max:20|number',
+            //     'nom'=>'required|max:40|string',
+            //     'age'=>'required|max:20|number',
                 
-                'tel'=>'required|max:20|number'
-            ]);
+            //     'tel'=>'required|max:20|number'
+            // ]);
         $inscription = new Inscription();
 
         $inscription->sexe = $request->input('sexe');
@@ -89,6 +94,14 @@ class InscriptionController extends Controller
 
         $inscription->save();
 
+
+        $lenom = $request->input('nom');
+        $leprenom = $request->input('prenom');
+
+
+        $titre = $lenom.' '.$leprenom;
+        
+        Alert::success('Votre inscription sous le nom : '.$titre.' a bien été enregistrer !, Merci');
 // ... Validation des données et téléchargements de fichiers ...
 
 $data = [
@@ -108,9 +121,16 @@ $data = [
 $pdf = PDF::loadView('pdf', $data);
 return $pdf->stream('pdf');
 
-  // return redirect('/admin/inscriptions');
+// return redirect('/admin/inscriptions');
 
     }
+  
+
+
+
+
+
+
 
     public function edit($id) {
         $inscription =Inscription::find($id);
@@ -217,7 +237,7 @@ $pdfOutput = $pdf->output();
         $leprenom = $inscription->prenom;
 
         $inscription->save();
-        Alert::success('Votre preinscription de '.$lenom.' '. $leprenom .' a bien été modifiée');
+        Alert::success('Votre inscription de : '.$lenom.' '. $leprenom .' a bien été modifiée');
         return redirect('/admin/inscriptions');
 
     }
@@ -236,7 +256,7 @@ $pdfOutput = $pdf->output();
         $leprenom = $inscription->prenom;
 
         $inscription->delete();
-        Alert::success('le candidat '.$lenom.' '. $leprenom .' a été suprime de la session '.$sessionname);
+        Alert::success('le candidat '.$lenom.' '. $leprenom .' a été supprimé de la session '.$sessionname);
         return redirect('/admin/session/'.$session->id.'/voir');
 
     }
@@ -288,7 +308,7 @@ $pdfOutput = $pdf->output();
 // $pdf = PDF::loadView('pdf',$data, compact('informations') );
 
 
-Alert::success('Deplome de '.$sessionname.' pour le candidat '.$lenom.' '. $leprenom .' a bien été telecharger');
+Alert::success('Diplôme de : '.$sessionname.' pour le candidat : '.$lenom.' '. $leprenom .' a bien été télécharger');
 $pdf = PDF::loadView('admin\sessions\deplome1pdf',$data);
 $pdf->setPaper('A4', 'landscape'); // Définissez le format du papier en paysage (landscape)
 $pdfOutput = $pdf->output();
@@ -374,58 +394,60 @@ return $response;
 
 
                         public function imprimer_tout($id)
-{
-    $session = Session::find($id);
-    $sessionname = $session->nom;
-    $date = date('d/m/Y'); // Modifier '20y' en 'Y' pour obtenir l'année complète
-    $inscriptions = Inscription::where('session', $sessionname)->get();
-    $informations = Information::first(); // Utilisation de first() pour récupérer le premier élément
-    $telephones = Telephone::first(); // Utilisation de first() pour récupérer le premier élément
-    
-    // Créer un objet Dompdf
-    $pdf = new \Dompdf\Dompdf();
-    $pdf->setPaper('A4', 'landscape');
-    
-    // Créer une variable pour stocker le contenu HTML de toutes les pages
-    $allHtmlPages = '';
-    
-    foreach ($inscriptions as $inscription) {
-        $data = [
-            'sexe' => $inscription->sexe,
-            'nom' => $inscription->nom,
-            'prenom' => $inscription->prenom,
-            'formation' => $inscription->formation,
-            'date_deb' => $date,
-            'date_fin' => $date,
-
-            'informations' => $informations,
-
-            'telephones' => $telephones,
-            'date' => $date,
-        ];
-        
-        // Générer le diplôme individuel
-        $htmlPage = view('admin.sessions.deplome1pdf', $data); // Utilisation de '/' pour le chemin
-        
-        // Ajouter le contenu HTML de la page actuelle à la variable
-        $allHtmlPages .= $htmlPage;
-    }
-    
-    // Charger toutes les pages HTML dans Dompdf
-    $pdf->loadHtml($allHtmlPages);
-    
-    // Rendre les pages disponibles pour la génération PDF
-    $pdf->render();
-    
-    // Renvoyer le PDF final au navigateur en tant que téléchargement
-    $pdfOutput = $pdf->output();
-    
-    // Envoie du PDF en téléchargement
-    return response($pdfOutput)
-        ->header('Content-Type', 'application/pdf')
-        ->header('Content-Disposition', 'attachment; filename="tous_les_diplomes.pdf"');
-}
-//  fin de new code 
+                        {
+                            $session = Session::find($id);
+                            $sessionname = $session->nom;
+                            $date = date('d/m/20y');
+                            $inscriptions = Inscription::where('session', $sessionname)->get();
+                            $informations = Information::all()->first();
+                            $telephones = Telephone::all()->first();
+                        
+                            // Créez un objet Dompdf
+                            $pdf = new \Dompdf\Dompdf();
+                            $pdf->setPaper('A4', 'landscape');
+                            
+                            // Créez une variable pour stocker le contenu HTML de toutes les pages
+                            $allHtmlPages = '';
+                        
+                            foreach ($inscriptions as $inscription) {
+                                $data = [
+                                    'sexe' => $inscription->sexe,
+                                    'nom' => $inscription->nom,
+                                    'prenom' => $inscription->prenom,
+                                    'formation' => $inscription->formation,
+                                    'date_deb' => $date,
+                                    'date_fin' => $date,
+                                    'informations' => $informations,
+                                    'telephones' => $telephones,
+                                    'date' => $date,
+                                ];
+                        
+                                // Générez le diplôme individuel
+                                $htmlPage = view('admin\sessions\deplome1pdf', $data);
+                        
+                                // Ajoutez le contenu HTML de la page actuelle à la variable
+                                $allHtmlPages .= $htmlPage;
+                            }
+                        
+                            // Chargez toutes les pages HTML dans Dompdf
+                            $pdf->loadHtml($allHtmlPages);
+                        
+                            // Rendez les pages disponibles pour la génération PDF
+                            $pdf->render();
+                        
+                            // Renvoyez le PDF final au navigateur en tant que téléchargement
+                            $pdfOutput = $pdf->output();
+                            $response = Response::make($pdfOutput, 200, [
+                                'Content-Type' => 'application/pdf',
+                                'Content-Disposition' => 'attachment; filename="tous_les_diplomes.pdf"',
+                                'Content-Length' => strlen($pdfOutput),
+                            ]);
+                        
+                            Alert::success('Les diplômes pour la session ' . $sessionname . ' ont été téléchargés avec succès.');
+                            return $response;
+                        }
+                        
+                        
 
 
 
