@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
         <label for="">Lien de votre page:</label>
-        <input type="text" name="lien" class="form-control @if($errors->get('lien')) is-invalid @endif" id="validationServer01" placeholder="numéro" value="{{ $lien->lien }}">
+        <input type="text" name="lien" class="form-control @if($errors->get('lien')) is-invalid @endif" id="validationServer01" placeholder="Coller le lien ici" value="{{ $lien->lien }}">
                 <div id="validationServer01Feedback" class="invalid-feedback">
                     @if($errors->get('lien'))
                     @foreach($errors->get('lien') as $message)

@@ -58,7 +58,7 @@ ini_set('display_errors', 1);
 
         </div>
         <div class="col-12">
-            <h1>le nom de l'ecole ici</h1>
+            <h1>{{$informations->nom}}</h1>
         </div>
         <div class="col-12">
             <h2>Reçu de l'inscription en ligne</h2>
@@ -114,22 +114,17 @@ ini_set('display_errors', 1);
 
                 <p id="contact">
 
-                    <span><i class="bi bi-geo-alt"></i>  Adresse : {{$informations->adresse}}  </span>
+                    <span> <img src="{{ public_path('icones/position.png') }}" class="img-fluid icones" alt="...">  Adresse : {{$informations->adresse}} . </span>
 
                 </p>
                 <p id="contact">
 
-                    <span><i class="bi bi-envelope"></i>  Email : {{$informations->email}}  -  </span> <span><i class="bi bi-globe"></i>  Site web : www.formacorpro.com </span>
+                    <span> <img src="{{ public_path('icones/email.png') }}" class="img-fluid icones" alt="...">  Email : {{$informations->email}}  |  </span>  <img src="{{ public_path('icones/globe.png') }}" class="img-fluid icones" alt="...">  Site web : www.formacorpro.com </span>
 
                 </p>
                 <p id="contact">
 
-                    <span><i class="bi bi-globe"></i>  Site web : www.formacorpro.com </span>
-
-                </p>
-                <p id="contact">
-
-                    <span><i class="bi bi-phone"></i>  Telephone :{{$telephones->numero}}  </span>
+                    <span> <img src="{{ public_path('icones/phone.png') }}" class="img-fluid icones" alt="...">  Telephone :  @foreach ($telephones as $telephone) {{$telephone->numero}} <span> / </span>  @endforeach </span>
                     
                 </p>
 
@@ -220,7 +215,10 @@ footer{
     position: static;
     bottom: 0;
 }
-i{
+.icones{
+    height: 12px;
+    margin-bottom: -5;
+    justify-content: center;
     margin-right: 5px;
 }
 </style>

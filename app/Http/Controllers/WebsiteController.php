@@ -128,7 +128,7 @@ class WebsiteController extends Controller
 // ... Validation des données et téléchargements de fichiers ...
         
 $informations= Information::all()->first();
-$telephones = Telephone::all()->first();
+$telephones = Telephone::all();
 
 $date=date('d/m/20y');
 
