@@ -183,7 +183,8 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     {{-- <a class="collapse-item" href=""><i class="fa-solid fa-bars submenu-i"></i>Page d'acceuil</a> --}}
-                                    <a class="collapse-item" href="/admin/ecole/presentation"><i class="fa-solid fa-bars submenu-i"></i>Présentation</a>
+                                    <a class="collapse-item" href="{{ url('/admin/ecole/presentation') }}"><i class="fa-solid fa-bars submenu-i"></i>Présentation</a>
+                                    <a class="collapse-item" href="{{ url('/admin/ecole/presentation/nouveau') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
                                 </div>
                             </div>
@@ -201,7 +202,7 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/gallerie') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des Actualites</a>
-                                    <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
+                                    <a class="collapse-item" href="{{ url('/admin/gallerie/nouveau') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
                                 </div>
                             </div>
@@ -219,7 +220,7 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/faq') }}"><i class="fa-solid fa-bars submenu-i"></i>FAQ</a>
-                                    <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
+                                    <a class="collapse-item" href="{{ url('/admin/faq/nouveau') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
                                 </div>
                             </div>
@@ -237,7 +238,7 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                     <a class="collapse-item" href="{{ url('/admin/temoignages') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des témoignages</a>
-                                    <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
+                                    <a class="collapse-item" href="{{ url('/admin/temoignages/nouveau') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
 
                                 </div>
                             </div>
@@ -317,7 +318,7 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
                                 {{-- <h6 class="collapse-header">Menu :</h6> --}}
                                 <a class="collapse-item" href="{{ url('/admin/formations') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des formations</a>
-                                <a class="collapse-item" href=""><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
+                                <a class="collapse-item" href="{{ url('/admin/formation/nouveau') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
                                 </div>
                             </div>
                         </li>

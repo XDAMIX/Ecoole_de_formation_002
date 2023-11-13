@@ -3,17 +3,24 @@
 
 
 
+{{-- retour à l'acceuil  --}}
+<div class="container" id="titre-page">
+  <div class="row">
+      <div class="col-2 d-flex align-items-center">
+          <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
+      </div>
+      <div class="col-10 d-flex align-items-center">
+          <h2>Témoignages</h2>
+      </div>
+  </div>
+</div>
+
+
+
 
 <div class="container" style="padding-top: 10px;">
   <div class="row">
 
-    <div class="head">
-      <h3 style="text-transform: uppercase;">témoignages</h3>
-    </div>
-
-    <div class="d-grid gap-1 d-md-flex justify-content-md-end" style="margin-top: 10px;margin-bottom: 10px;">
-      <button class="button-add-new s-titre" onclick="window.location.href='/admin/temoignages/nouveau';">Ajouter un témoin <i class="fa-sharp fa-solid fa-file-circle-plus hichem"></i></button>
-    </div>
 
     @foreach($temoignages as $temoignage)
     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
@@ -516,4 +523,9 @@ margin: 1%;
     
   }
 </style>
+
+
+
+{{-- footer  --}}
+<div class="container" id="pied-page">
 @endsection

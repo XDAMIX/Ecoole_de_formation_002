@@ -18,9 +18,9 @@
 
     <div class="col-md-6">
         <div class="card" style="background-color: #ffff;">
-                <div class="card-header"style="text-align:center;">
+                {{-- <div class="card-header"style="text-align:center;">
                   <a style="font-size: 20px;">Numéro de téléphone</a>
-                </div>
+                </div> --}}
                 <div class="card-body">
 
 <form action="{{ url('/admin/tel/save') }}" method="post">
@@ -51,11 +51,14 @@
 
 
     <br>
-    <div class="row formulaire-btn">
-        <div class="form-group col-12">
-
-            <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button>
-
+    <div class="form-group row justify-content-center text-center">
+        <div class="col-6">
+            <button type="submit" class="btn btn-outline-success"><i class="bi bi-check2"></i><span
+                    class="btn-description">Enregistrer</span></button>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-outline-danger" href="{{ '/admin/ecole' }}"><i
+                    class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
         </div>
     </div>
 
@@ -68,4 +71,7 @@
 </div>
 
 </div>
+
+{{-- footer  --}}
+<div class="container" id="pied-page">
 @endsection

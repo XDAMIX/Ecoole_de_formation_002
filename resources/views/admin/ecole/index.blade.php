@@ -14,8 +14,10 @@
 </div>
 
 
-<div class="container-fluid" id="global" style="margin-top:20px;margin-bottom: 20px;">
+<div class="container-fluid" style="margin-top:10px;margin-bottom:10px;">
 
+    <div class="card" style="background-color: #ffff;" id="global">
+        <div class="card-body">
 
 <!-- informations ecole -->
 <div class="container section">
@@ -277,7 +279,7 @@
 <!-- fin Autres informations -->
 
 
-
+        </div></div>
 {{-- fin container global --}}
 </div>
 

@@ -1,22 +1,23 @@
 @extends('layouts.admin_menu')
 @section('content')
 
-<div class="container-fluid" style="padding-top: 10px;">
 
+
+{{-- retour à l'acceuil  --}}
+<div class="container" id="titre-page">
     <div class="row">
-        <div class="col-md-12">
-        <div class="head">
-            <h3 style="text-transform: uppercase;">foire aux question</h3>
-            <h5>liste des réponses sur les questions les plus posés</h5>
-
-
-                <div class="d-grid gap-1 d-md-flex justify-content-md-end" style="margin-top: 10px;margin-bottom: 10px;">
-                        <button class="button-add-new s-titre" onclick="window.location.href='/admin/faq/nouveau';">Ajouter une question  <i class="fa-sharp fa-solid fa-file-circle-plus hichem"></i></button>
-                </div>
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
         </div>
-        <hr>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Foire au questions</h2>
         </div>
     </div>
+</div>
+
+
+<div class="container-fluid" style="padding-top: 10px;">
+
 
 
 
@@ -499,7 +500,8 @@ margin: 1%;
 </style>
 
 
-
+{{-- footer  --}}
+<div class="container" id="pied-page">
 
 
 @endsection

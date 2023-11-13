@@ -49,12 +49,12 @@
                         className: 'btn btn-dark'
                     },
         ],
-        columnDefs: [
-            {
-                targets: 1, // Assuming your date column is at index 0
-                type: 'date-eu' // 'date-eu' is for European date format, adjust accordingly
-            }
-        ]                
+        // columnDefs: [
+        //     {
+        //         targets: 1, // Assuming your date column is at index 0
+        //         type: 'date-eu' // 'date-eu' is for European date format, adjust accordingly
+        //     }
+        // ]                
 
         
     } );
@@ -64,7 +64,7 @@
 
 <style>
     .buttons-container {
-        text-align: center;
+        text-align: left;
         margin-top: 10px;
         margin-bottom: 10px;
         background-color: rgb(255, 255, 255);
