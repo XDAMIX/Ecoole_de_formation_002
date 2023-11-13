@@ -26,7 +26,7 @@
   <div class="row justify-content-center">
 
         <div class="col-12" style="text-align: center;">
-            <h2><i class="fa-solid fa-file-pen icons"></i>  Inscription en-ligne</h2>
+            <h2><i class="fa-solid fa-file-pen icons"></i>  Formulaire d'inscription </h2>
         </div>
 
   </div>
@@ -43,19 +43,15 @@
               </div> --}}
               <div class="card-body">
   
-<form action="{{url('/inscription/save')}}" method="POST">
+<form action="{{url('/inscription/save')}}" method="POST" id="form_insc" >
 @csrf
-
-
-
-
 
 {{-- sexe ,nom ,prenom  --}}
 {{-- ---------------------------------------------------------- --}}
 <div class="row espace-inputs"> 
   
   <div class="col-md-12">
-    <h5 style="text-align: center"><i class="bi bi-person-fill"></i>  informations personnelles</h5>
+    <h5><i class="bi bi-person-fill"></i>  informations personnelles</h5>
     <hr>
   </div>
 
@@ -281,16 +277,34 @@
 
 <hr>
 
-<div class="row formulaire-btn">
-    <div class="col-12 form-group">
+{{-- new code  --}}
+<div style="text-align: center;">
+  <div class="bt-en-ligne">
+       <div class="bt-en-ligne-div">
 
-        <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Valider</span></button>
-        {{-- <button type="submit" class="btn btn-primary alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button> --}}
-        {{-- <button type="submit" class="form-control btn btn-primary">Submit</button> --}}
+       <!-- <button class="btn-mdf btn-r" id="btn-mdf-{{ $formation->id}}" type="button" onclick="window.location.href='{{ url('/admin/formation/'.$formation->id.'/edit') }}';"> -->
+       <button class="btn-mdf btn-r" id="btn-mdf-{{ $formation->id}}" type="button">
+          <span class="text">Enregistrer</span>
+          <span class="icon">
+              <i class="bi bi-pen"></i>
+          </span>
+       </button>
 
-    </div>
+       </div>
+
+       <div class="bt-en-ligne-div"   id="mydiv">
+            <button class="btn-sup btn-r" id="btn-{{ $formation->id}}" type="button">
+                   <span class="text">Annuler</span>
+                   <span class="icon">
+                  <i class="bi bi-trash3"></i>
+                   </span>
+           </button>
+       </div>
+   </div>
+
 </div>
 
+{{-- fin --}}
 </form>
 
 </div>
@@ -304,13 +318,373 @@
 
 
 </div>
+<script>
+//    <!-- script pour le button annuler -->
+
+var bouton = document.getElementById("btn-{{ $formation->id }}");
+ bouton.addEventListener("click",function(){
+     const swalWithBootstrapButtons = Swal.mixin({
+         customClass: {
+             confirmButton: 'btn btn-success',
+             cancelButton: 'btn btn-danger'
+         },
+         buttonsStyling: false
+     })
+     swalWithBootstrapButtons.fire({
+         title: 'voulez vous annuler l"linscription ..?',
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonText: 'OUI',
+         cancelButtonText: 'NO',
+         reverseButtons: true
+     }).then((result) => {
+         if (result.isConfirmed) {
+             // Soumettre le formulaire de suppression
+             // var form = document.getElementById("delete-form-{{ $formation->id }}");
+             //  form.submit();
+             window.location.href="{{ url('/')}}"
+             swalWithBootstrapButtons.fire(
+                 'Inscription annuler',
+                 'Votre inscription a ete annuler',
+                 'success'
+             )
+         } else if (
+             result.dismiss === Swal.DismissReason.cancel
+         ) {
+             swalWithBootstrapButtons.fire(
+                 'Cancelled',
+                 'Your file is safe :)',
+                 'error'
+             )
+         }
+     })
+ });
+//    <!-- script pour le button  enregistrier  -->
+
+var boutonmdf = document.getElementById("btn-mdf-{{ $formation->id}}");
+boutonmdf.addEventListener("click",function(){
+ 
+     const swalWithBootstrapButtons = Swal.mixin({
+         customClass: {
+             confirmButton: 'btn btn-success',
+             cancelButton: 'btn btn-danger'
+         },
+         buttonsStyling: false
+     })
+     swalWithBootstrapButtons.fire({
+         title: 'enregister  !   {{ $formation->name}}',
+         text: "Voulez-vous faire une inscription sur la formation {{ $formation->titre }}",
+         icon: 'question',
+         showCancelButton: true,
+         confirmButtonText: 'OUI, Inscri!',
+         cancelButtonText: 'NO, Annuler!',
+         reverseButtons: true
+     }).then((result) => {
+         if (result.isConfirmed) {
+
+            // Validation des champs
+    //  var nomInput = document.getElementById("nom");
+    //  var ageInput = document.getElementById("age");
+    //  var telephoneInput = document.getElementById("tel");
+     
+    //  var nom = nomInput.value.trim();
+    //  var age = parseInt(ageInput.value);
+    //  var telephone = telephoneInput.value.trim();
+    //  var isValid = true;
+     
+    //  if (nom === "") {
+    //      nomInput.style.backgroundColor = 'red';
+    //      isValid = false;
+    //  } else {
+    //      nomInput.style.backgroundColor = ''; // Reset background color
+    //  }
+     
+    //  if (isNaN(age) || age <= 0) {
+    //      ageInput.style.backgroundColor = 'red';
+    //      isValid = false;
+    //  } else {
+    //      ageInput.style.backgroundColor = ''; // Reset background color
+    //  }
+     
+    //  if (telephone === "") {
+    //      telephoneInput.style.backgroundColor = 'red';
+    //      isValid = false;
+    //  } else {
+    //      telephoneInput.style.backgroundColor = ''; // Reset background color
+    //  }
+     
+    //  if (isValid) {
+         const form = document.getElementById("form_insc");
+         form.submit();
+          // Attendre un court délai (par exemple 1000 ms) avant de rediriger
+               setTimeout(function () {
+                   window.location.href = '/';
+               }, 1000);
+
+    //  } else {
+    //      swalWithBootstrapButtons.fire({
+    //          icon: 'error',
+    //          title: 'Champs invalides',
+    //          text: 'Veuillez remplir tous les champs correctement.',
+    //      });
+    //  }
+ } else if (result.dismiss === Swal.DismissReason.cancel) {
+     // Action à prendre si l'utilisateur annule
+ }
+     })
+ });
 
 
+</script>
 
 
+<style>
+  * button modifer */
+
+.btn-mdf {
+                              width: 150px;
+                              height: 50px;
+                              cursor: pointer;
+                              display: flex;
+                              align-items: center;
+                              background: #5EB1FD;
+                              border: none;
+                              border-radius: 10px;
+                              box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+                              background:#3165F6;
+                              white-space: nowrap; 
+                              
+                            }
+                            .in{
+                              position: absolute;
+                              bottom: 0;
+                              left: 0;
+                              width: 100%;
+                              padding: 10px;
+                              
+                            }
+                            
+                            .btn-mdf span {
+                              transition: 200ms;
+                            }
+                            
+                            .btn-mdf .text {
+                              transform: translateX(20px);
+                              color: white;
+                              font-weight: bold;
+                              text-align: center;
+                            }
+
+                            
+                            .btn-mdf .icon {
+                              position: absolute;
+                              /* border-left: 1px solid #5EB1FD; */
+                              transform: translateX(110px);
+                              height: 40px;
+                              width: 40px;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              padding-top: 0px;
+                            }
+                            
+                            .btn-mdf .i {
+                              /* width: 15px; */
+                              fill: #eee;
+                            }
+                            
+                            .btn-mdf:hover {
+                              background: #5EB1FD;
+                            }
+                            
+                            .btn-mdf:hover .text {
+                              color: transparent;
+                            }
+                            
+                            .btn-mdf:hover .icon {
+                              width: 150px;
+                              border-left: none;
+                              transform: translateX(0);
+                            }
+                            
+                            .btn-mdf:focus {
+                              outline: none;
+                            }
+                            
+                            .btn-mdf:active .icon svg {
+                              transform: scale(0.8);
+                            }
+
+                            /* -------fin mdf------ */
+                              /* button supprimer */
 
 
+                              .btn-sup {
+                                        width: 150px;
+                                        height: 50px;
+                                        cursor: pointer;
+                                        display: flex;
+                                        align-items: center;
+                                        background: red;
+                                        border: none;
+                                        border-radius: 10px;
+                                        box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+                                        background:#e62222;
+                                        white-space: nowrap;  
 
+                                                                          
+                                      }
+                                      
+                                       
+                                      .btn-sup span {
+                                        transition: 200ms;
+                                    
+                                        
+                                       }
+                                       
+                                       .btn-sup .text {
+                                        transform: translateX(20px);
+                                        color: white;
+                                        font-weight: bold;
+                                        text-align: center;
+                           
+                                       }
+                                      
+                                       
+                                       .btn-sup .icon {
+                                        position: absolute;
+                                        /* border-left: 1px solid #5EB1FD; */
+                                        transform: translateX(110px);
+                                        height: 40px;
+                                        width: 40px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        padding-top: 0px;
+                                       }
+                                       
+                                       .btn-sup .i {
+                                        /* width: 15px; */
+                                        fill: #eee;
+                                       
+                                       }
+                                       
+                                       .btn-sup:hover {
+                                        background: #ff3636;
+                                       }
+                                       
+                                       .btn-sup:hover .text {
+                                        color: transparent;
+                                       }
+                                       
+                                       .btn-sup:hover .icon {
+                                        width: 150px;
+                                        border-left: none;
+                                        transform: translateX(0);
+                                       }
+                                       
+                                       .btn-sup:focus {
+                                        outline: none;
+                                       }
+                                       
+                                       .btn-sup:active .icon svg {
+                                        transform: scale(0.8);
+                                       }
+                                       /* fin btn sup */
+                                       .bt-en-ligne{
+
+display: flex;
+
+justify-content: center;
+/* position: fixed; */
+bottom: 0;
+left: 0;
+right: 0;
+margin: auto;
+}
+.bt-en-ligne-div{
+margin: 1%;
+}
+
+/* fin */
+/* button modifer */
+
+.btn-mdf {
+                              width: 150px;
+                              height: 50px;
+                              cursor: pointer;
+                              display: flex;
+                              align-items: center;
+                              background: #5EB1FD;
+                              border: none;
+                              border-radius: 10px;
+                              box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+                              background:#3165F6;
+                              white-space: nowrap; 
+                              
+                            }
+                            .in{
+                              position: absolute;
+                              bottom: 0;
+                              left: 0;
+                              width: 100%;
+                              padding: 10px;
+                              
+                            }
+                            
+                            .btn-mdf span {
+                              transition: 200ms;
+                            }
+                            
+                            .btn-mdf .text {
+                              transform: translateX(20px);
+                              color: white;
+                              font-weight: bold;
+                              text-align: center;
+                            }
+
+                            
+                            .btn-mdf .icon {
+                              position: absolute;
+                              /* border-left: 1px solid #5EB1FD; */
+                              transform: translateX(110px);
+                              height: 40px;
+                              width: 40px;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              padding-top: 0px;
+                            }
+                            
+                            .btn-mdf .i {
+                              /* width: 15px; */
+                              fill: #eee;
+                            }
+                            
+                            .btn-mdf:hover {
+                              background: #5EB1FD;
+                            }
+                            
+                            .btn-mdf:hover .text {
+                              color: transparent;
+                            }
+                            
+                            .btn-mdf:hover .icon {
+                              width: 150px;
+                              border-left: none;
+                              transform: translateX(0);
+                            }
+                            
+                            .btn-mdf:focus {
+                              outline: none;
+                            }
+                            
+                            .btn-mdf:active .icon svg {
+                              transform: scale(0.8);
+                            }
+
+                            /* -------fin mdf------ */
+</style>
 
 
 
