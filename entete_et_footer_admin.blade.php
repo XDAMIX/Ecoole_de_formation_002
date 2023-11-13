@@ -1,5 +1,4 @@
-@extends('layouts.admin_menu')
-@section('content')
+
 
 {{-- retour à l'acceuil  --}}
 <div class="container" id="titre-page">
@@ -26,4 +25,5 @@
     </div>
 </div>
 
-@endsection
+{{-- footer  --}}
+<div class="container" id="pied-page">
