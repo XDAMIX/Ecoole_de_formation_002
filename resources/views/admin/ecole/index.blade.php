@@ -211,7 +211,7 @@
             @csrf
             @method('DELETE')
             
-                     <a href="{{ url('/admin/lien/'.$lien->id.'/vider') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+                     <a href="{{ url('/admin/lien/'.$lien->id.'/'.$lien->reseau_social) }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
 
                     <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-outline-danger alpa"><i class="bi bi-trash"></i><span class="btn-description">Supprimer</span></button>
             </form>

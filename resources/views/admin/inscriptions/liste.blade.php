@@ -83,15 +83,15 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>Date</th>
+                        {{-- <th>Date</th> --}}
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Age</th>
                         <th>Wilaya</th>
                         {{-- <th>Profession</th> --}}
                         <th>Formation</th>
-                        <th>Contacté</th>
-                        <th>Validé</th>
+                        {{-- <th>Contacté</th> --}}
+                        {{-- <th>Validé</th> --}}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -100,18 +100,18 @@
                     @foreach($inscriptions as $inscription)
                     <tr>
                         <td>{{ $inscription->id }}</td>
-                        <td>{{ $inscription->created_at }}</td>
+                        {{-- <td>{{ $inscription->created_at }}</td> --}}
                         <td>{{ $inscription->nom }}</td>
                         <td>{{ $inscription->prenom }}</td>
                         <td>{{ $inscription->age }}</td>
                         <td>{{ $inscription->wilaya }}</td>
                         {{-- <td>{{ $inscription->profession }}</td> --}}
                         <td style="font-weight: bold;">{{ $inscription->formation }}</td>
-                        <td  style=" color: @if($inscription->contact == 0) red; @else green; @endif ">
+                        {{-- <td  style=" color: @if($inscription->contact == 0) red; @else green; @endif ">
                             @if($inscription->contact == 0) NON @else OUI @endif</td>
 
                         <td  style=" color: @if($inscription->contact == 0) red; @else green; @endif ">
-                            @if($inscription->contact == 0) NON @else OUI @endif</td>
+                            @if($inscription->contact == 0) NON @else OUI @endif</td> --}}
 
                         <td>
 
@@ -148,15 +148,15 @@
                 <tfoot>
                     <tr>
                         <th>id</th>
-                        <th>Date</th>
+                        {{-- <th>Date</th> --}}
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Age</th>
                         <th>Wilaya</th>
                         {{-- <th>Profession</th> --}}
                         <th>Formation</th>
-                        <th>Contacté</th>
-                        <th>Validé</th>
+                        {{-- <th>Contacté</th> --}}
+                        {{-- <th>Validé</th> --}}
                         <th>Actions</th>
                     </tr>
                 </tfoot>
