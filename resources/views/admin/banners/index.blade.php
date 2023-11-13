@@ -1,12 +1,23 @@
 @extends('layouts.admin_menu')
 @section('content')
 
+
+
+{{-- retour à l'acceuil  --}}
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Publicités sur le site</h2>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container" style="padding-top: 10px;">
-                                <!-- Page Heading -->
-                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                    <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{'/admin'}}" id="btn-retour"><i class="fa-solid fa-house"></i> Acceuil</a>
-                                    <h1 class="h3 mb-0 text-gray-800">PUBS</h1>
-                                </div>
 
 <div class="row">
 
@@ -32,14 +43,14 @@
 
             {{-- bouttons --}}
                     <div class="form-group row" id="double-btn">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <a href="{{ url('/admin/banners/'.$banner->id.'/edit') }}" class="btn btn-primary btn-block btn-circle" style="margin-bottom: 5px;" ><i class="bi bi-pen"></i>Modifier</a>
+                        <div class="col-6 col-sm-6 mb-3 mb-sm-0">
+                            <a href="{{ url('/admin/banners/'.$banner->id.'/edit') }}" class="btn btn-outline-primary alpa" style="margin-bottom: 5px;" ><i class="bi bi-pen"></i> <span class="btn-description">Modifier</span></a>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-6 col-sm-6">
                             <form id="delete-form" action="{{ url('/admin/banners/'.$banner->id.'/delete') }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Êtes vous sure de vouloir supprimer la pub?')" class="btn btn-danger btn-block btn-circle"><i class="bi bi-trash3"></i>Supprimer</button>
+                                <button type="submit" onclick="return confirm('Êtes vous sure de vouloir supprimer la pub?')" class="btn btn-outline-danger alpa"><i class="bi bi-trash3"></i> <span class="btn-description">Supprimer</span></button>
                             </form>
 
                         </div>
@@ -63,6 +74,9 @@
 </div>
 
 
+
+{{-- footer  --}}
+<div class="container" id="pied-page">
 
 @endsection
 

@@ -90,14 +90,13 @@ class InscriptionController extends Controller
         $inscription->tel = $request->input('tel');
         $inscription->email = $request->input('email');
         $inscription->formation = $request->input('formation');
-        $inscription->date = now();
+        // $inscription->date = now();
 
         $inscription->save();
 
 
         $lenom = $request->input('nom');
         $leprenom = $request->input('prenom');
-
 
         $titre = $lenom.' '.$leprenom;
         

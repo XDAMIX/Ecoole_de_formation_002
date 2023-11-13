@@ -1,18 +1,29 @@
 @extends('layouts.admin_menu')
 @section('content')
 
+
+
+{{-- retour à l'acceuil  --}}
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Actualités</h2>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container" style="padding-top: 10px;">
     <div class="row">
 
-        <div class="head">
-            <h3 style="text-transform: uppercase;">gallerie des photos</h3>
-        </div>
-
-
-        <div class="d-grid gap-1 d-md-flex justify-content-md-end" style="margin-top: 10px;margin-bottom: 10px;">
+        {{-- <div class="d-grid gap-1 d-md-flex justify-content-md-end" style="margin-top: 10px;margin-bottom: 10px;">
 
             <button class="button-add-new s-titre" onclick="window.location.href='/admin/gallerie/nouveau';">Ajouter une Actualite <i class="fa-sharp fa-solid fa-file-circle-plus hichem"></i></button>
-        </div>
+        </div> --}}
         @foreach($photos as $photo)
         <!-- <div class="col-md-4" style="margin-bottom: 10px;"> -->
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
@@ -294,4 +305,9 @@
         margin-top: 50px;
     }
 </style>
+
+
+{{-- footer  --}}
+<div class="container" id="pied-page">
+
 @endsection

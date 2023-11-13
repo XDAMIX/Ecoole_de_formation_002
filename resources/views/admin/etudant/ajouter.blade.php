@@ -1,8 +1,23 @@
 @extends('layouts.admin_menu')
 @section('content')
 
+{{-- retour en arrière  --}}
+<div class="container" id="titre-page">
+  <div class="row">
+      <div class="col-2 d-flex align-items-center">
+          <a href="{{ url('/admin/etudiant') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span class="btn-description">Retour</span></a>
+      </div>
+      <div class="col-10 d-flex align-items-center">
+          <h2>Nouveau étudiant</h2>
+      </div>
+  </div>
+</div>
 
-    <h1>ajouter un etudiant </h1>
+
+<div class="container" style="margin-top:20px;">
+
+</div>
+
     <form action="{{ url('/admin/etudiant/save') }}" id="enr-form" method="POST" enctype="multipart/form-data">
         
         @csrf
