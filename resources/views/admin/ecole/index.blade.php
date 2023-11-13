@@ -14,8 +14,10 @@
 </div>
 
 
-<div class="container-fluid" id="global" style="margin-top:20px;margin-bottom: 20px;">
+<div class="container-fluid" style="margin-top:10px;margin-bottom:10px;">
 
+    <div class="card" style="background-color: #ffff;" id="global">
+        <div class="card-body">
 
 <!-- informations ecole -->
 <div class="container section">
@@ -211,7 +213,7 @@
             @csrf
             @method('DELETE')
             
-                     <a href="{{ url('/admin/lien/'.$lien->id.'/vider') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+                     <a href="{{ url('/admin/lien/'.$lien->id.'/'.$lien->reseau_social) }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
 
                     <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-outline-danger alpa"><i class="bi bi-trash"></i><span class="btn-description">Supprimer</span></button>
             </form>
@@ -277,7 +279,7 @@
 <!-- fin Autres informations -->
 
 
-
+        </div></div>
 {{-- fin container global --}}
 </div>
 

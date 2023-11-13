@@ -14,8 +14,9 @@
 </div>
 
 
-<div class="container-fluid" id="global" style="margin-top:20px;margin-bottom: 20px;">
-
+<div class="container-fluid" style="margin-top:20px;margin-bottom: 20px;">
+    <div class="card" style="background-color: #ffff;" id="global">
+        <div class="card-body">
 <div class="container">
 
 {{-- <div class="row">
@@ -66,7 +67,7 @@
 
 
 </div>
-
+        </div></div>
 </div>
 
 

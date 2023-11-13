@@ -38,9 +38,9 @@
   <div class="row justify-content-center">
       <div class="col-md-8">
       <div class="card" style="background-color: #ffff;">
-              <div class="card-header"style="text-align:center;">
+              {{-- <div class="card-header"style="text-align:center;">
                 <a style="font-size: 20px;">Formulaire d'inscription</a>
-              </div>
+              </div> --}}
               <div class="card-body">
   
 <form action="{{url('/inscription/save')}}" method="POST">
