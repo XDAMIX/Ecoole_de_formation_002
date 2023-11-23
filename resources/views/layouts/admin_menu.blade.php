@@ -111,9 +111,10 @@
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"></script>
 
- 
-
+    {{-- sweetalert2  --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 

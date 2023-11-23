@@ -18,20 +18,22 @@
 
     <div class="container" style="padding-top: 10px;">
 
-        <div class="row">
+        <div class="row animate__animated animate__backInLeft">
 
-            <div class="card">
+            <div class="card shadow">
                 {{-- <div class="card-header">
                     <h5>Modifier la publicité :</h5>
                   </div> --}}
 
                 <div class="card-body">
-                    <img id="imagePreview" class="card-img-top" src="{{ asset('storage/' . $banner->photo) }}"
-                        alt="l'image n'a pas été sélectionné!">
+                    <div class="col-12 text-center">
+                        <img id="imagePreview" class="" src="{{ asset('storage/' . $banner->photo) }}"
+                            alt="l'image n'a pas été sélectionné!" style="height: 300px;width: auto;">
+                    </div>
                     <hr>
 
                     <form action="{{ url('/admin/banners/' . $banner->id . '/update') }}" method="post"
-                        enctype="multipart/form-data" class="user">
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -39,7 +41,7 @@
                             <label for="titre">Titre de la pub:</label>
                             <input type="text" name="titre"
                                 class="form-control @if ($errors->get('titre')) is-invalid @endif"
-                                id="validationTitre" placeholder="titre" value="{{ $banner->titre }}">
+                                id="validationTitre" placeholder="titre" value="{{ $banner->titre }}" required>
                             <div id="validationTitreFeedback" class="invalid-feedback">
                                 @if ($errors->get('titre'))
                                     @foreach ($errors->get('titre') as $message)
@@ -68,12 +70,12 @@
                         {{-- bouttons --}}
                         <div class="form-group row justify-content-center text-center" id="double-btn">
                             <div class="col-6">
-                                <button type="submit" class="btn btn-outline-success"><i
-                                        class="fa-solid fa-floppy-disk"></i>Enregistrer</button>
+                                <button type="submit" class="btn btn-outline-success alpa shadow"><i
+                                        class="bi bi-check2 bi-lg"></i><span class="btn-description">Enregistrer</span></button>
                             </div>
                             <div class="col-6">
-                                <a class="btn btn-outline-danger" href="{{ '/admin/banners' }}"><i
-                                        class="fa-solid fa-ban"></i>Annuler</a>
+                                <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/banners' }}"><i
+                                        class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
                             </div>
                         </div>
                         {{-- bouttons --}}
@@ -124,9 +126,8 @@
     </script>
 
     <style>
-        i {
-            margin-right: 10px;
-        }
+
+        
     </style>
 
 

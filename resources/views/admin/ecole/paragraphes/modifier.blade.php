@@ -31,7 +31,7 @@
 <div class="container" style="padding-top: 10px;">
     <div class="row">
         <div class="col-md-12">
-        <div class="card" style="background-color: #ffff;">
+        <div class="card shadow" style="background-color: #ffff;">
                 {{-- <div class="card-header"style="text-align:center;">
                   <a style="font-size: 20px;">Modifier le bloc de présentation</a>
                 </div> --}}
@@ -92,7 +92,7 @@
                 </div>
 
         <div class="col-12" style="text-align: center;">
-            <img src="{{ asset('storage/'.$paragraphe->photo ) }}" class="img-fluid rounded" alt="" style="height:450px;width:auto; margin-top: 15px;margin-bottom: 15px;" id="preview">
+            <img src="{{ asset('storage/'.$paragraphe->photo ) }}" class="img-fluid rounded" alt="" style="width:100%; margin-top: 15px;margin-bottom: 15px;" id="preview">
         </div>
 
     </div>
@@ -100,11 +100,11 @@
     <br>
     <div class="form-group row justify-content-center text-center">
         <div class="col-6">
-            <button type="submit" class="btn btn-outline-success"><i class="bi bi-check2"></i><span
+            <button type="submit" class="btn btn-outline-success alpa shadow"><i class="bi bi-check2"></i><span
                     class="btn-description">Enregistrer</span></button>
         </div>
         <div class="col-6">
-            <a class="btn btn-outline-danger" href="{{ '/admin/ecole/presentation' }}"><i
+            <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/ecole/presentation' }}"><i
                     class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
         </div>
     </div>

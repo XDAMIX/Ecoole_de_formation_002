@@ -33,7 +33,7 @@
     <div class="container" style="padding-top: 10px;">
         <div class="row">
             <div class="col-md-12">
-                <div class="card" style="background-color: #ffff;">
+                <div class="card shadow" style="background-color: #ffff;">
                     {{-- <div class="card-header"style="text-align:center;">
                   <a style="font-size: 20px;">informations de l'école</a>
                 </div> --}}
@@ -148,11 +148,11 @@
 
                             <div class="form-group row justify-content-center text-center">
                                 <div class="col-6">
-                                    <button type="submit" class="btn btn-outline-success"><i class="bi bi-check2"></i><span
+                                    <button type="submit" class="btn btn-outline-success alpa shadow"><i class="bi bi-check2"></i><span
                                             class="btn-description">Enregistrer</span></button>
                                 </div>
                                 <div class="col-6">
-                                    <a class="btn btn-outline-danger" href="{{ '/admin/ecole' }}"><i
+                                    <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/ecole' }}"><i
                                             class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
                                 </div>
                             </div>

@@ -21,8 +21,9 @@
     }
 </style>
 
+<div class="container-fluid">
 
-<div class="container" id="titre-page">
+<div class="container animate__animated animate__backInLeft" id="titre-page">
   <div class="row justify-content-center">
 
         <div class="col-12" style="text-align: center;">
@@ -34,16 +35,16 @@
 
 
 
-<div class="container" style="padding-top: 10px;">
+<div class="container animate__animated animate__backInLeft" style="padding-top: 10px;">
   <div class="row justify-content-center">
       <div class="col-md-8">
-      <div class="card" style="background-color: #ffff;">
+      <div class="card shadow" style="background-color: #ffff;">
               {{-- <div class="card-header"style="text-align:center;">
                 <a style="font-size: 20px;">Formulaire d'inscription</a>
               </div> --}}
               <div class="card-body">
   
-<form action="{{url('/inscription/save')}}" method="POST">
+<form class="inscription-form" action="{{url('/inscription/save')}}" method="POST">
 @csrf
 
 
@@ -285,18 +286,26 @@
 
 <hr>
 
-<div class="row formulaire-btn">
-    <div class="col-12 form-group">
+<div class="row formulaire-btn" style="margin-top:20px;margin-bottom:30px;">
+  <div class="col-6 form-group">
 
-        <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Valider</span></button>
-        {{-- <button type="submit" class="btn btn-primary alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button> --}}
-        {{-- <button type="submit" class="form-control btn btn-primary">Submit</button> --}}
+      <button type="button" onclick="sauvegarder()"
+          class="btn btn-outline-success alpa shadow"><i
+              class="bi bi-check2"></i><span class="btn-description">Valider</span></button>
 
-    </div>
+
+  </div>
+  <div class="col-6 form-group">
+
+      <a href="/" class="btn btn-outline-danger alpa shadow"><i
+              class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
+
+  </div>
 </div>
 
 </form>
-
+{{-- form de redirection --}}
+<form class="redirect-form" action="{{ url('/') }}" method="GET"></form>
 </div>
 </div>
 
@@ -310,19 +319,44 @@
 </div>
 
 
+    {{-- script sauvegarder  --}}
+    <script>
+      async function sauvegarder() {
+          // Utilisez le bouton pour obtenir le formulaire parent
+          const form1 = document.querySelector('.inscription-form');
+          const form2 = document.querySelector('.redirect-form');
 
+          // Vérifiez si le formulaire a été trouvé
+          if (form1 && form2) {
 
+              Swal.fire({
+                  title: "Êtes-vous sûr(e) de vouloir enregistrer cette inscription ?",
+                  icon: "question",
+                  showCancelButton: true,
+                  confirmButtonColor: "#198754",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Oui",
+                  cancelButtonText: "Non",
+              }).then(async (result) => {
+                  try {
+                      if (result.isConfirmed) {
+                          // Soumettre le premier formulaire
+                          await form1.submit();
 
+                          // Attendez que le premier formulaire soit soumis avant de soumettre le deuxième
+                          await new Promise(resolve => setTimeout(resolve,
+                          10000)); // 5 seconde de délai (ajustez si nécessaire)
 
-
-
-
-
-
-
-
-
-
-
-
-{{-- <option value="{{ $formation->titre }}" selected>{{ $formation->titre }}</option> --}}
+                          form2.submit();
+                      }
+                  } catch (error) {
+                      console.error("Erreur lors de la soumission du formulaire : ", error);
+                  }
+              });
+          } else {
+              console.error("Il y a une erreur !");
+          }
+      }
+  </script>
+</div>
+@endsection
