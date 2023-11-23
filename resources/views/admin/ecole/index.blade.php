@@ -14,9 +14,9 @@
 </div>
 
 
-<div class="container-fluid" style="margin-top:10px;margin-bottom:10px;">
+<div class="container-fluid animate__animated animate__backInLeft" style="margin-top:10px;margin-bottom:10px;">
 
-    <div class="card" style="background-color: #ffff;" id="global">
+    <div class="card shadow" style="background-color: #ffff;" id="global">
         <div class="card-body">
 
 <!-- informations ecole -->
@@ -56,14 +56,14 @@
                 </div>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-12 col-md-4">
                     <p class="titre"><i class="bi bi-map icons"></i>Localisation sur google-map (src):</p>
                 </div>
                 <div class="col-12 col-md-8">
                     <p class="data"> {{ $information->localisation }} </p>
                 </div> 
-            </div>
+            </div> --}}
 
             <div class="row">
                 <div class="col-12 col-md-4">
@@ -89,7 +89,7 @@
                 <p class="titre"><i class="bi bi-file-image icons"></i>Logo:</p>
             </div>
             <div class="col-12" style="text-align: center;">
-                <img src="{{ asset('storage/'.$information->logo ) }}" alt="..." class="img-fluid" style="height: 250px; width:auto;">
+                <img src="{{ asset('storage/'.$information->logo ) }}" alt="..." class="img-fluid shadow" style="">
             </div>
         </div>
 
@@ -100,7 +100,7 @@
                 <h6>Modifier les informations de l'école :</h6>            
             </div>
             <div class="col-2 col-md-6 d-flex align-items-center">
-                    <a href="{{ url('/admin/ecole/'.$information->id.'/edit') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+                    <a href="{{ url('/admin/ecole/'.$information->id.'/edit') }}" class="btn btn-outline-primary alpa shadow"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
             </div>
         </div>
 
@@ -147,8 +147,8 @@
                         <form action="{{ url('/admin/tel/'.$telephone->id.'/delete') }}" method="POST">
                         @csrf
                         @method('DELETE')
-                                <a href="{{ url('/admin/tel/'.$telephone->id.'/edit') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
-                                <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-outline-danger alpa"><i class="bi bi-trash"></i><span class="btn-description">Supprimer</span></button>
+                                <a href="{{ url('/admin/tel/'.$telephone->id.'/edit') }}" class="btn btn-outline-primary alpa shadow"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+                                <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-outline-danger alpa shadow"><i class="bi bi-trash"></i><span class="btn-description">Supprimer</span></button>
                         </form>
 
         </div>
@@ -161,7 +161,7 @@
                 <h6>Ajouter un nouveau numéro de téléphone :</h6>            
             </div>
             <div class="col-2 col-md-6 d-flex align-items-center">
-                <a href="{{url('/admin/tel/nouveau')}}" class="btn btn-outline-success alpa"><i class="bi bi-plus"></i><span class="btn-description">Ajouter</span></a>
+                <a href="{{url('/admin/tel/nouveau')}}" class="btn btn-outline-success alpa shadow"><i class="bi bi-plus"></i><span class="btn-description">Ajouter</span></a>
             </div>
         </div>
 
@@ -213,9 +213,9 @@
             @csrf
             @method('DELETE')
             
-                     <a href="{{ url('/admin/lien/'.$lien->id.'/'.$lien->reseau_social) }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+                     <a href="{{ url('/admin/lien/'.$lien->id.'/'.$lien->reseau_social) }}" class="btn btn-outline-primary alpa shadow"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
 
-                    <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-outline-danger alpa"><i class="bi bi-trash"></i><span class="btn-description">Supprimer</span></button>
+                    <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-outline-danger alpa shadow"><i class="bi bi-trash"></i><span class="btn-description">Supprimer</span></button>
             </form>
         
 
@@ -251,8 +251,8 @@
 
 <div class="row">
 @foreach($acceuils as $acceuil)
-        <div class="col-12" style="background-image: url(  {{asset('storage/'.$acceuil->photo)}} );background-size: cover;background-repeat: no-repeat; text-align:center ;height:500px;padding-top:50px;">
-          <div class="titres" style="width:100%;padding:50px;text-align: center;background-color: #ffff;opacity: 0.8;">
+        <div class="col-12" style="background-image: url(  {{asset('storage/'.$acceuil->photo)}} );background-size: cover;background-repeat: no-repeat; text-align:center ;height:500px;padding-top:50px;padding-bottom:50px;">
+          <div class="titres" style="height:100%;width:100%;padding:50px;text-align: center;background-color: #ffff;opacity: 0.6;">
             <h2>{{$acceuil->titre}}</h2>
             <p>
                 {{$acceuil->sous_titre1}}
@@ -269,7 +269,7 @@
                 <h6>Modifier le Banner d'acceuil sur le site web :</h6>            
             </div>
             <div class="col-2 col-md-6 d-flex align-items-center">
-                <a href="{{ url('/admin/ecole/acceuil/'.$acceuil->id.'/edit') }}" class="btn btn-outline-primary alpa"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
+                <a href="{{ url('/admin/ecole/acceuil/'.$acceuil->id.'/edit') }}" class="btn btn-outline-primary alpa shadow"><i class="bi bi-pen"></i><span class="btn-description">Modifier</span></a>
             </div>
         </div>
 

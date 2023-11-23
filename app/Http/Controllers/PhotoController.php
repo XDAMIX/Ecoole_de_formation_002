@@ -36,9 +36,10 @@ public function store(PhotoRequest $request) {
     if($request->hasFile('photo')){
         $nvPhoto->photo = $request->photo->store('/public/images/gallerie');
     }
-    $titre = $request->input('titre');
     $nvPhoto->save();
+    $titre = $request->input('titre').' - '.$request->input('emplacement');
     Alert::success($titre, 'a bien été enregistré');
+
     return redirect('/admin/gallerie');
 }
 
@@ -58,6 +59,9 @@ public function update(PhotoRequest $request,$id) {
     }
 
     $Photo->save();
+    $titre = $request->input('titre').' - '.$request->input('emplacement');
+    Alert::success($titre, 'Vos modifications ont été enregistrées');
+    
     return redirect('/admin/gallerie');
 
 }

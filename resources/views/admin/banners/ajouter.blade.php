@@ -18,19 +18,21 @@
 
     <div class="container" style="margin-top: 10px;">
 
-        <div class="row">
+        <div class="row animate__animated animate__backInLeft">
 
-            <div class="card">
+            <div class="card shadow">
                 {{-- <div class="card-header">
                 <h5>Nouvelle Publicité :</h5>
               </div> --}}
 
                 <div class="card-body">
-                    <img id="imagePreview" class="card-img-top" src="" alt="l'image n'a pas été sélectionné!">
+                    <div class="col-12 text-center">
+                        <img id="imagePreview" class="" src=""
+                            alt="l'image n'a pas été sélectionné!" style="height: 300px;width: auto;">
+                    </div>
                     <hr>
 
-                    <form action="{{ url('/admin/banners/save') }}" method="POST" enctype="multipart/form-data"
-                        class="user">
+                    <form action="{{ url('/admin/banners/save') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="titre">Titre de la pub:</label>
@@ -63,12 +65,12 @@
                         {{-- bouttons --}}
                         <div class="form-group row justify-content-center text-center" id="double-btn">
                             <div class="col-6">
-                                <button type="submit" class="btn btn-outline-success"><i
-                                        class="bi bi-check2"></i>Enregistrer</button>
+                                <button type="submit" class="btn btn-outline-success alpa shadow"><i
+                                        class="bi bi-check2"></i> <span class="btn-description">Enregistrer</span> </button>
                             </div>
                             <div class="col-6">
-                                <a class="btn btn-outline-danger" href="{{ '/admin/banners' }}"><i
-                                        class="bi bi-x"></i>Annuler</a>
+                                <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/banners' }}"><i
+                                        class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
                             </div>
                         </div>
                         {{-- bouttons --}}
@@ -119,9 +121,9 @@
             </script>
 
             <style>
-                i {
+                /* i {
                     margin-right: 10px;
-                }
+                } */
             </style>
 
 

@@ -4,7 +4,7 @@
 <div class="container" style="padding-top: 10px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">Message</div>
                 <div class="card-body">
                  <label>date et heure:</label>

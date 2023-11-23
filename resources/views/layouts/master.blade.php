@@ -54,7 +54,7 @@
       <div class="row justify-content-center align-items-center">
         <div class="col-xl-11 d-flex align-items-center justify-content-between">
           <a class="logo me-auto" data-bs-toggle="offcanvas" href="#offcanvasWithBothOptions" role="button" aria-controls="offcanvasWithBothOptions">
-            <img src="{{asset('storage/'.$informations->logo)}}" alt="logo">
+            <img class="animate__animated animate__slideInDown" src="{{asset('storage/'.$informations->logo)}}" alt="logo">
           </a>
           <!-- <h3 class="nom me-auto">{{$informations->nom}}</h3> -->
 
@@ -129,7 +129,7 @@
           </div>
           <!-- offcanvas -->
 
-          <nav id="navbar" class="navbar">
+          <nav id="navbar" class="navbar animate__animated animate__slideInDown">
             <ul>
               <li><a class="nav-link scrollto " href="#hero">Acceuil</a></li>
               <li><a class="nav-link scrollto" href="#ecole">A propos de nous</a></li>
@@ -143,8 +143,8 @@
           </nav>
 
           <!-- button inscription -->
-          <a class="btn-inscrir" href="{{('/inscription/nouveau')}}">
-            <h6><i class="bi bi-mortarboard-fill"></i>Inscription</h6>
+          <a class="btn-inscrir animate__animated animate__rubberBand" href="{{('/inscription/nouveau')}}">
+            <h6 class=""><i class="bi bi-mortarboard-fill"></i>Inscription</h6>
           </a>
           <!-- button inscription -->
 

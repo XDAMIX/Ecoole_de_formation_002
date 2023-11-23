@@ -18,7 +18,7 @@
  <div class="container" style="margin-top: 10px;" >
     <div class="row">
         <div class="col-md-12">
-        <div class="card" style="background-color: #ffff;">
+        <div class="card shadow" shadow style="background-color: #ffff;">
                 <div class="card-header"style="text-align:center;">
                             <!-- <a style="font-size: 20px;"><i class="bi bi-person"></i>Modifier les informations de la Formation</a> -->
 

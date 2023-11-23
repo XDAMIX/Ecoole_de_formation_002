@@ -1,0 +1,18 @@
+<!-- Exemple de bouton qui enregistre la position du scroll -->
+<button onclick="enregistrerPosition()">Quitter la page</button>
+
+<script>
+    function enregistrerPosition() {
+        localStorage.setItem('positionScroll', window.scrollY);
+    }
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var positionScroll = localStorage.getItem('positionScroll');
+        if (positionScroll !== null) {
+            window.scrollTo(0, positionScroll);
+        }
+    });
+</script>

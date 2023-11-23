@@ -31,10 +31,10 @@
     <div class="row">
         
         <div class="col-md-12">
-        <div class="card" style="background-color: #ffff;">
-                <div class="card-header"style="text-align:center;">
+        <div class="card shadow" style="background-color: #ffff;">
+                {{-- <div class="card-header"style="text-align:center;">
                   <a style="font-size: 20px;">Banner d'acceuil sur le site web</a>
-                </div>
+                </div> --}}
                 <div class="card-body">
 
      <form action="{{ url('/admin/ecole/acceuil/'.$acceuil->id.'/update') }}" method="post" enctype="multipart/form-data">
@@ -117,7 +117,7 @@
     <div class="row formulaire-btn">
         <div class="form-group col-12">
 
-            <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button>
+            <button type="submit" class="btn btn-outline-success alpa shadow"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button>
 
         </div>
     </div>

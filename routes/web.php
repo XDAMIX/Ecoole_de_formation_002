@@ -65,11 +65,13 @@ Route::controller(MessageController::class)->group(function () {
                                         // inscriptions
 Route::controller(InscriptionController::class)->group(function () {
     Route::get('/admin/inscriptions','index');
+    Route::get('/admin/inscription/{id}/voir','show');
     Route::get('/admin/inscriptions/nouveau','create');
     Route::post('/admin/inscriptions/save','store');
     Route::get('/admin/inscriptions/{id}/edit','edit');
     Route::put('/admin/inscriptions/{id}/update','update');
     Route::delete('/admin/inscriptions/{id}/delete','destroy');
+    Route::get('/admin/inscriptions/{id}/download','telecharger_pdf_inscription');
     Route::get('/admin/inscriptions/filtrer','filtrer');
     Route::get('/admin/inscriptions/recherche','recherche')->name('recherche');
     // creer le pdf de la liste des inscriptions
