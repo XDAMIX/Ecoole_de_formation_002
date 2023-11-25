@@ -20,6 +20,14 @@ class FormationController extends Controller
         return view('admin.formations.index',['formations'=>$ListeFormations]);
     }
 
+
+    public function show($id)
+    {
+        $formation = Formation::find($id);
+        return view('admin.formations.voir', ['formation' => $formation]);
+    }
+
+
     public function create() {
         return view('admin.formations.ajouter');
     }

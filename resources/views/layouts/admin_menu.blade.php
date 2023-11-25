@@ -133,7 +133,7 @@
                             <div class="sidebar-brand-icon rotate-n-15">
                                 <i class="fas fa-fw fa-tachometer-alt"></i>
                             </div>
-                            <div class="sidebar-brand-text mx-2">{{ config('app.name', 'Laravel') }}</div>
+                            <div class="sidebar-brand-text mx-2" style="font-size: 12px;">{{ config('app.name', 'Laravel') }}</div>
 
                         </a>
 
@@ -286,7 +286,7 @@
                             <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseInscriptions"
                                 aria-expanded="true" aria-controls="collapseInscriptions">
                                 <i class="fa-solid fa-graduation-cap"></i>
-                                <span>PRE-INSCRIPTIONS</span>
+                                <span>INSCRIPTIONS EN-LIGNE</span>
                             </a>
                             <div id="collapseInscriptions" class="collapse" aria-labelledby="headingInscriptions"
                                 data-bs-parent="#accordionSidebar">
@@ -340,24 +340,7 @@
                                 </div>
                             </div>
                         </li>
-
-                        <!-- Nav Item - Utilities Collapse Menu -->
-                        <li class="nav-item">
-                                <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseEmplyes"
-                                 aria-expanded="true" aria-controls="collapseEmplyes">
-                                 <i class="fa-solid fa-people-group"></i>
-                                <span>SESSION</span>
-                                </a>
-                            <div id="collapseEmplyes" class="collapse" aria-labelledby="headingEmplyes"
-                                data-bs-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
-                                {{-- <h6 class="collapse-header">Menu :</h6> --}}
-                                <a class="collapse-item" href="{{ url('/admin/session') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des sessions</a>
-                                <a class="collapse-item" href="{{ url('/admin/session/ajouter') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Nouvelle session</a>
-                                </div>
-                            </div>
-                        </li>
-
+                        
                         <!-- Nav Item - Utilities Collapse Menu -->
                         <li class="nav-item">
                                 <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseStagiaires"
@@ -374,6 +357,40 @@
                                 </div>
                             </div>
                         </li>
+
+                        <!-- Nav Item - Utilities Collapse Menu -->
+                        <li class="nav-item">
+                                <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseSessions"
+                                 aria-expanded="true" aria-controls="collapseSessions">
+                                 <i class="fa-solid fa-people-group"></i>
+                                <span>SESSION</span>
+                                </a>
+                            <div id="collapseSessions" class="collapse" aria-labelledby="headingSessions"
+                                data-bs-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                {{-- <h6 class="collapse-header">Menu :</h6> --}}
+                                <a class="collapse-item" href="{{ url('/admin/session') }}"><i class="fa-solid fa-bars submenu-i"></i>Liste des sessions</a>
+                                <a class="collapse-item" href="{{ url('/admin/session/ajouter') }}"><i class="fa-regular fa-square-plus submenu-i"></i>Nouvelle session</a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Utilities Collapse Menu -->
+                        <li class="nav-item">
+                                <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseCaisse"
+                                 aria-expanded="true" aria-controls="collapseCaisse">
+                                 <i class="bi bi-cash-stack"></i>
+                                <span>CAISSE</span>
+                                </a>
+                            <div id="collapseCaisse" class="collapse" aria-labelledby="headingCaisse"
+                                data-bs-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                {{-- <h6 class="collapse-header">Menu :</h6> --}}
+                                <a class="collapse-item" href="{{ url('/admin/caisse') }}"><i class="fa-solid fa-bars submenu-i"></i>Calcul</a>
+                                </div>
+                            </div>
+                        </li>
+
 
                         <!-- Divider -->
                         <hr class="sidebar-divider d-none d-md-block">

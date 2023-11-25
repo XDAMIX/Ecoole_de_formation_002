@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InscriptionRequest extends FormRequest
+class ProfRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class InscriptionRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -29,8 +29,8 @@ class InscriptionRequest extends FormRequest
             'prenom'       => 'required|min:1|max:255',
             'age'       => 'required',
             'wilaya'    => 'required|min:1|max:255',
-            'formation' => 'required|min:1|max:255',
-            'tel' => 'required|min:1|max:255',
+            'specialite' => 'required|min:1|max:255',
+            'tel'       => 'required|min:1|max:255',
             'email'       => 'required|min:1|max:255',
         ];
     }

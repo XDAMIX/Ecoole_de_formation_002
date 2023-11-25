@@ -83,12 +83,12 @@ ini_set('display_errors', 1);
                             <p>Nom : {{ $nom }} </p>
                         </div>
                         <div class="col-6">
-                            <p>Prenom : {{ $prenom }} </p>
+                            <p>Prénom : {{ $prenom }} </p>
                         </div>
                         {{-- --------------------------------------  --}}
 
                         <div class="col-6">
-                            <p>Age : {{ $age }} </p>
+                            <p>Age : {{ $age }} ans</p>
                         </div>
 
                         <div class="col-6">
@@ -142,16 +142,7 @@ ini_set('display_errors', 1);
 
     </div>
 
-    {{-- <div class="container-fluid" id="teste">
-    <div class="row justify-content-center text-center">
-        <div class="col-12">
-            <a href="#" class="btn btn-primary"><i class="bi bi-geo-alt"></i>  teste de bootstrap</a>
-            <a href="#" class="btn btn-success"><i class="bi bi-phone"></i>  teste de bootstrap</a>
-            <a href="#" class="btn btn-danger"><i class="bi bi-envelope"></i>  teste de bootstrap</a>
-            <a href="#" class="btn btn-dark"><i class="bi bi-globe"></i>  teste de bootstrap</a>
-        </div>
-    </div>
-</div> --}}
+
 
 
     <footer>

@@ -7,7 +7,7 @@
                         class="btn-description">Acceuil</span></a>
             </div>
             <div class="col-10 d-flex align-items-center">
-                <h2>Liste des inscriptions</h2>
+                <h2>Liste des inscriptions en-ligne</h2>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
 
     {{-- html  --}}
     <div class="container-fluid" style="padding-top:10px;padding-bottom:80px;">
-        <div class="row">
+        <div class="row animate__animated animate__backInLeft">
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     <div class="card-body">

@@ -27,8 +27,8 @@
 
                 <div class="card-body">
                     <div class="col-12 text-center">
-                        <img id="imagePreview" class="" src=""
-                            alt="l'image n'a pas été sélectionné!" style="height: 300px;width: auto;">
+                        <img id="imagePreview" class="" src="" alt="l'image n'a pas été sélectionné!"
+                            style="height: 300px;width: auto;">
                     </div>
                     <hr>
 
@@ -122,8 +122,8 @@
 
             <style>
                 /* i {
-                    margin-right: 10px;
-                } */
+                        margin-right: 10px;
+                    } */
             </style>
 
 

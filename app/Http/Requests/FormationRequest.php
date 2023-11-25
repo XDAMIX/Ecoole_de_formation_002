@@ -29,7 +29,7 @@ class FormationRequest extends FormRequest
             'dure'        => 'required|min:1|max:255',
             'publique'    => 'required|min:1|max:16383',
             'objectifs'   => 'required|min:1|max:16383',
-            'photo'       => 'required',
+            // 'photo'       => 'required',
         ];
     }
 }

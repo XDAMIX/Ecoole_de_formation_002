@@ -12,7 +12,7 @@
         </div>
     </div>
 
-
+{{-- -------------------------------------------------------------------------------------- --}}
     <div class="container-fluid animate__animated animate__backInLeft" style="margin-top:20px;margin-bottom: 20px;">
         <div class="card shadow" style="background-color: #ffff;" id="global">
             <div class="card-body">

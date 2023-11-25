@@ -159,34 +159,6 @@ class WebsiteController extends Controller
         // Télécharger le PDF avec un nom spécifique
         return $pdf->download($titre . '.pdf');
 
-        // $pdfOutput = $pdf->output();
-
-        // Générer le PDF et définir l'entête de la réponse
-        //   $response = Response::make($pdfOutput, 200, [
-        //     'Content-Type' => 'application/pdf',
-        // 'Content-Disposition' => 'inline; filename="registration.pdf"',
-        // L'option "inline" indique au navigateur d'ouvrir le fichier PDF directement.
-        // 'Content-Disposition' => 'attachment; filename="'.$lenom.'_'.$leprenom.'_inscription_formacorp.pdf"', 
-        // L'option "attachment" indique au navigateur de télécharger le fichier.
-        // 'Content-Length' => strlen($pdfOutput),
-
-        // ]);
-
-        // return $response;
-
-        // Charger la vue avec JavaScript pour effectuer la redirection après un court délai
-        // return View::make('redirect')->with('response', $response);
-
-        // Rediriger vers la racine après le téléchargement
-        // return $response->withHeaders([
-        //     'Refresh' => '3; url=/',
-        // ]);
-
-        // return $pdf->stream('pdf');
-        // return $pdf->download('pdf');
-
-        // return redirect('/');
-
 
     }
 
