@@ -93,7 +93,7 @@
     {{-- html  --}}
 
     <div class="container-fluid" style="padding-top:10px;padding-bottom:80px;">
-        <div class="row">
+        <div class="row animate__animated animate__backInLeft">
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     <div class="card-body">
@@ -106,8 +106,8 @@
                                     <th>Prénom</th>
 
                                     <th>Âge</th>
-                                    <th>E-Mail</th>
-                                    <th>N° de téléphone</th>
+                                    {{-- <th>E-Mail</th>
+                                    <th>N° de téléphone</th> --}}
                                     <th>Specialite</th>
 
 
@@ -123,8 +123,8 @@
                                         <td>{{ $prof->prenom }}</td>
 
                                         <td>{{ $prof->age }}</td>
-                                        <td>{{ $prof->email }}</td>
-                                        <td>{{ $prof->tel }}</td>
+                                        {{-- <td>{{ $prof->email }}</td>
+                                        <td>{{ $prof->tel }}</td> --}}
                                         <td>{{ $prof->specialite }}</td>
 
                                         <td>
@@ -191,8 +191,8 @@
                                     <th>Prénom</th>
 
                                     <th>Âge</th>
-                                    <th>E-Mail</th>
-                                    <th>N° de téléphone</th>
+                                    {{-- <th>E-Mail</th>
+                                    <th>N° de téléphone</th> --}}
                                     <th>Specialite</th>
 
 
@@ -290,4 +290,8 @@
                 }
             }
         </script>
+
+
+
+
     @endsection

@@ -14,10 +14,10 @@
         </div>
     </div>
 
-
+{{-- ---------------------------------------------------------- --}}
 
     <div class="container" style="padding-top: 10px;">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center animate__animated animate__backInLeft">
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     {{-- <div class="card-header"style="text-align:center;">
@@ -297,20 +297,21 @@
 
                             <hr>
 
+                            
+                            {{-- form buttons  --}}
                             <div class="row formulaire-btn">
-
-                                {{-- form buttons  --}}
                                 <div class="form-group row justify-content-center text-center">
-                                    <div class="col-6">
+                                        <div class="col-6">
                                         <button type="button" onclick="sauvegarder(this)"  class="btn btn-outline-success alpa shadow"><i
-                                                class="bi bi-check2 icons"></i>Enregistrer</button>
-                                    </div>
-                                    <div class="col-6">
-                                        <a class="btn btn-outline-danger alpa shadow"
+                                            class="bi bi-check2 icons"></i>Enregistrer</button>
+                                        </div>
+                                        <div class="col-6">
+                                            <a class="btn btn-outline-danger alpa shadow"
                                             href="{{ '/admin/inscriptions' }}"><i class="bi bi-x icons"></i>Annuler</a>
-                                    </div>
+                                        </div>
                                 </div>
-
+                            </div>        
+                            {{-- form buttons  --}}
                         </form>
 
                     </div>

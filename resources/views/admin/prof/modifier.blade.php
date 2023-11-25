@@ -1,444 +1,255 @@
-{{-- new style  --}}
-
 
 @extends('layouts.admin_menu')
 @section('content')
 
 
-<div class="divepo">
-{{-- new style --}}
-<form class="form" action="{{ url('/admin/prof/'.$prof->id.'/update') }}"id="enr-form" method="POST" enctype="multipart/form-data">
-  <h1 class="title" >Modifier le prof : {{$prof->nom}} {{$prof->prenom}} </h1>
-    
-    @csrf
-    @method('PUT')
 
-    <div style="display: flex; align-items: center;">
-    <label  style="color: rgb(14, 10, 10) ; font-size: 20px;font-weight: bold" for="formation">Sexe</label>
-    <div class="col form-group">
-
-    <select class="form-control" style="text-align: center;font-size: 15px;font-weight: bold" id="sexe" name="sexe" >
-      <option value="">Sélectionner</option>
-      <option value="homme" <?php if ($prof->sexe === 'homme') echo 'selected'; ?>>HOMME</option>
-      <option value="femme" <?php if ($prof->sexe === 'femme') echo 'selected'; ?>>FEMME</option>
-    </select>
-
-    </div>
-    </div>
-    <br>
-
-    <div style="display: flex;">
-    <label for="nom" style="color: rgb(14, 10, 10) ; font-size: 20px;font-weight: bold"> Nom</label>
-    <div class="divepo" >
-        <input type="text" class="input" style="" id="nom" name="nom" value="{{ $prof->nom}}">
-
-    </div>
-    </div>
-    <br>
-    <div style="display: flex; align-items: center;">
-    <label for="prenom" style="color: rgb(14, 10, 10) ; font-size: 20px;font-weight: bold">Prénom</label>
-    <div class="divepo">
-        <input type="text" class="input" style="justify-content: center;" id="prenom" name="prenom" value="{{ $prof->prenom }}" >
-
-    </div>
-    </div>
-    <br>
-
-    <div style="display: flex; align-items: center;">
-    <label for="prenom" style="color: rgb(14, 10, 10) ; font-size: 20px;font-weight: bold">Âge</label>
-    <div class="divepo">
-        <input type="number" class="input" id="age" name="age" value="{{ $prof->age }}" >
-
-    </div>
-    </div>
-    <br>
-
-    <div style="display: flex; align-items: center;">
-    <label for="email" style="color: rgb(14, 10, 10) ; font-size: 20px;font-weight: bold">ُE-mail</label>
-    <div class="divepo">
-        <input type="email" class="input" id="email" name="email" value="{{ $prof->email }}" >
-
-    </div>
-    </div>
-    <br>
-
-    <div style="display: flex; align-items: center;">
-    <label for="tel" style="color: rgb(14, 10, 10) ; font-size: 20px;font-weight: bold">Tel</label>
-    <div class="divepo">
-        <input type="number" class="input" id="tel" name="tel" value="{{ $prof->tel }}" >
-
-    </div>
-    </div>
-    <br>
-
-   <div style="display: flex; align-items: center;">
-    <label for="specialite" style="color: rgb(14, 10, 10) ; font-size: 20px;font-weight: bold">specialite</label>
-    <div class="divepo">
-        <input type="text" class="input" id="specialite" name="specialite" value="{{$prof->specialite}}" >
-
-    </div>
+<div class="container" id="titre-page">
+  <div class="row">
+      <div class="col-2 d-flex align-items-center">
+          <a href="{{ url('/admin/prof') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
+                  class="btn-description">Retour</span></a>
+      </div>
+      <div class="col-10 d-flex align-items-center">
+          <h2>Modifier les informations de Profésseur</h2>
+      </div>
   </div>
-<br>
-
-
-   
-{{-- nouveaux bouton  --}}
-    
-        <div class="bt-en-ligne">
-             <div class="bt-en-ligne-div">
-
-          
-             <button class="btn-mdf btn-r" id="btn-mdf" type="button">
-                <span class="text">Modifier</span>
-                <span class="icon">
-                  <i class="fa-solid fa-pen fa-bounce fa-xl"  style="color: #000000;"></i>
-                </span>
-             </button>
-
-             </div>
-
-             <div class="bt-en-ligne-div"   id="mydiv">
-                  <button class="btn-sup btn-r" id="btn_annuler" type="button">
-                         <span class="text" >Annuler</span>
-                         <span class="icon">
-                          <i class="fa-solid fa-xmark fa-xl"></i>
-                         </span>
-                 </button>
-             </div>
-         </div>
-
-{{-- fin nouveau bouton  --}}
-
-  </form>
 </div>
-{{-- fin new style --}}
+{{-- ---------------------------------------------------------- --}}
 
 
+<div class="container" style="padding-top: 10px;">
+  <div class="row justify-content-center animate__animated animate__backInLeft">
+      <div class="col-md-12">
+          <div class="card shadow" style="background-color: #ffff;">
+              {{-- <div class="card-header"style="text-align:center;">
+          <a style="font-size: 20px;">Formulaire d'inscription</a>
+        </div> --}}
+              <div class="card-body">
 
-<script>
-
-    //    <!-- script pour le button Annuler  -->
-
-       var bouton = document.getElementById("btn_annuler");
-        bouton.addEventListener("click",function(){
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
-            swalWithBootstrapButtons.fire({
-                title: 'Annuler ! ',
-                text: "Voulez-vous Annuler  ",
-                icon: 'warning',
-                showCancelButton: true,
-                cancelButtonText: 'NO',
-                confirmButtonText: 'OUI',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href="{{ url('/admin/session') }}"
-                    
-                } else if (
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                   
-                }
-            })
-        });
-    //    <!-- script pour le button enregistrier  -->
-
-       var boutonmdf = document.getElementById("btn-mdf");
-       boutonmdf.addEventListener("click",function(){
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
-            swalWithBootstrapButtons.fire({
-                title: 'Modifier ! ',
-                text: "Voulez-vous enregistrer les modification ..?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'OUI, Modifier',
-                cancelButtonText: 'NO, Annuler',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Soumettre le formulaire de suppression
-                    var form = document.getElementById("enr-form");
-                         form.submit();
-                } else if (
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-
-                }
-            })
-        });
-    </script>
+                <form class="edit-form" action="{{ url('/admin/prof/' . $prof->id . '/update') }}" method="post"
+                  enctype="multipart/form-data">
+                  @csrf
+                  @method('PUT')
 
 
 
 
 
+                      {{-- sexe ,nom ,prenom  --}}
+                      {{-- ---------------------------------------------------------- --}}
+                      <div class="row espace-inputs">
+
+                          <div class="col-md-12">
+                              <h5 style="text-align: center"><i class="bi bi-person-fill"></i> informations
+                                  personnelles</h5>
+                              <hr>
+                          </div>
+
+                          <div class="col-md-4 form-group" id="sexe">
+                              <label for="">sexe :</label>
+
+                              <select class="form-control" name="sexe" required>
+                                <option value="{{ $prof->sexe }}" style="display:none;" selected>
+                                  @if ($prof->sexe == 'H')
+                                      HOMME
+                                  @else
+                                      FEMME
+                                  @endif
+                                </option>
+                                  <option value="H">HOMME</option>
+                                  <option value="F">FEMME</option>
+                              </select>
+                          </div>
 
 
-      <style>
-        .form {
-  max-width: 500px;
-  width: 100%;
-  background-color: #fff;
-  padding: 10px;
-  box-shadow: 0px 0px 0px 4px rgba(52, 52, 53, 0.185);
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
- 
-}
+                          <div class="col-md-4 form-group" id="nom">
+                              <label for="">Nom :</label>
 
-.title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #1a202c;
-}
+                              <input type="text" name="nom"
+                                  class="form-control @if ($errors->get('nom')) is-invalid @endif"
+                                  id="validationServer01" placeholder="Veuillez saisir votre nom ici" required value="{{ $prof->nom }}">
+                              <div id="validationServer01Feedback" class="invalid-feedback">
+                                  @if ($errors->get('nom'))
+                                      @foreach ($errors->get('nom') as $message)
+                                          {{ $message }}
+                                      @endforeach
+                                  @endif
+                              </div>
 
-.label {
-  color: rgb(0, 0, 0);
-  margin-bottom: 4px;
-}
-
-.input {
-  padding: 5px;
-  /* margin-bottom: 3px; */
-  margin-left: 20px ;
-  width: 350px;
-  font-size: 1rem;
-  color: #4a5568;
-  outline: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  transition: all 0.2s ease-in-out;
-  text-align: center;
- 
+                          </div>
 
 
-}
+                          <div class="col-md-4 form-group" id="prenom">
+                              <label for="">Prénom :</label>
 
-.input:focus {
-  background-color: #fff;
-  box-shadow: 0 0 0 2px #cbd5e0;
-}
+                              <input type="text" name="prenom"
+                                  class="form-control @if ($errors->get('prenom')) is-invalid @endif"
+                                  id="validationServer02" placeholder="Veuillez saisir votre prénom ici" required value="{{ $prof->prenom }}">
+                              <div id="validationServer02Feedback" class="invalid-feedback">
+                                  @if ($errors->get('prenom'))
+                                      @foreach ($errors->get('prenom') as $message)
+                                          {{ $message }}
+                                      @endforeach
+                                  @endif
+                              </div>
 
-.input:valid {
-  border: 1px solid green;
-}
+                          </div>
 
-.input:invalid {
-  border: 1px solid rgba(14, 14, 14, 0.205);
-}
 
-.submit {
-  background-color: #1a202c;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
+                      </div>
+
+
+
+                      {{-- age, telephone ,email   --}}
+                      {{-- ---------------------------------------------------------- --}}
+                      <div class="row espace-inputs">
+
+
+                          <div class="col-md-4 form-group" id="age">
+                              <label for="">Age :</label>
+
+                              <input type="number" name="age"
+                                  class="form-control @if ($errors->get('age')) is-invalid @endif"
+                                  id="validationServer03" placeholder="" min="18" required value="{{ $prof->age }}">
+                              <div id="validationServer03Feedback" class="invalid-feedback">
+                                  @if ($errors->get('age'))
+                                      @foreach ($errors->get('age') as $message)
+                                          {{ $message }}
+                                      @endforeach
+                                  @endif
+                              </div>
+
+                          </div>
+
+                          <div class="col-md-4 form-group" id="telephone">
+                              <label for="">Numéro de téléphone :</label>
     
+                              <input type="text" name="tel"
+                                  class="form-control @if ($errors->get('tel')) is-invalid @endif"
+                                  id="validationServer05"
+                                  placeholder="Veuillez saisir votre numéro de téléphone ici" required value="{{ $prof->tel }}">
+                              <div id="validationServer05Feedback" class="invalid-feedback">
+                                  @if ($errors->get('tel'))
+                                      @foreach ($errors->get('tel') as $message)
+                                          {{ $message }}
+                                      @endforeach
+                                  @endif
+                              </div>
     
-    .divepo{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* height: 100vh; 100% de la hauteur de la vue */
-        margin: 0;
-    }
+                          </div>
+                          <div class="col-md-4 form-group" id="email">
+                              <label for="">Adresse e-mail :</label>
+    
+                              <input type="text" name="email"
+                                  class="form-control @if ($errors->get('email')) is-invalid @endif"
+                                  id="validationServer06" placeholder="Veuillez saisir votre adresse e-mail ici" required value="{{ $prof->email }}">
+                              <div id="validationServer06Feedback" class="invalid-feedback">
+                                  @if ($errors->get('email'))
+                                      @foreach ($errors->get('email') as $message)
+                                          {{ $message }}
+                                      @endforeach
+                                  @endif
+                              </div>
+    
+                          </div>
+
+                      </div>
 
 
-    /* boutton modifier / ajouter  */
 
-   /* button modifer */
 
-   .btn-mdf {
-                              width: 150px;
-                              height: 50px;
-                              cursor: pointer;
-                              display: flex;
-                              align-items: center;
-                              background: #5EB1FD;
-                              border: none;
-                              border-radius: 10px;
-                              box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-                              background:#3165F6;
-                              white-space: nowrap; 
+
+
+
+
+                      {{-- formation --}}
+                      {{-- -------------------------------------------------------------------------- --}}
+
+                      <div class="row espace-inputs justify-content-center">
+                          <div class="col-md-12">
+                              <hr>
+                              <h5 style="text-align: center"><i class="bi bi-mortarboard-fill"></i> Formation</h5>
+                              <hr>
+                          </div>
+
+                          <div class="col-md-6 form-group" id="specialite" style="text-align: center;">
+                              <label for="">Spécialité de profésseur :</label>
+
                               
-                            }
-                            .in{
-                              position: absolute;
-                              bottom: 0;
-                              left: 0;
-                              width: 100%;
-                              padding: 10px;
-                              
-                            }
-                            
-                            .btn-mdf span {
-                              transition: 200ms;
-                            }
-                            
-                            .btn-mdf .text {
-                              transform: translateX(20px);
-                              color: white;
-                              font-weight: bold;
-                              text-align: center;
-                            }
+                              <select class="form-control" name="specialite" required>
+                                  <option value="{{ $prof->specialite }}" style="display:none;" selected>
+                                    {{ $prof->specialite }}</option>
+                                  @foreach ($formations as $formation)
+                                      <option value="{{ $formation->titre }}">{{ $formation->titre }}</option>
+                                  @endforeach
+                              </select>
+                          </div>
 
-                            
-                            .btn-mdf .icon {
-                              position: absolute;
-                              /* border-left: 1px solid #5EB1FD; */
-                              transform: translateX(110px);
-                              height: 40px;
-                              width: 40px;
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                              /* padding-top: 70px; */
-                            }
-                            
-                            .btn-mdf .i {
-                              /* width: 15px; */
-                              fill: #eee;
-                            }
-                            
-                            .btn-mdf:hover {
-                              background: #5EB1FD;
-                            }
-                            
-                            .btn-mdf:hover .text {
-                              color: transparent;
-                            }
-                            
-                            .btn-mdf:hover .icon {
-                              width: 150px;
-                              border-left: none;
-                              transform: translateX(0);
-                            }
-                            
-                            .btn-mdf:focus {
-                              outline: none;
-                            }
-                            
-                            .btn-mdf:active .icon svg {
-                              transform: scale(0.8);
-                            }
+                      </div>
 
-                            /* -------fin mdf------ */
-                              /* button supprimer */
+                      <hr>
+
+                            {{-- form buttons  --}}
+                            <div class="row formulaire-btn">
+                              <div class="form-group row justify-content-center text-center">
+                                      <div class="col-6">
+                                      <button type="button" onclick="sauvegarder(this)"  class="btn btn-outline-success alpa shadow"><i
+                                          class="bi bi-check2 icons"></i>Enregistrer</button>
+                                      </div>
+                                      <div class="col-6">
+                                          <a class="btn btn-outline-danger alpa shadow"
+                                          href="{{ '/admin/prof' }}"><i class="bi bi-x icons"></i>Annuler</a>
+                                      </div>
+                              </div>
+                          </div>        
+                          {{-- form buttons  --}}
+
+                  </form>
+
+              </div>
+          </div>
+
+      </div>
+  </div>
 
 
-                              .btn-sup {
-                                        width: 150px;
-                                        height: 50px;
-                                        cursor: pointer;
-                                        display: flex;
-                                        align-items: center;
-                                        background: red;
-                                        border: none;
-                                        border-radius: 10px;
-                                        box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-                                        background:#e62222;
-                                        white-space: nowrap;  
-
-                                                                          
-                                      }
-                                      
-                                       
-                                      .btn-sup span {
-                                        transition: 200ms;
-                                    
-                                        
-                                       }
-                                       
-                                       .btn-sup .text {
-                                        transform: translateX(20px);
-                                        color: white;
-                                        font-weight: bold;
-                                        text-align: center;
-                           
-                                       }
-                                      
-                                       
-                                       .btn-sup .icon {
-                                        position: absolute;
-                                        /* border-left: 1px solid #5EB1FD; */
-                                        transform: translateX(110px);
-                                        height: 40px;
-                                        width: 40px;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        /* padding-top: 70px; */
-                                       }
-                                       
-                                       .btn-sup .i {
-                                        /* width: 15px; */
-                                        fill: #eee;
-                                       
-                                       }
-                                       
-                                       .btn-sup:hover {
-                                        background: #ff3636;
-                                       }
-                                       
-                                       .btn-sup:hover .text {
-                                        color: transparent;
-                                       }
-                                       
-                                       .btn-sup:hover .icon {
-                                        width: 150px;
-                                        border-left: none;
-                                        transform: translateX(0);
-                                       }
-                                       
-                                       .btn-sup:focus {
-                                        outline: none;
-                                       }
-                                       
-                                       .btn-sup:active .icon svg {
-                                        transform: scale(0.8);
-                                       }
-                                       /* fin btn sup */
-
-                                                                                       /* aligniement de bouton sur les div  */
- .bt-en-ligne{
-
-display: flex;
-
-justify-content: center;
-/* position: fixed; */
-bottom: 0;
-left: 0;
-right: 0;
-margin: auto;
-}
-.bt-en-ligne-div{
-margin: 1%;
-}
-
-/* fin */
 
 
-      </style>
-     
-{{-- fin new style  --}}
+
+</div>
+{{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
+
+    {{-- ------------------------------------------------------------------------------------------------------------------------------------- --}}
+
+    {{-- script sauvegarder  --}}
+    <script>
+      function sauvegarder(button) {
+          // Utilisez le bouton pour obtenir le formulaire parent
+          const form = button.closest('.edit-form');
+  
+          // Vérifiez si le formulaire a été trouvé
+          if (form) {
+  
+              Swal.fire({
+                  title: "Êtes-vous sûr(e) de vouloir enregistrer les modifications de Profésseur ?",
+                  text: name,
+                  icon: "question",
+                  showCancelButton: true,
+                  confirmButtonColor: "#198754",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Oui",
+                  cancelButtonText: "Non",
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      form.submit();
+                  }
+              });
+          } else {
+              console.error("Le formulaire n'a pas été trouvé.");
+          }
+      }
+  </script>
   
 
 

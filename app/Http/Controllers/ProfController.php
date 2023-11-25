@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Formation;
+use App\Models\Information;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Prof;
+use Dompdf\Dompdf;
+use PDF;
 
 class ProfController extends Controller
 {
@@ -18,9 +22,43 @@ class ProfController extends Controller
         return view('admin/prof/index',['profs'=>$ListeProfs]);
 
     }
+
+    public function show($id)
+    {
+        $prof = Prof::find($id);
+        return view('admin/prof/voir', ['prof' => $prof]);
+    }
+
+
+    public function telecharger_pdf_prof($id)
+    {
+        $prof = Prof::find($id);
+        $informations = Information::all()->first();
+
+        $data = [
+            'sexe' => $prof->sexe,
+            'nom' => $prof->nom,
+            'prenom' => $prof->prenom,
+            'age' => $prof->age,
+            'tel' => $prof->tel,
+            'email' => $prof->email,
+            'specialite' => $prof->specialite,
+            'date' => $prof->created_at,
+            'informations' => $informations,
+        ];
+
+        $titre = $prof->nom .'_'. $prof->prenom;
+        // Générer le PDF à partir d'une vue
+        $pdf = PDF::loadView('admin.prof.pdf', $data);
+
+        // Télécharger le PDF avec un nom spécifique
+        return $pdf->download('Professeur_'.$titre.'.pdf');
+
+    }
     
     public function create() {
-        return view('admin/prof/ajouter');
+        $listeformations = Formation::all();
+        return view('admin/prof/ajouter',['formations' => $listeformations]);
     }
 
     
@@ -56,7 +94,9 @@ class ProfController extends Controller
 
     public function edit($id) {
         $prof = Prof::find($id);
-        return view('admin/prof/modifier',['prof' => $prof]);
+        $listeformations = Formation::all();
+
+        return view('admin/prof/modifier',['prof' => $prof,'formations' => $listeformations]);
     }
 
     public function update(Request $request,$id) {

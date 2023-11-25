@@ -63,7 +63,7 @@ ini_set('display_errors', 1);
                 <h1 style="font-weight: bold;padding-top:10px;">{{ $informations->nom }}</h1>
             </div>
             <div class="col-12">
-                <h3>Fiche d'inscription de stagiaire</h3>
+                <h3>Fiche Profésseur</h3>
             </div>
         </div>
     </div>
@@ -87,49 +87,23 @@ ini_set('display_errors', 1);
                         </div>
                         {{-- --------------------------------------  --}}
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <p>Age : {{ $age }} ans</p>
                         </div>
 
-                        <div class="col-6">
-                            <p>Wilaya :{{ $wilaya }} </p>
-                        </div>
-
-                        {{-- --------------------------------------  --}}
-
-                        <div class="col-12">
-                            <p>Profession :{{ $profession }} </p>
-                        </div>
-
-                        {{-- --------------------------------------  --}}
-
-                        <div class="col-6">
+                        <div class="col-4">
                             <p>N° Tel: {{ $tel }} </p>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <p>E-mail : {{ $email }} </p>
                         </div>
 
                         {{-- --------------------------------------  --}}
 
                         <div class="col-6">
-                            <p>Formation : <span
-                                    style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;">{{ $formation }}
-                                </span></p>
-                        </div>
-                        {{-- --------------------------------------  --}}
-
-                        <div class="col-6">
-                            <p>Session : <span
-                                    style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;">{{ $session }}
-                                </span></p>
-                        </div>
-                        {{-- --------------------------------------  --}}
-
-                        <div class="col-6">
-                            <p>Montant payé : <span
-                                    style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;">{{ $montant }} DA
+                            <p>Spécialite : <span
+                                    style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;text-weight:bold;">{{ $specialite }}
                                 </span></p>
                         </div>
 
@@ -151,41 +125,8 @@ ini_set('display_errors', 1);
 
 
 
-
     <footer>
-        <div class="container-fluid" id="peidpage">
-            <div class="row">
-                <div class="col-12">
 
-                    <p class="contact-titre" style="text-decoration: underline;">Contactez-nous par :</p>
-
-                    <p class="contact">
-
-                        <span> <img src="{{ public_path('icones/position.png') }}" class="img-fluid icones"
-                                alt="..."> Adresse : {{ $informations->adresse }} . </span>
-
-                    </p>
-                    <p class="contact">
-
-                        <span> <img src="{{ public_path('icones/email.png') }}" class="img-fluid icones-lg"
-                                alt="..."> Email : {{ $informations->email }} | </span> <img
-                            src="{{ public_path('icones/globe.png') }}" class="img-fluid icones-lg" alt="..."> Site
-                        web : www.formacorpro.com </span>
-
-                    </p>
-                    <p class="contact">
-
-                        <span> <img src="{{ public_path('icones/phone.png') }}" class="img-fluid icones"
-                                alt="..."> Telephone : @foreach ($telephones as $telephone)
-                                {{ $telephone->numero }} <span> | </span>
-                            @endforeach </span>
-
-                    </p>
-
-
-                </div>
-            </div>
-        </div>
     </footer>
 
 
@@ -307,9 +248,3 @@ ini_set('display_errors', 1);
 
 
 </html>
-
-
-
-{{-- --------------------------------------------------------------------------------------- --}}
-
-

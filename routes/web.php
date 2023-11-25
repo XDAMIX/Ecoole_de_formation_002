@@ -71,18 +71,18 @@ Route::controller(InscriptionController::class)->group(function () {
     Route::get('/admin/inscriptions/{id}/edit','edit');
     Route::put('/admin/inscriptions/{id}/update','update');
     Route::delete('/admin/inscriptions/{id}/delete','destroy');
-    Route::get('/admin/inscriptions/{id}/download','telecharger_pdf_inscription');
     Route::get('/admin/inscriptions/filtrer','filtrer');
     Route::get('/admin/inscriptions/recherche','recherche')->name('recherche');
     // creer le pdf de la liste des inscriptions
     Route::get('/admin/inscriptions/imprimer','imprimertout');
     // Route::get('/admin/inscriptions/imprimer', [InscriptionController::class, 'imprimer'])->header('Content-Type', 'application/pdf');
+    Route::get('/admin/inscriptions/{id}/download','telecharger_pdf_inscription');
     
     
     // les route pour validation :
     Route::get('/admin/inscriptions/{id}/valide','validepage');
     Route::put('/admin/inscriptions/{id}/valideupdate','validesave');
-
+    
     // les route pour la page voir de session sup_ins_sesion
     Route::delete('/admin/inscriptions/{id}/sup_ins_sesion','sup_ins_sesion');
     Route::get('/admin/inscriptions/{id}/imprime1','imprime1');
@@ -93,23 +93,28 @@ Route::controller(InscriptionController::class)->group(function () {
 // formations
 Route::controller(FormationController::class)->group(function () {
     Route::get('/admin/formations','index');
+    Route::get('/admin/formation/{id}/voir','show');
     Route::get('/admin/formation/nouveau','create');
     Route::post('/admin/formation/save','store');
     Route::get('/admin/formation/{id}/edit','edit');
     Route::put('/admin/formation/{id}/update','update');
     Route::delete('/admin/formation/{id}/delete','destroy');
-    });
+});
 // --------------------------------------------------------------------------
 // ---------                Route pour etudiants                   ----------
 // --------------------------------------------------------------------------
 Route::controller(EtudiantController::class)->group(function () {
     Route::get('/admin/etudiant','index');
+    Route::get('/admin/etudiant/{id}/voir','show');
     Route::get('/admin/etudiant/nouveau','create');
     Route::post('/admin/etudiant/save','store');
     Route::get('/admin/etudiant/{id}/edit','edit');
     Route::put('/admin/etudiant/{id}/update','update');
     Route::delete('/admin/etudiant/{id}/delete','destroy');
-    });
+    Route::get('/get-sessions/{titre_formation}','getSessions');
+    Route::get('/admin/etudiant/{id}/download','telecharger_pdf_etudiant');
+    Route::get('/admin/caisse','caisse');
+});
 // --------------------------------------------------------------------------
 // ---------                Route pour Profs                   ----------
 // --------------------------------------------------------------------------
@@ -120,6 +125,8 @@ Route::controller(ProfController::class)->group(function () {
     Route::get('/admin/prof/{id}/edit','edit');
     Route::put('/admin/prof/{id}/update','update');
     Route::delete('/admin/prof/{id}/delete','destroy');
+    Route::get('/admin/prof/{id}/voir','show');
+    Route::get('/admin/prof/{id}/download','telecharger_pdf_prof');
     });
 // --------------------------------------------------------------------------
 // ---------                Route pour session                  ----------
@@ -134,6 +141,7 @@ Route::controller(SessionController::class)->group(function () {
     Route::get('/admin/session/{id}/statutatt','statut_enattente');
     Route::get('/admin/session/{id}/statutcour','statut_encours');
     Route::get('/admin/session/{id}/statutterm','statut_termine');
+    Route::get('/get-profs/{titre_formation}','getProfs');
 
                     // pour session voir 
                     Route::get('/admin/session/voir/{id}','voir');

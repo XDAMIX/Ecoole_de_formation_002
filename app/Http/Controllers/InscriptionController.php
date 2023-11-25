@@ -51,9 +51,6 @@ class InscriptionController extends Controller
         ]);
 
 
-        // return view('admin.inscriptions.liste',['inscriptions'=>$ListeInscriptions]);
-
-
     }
 
 
@@ -94,6 +91,8 @@ class InscriptionController extends Controller
             'tel' => $inscription->tel,
             'email' => $inscription->email,
             'formation' => $inscription->formation,
+            'session' => $inscription->session,
+            'montant' => $inscription->montant,
             'informations' => $informations,
             'telephones' => $telephones,
             'date' => $inscription->created_at,
@@ -101,7 +100,7 @@ class InscriptionController extends Controller
 
         $titre = $inscription->nom .'_'. $inscription->prenom;
         // Générer le PDF à partir d'une vue
-        $pdf = PDF::loadView('admin\inscriptions\pdf', $data);
+        $pdf = PDF::loadView('admin.inscriptions.pdf', $data);
 
         // Télécharger le PDF avec un nom spécifique
         return $pdf->download($titre.'.pdf');
@@ -207,14 +206,16 @@ class InscriptionController extends Controller
         $inscription = Inscription::find($id);
 
         $formationchoi = $inscription->formation;
-        // $sessions = Session::where('formation',$formationchoi)->get();
-        $sessions = Session::where('formation', $formationchoi)->where('statut', 'En attente')->get();
 
-        $formations = Formation::all();
-        return view('admin/inscriptions/valid', ['inscription' => $inscription, 'sessions' => $sessions, 'formations' => $formations]);
+        // $sessions = Session::where('formation', $formationchoi)->where('statut', 'En attente')->get();
+        $sessions = Session::where('formation', $formationchoi)->get();
+
+        // $formations = Formation::all();
+        // return view('admin/inscriptions/valid', ['inscription' => $inscription, 'sessions' => $sessions, 'formations' => $formations]);
+        return view('admin/inscriptions/valid', ['inscription' => $inscription, 'sessions' => $sessions]);
     }
 
-    public function validesave(EtudiantRequest $request, $id)
+    public function validesave(Request $request, $id)
     {
         $etudiant = new Etudiant();
         $inscription = Inscription::find($id);
@@ -226,7 +227,6 @@ class InscriptionController extends Controller
 
         $inscription->save();
 
-        info('inscription modifiée');
 
         // enregistrement de l'etudiant dans la table etudiants
         $etudiant->nom = $inscription->nom;
@@ -239,22 +239,22 @@ class InscriptionController extends Controller
         $etudiant->profession = $inscription->profession;
         $etudiant->formation = $inscription->formation;
         $etudiant->session = $request->input('session');
+        $etudiant->montant = $request->input('montant');
         $etudiant->contact = (true);
 
         $etudiant->save();
 
-        info('etudiant ajouté');
 
         $lenom = $inscription->nom;
         $leprenom = $inscription->prenom;
 
-        Alert::success('le candidat : ' . $lenom . ' ' . $leprenom . ' a bien été validé');
+        Alert::success('le stagiaire : ' . $lenom . ' ' . $leprenom . ' a bien été validé');
 
 
 
-        // telechargemnt de ficher pd e
+        // telechargemnt de ficher pdf
         $informations = Information::all()->first();
-        $telephones = Telephone::all()->first();
+        $telephones = Telephone::all();
 
         $date = date('d/m/20y');
 
@@ -280,20 +280,12 @@ class InscriptionController extends Controller
         ];
 
         // $pdf = PDF::loadView('pdf',$data, compact('informations') );
-        $pdf = PDF::loadView('admin\inscriptions\pdf_recu', $data);
+        $pdf = PDF::loadView('admin.inscriptions.pdf_recu', $data);
 
-        $pdfOutput = $pdf->output();
+        $titre = $etudiant->nom .'_'. $etudiant->prenom;
+        // Générer le PDF à partir d'une vue
+        return $pdf->download($titre.'.pdf');
 
-        // Générer le PDF et définir l'entête de la réponse
-        $response = Response::make($pdfOutput, 200, [
-            'Content-Type' => 'application/pdf',
-            // 'Content-Disposition' => 'inline;filename="'.$lenom.'_'.$leprenom.'_rece_de_payement_'.$date.'.pdf"', // L'option "inline" indique au navigateur d'ouvrir le fichier PDF directement.
-            'Content-Disposition' => 'attachment; filename="' . $lenom . '_' . $leprenom . '_rece_de_payementè' . $date . '.pdf"', // L'option "attachment" indique au navigateur de télécharger le fichier.
-            'Content-Length' => strlen($pdfOutput),
-
-        ]);
-        return $response;
-        // return redirect('/admin/inscriptions');
     }
 
 

@@ -12,9 +12,11 @@
     </div>
 </div>
 
+
+{{-- -------------------------------------------------------------------------------------- --}}
 <div class="container" style="padding-top: 10px;">
 
-<div class="row justify-content-center">
+<div class="row justify-content-center animate__animated animate__backInLeft">
     
         <div class="col-md-6">
         <div class="card shadow" style="background-color: #ffff;">

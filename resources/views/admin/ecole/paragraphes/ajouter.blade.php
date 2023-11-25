@@ -15,9 +15,9 @@
     }
     </script>
 
-
+{{-- -------------------------------------------------------------------------------------- --}}
 <div class="container" id="titre-page">
-    <div class="row">
+    <div class="row animate__animated animate__backInLeft">
         <div class="col-2 d-flex align-items-center">
             <a href="{{ url('/admin/ecole/presentation') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span class="btn-description">Retour</span></a>
         </div>

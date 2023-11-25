@@ -24,14 +24,15 @@ class EtudiantRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'nom'    => 'required|min:1|max:255',
-            // 'prenom' => 'required|min:1|max:255',
-            // 'age'    => 'required|min:1|max:255',
-            // 'sexe'   => 'required|min:1|max:255',
-            // 'wilaya' => 'required|min:1|max:255',
-            // 'formation'=> 'required|min:1|max:255',
+            'nom'    => 'required|min:1|max:255',
+            'prenom' => 'required|min:1|max:255',
+            'age'    => 'required|min:1|max:255',
+            'sexe'   => 'required|min:1|max:255',
+            'wilaya' => 'required|min:1|max:255',
+            'formation'=> 'required|min:1|max:255',
             'session'=> 'required|min:1|max:255',
-            'montant'  => 'required|min:1|max:255',
+            'tel'  => 'required|min:1|max:255',
+            'email'  => 'required|min:1|max:255',
         ];
     }
 }

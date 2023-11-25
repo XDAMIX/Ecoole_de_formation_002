@@ -15,9 +15,10 @@
     </div>
 
 
+{{-- ---------------------------------------------------------- --}}
 
     <div class="container" style="padding-top: 10px;">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center animate__animated animate__backInLeft">
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     {{-- <div class="card-header"style="text-align:center;">
@@ -82,12 +83,6 @@
 
 
                             </div>
-
-
-
-
-
-
 
 
 
@@ -202,7 +197,7 @@
 
                             // Attendez que le premier formulaire soit soumis avant de soumettre le deuxième
                             await new Promise(resolve => setTimeout(resolve,
-                                5000)); // 5 seconde de délai (ajustez si nécessaire)
+                                10000)); // 5 seconde de délai (ajustez si nécessaire)
 
                             form2.submit();
                         }

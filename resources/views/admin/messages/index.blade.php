@@ -17,7 +17,7 @@
 
 
 <div class="container" style="padding-top: 10px;">
-    <div class="row">
+    <div class="row animate__animated animate__backInLeft">
 
         <div class="col-md-12">
 

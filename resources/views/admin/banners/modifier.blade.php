@@ -71,7 +71,8 @@
                         <div class="form-group row justify-content-center text-center" id="double-btn">
                             <div class="col-6">
                                 <button type="submit" class="btn btn-outline-success alpa shadow"><i
-                                        class="bi bi-check2 bi-lg"></i><span class="btn-description">Enregistrer</span></button>
+                                        class="bi bi-check2 bi-lg"></i><span
+                                        class="btn-description">Enregistrer</span></button>
                             </div>
                             <div class="col-6">
                                 <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/banners' }}"><i
@@ -127,7 +128,7 @@
 
     <style>
 
-        
+
     </style>
 
 
