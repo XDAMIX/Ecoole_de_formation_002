@@ -137,16 +137,18 @@
               <li><a class="nav-link scrollto" href="/actualites">Gallerie</a></li>
               <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
               <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+              <li>
+                <!-- button inscription -->
+                <a class=" btn-inscrir nav-link animate__animated animate__rubberBand" href="{{('/inscription/nouveau')}}">
+                  <i class="bi bi-mortarboard" style="margin-right:5px;font-size:16px;"></i>Inscription
+                </a>
+                <!-- button inscription -->
+              </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
 
           </nav>
 
-          <!-- button inscription -->
-          <a class="btn-inscrir animate__animated animate__rubberBand" href="{{('/inscription/nouveau')}}">
-            <h6 class=""><i class="bi bi-mortarboard-fill"></i>Inscription</h6>
-          </a>
-          <!-- button inscription -->
 
           <!-- .navbar -->
         </div>
@@ -171,8 +173,8 @@
         <div class="carousel-item active" style="background-image: url( {{asset('storage/'.$acceuil->photo)}} );">
           <div class="carousel-container">
             <div class="container">
-              <img src="{{asset('storage/'.$informations->logo)}}" alt="logo" class="img-fluid animate__animated animate__fadeInDown" style="height: 200px;">
-              <h2 class="animate__animated animate__fadeInDown">{{$acceuil->titre}}</h2>
+              <img src="{{asset('storage/'.$informations->logo)}}" alt="logo" class="img-fluid animate__animated animate__backInDown" style="height: 200px;padding:30px;">
+              <h2 class="animate__animated animate__backInDown">{{$acceuil->titre}}</h2>
               <p class="animate__animated animate__fadeInUp">{{$acceuil->sous_titre1}}</p>
               <p class="animate__animated animate__fadeInUp">{{$acceuil->sous_titre2}}</p>
             </div>

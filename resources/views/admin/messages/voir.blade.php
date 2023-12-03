@@ -21,14 +21,27 @@
             <div class="card shadow">
                 <div class="card-header">Message</div>
                 <div class="card-body">
-                 <label>date et heure:</label>
-                 <p>{{$message->created_at}}</p>
-                 <label>nom et prénom:</label>
-                 <p>{{$message->name}}</p>
-                 <label>n° de téléphone:</label>
-                 <p>{{$message->tel}}</p>
-                 <label>e-mail:</label>
-                 <p>{{$message->email}}</p>
+                    <div class="row" style="text-align: center;">
+                        <div class="col-12">
+                            <label>date et heure:</label>
+                            <p>{{$message->created_at}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label>nom et prénom:</label>
+                            <p>{{$message->name}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label>n° de téléphone:</label>
+                            <p>{{$message->tel}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label>e-mail:</label>
+                            <p>{{$message->email}}</p>
+                        </div>
+                    </div>
+
+
+
                  <hr>
                  <label>sujet:</label>
                  <p>{{$message->subject}}</p>

@@ -35,7 +35,7 @@ class TemoignageController extends Controller
         }
         
         $nvTemoignage->save();
-        Alert::success('le nouveau témoin a bien été enregistré');
+        Alert::success('le nouveau témoignage a bien été enregistré');
         return redirect('/admin/temoignages');
 
     }

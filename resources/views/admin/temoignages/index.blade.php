@@ -1,531 +1,253 @@
 @extends('layouts.admin_menu')
 @section('content')
-
-
-
-{{-- retour à l'acceuil  --}}
-<div class="container" id="titre-page">
-  <div class="row">
-      <div class="col-2 d-flex align-items-center">
-          <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
-      </div>
-      <div class="col-10 d-flex align-items-center">
-          <h2>Témoignages</h2>
-      </div>
-  </div>
-</div>
-
-
-
-
-<div class="container" style="">
-  <div class="row">
-
-
-    @foreach($temoignages as $temoignage)
-    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 10px;">
-
-
-      <!-- <div class="card">
-  <img src="{{ asset('storage/'.$temoignage->photo )}}" class="card-img-top" alt="..." style="width: 100%;height: 100%;">
-  <div class="card-body" style="text-align: center;" >
-    <h5 class="card-title">{{$temoignage->nom}}</h5>
-    <h5 class="text-muted">{{$temoignage->poste}}</h5>
-    <p class="card-text">{{$temoignage->mot}}</p>
-    <div style="text-align: center;align-items:center;">
-                    <form action="{{ url('/admin/temoignages/'.$temoignage->id.'/delete') }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                            <a href="{{ url('/admin/temoignages/'.$temoignage->id.'/edit') }}" class="btn btn-primary" style="margin-bottom: 5px;" ><i class="bi bi-pen"></i>Modifier</a>
-                            <button type="submit" onclick="return confirm('Êtes vous sure?')" class="btn btn-danger"><i class="bi bi-trash3"></i>Supprimer</button>
-                    </form>
-    </div>
-  </div>
-</div> -->
-      <!-- new style  -->
-
-      <div class="carddami">
-        <div class="upper-part">
-          <div class="upper-part-face imag_size" style="background-image: url({{ asset('storage/'.$temoignage->photo )}}); background-size:cover;background-position:center;">
-            {{-- {{ <img src="{{ asset('storage/'.$temoignage->photo)}}" class="card-img-top okok" alt="..." style="width: 100%;height: 100%;"}} --}}
-          </div>
-          <div class="upper-part-back">
-            <p>{{$temoignage->mot}}</p>
-          </div>
-        </div>
-        <div class="lower-part">
-          <div class="lower-part-face">{{$temoignage->nom}}</div>
-          <div class="lower-part-back">
-            <div style="text-align: center;align-items:center;">
-              <div style="text-align: center;">
-                <form id="delete-form-{{ $temoignage->id }}" action="{{ url('/admin/temoignages/'.$temoignage->id.'/delete') }}" method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <div class="bt-en-ligne">
-                    <div class="bt-en-ligne-div">
-
-
-                      <button class="btn-mdf btn-r" id="btn-mdf-{{ $temoignage->id}}" type="button">
-                        <span class="text">Modifier</span>
-                        <span class="icon">
-                          <i class="bi bi-pen"></i>
-                        </span>
-                      </button>
-
-                    </div>
-
-                    <div class="bt-en-ligne-div" id="mydiv">
-                      <button class="btn-sup btn-r" id="btn-{{ $temoignage->id}}" type="button">
-                        <span class="text">Supprimer</span>
-                        <span class="icon">
-                          <i class="bi bi-trash3"></i>
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-
-
-
-
-                </form>
-              </div>
+    {{-- retour à l'acceuil  --}}
+    <div class="container" id="titre-page">
+        <div class="row">
+            <div class="col-2 d-flex align-items-center">
+                <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
+                        class="btn-description">Acceuil</span></a>
             </div>
-          </div>
+            <div class="col-10 d-flex align-items-center">
+                <h2>Témoignages</h2>
+            </div>
         </div>
-      </div>
-
     </div>
 
+    {{-- ---------------------------------------------------------------------------------------------------- --}}
+
+    <div class="container" style="padding-top: 10px;">
+        <div class="row">
+
+
+            @foreach ($temoignages as $temoignage)
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 animate__animated animate__backInLeft"
+                    style="margin-bottom: 10px;">
+
+                    <div class="card shadow">
+
+                        <div class="row">
+                            <div class="col-12 image-ronde text-center align-items-center shadow"
+                                style="background-image: url({{ asset('storage/' . $temoignage->photo) }} );">
+
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+                                    {{-- <label>Titre :</label> --}}
+                                    <h4 class="card-title"
+                                        style="text-transform: uppercase;font-weight:bold;padding-top:10px;">
+                                        {{ $temoignage->nom }}<br>
+                                        <span style="color: rgb(74, 74, 74);">{{ $temoignage->poste }}</span>
+                                    </h4>
+                                </div>
+                                <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+                                    {{-- <label>Mot :</label> --}}
+                                    <div class="truncate-text" id="truncate-text{{ $temoignage->id }}">
+                                        <p class="card-title">
+                                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                            {{ $temoignage->mot }}
+                                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                        </p>
+                                        {{-- expand button  --}}
+                                        <button class="btn btn-light" onclick="toggleText({{ $temoignage->id }})">Lire
+                                            la suite</button>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                            {{-- bouttons --}}
+                            <div class="form-group row justify-content-center text-center">
+
+                                <div class="col-6 col-sm-6 mb-3 mb-sm-0">
+                                    {{-- edit button    --}}
+                                    <form class="edit-form" action="" data-id="{{ $temoignage->id }}"
+                                        data-name="{{ $temoignage->nom }}" method="GET">
+                                        @csrf
+                                        <button type="button" onclick="edit_confirmation(this)"
+                                            class="btn btn-outline-primary alpa shadow" style="margin-bottom: 5px;"><i
+                                                class="bi bi-pen"></i> <span
+                                                class="btn-description">Modifier</span></button>
+                                    </form>
+
+                                </div>
+                                <div class="col-6 col-sm-6">
+                                    {{-- delete button  --}}
+                                    <form class="delete-form" action="" data-id="{{ $temoignage->id }}"
+                                        data-name="{{ $temoignage->nom }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="supprimer_confirmation(this)"
+                                            class="btn btn-outline-danger alpa shadow"><i class="bi bi-trash3"></i>
+                                            <span class="btn-description">Supprimer</span></button>
+                                    </form>
+
+                                </div>
+                            </div>
+                            {{-- bouttons         --}}
+
+                        </div>
+
+                    </div>
+
+                </div>
+            @endforeach
+
+
+        </div>
+    </div>
+
+
+
+{{-- script suppression  --}}
+<script>
+  function supprimer_confirmation(button) {
+      // Utilisez le bouton pour obtenir le formulaire parent
+      const form = button.closest('.delete-form');
+
+      // Vérifiez si le formulaire a été trouvé
+      if (form) {
+          // Utilisez le formulaire pour extraire l'ID
+          const id = form.dataset.id;
+          const name = form.dataset.name;
+
+          Swal.fire({
+              title: "Êtes-vous sûr(e) de vouloir supprimer ce témoignage ?",
+              text: name,
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonColor: "#198754",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Oui, Supprime-le",
+              cancelButtonText: "Non, Annuler",
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                  form.action = `/admin/temoignages/${id}/delete`;
+                  form.submit();
+
+                  Swal.fire({
+                      title: "témoignage supprimée !",
+                      icon: "success"
+                  });
+              }
+          });
+      } else {
+          console.error("Le formulaire n'a pas été trouvé.");
+      }
+  }
+</script>
+
+
+
+
+{{-- script modifier  --}}
+<script>
+  function edit_confirmation(button) {
+      // Utilisez le bouton pour obtenir le formulaire parent
+      const form = button.closest('.edit-form');
+
+      // Vérifiez si le formulaire a été trouvé
+      if (form) {
+          // Utilisez le formulaire pour extraire l'ID
+          const id = form.dataset.id;
+          const name = form.dataset.name;
+
+          Swal.fire({
+              title: "Êtes-vous sûr(e) de vouloir modifier ce témoignage ?",
+              text: name,
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonColor: "#198754",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Oui",
+              cancelButtonText: "Non",
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                  form.action = `/admin/temoignages/${id}/edit`;
+                  form.submit();
+              }
+          });
+      } else {
+          console.error("Le formulaire n'a pas été trouvé.");
+      }
+  }
+</script>
+
+
+
+{{-- ---------------------------------------------------------------------------------------------------- --}}
+
+    {{-- ---------------------------------------------------------------------------------------------------- --}}
     <script>
-      //    <!-- script pour le button supprimer  -->
+        function toggleText(id) {
+            console.log("***ToggleText function called***");
+            console.log('id : '+ id);
 
-      var bouton = document.getElementById("btn-{{ $temoignage->id }}");
-      bouton.addEventListener("click", function() {
-        const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-          },
-          buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-          title: 'Vous êtes sûr !   {{ $temoignage->id}}',
-          text: "Voulez-vous supprimer le témoin : {{ $temoignage->nom }}",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'OUI, Supprimer!',
-          cancelButtonText: 'NO, Annuler!',
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // Soumettre le formulaire de suppression
-            var form = document.getElementById("delete-form-{{ $temoignage->id }}");
-            form.submit();
-            swalWithBootstrapButtons.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
-          } else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              'Cancelled',
-              'Your file is safe :)',
-              'error'
-            )
-          }
-        })
-      });
-      //    <!-- script pour le button modifer   -->
+            var element = document.querySelector("#truncate-text" + id);
 
-      var boutonmdf = document.getElementById("btn-mdf-{{ $temoignage->id}}");
-      boutonmdf.addEventListener("click", function() {
-        const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-          },
-          buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-          title: 'MODIFER !   {{ $temoignage->id}}',
-          text: "Voulez-vous faire des modifcation sur le témoin : {{ $temoignage->nom }}",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'OUI, Modifer!',
-          cancelButtonText: 'NO, Annuler!',
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "{{ url('/admin/temoignages/'.$temoignage->id.'/edit') }}"
-
-          } else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-
-          }
-        })
-      });
+            if (element) {
+                element.classList.toggle("expanded");
+                console.log("L'élément a été trouvé et la classe est switché");
+            } else {
+                console.error();("L'élément n'a pas été trouvé.");
+            }
+        }
     </script>
 
+{{-- ---------------------------------------------------------------------------------------------------- --}}
+    <style>
+        .truncate-text .card-title {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Limit to three lines */
+            -webkit-box-orient: vertical;
+            max-height: calc(1.5em * 3);
+            /* Adjust the line height accordingly */
+            transition: max-height 0.3s ease;
+            /* Add a smooth transition effect */
+        }
 
-    @endforeach
-  </div>
-</div>
+        .truncate-text.expanded .card-title {
+            max-height: none;
+            -webkit-line-clamp: 100;
+            /* Allow the full height for the expanded state */
+        }
+
+        .truncate-text.expanded button {
+            display: inline-block;
+            /* Hide the "Lire la suite" button by default */
+        }
+
+        .truncate-text button {
+            display: inline-block;
+            /* Display the "Lire la suite" button in expanded mode */
+        }
+    </style>
 
 <style>
-  .head {
-    text-align: center;
-    color: var(--color5);
-  }
-
-  /* new style  */
-
-
-  /* boutton ajouter une formation */
-
-.button-add-new {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 38px;
-  border-radius: 16px;
-  border: 1px solid transparent;
-  color: #FFFFFF;
-  background-color: #1DC9A0;
-  font-size: 20px;
-  letter-spacing: 1px;
-  transition: all 0.15s linear;
- }
- 
- .button-add-new:hover {
-  background-color: rgba(29, 201, 160, 0.08);
-  border-color: #1DC9A0;
-  color: #1DC9A0;
-  transform: translateY(-5px) scale(1.05);
- }
- 
- .button-add-new:active {
-  background-color: transparent;
-  border-color: #1DC9A0;
-  color: #1DC9A0;
-  transform: translateY(5px) scale(0.95);
- }
- 
- .button-add-new:disabled {
-  background-color: rgba(255, 255, 255, 0.16);
-  color: #8E8E93;
-  border-color: #8E8E93;
- }
- /* -------------------  fin  ------------- */
-
- /* button modifer */
-
- .btn-mdf {
-                              width: 150px;
-                              height: 50px;
-                              cursor: pointer;
-                              display: flex;
-                              align-items: center;
-                              background: #5EB1FD;
-                              border: none;
-                              border-radius: 10px;
-                              box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-                              background:#3165F6;
-                              white-space: nowrap; 
-                              
-                            }
-                            .in{
-                              position: absolute;
-                              bottom: 0;
-                              left: 0;
-                              width: 100%;
-                              padding: 10px;
-                              
-                            }
-                            
-                            .btn-mdf span {
-                              transition: 200ms;
-                            }
-                            
-                            .btn-mdf .text {
-                              transform: translateX(20px);
-                              color: white;
-                              font-weight: bold;
-                              text-align: center;
-                            }
-
-                            
-                            .btn-mdf .icon {
-                              position: absolute;
-                              /* border-left: 1px solid #5EB1FD; */
-                              transform: translateX(110px);
-                              height: 40px;
-                              width: 40px;
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                              padding-top: 0px;
-                            }
-                            
-                            .btn-mdf .i {
-                              /* width: 15px; */
-                              fill: #eee;
-                            }
-                            
-                            .btn-mdf:hover {
-                              background: #5EB1FD;
-                            }
-                            
-                            .btn-mdf:hover .text {
-                              color: transparent;
-                            }
-                            
-                            .btn-mdf:hover .icon {
-                              width: 150px;
-                              border-left: none;
-                              transform: translateX(0);
-                            }
-                            
-                            .btn-mdf:focus {
-                              outline: none;
-                            }
-                            
-                            .btn-mdf:active .icon svg {
-                              transform: scale(0.8);
-                            }
-
-                            /* -------fin mdf------ */
- /* button supprimer */
-
-
-                              .btn-sup {
-                                        width: 150px;
-                                        height: 50px;
-                                        cursor: pointer;
-                                        display: flex;
-                                        align-items: center;
-                                        background: red;
-                                        border: none;
-                                        border-radius: 10px;
-                                        box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-                                        background:#e62222;
-                                        white-space: nowrap;  
-
-                                                                          
-                                      }
-                                      
-                                       
-                                      .btn-sup span {
-                                        transition: 200ms;
-                                    
-                                        
-                                       }
-                                       
-                                       .btn-sup .text {
-                                        transform: translateX(20px);
-                                        color: white;
-                                        font-weight: bold;
-                                        text-align: center;
-                           
-                                       }
-                                      
-                                       
-                                       .btn-sup .icon {
-                                        position: absolute;
-                                        /* border-left: 1px solid #5EB1FD; */
-                                        transform: translateX(110px);
-                                        height: 40px;
-                                        width: 40px;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        padding-top: 0px;
-                                       }
-                                       
-                                       .btn-sup .i {
-                                        /* width: 15px; */
-                                        fill: #eee;
-                                       
-                                       }
-                                       
-                                       .btn-sup:hover {
-                                        background: #ff3636;
-                                       }
-                                       
-                                       .btn-sup:hover .text {
-                                        color: transparent;
-                                       }
-                                       
-                                       .btn-sup:hover .icon {
-                                        width: 150px;
-                                        border-left: none;
-                                        transform: translateX(0);
-                                       }
-                                       
-                                       .btn-sup:focus {
-                                        outline: none;
-                                       }
-                                       
-                                       .btn-sup:active .icon svg {
-                                        transform: scale(0.8);
-                                       }
-                                       /* fin btn sup */
-
-                                                                                       /* aligniement de bouton sur les div  */
- .bt-en-ligne{
-
-display: flex;
-
-justify-content: center;
-/* position: fixed; */
-bottom: 0;
-left: 0;
-right: 0;
-margin: auto;
-}
-.bt-en-ligne-div{
-margin: 1%;
-}
-
-/* fin */
-
-
-
-  .card {
-    width: 350px;
-    height: 500px;
-    position: relative;
-    border-radius: 40px;
-    transition: all 0.8s;
-    perspective: 600px;
-    perspective-origin: center bottom;
-
-  }
-
-  .carddami{
-    /* width: 350px; */
-    height: 500px;
-    position: relative;
-    border-radius: 40px;
-    transition: all 0.8s;
-    perspective: 600px;
-    perspective-origin: center bottom;
-  }
-
-  .upper-part {
-    width: 100%;
-    height: 65%;
-    border-radius: 40px 40px 0 0;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: all 0.9s;
-  }
-
-  .upper-part-face,
-  .upper-part-back {
-    text-align: center;
-    background-color: lightgray;
-    color: purple;
-    border: 3px solid purple;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    padding: 15px;
-    border-radius: 40px 40px 0 0;
-    font-weight: bold;
-    z-index: 2;
-    backface-visibility: hidden;
-    transition: all 0.6s;
-  }
-
-  .upper-part-back {
-    background-color: purple;
-    color: lightgray;
-    transform: rotatex(180deg);
-  }
-
-  .lower-part {
-    width: 100%;
-    height: 20%;
-    border-radius: 0 0 40px 40px;
-    position: relative;
-    transform-style: preserve-3d;
-    transform-origin: center top;
-    transition: all 0.9s;
-  }
-
-  .lower-part-face,
-  .lower-part-back {
-    background-color: purple;
-    width: 100%;
-    height: 100%;
-    color: lightgray;
-    font-weight: bold;
-    position: absolute;
-    border-radius: 0 0 40px 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: translate(0, -0.8px);
-    backface-visibility: hidden;
-    z-index: 2;
-  }
-
-  .lower-part-back {
-    backface-visibility: visible;
-    border-radius: 40px ;
-    /* border-radius: 0  0  40px 40px ; */
-    color: purple;
-    background-color: lightgray;
-    transform: rotateX(180deg);
-    z-index: 1;
-    transition: border-radius 0.6s;
-  }
-
-  .carddami:hover .upper-part {
-    transform: rotatex(-0.5turn);
-  }
-
-  .carddami:hover .lower-part {
-    transform: translateY(88.3px) rotateX(0.5turn);
-  }
-
-  /* .card:hover>.lower-part>.lower-part-back  */
-  .carddami:hover .lower-part .lower-part-back 
-  {
-    border: 3px solid purple;
-    border-radius: 0 0 40px 40px;
-
-  }
-
-  /* photo  */
-  .okok {
-    display: flex;
-    margin: 60px auto 10px auto;
-    width: 100%;
-    height: 100%;
-    border: 3px solid black;
-    border-radius: 50%;
-    font-size: 11px;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.5s;
-    z-index: 99;
-    padding: 5px;
-  }
-  .imag_size{
-    
+  .image-ronde {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100px;
+      width: 100px;
+      left: 35%;
+      margin-top: 5%;
+      border-radius: 50%;
+      text-align: center;
   }
 </style>
+    {{-- ---------------------------------------------------------------------------------------------------- --}}
 
 
-
-{{-- footer  --}}
-<div class="container" id="pied-page">
-@endsection
+    {{-- footer  --}}
+    <div class="container" id="pied-page">
+    @endsection
