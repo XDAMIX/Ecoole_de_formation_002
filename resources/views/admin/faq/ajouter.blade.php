@@ -1,165 +1,141 @@
 @extends('layouts.admin_menu')
 @section('content')
 
-<div class="container" style="margin-top: 10px;  " >
-    <div class="row" >
-        <div class="col-md-12">
-        <div class="card shadow" style="background-color: #ffff;">
-                <div class="card-header"style="text-align:center;">
-                  <!-- <a style="font-size: 20px;"><i class="bi bi-person"></i>Modifier les informations de la Formation</a> -->
-                    <h1>Nouvelle Question/Réponse<i class="fa-solid fa-file-pen"></i></h1>
-                </div>
-                <div class="card-body">
-                <form action="{{ url('/admin/faq/save') }}" method="POST" id="enr-form" enctype="multipart/form-data">
-                @csrf
 
-
-                    <!-- div globale  -->
-
-    <div class="container-group">
-
-                    <!-- div input  -->
-
-        <div class="input-div" >
-
-
-
-
-            <!-- quistion -->
-                <div class="form__group  field">
-                         <textarea required=""
-                                placeholder="description"
-                                name="question"
-                                class="form__field_text @if($errors->get('question')) is-invalid @endif"
-                                type="text"
-                                value=""
-                                id="validationServer04"></textarea>
-                         <label class="form__label" for="name">Question</label>
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                @if($errors->get('question'))
-                                @foreach($errors->get('question') as $message)
-                                {{ $message }}
-                                @endforeach
-                                @endif
-                             </div>
-                    </div>
-                    <!-- Reponce  -->
-
-                 <div class="form__group  field">
-                         <textarea required=""
-                                placeholder="reponse"
-                                name="reponse"
-                                class="form__field_text @if($errors->get('reponse')) is-invalid @endif"
-                                type="text"
-                                value=""
-                                id="validationServer04"></textarea>
-                         <label class="form__label" for="name">reponse</label>
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                @if($errors->get('reponse'))
-                                @foreach($errors->get('reponse') as $message)
-                                {{ $message }}
-                                @endforeach
-                                @endif
-                             </div>
-                    </div>
-
-                    <div class="bt-en-ligne" style="padding : 10px;" >
-                    <div class="bt-en-ligne-div">
-
-                                        <button class="button_enr" id="btnsave" type="button">
-                                                      <span class="text">Enregister</span>
-                                            <span class="icon">
-                                                 <i class="fa-solid fa-check" style="color: white;"></i>
-                                            </span>
-                                        </button>
-
-                    </div>
-
-                    <div class="bt-en-ligne-div ">
-
-                                        <button class="button_ok" id="btn-anl" type="button">
-                                            <span class="text">Annuler</span>
-                                            <span class="icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
-                                            </svg>
-                                            </span>
-                                        </button>
-                    </div>
-    </div >
-
-                        </div>
-                   <!-- fin group input  -->
-
-
-</div>
-
-
-</form>
-                </div>
-            </div>
-
+<div class="container" id="titre-page">
+    <div class="row">
+        <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/faq') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
+                    class="btn-description">Retour</span></a>
+        </div>
+        <div class="col-10 d-flex align-items-center">
+            <h2>Ajouter une nouvelle Question / Réponse</h2>
         </div>
     </div>
 </div>
 
 
-	<script>
+{{-- -------------------------------------------------------------------------------------- --}}
 
-//    bouton annuler
-        var boutonanl = document.getElementById("btn-anl");
-        boutonanl.addEventListener("click",function(){
-                                                    const swalWithBootstrapButtons = Swal.mixin({
-                                                        customClass: {
-                                                            confirmButton: 'btn btn-success',
-                                                            cancelButton: 'btn btn-danger'
-                                                        },
-                                                        buttonsStyling: false
-                                                    })
-                                                    swalWithBootstrapButtons.fire({
-                                                        title: 'Annuler !',
-                                                        text: "Voulez-vous annuler sans enregistrer ?",
-                                                        icon: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonText: 'OUI',
-                                                        cancelButtonText: 'NO',
-                                                        reverseButtons: true
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            window.location.href='/admin/faq';
+<div class="container">
 
-                                                        } else if (
-                                                            result.dismiss === Swal.DismissReason.cancel
-                                                        ) {
-
-                                                        }
-                                                    })
-                                                });
+    <div class="row animate__animated animate__backInLeft">
+        <div class="col-md-12">
+            <div class="card shadow" style="background-color: #ffff;">
+                {{-- <div class="card-header"style="text-align:center;">
+              <a style="font-size: 20px;">Nouveau bloc de présentation</a>
+            </div> --}}
+                <div class="card-body">
 
 
-                                                        // bouton enregistrer
-                                                var boutonsave = document.getElementById("btnsave");
-                                                boutonsave.addEventListener('click',function(){
-                                                    Swal.fire({
-                                                                title: 'Voulez-vous enregistrer !! ',
-                                                                showDenyButton: true,
-                                                                showCancelButton: true,
-                                                                confirmButtonText: 'Enregistrer',
-                                                                denyButtonText: `Annuler`,
-                                                                }).then((result) => {
-                                                                /* Read more about isConfirmed, isDenied below */
-                                                                if (result.isConfirmed) {
-                                                                    // Swal.fire('Saved!', '', 'success')
-                                                                    var form = document.getElementById("enr-form");
-                                                                    form.submit();
-                                                                } else if (result.isDenied) {
-                                                                    Swal.fire('rien na ete enregistrer ', '', 'info')
-                                                                    window.location.href='/admin/faq';
-                                                                }
-                                                                })
-                                                })
+                    <form class="add-form" action="{{ url('/admin/faq/save') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-	</script>
+
+                        <div class="form-group">
+                            <label for="">Question:</label>
+                            <textarea type="text" name="question" class="form-control @if ($errors->get('question')) is-invalid @endif"
+                                id="validationQuestion" placeholder="la question" value="" required>{{ old('question') }}</textarea>
+                            <div id="validationQuestionFeedback" class="invalid-feedback">
+                                @if ($errors->get('question'))
+                                    @foreach ($errors->get('question') as $message)
+                                        {{ $message }}
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group">
+                            <label for="">Sa Réponse:</label>
+                            <textarea type="text" name="reponse" class="form-control @if ($errors->get('reponse')) is-invalid @endif"
+                                id="validationReponse" placeholder="le réponse" value="" required>{{ old('reponse') }}</textarea>
+                            <div id="validationReponseFeedback" class="invalid-feedback">
+                                @if ($errors->get('reponse'))
+                                    @foreach ($errors->get('reponse') as $message)
+                                        {{ $message }}
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+
+
+
+                        <br>
+                        <div class="form-group row justify-content-center text-center">
+                            <div class="col-6">
+                                <button type="button" onclick="sauvegarder(this)" class="btn btn-outline-success alpa shadow"><i
+                                        class="bi bi-check2"></i><span
+                                        class="btn-description">Enregistrer</span></button>
+                            </div>
+                            <div class="col-6">
+                                <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/faq' }}"><i
+                                        class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
+                            </div>
+                        </div>
+
+
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {{-- script sauvegarder  --}}
+    <script>
+        function sauvegarder(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.add-form');
+    
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+    
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir enregistrer cette Question/Réponse ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+
+
+
+
+
+
+    {{-- footer  --}}
+    <div class="container" id="pied-page">
 
 
 @endsection

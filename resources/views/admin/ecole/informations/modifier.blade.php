@@ -31,7 +31,7 @@
 
 
     <div class="container" style="padding-top: 10px;">
-        <div class="row">
+        <div class="row animate__animated animate__backInLeft">
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     {{-- <div class="card-header"style="text-align:center;">
@@ -39,8 +39,8 @@
                 </div> --}}
                     <div class="card-body">
 
-                        <form action="{{ url('/admin/ecole/' . $information->id . '/update') }}" method="post"
-                            enctype="multipart/form-data">
+                        <form class="edit-form" action="{{ url('/admin/ecole/' . $information->id . '/update') }}"
+                            method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -148,7 +148,8 @@
 
                             <div class="form-group row justify-content-center text-center">
                                 <div class="col-6">
-                                    <button type="submit" class="btn btn-outline-success alpa shadow"><i class="bi bi-check2"></i><span
+                                    <button type="button" onclick="sauvegarder(this)"
+                                        class="btn btn-outline-success alpa shadow"><i class="bi bi-check2"></i><span
                                             class="btn-description">Enregistrer</span></button>
                                 </div>
                                 <div class="col-6">
@@ -171,7 +172,41 @@
 
     </div>
 
-{{-- footer  --}}
-<div class="container" id="pied-page">
+    {{-- --------------------------------------------------------------     --}}
 
-@endsection
+    {{-- script sauvegarder  --}}
+    <script>
+        function sauvegarder(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.edit-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir enregistrer les modifications ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+
+
+    {{-- ------------------------------ --}}
+    {{-- footer  --}}
+    <div class="container" id="pied-page">
+
+    @endsection

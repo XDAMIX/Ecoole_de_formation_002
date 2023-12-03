@@ -45,22 +45,32 @@
                                 {{-- bouttons --}}
                                 <div class="form-group row" id="double-btn">
                                     <div class="col-6 col-sm-6 mb-3 mb-sm-0">
-                                        <a href="{{ url('/admin/banners/' . $banner->id . '/edit') }}"
+
+                                    {{-- edit button    --}}
+                                    <form class="edit-form" action="" data-id="{{ $banner->id }}"
+                                        data-name="{{ $banner->titre }}" method="GET">
+                                        @csrf
+                                        <button type="button" onclick="edit_confirmation(this)"
                                             class="btn btn-outline-primary alpa shadow" style="margin-bottom: 5px;"><i
-                                                class="bi bi-pen"></i> <span class="btn-description">Modifier</span></a>
+                                                class="bi bi-pen"></i> <span
+                                                class="btn-description">Modifier</span></button>
+                                    </form>
                                     </div>
+
                                     <div class="col-6 col-sm-6">
-                                        <form id="delete-form" action="{{ url('/admin/banners/' . $banner->id . '/delete') }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                onclick="return confirm('Êtes vous sure de vouloir supprimer la pub?')"
-                                                class="btn btn-outline-danger alpa shadow"><i class="bi bi-trash3"></i>
-                                                <span class="btn-description">Supprimer</span></button>
-                                        </form>
+
+                                    {{-- delete button  --}}
+                                    <form class="delete-form" action="" data-id="{{ $banner->id }}"
+                                        data-name="{{ $banner->titre }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="supprimer_confirmation(this)"
+                                            class="btn btn-outline-danger alpa shadow"><i class="bi bi-trash3"></i>
+                                            <span class="btn-description">Supprimer</span></button>
+                                    </form>
 
                                     </div>
+
                                 </div>
                                 {{-- bouttons         --}}
 
@@ -76,6 +86,87 @@
 
     </div>
 
+
+    {{-- -------------------------------------------------------------- --}}
+
+    {{-- script modifier --}}
+    <script>
+        function edit_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.edit-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id = form.dataset.id;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir modifier cette pub ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                        form.action = `/admin/banners/${id}/edit`;
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+
+    {{-- script suppression  --}}
+    <script>
+        function supprimer_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.delete-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id = form.dataset.id;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir supprimer cette pub ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui, Supprime-la",
+                    cancelButtonText: "Non, Annuler",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                        form.action = `/admin/banners/${id}/delete`;
+                        form.submit();
+
+                        Swal.fire({
+                            title: "Pub supprimée !",
+                            icon: "success"
+                        });
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+
+
+
+    {{-- -------------------------------------------------------------- --}}
 
 
     {{-- footer  --}}
