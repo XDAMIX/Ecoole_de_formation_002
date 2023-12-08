@@ -12,124 +12,176 @@
         </div>
     </div>
 
+
 {{-- ---------------------------------------------------------- --}}
 
     <div class="container" style="padding-top: 10px;">
         <div class="row justify-content-center animate__animated animate__backInLeft">
             <div class="col-md-12">
+
+
                 <div class="card shadow" style="background-color: #ffff;">
                     {{-- information personnelles  --}}
                     <div class="container">
-                        <div class="row justify-content-center text-center">
-
-                            <div class="col-md-12">
-                                <br>
+                        <div class="row" style="margin-top: 10px;margin-bottom:10px;">
+                            {{-- -------------------------------------- --}}
+                            <div class="col-12" id="informations-personnelles">
                                 <h5><i class="bi bi-person-fill"></i> Informations
                                     personnelles</h5>
-                                <hr>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="row" style="padding-top: 10px;padding-bottom:10px;">
+
+                                            <div class="col-md-4">
+                                                <h6>Identifiant :</h6>
+                                                <p>{{ $prof->id }}</p>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6>Date d'ajout :</h6>
+                                                <p>{{ $prof->created_at }}</p>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+
+
+                                            </div>
+
+                                            {{-- -------------------------------------- --}}
+                                            <div class="col-md-4">
+                                                <h6>sexe :</h6>
+                                                <p>
+                                                    @if ($prof->sexe == 'H')
+                                                        HOMME
+                                                    @else
+                                                        FEMME
+                                                    @endif
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6>Nom :</h6>
+                                                <p>{{ $prof->nom }}</p>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6>Prénom :</h6>
+                                                <p>{{ $prof->prenom }}</p>
+
+                                            </div>
+                                            {{-- -------------------------------------- --}}
+                                            
+                                            <div class="col-md-4">
+                                                <h6>Date de naissance :</h6>
+                                                <p>{{ $prof->date_naissance }}</p>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-4">
+                                                <h6>Lieu de naissance :</h6>
+                                                <p>{{ $prof->lieu_naissance }}</p>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-4">
+
+
+                                            </div>
+                                            {{-- -------------------------------------- --}}
+                                            
+                                            <div class="col-md-4">
+                                                <h6>Wilaya de résidence :</h6>
+                                                <p>{{ $prof->wilaya }}</p>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-8">
+                                                <h6>Adresse :</h6>
+                                                <p>{{ $prof->adresse }}</p>
+                                                
+                                            </div>
+
+                                            {{-- -------------------------------------- --}}
+                                            
+                                            <div class="col-md-4">
+                                                <h6>Diplôme :</h6>
+                                                <p>{{ $prof->diplome }}</p>
+                                                
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6>N° de Téléphone :</h6>
+                                                <p>{{ $prof->tel }}</p>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h6>E-Mail :</h6>
+                                                <p>{{ $prof->email }}</p>
+
+                                            </div>
+
+                                            {{-- -------------------------------------- --}}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 photo" style="padding-top: 10px;padding-bottom:10px;text-align:center;">
+                                        <div
+                                            style="background-image:url({{ asset('storage/' . $prof->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 250px; width: 220px; margin-left:5px; margin-right:5px;">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <h6>ID :</h6>
-                                <p>{{ $prof->id }}</p>
+                            {{-- -------------------------------------- --}}
+                            <div class="col-12" id="formation">
+                                <h5><i class="bi bi-mortarboard-fill"></i> Formations </h5>
+                                <div class="row" style="padding-top: 10px;padding-bottom:10px;">
+                                    <div class="col-12">
 
+                                        @foreach($cours as $cour)
+                                        <h6 style="margin-top:20px;"> <span style="color: #444444"> Formation  :</span>    {{ $cour->titre_formation }}</h6>
+                                        @endforeach
+
+                                    </div>
+
+                                </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <h6>Date d'inscription :</h6>
-                                <p>{{ $prof->created_at }}</p>
+                            {{-- -------------------------------------- --}}
+                            <div class="col-12" id="boutons">
+                                <br>
+                                <div class="row formulaire-btn">
+                                    <div class="col-12 form-group" style="padding:40px;">
+                                        {{-- bouton de sauvegarde  --}}
+                                        <form class="download-form"
+                                            action="{{ url('/admin/prof/' . $prof->id . '/download') }}"
+                                            method="GET">
+                                            @csrf
+                                            <button type="button" onclick="telecharger(this)"
+                                                class="btn btn-outline-danger alpa shadow"><i
+                                                    class="bi bi-filetype-pdf icons"></i>Télécharger le PDF</button>
+                                        </form>
+
+                                    </div>
+                                </div>
 
                             </div>
-
-                            <div class="col-md-4">
-                                <h6>sexe :</h6>
-                                <p>
-                                    @if ($prof->sexe == 'H')
-                                        HOMME
-                                    @else
-                                        FEMME
-                                    @endif
-                                </p>
-                            </div>
-
-                            {{-- ----------------------------------------------------------  --}}
-                            <div class="col-12">
-                                <hr>
-                            </div>
-                            {{-- ----------------------------------------------------------  --}}
-{{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
-                            <div class="col-md-4">
-                                <h6>Nom :</h6>
-                                <p>{{ $prof->nom }}</p>
-
-                            </div>
-
-                            <div class="col-md-4">
-                                <h6>Prénom :</h6>
-                                <p>{{ $prof->prenom }}</p>
-
-                            </div>
-
-                            <div class="col-md-4">
-                                <h6>Age :</h6>
-                                <p>{{ $prof->age }} ans</p>
-
-                            </div>
-                            {{-- ----------------------------------------------------------  --}}
-                            <div class="col-12">
-                                <hr>
-                            </div>
-                            {{-- ----------------------------------------------------------  --}}
-                            
+                            {{-- -------------------------------------- --}}
 
 
-                            <div class="col-md-6">
-                                <h6>N° de Téléphone :</h6>
-                                <p>{{ $prof->tel }}</p>
-                                
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <h6>E-Mail :</h6>
-                                <p>{{ $prof->email }}</p>
-                                
-                            </div>
 
 
-                            {{-- --------------------------------------------------------------  --}}
-                            
-         
 
-                            {{-- ---------------------------------------------------------------------  --}}
-                            
+
+
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-md-12">
-                                <hr>
-                                <h5 style="text-align: center"><i class="bi bi-mortarboard-fill"></i> Formation</h5>
-                                <hr>
-                            </div>
-                            <br>
-                            <div class="col-md-12 text-center">
-                                <h6>Spécialite:</h6>
-                                <p>{{ $prof->specialite }}</p>
-                            <hr>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row formulaire-btn">
-                            <div class="col-12 form-group" style="padding:40px;">
-                              {{-- bouton de sauvegarde  --}}
-                              <form class="download-form" action="{{ url('/admin/prof/'.$prof->id.'/download') }}" method="GET">
-                                @csrf
-                                <button type="button" onclick="telecharger(this)" class="btn btn-outline-danger alpa shadow"><i class="bi bi-filetype-pdf icons"></i>Télécharger le PDF</button>
-                              </form>
 
-                            </div>
-                        </div>
                     </div>
-
                 </div>
+
             </div>
 
 

@@ -111,7 +111,8 @@ Route::controller(EtudiantController::class)->group(function () {
     Route::get('/admin/etudiant/{id}/edit','edit');
     Route::put('/admin/etudiant/{id}/update','update');
     Route::delete('/admin/etudiant/{id}/delete','destroy');
-    Route::get('/get-sessions/{titre_formation}','getSessions');
+    
+    Route::get('/get-sessions/{id_formation}','getSessions');
     Route::get('/admin/etudiant/{id}/download','telecharger_pdf_etudiant');
     Route::get('/admin/caisse','caisse');
 });
@@ -121,12 +122,16 @@ Route::controller(EtudiantController::class)->group(function () {
 Route::controller(ProfController::class)->group(function () {
     Route::get('/admin/prof','index');
     Route::get('/admin/prof/ajouter','create');
-    Route::post('/admin/prof/save','store');
+    Route::post('/admin/prof/{id}/save','store');
     Route::get('/admin/prof/{id}/edit','edit');
     Route::put('/admin/prof/{id}/update','update');
     Route::delete('/admin/prof/{id}/delete','destroy');
     Route::get('/admin/prof/{id}/voir','show');
     Route::get('/admin/prof/{id}/download','telecharger_pdf_prof');
+    // cours 
+    Route::post('/admin/prof/add-cour/{formation}/{prof}','ajouter_un_cour');
+    Route::delete('/admin/prof/delete-cour/{id}','delete_cour');
+    Route::get('/admin/prof/get-formations/{prof}','liste_formations');
     });
 // --------------------------------------------------------------------------
 // ---------                Route pour session                  ----------

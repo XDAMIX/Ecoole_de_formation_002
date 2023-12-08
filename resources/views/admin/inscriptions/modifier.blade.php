@@ -36,16 +36,16 @@
                             {{-- ---------------------------------------------------------- --}}
                             <div class="row espace-inputs">
 
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <h5 style="text-align: center"><i class="bi bi-person-fill"></i> informations
                                         personnelles</h5>
                                     <hr>
                                 </div>
 
-                                <div class="col-md-4 form-group" id="sexe">
+                                <div class="col-12 col-md-4 form-group" id="sexe">
                                     <label for="">sexe :</label>
 
-                                    <select class="form-control" name="sexe">
+                                    <select class="form-control form-select" name="sexe">
                                         <option value="{{ $inscription->sexe }}" style="display:none;" selected>
                                             @if ($inscription->sexe == 'H')
                                                 HOMME
@@ -59,7 +59,7 @@
                                 </div>
 
 
-                                <div class="col-md-4 form-group" id="nom">
+                                <div class="col-12 col-md-4 form-group" id="nom">
                                     <label for="">Nom :</label>
 
                                     <input type="text" name="nom"
@@ -77,7 +77,7 @@
                                 </div>
 
 
-                                <div class="col-md-4 form-group" id="prenom">
+                                <div class="col-12 col-md-4 form-group" id="prenom">
                                     <label for="">Prénom :</label>
 
                                     <input type="text" name="prenom"
@@ -104,7 +104,7 @@
                             <div class="row espace-inputs">
 
 
-                                <div class="col-md-4 form-group" id="age">
+                                <div class="col-12 col-md-4 form-group" id="age">
                                     <label for="">Age :</label>
 
                                     <input type="number" name="age"
@@ -122,10 +122,10 @@
                                 </div>
 
 
-                                <div class="col-md-8 form-group" id="wilaya">
+                                <div class="col-12 col-md-4 form-group" id="wilaya">
                                     <label for="">Wilaya de résidence :</label>
 
-                                    <select class="form-control" name="wilaya">
+                                    <select class="form-control form-select" name="wilaya">
 
                                         <option value="{{ $inscription->wilaya }}" style="display:none;" selected>
                                             {{ $inscription->wilaya }}</option>
@@ -198,14 +198,7 @@
 
                                 </div>
 
-                            </div>
-
-
-                            {{-- ,profession --}}
-                            {{-- -------------------------------------------------------------------------- --}}
-                            <div class="row espace-inputs">
-
-                                <div class="col-md-12 form-group" id="profession">
+                                <div class="col-12 col-md-4 form-group" id="profession">
                                     <label for="">Votre profession :</label>
 
                                     <input type="text" name="profession"
@@ -226,11 +219,13 @@
 
 
 
+
+
                             {{-- telephone ,email --}}
                             {{-- -------------------------------------------------------------------------- --}}
                             <div class="row espace-inputs">
 
-                                <div class="col-md-6 form-group" id="telephone">
+                                <div class="col-12 col-md-6 form-group" id="telephone">
                                     <label for="">Numéro de téléphone :</label>
 
                                     <input type="text" name="tel"
@@ -247,7 +242,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-6 form-group" id="email">
+                                <div class="col-12 col-md-6 form-group" id="email">
                                     <label for="">Adresse e-mail :</label>
 
                                     <input type="text" name="email"
@@ -282,13 +277,13 @@
                                 <div class="col-md-6 form-group" id="formation" style="text-align: center;">
                                     <label for="">Choix de formation :</label>
 
-                                    <select class="form-control" name="formation">
+                                    <select class="form-control form-select" name="formation">
 
-                                        <option value="{{ $inscription->formation }}" style="display:none;" selected>
+                                        <option value="{{ $inscription->formation_id }}" style="display:none;" selected>
                                             {{ $inscription->formation }}</option>
 
                                         @foreach ($formations as $formation)
-                                            <option value="{{ $formation->titre }}">{{ $formation->titre }}</option>
+                                            <option value="{{ $formation->id }}">{{ $formation->titre }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -359,7 +354,8 @@
 
 
 
-
+<div class="container" id="pied-page">
 
 
 @endsection
+

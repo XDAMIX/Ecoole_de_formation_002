@@ -277,7 +277,7 @@
      @endforeach
     </select> --}}
     <select class="form-control" name="formation">
-    <option value="{{ $formation->titre }}" selected>{{ $formation->titre }}</option>
+    <option value="{{ $formation->id }}" selected>{{ $formation->titre }}</option>
     </select>
 
   </div>

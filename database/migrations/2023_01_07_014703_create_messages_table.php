@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->Increments('id');
+            $table->id();
             $table->string('name');
             $table->string('email');
             $table->string('tel');

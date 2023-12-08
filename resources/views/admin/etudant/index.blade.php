@@ -100,10 +100,10 @@
                         <table id="example" class="table table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th >ID</th>
+                                    {{-- <th >ID</th> --}}
+                                    <th >Photo</th>
                                     <th>Nom</th>
                                     <th>Prénom</th>
-                                    <th>Âge</th>
                                     {{-- <th >Wilaya</th> --}}
                                     {{-- <th>email</th> --}}
                                     {{-- <th>Tel</th> --}}
@@ -114,20 +114,21 @@
                                     <th>Actions</th>
                             </thead>
 
-                            <tbody>
+                            <tbody class="text-center">
                                 @foreach ($etudiants as $etudiant)
                                     <tr>
-                                        <td>{{ $etudiant->id }}</td>
-                                        <td>{{ $etudiant->nom }}</td>
-                                        <td>{{ $etudiant->prenom }}</td>
-                                        <td>{{ $etudiant->age }}</td>
+                                        {{-- <td class=" align-middle">{{ $etudiant->id }}</td> --}}
+                                        <td class=" align-middle"><div style="background-image:url({{ asset('storage/' . $etudiant->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;"></div></td>
+                                        <td class=" align-middle">{{ $etudiant->nom }}</td>
+                                        <td class=" align-middle">{{ $etudiant->prenom }}</td>
+
                                         {{-- <td>{{ $etudiant->wilaya}}</td> --}}
                                         {{-- <td>{{ $etudiant->email }}</td> --}}
                                         {{-- <td>{{ $etudiant->tel }}</td> --}}
-                                        <td>{{ $etudiant->formation }}</td>
-                                        <td>{{ $etudiant->session }}</td>
+                                        <td class=" align-middle">{{ $etudiant->formation }}</td>
+                                        <td class=" align-middle">{{ $etudiant->session }}</td>
 
-                                        <td>
+                                        <td class=" align-middle">
 
                                             <div class="container">
                                                 <div class="row">
@@ -177,18 +178,18 @@
                                             </div>
 
 
-                                        </td>
 
+                                        </td>
                                     </tr>
                                 @endforeach
+
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>ID</th>
+                                    {{-- <th>ID</th> --}}
+                                    <th>Photo</th>
                                     <th>Nom</th>
                                     <th>Prénom</th>
-
-                                    <th>Âge</th>
                                     {{-- <th >Wilaya</th> --}}
                                     {{-- <th>email</th> --}}
                                     {{-- <th>Tel</th> --}}
@@ -210,7 +211,7 @@
 
 
     {{-- footer  --}}
-    <div class="container" id="pied-page">
+    <div class="container" id="pied-page"></div>
 
 
 

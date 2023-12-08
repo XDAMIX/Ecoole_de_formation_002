@@ -13,10 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::create('cours', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->string('photo');
+
+            $table->unsignedBigInteger('formation_id');
+            $table->foreign('formation_id')
+            ->references('id')
+            ->on('formations');
+
+            $table->unsignedBigInteger('prof_id');
+            $table->foreign('prof_id')
+            ->references('id')
+            ->on('profs');
+
             $table->timestamps();
         });
     }
@@ -28,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('photos');
+        Schema::dropIfExists('cours');
     }
 };

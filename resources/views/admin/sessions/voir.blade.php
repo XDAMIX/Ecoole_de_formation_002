@@ -20,7 +20,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-4'">
-            <h1 class="m-0 font-weight-bold " style="text-align: center"> {{ $sessions->nom }}</h1>
+            <h1 class="m-0 font-weight-bold " style="text-align: center"> {{ $session->nom }}</h1>
         </div>
 
 
@@ -28,29 +28,29 @@
             <div class="col-4">
                 <h5 class="m-0 font-weight-bold "> <i class="bi bi-award  fa-2xl" style="color: rgb(244, 176, 94)"></i>
                     Formation :
-                    <span style="text-align: center;font-size: 20px"> {{ $sessions->formation }}</span>
+                    <span style="text-align: center;font-size: 20px"> {{ $session->titre_formation }}</span>
                 </h5>
 
             </div>
 
             <div class="col-4">
                 <h5 class="m-0 font-weight-bold "> <i class="fa-solid fa-chalkboard-user  fa-2xl"></i> Prof : <span
-                        style="text-align: center;font-size: 20px" class="font-weight-bold ">{{ $sessions->prof }}</span> </h5>
+                        style="text-align: center;font-size: 20px" class="font-weight-bold ">{{ $session->nom_prof }}-{{ $session->prenom_prof }}</span> </h5>
 
             </div>
 
             <div class="col-4">
-                @if ($sessions->statut == 'En attente')
+                @if ($session->statut == 'En attente')
                     <h5 style="text-align: center;font-size: 20px;color: #656972;" class="font-weight-bold "> <i
                             class="fa-solid fa-stopwatch fa-bounce fa-2xl" style="color: #656972;"></i>
-                        {{ $sessions->statut }}</h5>
-                @elseif ($sessions->statut == 'En cours')
+                        {{ $session->statut }}</h5>
+                @elseif ($session->statut == 'En cours')
                     <h5 style="text-align: center;font-size: 20px;color: #297ce8;" class="font-weight-bold "><i
-                            class="fa-solid fa-spinner fa-spin fa-2xl " style="color: #297ce8;"></i> {{ $sessions->statut }}
+                            class="fa-solid fa-spinner fa-spin fa-2xl " style="color: #297ce8;"></i> {{ $session->statut }}
                     </h5>
-                @elseif ($sessions->statut == 'Termine')
+                @elseif ($session->statut == 'Termine')
                     <h5 style="text-align: center;font-size: 20px;color: #e82121;" class="font-weight-bold "> <i
-                            class="fa-solid fa-ban fa-shake  fa-2xl" style="color: #e82121;"></i> {{ $sessions->statut }}
+                            class="fa-solid fa-ban fa-shake  fa-2xl" style="color: #e82121;"></i> {{ $session->statut }}
                     </h5>
                 @endif
 
@@ -67,14 +67,14 @@
 
             <div class="col-6">
                 <h6 class="m-0 font-weight-bold "> <i class="fas fa-calendar-day fa-2xl" style="color: #347df1;"></i> Debut :
-                    <span style="color:#347df1; ">{{ $sessions->date_debut }}</span>
+                    <span style="color:#347df1; ">{{ $session->date_debut }}</span>
                 </h6>
 
             </div>
 
             <div class="col-6">
                 <h6 class="m-0 font-weight-bold "><i class="fas fa-calendar-day fa-2xl" style="color: #e82121;"></i> Fin : <span
-                        style="color:#e82121; ">{{ $sessions->date_fin }}</span></h6>
+                        style="color:#e82121; ">{{ $session->date_fin }}</span></h6>
 
             </div>
 
@@ -86,19 +86,19 @@
 
         <div class="row" style="padding: 20px;">
             <div class="col-12">
-                @if ($sessions->statut == 'En attente')
+                @if ($session->statut == 'En attente')
                     <div style="text-align: center">
                         <button class="dmr" id="dmr">
                             Demmarer la session
                         </button>
                     </div>
-                @elseif ($sessions->statut == 'En cours')
+                @elseif ($session->statut == 'En cours')
                     <div style="text-align: center">
                         <button class="trm" id="trm">
                             terminre la session
                         </button>
                     </div>
-                @elseif ($sessions->statut == 'Termine')
+                @elseif ($session->statut == 'Termine')
                     <div style="text-align: center">
                         <button class="fin" id="fin">
                             session terminé
@@ -129,7 +129,6 @@
                         {{-- <th >ID</th> --}}
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Age</th>
 
                         <th>N° de Tel</th>
                         <th>EMail</th>
@@ -146,7 +145,6 @@
                                 {{-- <td>{{ $inscription->id }}</td> --}}
                                 <td>{{ $etudiant->nom }}</td>
                                 <td>{{ $etudiant->prenom }}</td>
-                                <td>{{ $etudiant->age }}</td>
                                 <td>{{ $etudiant->tel }}</td>
                                 <td>{{ $etudiant->email }}</td>
 
@@ -228,8 +226,8 @@
                 buttonsStyling: false
             })
             swalWithBootstrapButtons.fire({
-                title: 'cloturer la sessionla  ',
-                text: "Voulez-vous cloturer la session  : {{ $sessions->nom }} ",
+                title: 'cloturer la session la  ',
+                text: "Voulez-vous cloturer la session  : {{ $session->nom }} ",
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'OUI',
@@ -241,7 +239,7 @@
 
 
 
-                    window.location.href = "{{ url('/admin/session/' . $sessions->id . '/statutterm') }}"
+                    window.location.href = "{{ url('/admin/session/' . $session->id . '/statutterm') }}"
 
                 } else if (
                     result.dismiss === Swal.DismissReason.cancel
@@ -266,7 +264,7 @@
             })
             swalWithBootstrapButtons.fire({
                 title: 'Demmarer la session ',
-                text: "Voulez-vous Demmare la session  : {{ $sessions->nom }} ",
+                text: "Voulez-vous Demmare la session  : {{ $session->nom }} ",
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'OUI',
@@ -275,7 +273,7 @@
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "{{ url('/admin/session/' . $sessions->id . '/statutcour') }}"
+                    window.location.href = "{{ url('/admin/session/' . $session->id . '/statutcour') }}"
 
                 } else if (
                     result.dismiss === Swal.DismissReason.cancel
@@ -301,7 +299,7 @@
             swalWithBootstrapButtons.fire({
 
                 title: ' supprimer !',
-                text: "Voulez-vous supprimer {{ $etudiant->nom }} {{ $etudiant->prenom }}  de la session : {{ $sessions->nom }}",
+                text: "Voulez-vous supprimer {{ $etudiant->nom }} {{ $etudiant->prenom }}  de la session : {{ $session->nom }}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Supprimer',
@@ -314,7 +312,7 @@
                     form.submit();
                     swalWithBootstrapButtons.fire(
                         'Supprimer !',
-                        'le condidat {{ $etudiant->nom }} {{ $etudiant->prenom }}  a ete supprime de la session {{ $sessions->nom }}.',
+                        'le condidat {{ $etudiant->nom }} {{ $etudiant->prenom }}  a ete supprime de la session {{ $session->nom }}.',
                         'success'
                     )
                 } else if (
@@ -367,7 +365,7 @@
     @if (session('telechargertout'))
         <script>
             // Redirection JavaScript vers l'URL spécifiée
-            window.location.href = "{{ url('/admin/inscriptions/' . $sessions->id . '/imprimertout') }}";
+            window.location.href = "{{ url('/admin/inscriptions/' . $session->id . '/imprimertout') }}";
             setTimeout(function() {
                 location.reload();
             }, 1000);

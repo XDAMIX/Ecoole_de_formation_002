@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('informations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nom');
             $table->string('adresse');
             $table->text('localisation',16383);

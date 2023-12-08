@@ -37,7 +37,7 @@ class AdminController extends Controller
         $total_sessions = Session::count();
         $total_profs = Prof::count();
         $total_etudiants = Etudiant::count();
-        $total_inscriptions = Inscription::where('contact', false)
+        $total_inscriptions = Inscription::where('validation', false)
                                   ->where('deleted_at', null)
                                   ->count();
         $total_messages = Message::count();

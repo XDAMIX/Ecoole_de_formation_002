@@ -46,7 +46,16 @@
 
                                 <div class="row">
                                     <div class="col-12 col-md-4">
-                                        <p class="titre"><i class="bi bi-geo-alt icons"></i>Adresse:</p>
+                                        <p class="titre"><i class="bi bi-geo-alt icons"></i>Wilaya:</p>
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <p class="data"> {{ $information->wilaya }} </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-4">
+                                        <p class="titre"><i class="bi bi-pin-map icons"></i>Adresse:</p>
                                     </div>
                                     <div class="col-12 col-md-8">
                                         <p class="data"> {{ $information->adresse }} </p>
@@ -60,6 +69,15 @@
                                     </div>
                                     <div class="col-12 col-md-8">
                                         <p class="data"> {{ $information->email }} </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-4">
+                                        <p class="titre"><i class="bi bi-globe icons"></i>Site-Web:</p>
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <p class="data"> {{ $information->site_web }} </p>
                                     </div>
                                 </div>
 
@@ -514,7 +532,7 @@
                         form.submit();
 
                         Swal.fire({
-                            title: "Numéro supprimée !",
+                            title: "Lien supprimée !",
                             icon: "success"
                         });
                     }

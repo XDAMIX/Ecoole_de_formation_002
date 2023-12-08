@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('formations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('titre');
             $table->string('dure');
             $table->text('description',16383);

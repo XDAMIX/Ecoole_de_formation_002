@@ -46,7 +46,7 @@
                             <label for="">Formation:</label>
                             <select class="form-control" id="formation" name="formation">
                                 @foreach ($formations as $formation)
-                                    <option value="{{ $formation->titre }}">{{ $formation->titre }}</option>
+                                    <option value="{{ $formation->id }}">{{ $formation->titre }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -95,10 +95,10 @@
             <script>
                 // Fonction pour effectuer la requête AJAX
                 function filtrerProfesseurs() {
-                    var titreFormation = $('#formation').val();
+                    var id_Formation = $('#formation').val();
 
                     $.ajax({
-                        url: '/get-profs/' + titreFormation,
+                        url: '/get-profs/' + id_Formation,
                         type: 'GET',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -106,7 +106,7 @@
                         success: function(response) {
                             $('#profs').empty();
                             $.each(response.profs, function(key, value) {
-                                $('#profs').append('<option value="' + value.nom + ' ' + value.prenom + '">' +
+                                $('#profs').append('<option value="' + value.id_prof +'">' +
                                     value.nom + ' ' + value.prenom + '</option>');
                             });
                         },

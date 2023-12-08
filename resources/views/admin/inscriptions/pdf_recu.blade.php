@@ -88,7 +88,7 @@ ini_set('display_errors', 1);
                         {{-- --------------------------------------  --}}
 
                         <div class="col-6">
-                            <p>Age : {{ $age }} ans</p>
+                            <p>Date et lieu de naissance : {{ $date_naissance }} à {{ $lieu_naissance }}</p>
                         </div>
 
                         <div class="col-6">
@@ -170,7 +170,7 @@ ini_set('display_errors', 1);
                         <span> <img src="{{ public_path('icones/email.png') }}" class="img-fluid icones-lg"
                                 alt="..."> Email : {{ $informations->email }} | </span> <img
                             src="{{ public_path('icones/globe.png') }}" class="img-fluid icones-lg" alt="..."> Site
-                        web : www.formacorpro.com </span>
+                        web : {{ $informations->site_web }} </span>
 
                     </p>
                     <p class="contact">

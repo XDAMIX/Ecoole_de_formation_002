@@ -31,15 +31,15 @@
                         <div class="card-body">
                             <div class="form-group row">
 
-                                <div class="col-sm-6 mb-3 mb-sm-0 text-center">
+                                <div class="col-sm-12 mb-3 mb-sm-0 text-center">
                                     <label>Titre:</label>
                                     <h4 class="card-title">{{ $formation->titre }}</h4>
                                 </div>
-                                <div class="col-sm-6 mb-3 mb-sm-0 text-center">
+                                {{-- <div class="col-sm-6 mb-3 mb-sm-0 text-center">
                                     <label>Duré:</label>
                                     <h4 class="card-title">{{ $formation->dure }}</h4>
 
-                                </div>
+                                </div> --}}
                                 <div style="text-align: center;align-items:center;">
 
                                     {{-- bouttons --}}
