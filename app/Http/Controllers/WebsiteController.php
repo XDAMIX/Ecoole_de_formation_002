@@ -116,7 +116,7 @@ class WebsiteController extends Controller
         $inscription->profession = $request->input('profession');
         $inscription->tel = $request->input('tel');
         $inscription->email = $request->input('email');
-        $inscription->formation = $request->input('formation');
+        $inscription->formation_id = $request->input('formation');
 
 
 
@@ -127,12 +127,15 @@ class WebsiteController extends Controller
         $titre = $lenom . ' ' . $leprenom;
 
         Alert::success($titre, 'Votre inscription en-ligne a été éffectuée avec succès! merci')->position('center')->autoClose(5000);
-        // Alert::success($titre, 'Votre inscription en-ligne a été éffectuée avec succès! merci')->position('center')->autoClose(5000);
+
 
         // ... Validation des données et téléchargements de fichiers ...
 
         $informations = Information::all()->first();
         $telephones = Telephone::all();
+        
+        $id_formation = $inscription->formation_id;
+        $formation = Formation::find($id_formation);
 
         $date = date('d/m/20y');
 
@@ -145,7 +148,7 @@ class WebsiteController extends Controller
             'profession' => $request->input('profession'),
             'tel' => $request->input('tel'),
             'email' => $request->input('email'),
-            'formation' => $request->input('formation'),
+            'formation' => $formation->titre,
             'informations' => $informations,
             'telephones' => $telephones,
             'date' => $date,

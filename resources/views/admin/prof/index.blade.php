@@ -97,18 +97,18 @@
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     <div class="card-body">
-                        <table id="example" class="table table-bordered" style="width:100%">
+                        <table id="example" class="table table-bordered text-center" style="width:100%">
+                        {{-- <table id="example" class="table cell-border compact hover" style="width:100%;"> --}}
                             <thead>
                                 <tr>
-                                    <th>N°</th>
+                                    <th>Photo</th>
                                     {{-- <th>Sexe</th> --}}
                                     <th>Nom</th>
                                     <th>Prénom</th>
 
-                                    <th>Âge</th>
-                                    {{-- <th>E-Mail</th>
-                                    <th>N° de téléphone</th> --}}
-                                    <th>Specialite</th>
+                                    <th>N° de téléphone</th>
+                                    <th>E-Mail</th>
+                                    {{-- <th>Specialite</th> --}}
 
 
                                     <th>Actions</th>
@@ -117,17 +117,15 @@
                             <tbody>
                                 @foreach ($profs as $prof)
                                     <tr>
-                                        <td>{{ $prof->id }}</td>
-                                        {{-- <td>{{ $prof->sexe }}</td> --}}
-                                        <td>{{ $prof->nom }}</td>
-                                        <td>{{ $prof->prenom }}</td>
+                                        <td class="align-middle"><div style="background-image:url({{ asset('storage/' . $prof->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;"></div></td>
+                                        <td class="align-middle">{{ $prof->nom }}</td>
+                                        <td class="align-middle">{{ $prof->prenom }}</td>
 
-                                        <td>{{ $prof->age }}</td>
-                                        {{-- <td>{{ $prof->email }}</td>
-                                        <td>{{ $prof->tel }}</td> --}}
-                                        <td>{{ $prof->specialite }}</td>
+                                        <td class="align-middle">{{ $prof->tel }}</td>
+                                        <td class="align-middle">{{ $prof->email }}</td>
+      
 
-                                        <td>
+                                        <td class="align-middle">
 
                                             <div class="container">
                                                 <div class="row">
@@ -185,15 +183,14 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>N°</th>
+                                    <th>Photo</th>
                                     {{-- <th>Sexe</th> --}}
                                     <th>Nom</th>
                                     <th>Prénom</th>
 
-                                    <th>Âge</th>
-                                    {{-- <th>E-Mail</th>
-                                    <th>N° de téléphone</th> --}}
-                                    <th>Specialite</th>
+                                    <th>N° de téléphone</th>
+                                    <th>E-Mail</th>
+                                    {{-- <th>Specialite</th> --}}
 
 
                                     <th>Actions</th>

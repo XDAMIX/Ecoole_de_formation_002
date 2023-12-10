@@ -3229,12 +3229,16 @@ a:hover {
 /*--------------------------------------------------------------
 # Testimonials Section
 --------------------------------------------------------------*/
+.testimonials{
+  height: 800px; 
+}
 .testimonials-box {
   padding: 1rem 0;
+  height: 100em;
 }
 
 .testimonials-box .testimonial-avatar {
-  width: 80px !important;
+  width: 90px !important;
   display: inline-flex !important;
   border-radius: 50%;
 }

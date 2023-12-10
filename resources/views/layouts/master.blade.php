@@ -174,7 +174,7 @@
           <div class="carousel-container">
             <div class="container">
               <img src="{{asset('storage/'.$informations->logo)}}" alt="logo" class="img-fluid animate__animated animate__backInDown" style="height: 200px;padding:30px;">
-              <h2 class="animate__animated animate__backInDown">{{$acceuil->titre}}</h2>
+              <h2 class="animate__animated animate__backInUp">{{$acceuil->titre}}</h2>
               <p class="animate__animated animate__fadeInUp">{{$acceuil->sous_titre1}}</p>
               <p class="animate__animated animate__fadeInUp">{{$acceuil->sous_titre2}}</p>
             </div>

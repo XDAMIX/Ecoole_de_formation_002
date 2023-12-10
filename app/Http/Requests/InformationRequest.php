@@ -29,6 +29,7 @@ class InformationRequest extends FormRequest
             'localisation' => 'required|min:1|max:16383',
             'email'        => 'required|min:1|max:255',
             'heure_travail'=> 'required|min:1|max:255',
+            'wilaya'       => 'required|min:1|max:255',
             // 'logo'         => 'required',
         ];
     }

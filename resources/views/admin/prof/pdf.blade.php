@@ -79,36 +79,64 @@ ini_set('display_errors', 1);
 
                         {{-- --------------------------------------  --}}
 
-                        <div class="col-6">
+                        <div class="col-4">
+                            <p>@if($sexe == 'H') Mr @else Mme @endif</p>
+                        </div>
+                        <div class="col-4">
                             <p>Nom : {{ $nom }} </p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <p>Prénom : {{ $prenom }} </p>
                         </div>
                         {{-- --------------------------------------  --}}
 
                         <div class="col-4">
-                            <p>Age : {{ $age }} ans</p>
+                            <p>date de naissance : {{ $nom }}  </p>
                         </div>
+                        <div class="col-4">
+                            <p>lieu de naissance : {{ $nom }} </p>
+                        </div>
+                        <div class="col-4">
 
+                        </div>
+                        {{-- --------------------------------------  --}}
+
+                        <div class="col-4">
+                            <p>wilaya : {{ $wilaya }}  </p>
+                        </div>
+                        <div class="col-4">
+                            <p>adresse : {{ $adresse }} </p>
+                        </div>
+                        <div class="col-4">
+
+                        </div>
+                        {{-- --------------------------------------  --}}
+
+                        
                         <div class="col-4">
                             <p>N° Tel: {{ $tel }} </p>
                         </div>
-
+                        
                         <div class="col-4">
                             <p>E-mail : {{ $email }} </p>
                         </div>
-
+                        
+                        <div class="col-4">
+                            
+                        </div>
                         {{-- --------------------------------------  --}}
 
                         <div class="col-6">
-                            <p>Spécialite : <span
-                                    style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;text-weight:bold;">{{ $specialite }}
-                                </span></p>
+                            <p>formations : </p>
+                                @foreach($cours as $cour)
+                                <p style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;text-weight:bold;">-
+                                 {{ $cour->titre_formation }}
+                                </p>
+                                @endforeach
                         </div>
 
                         <div class="col-6">
-                            <p>Date d'inscription : {{ $date }}</p>
+                            <p>Date d'ajout : {{ $date }}</p>
                         </div>
 
                         {{-- --------------------------------------  --}}

@@ -269,7 +269,7 @@
 
                                     <select class="form-control" name="formation">
                                         @foreach ($formations as $formation)
-                                            <option value="{{ $formation->titre }}">{{ $formation->titre }}</option>
+                                            <option value="{{ $formation->id }}">{{ $formation->titre }}</option>
                                         @endforeach
                                     </select>
                                 </div>

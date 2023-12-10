@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('acceuils', function (Blueprint $table) {
-            $table->Increments('id');
+            $table->id();
             $table->string('titre');
             $table->string('sous_titre1');
             $table->string('sous_titre2');

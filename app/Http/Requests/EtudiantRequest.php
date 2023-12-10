@@ -26,11 +26,13 @@ class EtudiantRequest extends FormRequest
         return [
             'nom'    => 'required|min:1|max:255',
             'prenom' => 'required|min:1|max:255',
-            'age'    => 'required|min:1|max:255',
-            'sexe'   => 'required|min:1|max:255',
-            'wilaya' => 'required|min:1|max:255',
-            'formation'=> 'required|min:1|max:255',
+            'date_naissance'    => 'required',
+            'lieu_naissance'    => 'required|min:1|max:255',
             'session'=> 'required|min:1|max:255',
+            // 'photo' => 'required',
+
+            // 'sexe'   => 'required|min:1|max:255',
+            // 'wilaya' => 'required|min:1|max:255',
             'tel'  => 'required|min:1|max:255',
             'email'  => 'required|min:1|max:255',
         ];

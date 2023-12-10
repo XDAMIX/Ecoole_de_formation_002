@@ -140,21 +140,33 @@
                         <div class="swiper-wrapper">
 
                             @foreach ($temoignages as $temoignage)
+
                                 <!-- testimonial item -->
                                 <div class="swiper-slide">
-                                    <div class="testimonial-item">
-                                        <p>
-                                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                            {{ $temoignage->mot }}
-                                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                        </p>
-                                        <img src="{{ 'storage/' . $temoignage->photo }}" class="testimonial-img"
-                                            alt="">
-                                        <h3>{{ $temoignage->nom }}</h3>
-                                        <h4>{{ $temoignage->poste }}</h4>
+                                    <div class="testimonial-item testimonials-box">
+                                        <div class="testimonial-text">
+                                            <p>
+                                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                                {{ $temoignage->mot }}
+                                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                            </p>
+
+                                        </div>
+                                        <div class="testimonial-author-box">
+
+                                            <div class="testimonial-author">
+                                                <img src="{{ 'storage/' . $temoignage->photo }}" class="testimonial-img"
+                                                    alt="">
+
+                                            </div>
+                                            
+                                            <h3>{{ $temoignage->nom }}</h3>
+                                            <h4>{{ $temoignage->poste }}</h4>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- End testimonial item -->
+
                             @endforeach
 
                         </div>

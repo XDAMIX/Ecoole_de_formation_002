@@ -101,10 +101,10 @@
                         <table id="example" class="table table-bordered " style="width:100%">
                             <thead>
                                 <tr>
-                                    <th  scope="col">N°</th>
-                                    <th  scope="col">Nom</th>
+                                    {{-- <th  scope="col">N°</th> --}}
+                                    <th  scope="col">Titre</th>
                                     <th  scope="col">Profésseur</th>
-                                    <th  scope="col">Formtion</th>
+                                    <th  scope="col">Formation</th>
                                     <th  scope="col">Date début</th>
                                     <th  scope="col">Date fin</th>
                                     <th  scope="col">Statut</th>
@@ -116,17 +116,17 @@
                             <tbody class="table-group-divider">
                                 @foreach ($sessions as $session)
                                     <tr>
-                                        <td scope="row">{{ $session->id }}</td>
-                                        <td>{{ $session->nom }}</td>
-                                        <td>{{ $session->prof }}</td>
-                                        <td>{{ $session->formation }}</td>                                   
-                                        <td>{{ $session->date_debut }}</td>
-                                        <td>{{ $session->date_fin }}</td>
+                                        {{-- <td scope="row">{{ $session->id }}</td> --}}
+                                        <td class="align-middle">{{ $session->nom }}</td>
+                                        <td class="align-middle">{{ $session->nom_prof }}-{{ $session->prenom_prof }}</td>
+                                        <td class="align-middle">{{ $session->formation }}</td>                                   
+                                        <td class="align-middle">{{ $session->date_debut }}</td>
+                                        <td class="align-middle">{{ $session->date_fin }}</td>
                 
-                                        <td class="@if($session->statut == 'En attente') bg-secondary text-white @elseif($session->statut == 'En cours') bg-primary text-white @elseif($session->statut == 'Termine') bg-danger text-white @endif"  class="action-column">{{ $session->statut }}</td>
+                                        <td class="align-middle @if($session->statut == 'En attente') bg-secondary text-white @elseif($session->statut == 'En cours') bg-primary text-white @elseif($session->statut == 'Termine') bg-danger text-white @endif"  class="action-column">{{ $session->statut }}</td>
                 
                                     
-                                        <td>
+                                        <td class="align-middle">
 
                                             <div class="container">
                                                 <div class="row">
@@ -186,10 +186,10 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th   scope="col">N°</th>
-                                    <th   scope="col">Nom</th>
+                                    {{-- <th   scope="col">N°</th> --}}
+                                    <th   scope="col">Titre</th>
                                     <th   scope="col">Profésseur</th>
-                                    <th   scope="col">Formtion</th>
+                                    <th   scope="col">Formation</th>
                                     <th   scope="col">Date début</th>
                                     <th   scope="col">Date fin</th>
                                     <th   scope="col">Statut</th>

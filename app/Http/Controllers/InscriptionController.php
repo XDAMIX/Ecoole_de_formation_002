@@ -30,44 +30,31 @@ class InscriptionController extends Controller
 
     public function index()
     {
-        $ListeFormations = Formation::all();
-        // $ListeInscriptions = Inscription::orderBy('id', 'DESC')->get(); 
-        $ListeInscriptions = Inscription::where('contact', false)->get();
+        $ListeInscriptions = Inscription::rightJoin('formations', 'inscriptions.formation_id', '=', 'formations.id')
+            ->where('inscriptions.validation', false)
+            ->get([
+                'inscriptions.*', // Sélectionne toutes les colonnes de la table inscriptions
+                'formations.titre as formation', // Renomme la colonne 'nom_formation' en 'formation_nom'
+            ]);
 
-        $formation = '';
-        $contact = '';
-        $dateDebut = '';
-        $dateFin = '';
-        $valeur = '';
-
-        $chformation = 0;
-        $chdate = 0;
-        $chcontact = 0;
-
-
-
-        return view('admin.inscriptions.liste', [
-            'inscriptions' => $ListeInscriptions, 'formations' => $ListeFormations, 'valeur' => $valeur, 'laformation' => $formation, 'lecontact' => $contact, 'ladatedebut' => $dateDebut, 'ladatefin' => $dateFin, 'chformation' => $chformation, 'chdate' => $chdate, 'chcontact' => $chcontact
-        ]);
-
-
+        return view('admin.inscriptions.liste', ['inscriptions' => $ListeInscriptions]);
     }
 
 
 
 
-    public function imprimertout()
-    {
-        $ListeInscriptions = Inscription::orderBy('id', 'desc')->get();
+    // public function imprimertout()
+    // {
+    //     $ListeInscriptions = Inscription::orderBy('id', 'desc')->get();
 
-        $html = View::make('admin.inscriptions.imprimertout', ['inscriptions' => $ListeInscriptions])->render();
-        $pdf = new Dompdf();
-        $pdf->loadHtml($html);
-        $pdf->setPaper('A4', 'landscape');
-        $pdf->render();
+    //     $html = View::make('admin.inscriptions.imprimertout', ['inscriptions' => $ListeInscriptions])->render();
+    //     $pdf = new Dompdf();
+    //     $pdf->loadHtml($html);
+    //     $pdf->setPaper('A4', 'landscape');
+    //     $pdf->render();
 
-        return $pdf->stream('inscriptions.pdf');
-    }
+    //     return $pdf->stream('inscriptions.pdf');
+    // }
 
     public function create()
     {
@@ -75,11 +62,22 @@ class InscriptionController extends Controller
         return view('admin.inscriptions.ajouter', ['formations' => $ListeFormations]);
     }
 
+
+
+
     public function telecharger_pdf_inscription($id)
     {
-        $inscription = Inscription::find($id);
+        $inscription = Inscription::rightJoin('formations', 'inscriptions.formation_id', '=', 'formations.id')
+            ->where('inscriptions.id', $id)
+            ->first([
+                'inscriptions.*', // Sélectionne toutes les colonnes de la table inscriptions
+                'formations.titre as formation', // Renomme la colonne 'nom_formation' en 'formation_nom'
+            ]);
         $informations = Information::all()->first();
         $telephones = Telephone::all();
+
+        $id_formation = $inscription->formation_id;
+        $formation = Formation::find($id_formation);
 
         $data = [
             'sexe' => $inscription->sexe,
@@ -98,14 +96,17 @@ class InscriptionController extends Controller
             'date' => $inscription->created_at,
         ];
 
-        $titre = $inscription->nom .'_'. $inscription->prenom;
+        $titre = $inscription->nom . '_' . $inscription->prenom;
         // Générer le PDF à partir d'une vue
         $pdf = PDF::loadView('admin.inscriptions.pdf', $data);
 
         // Télécharger le PDF avec un nom spécifique
-        return $pdf->download($titre.'.pdf');
-
+        return $pdf->download($titre . '.pdf');
     }
+
+
+
+
 
     public function store(InscriptionRequest $request)
     {
@@ -120,7 +121,7 @@ class InscriptionController extends Controller
         $inscription->profession = $request->input('profession');
         $inscription->tel = $request->input('tel');
         $inscription->email = $request->input('email');
-        $inscription->formation = $request->input('formation');
+        $inscription->formation_id = $request->input('formation');
 
         $inscription->save();
 
@@ -136,6 +137,8 @@ class InscriptionController extends Controller
         $informations = Information::all()->first();
         $telephones = Telephone::all();
         $date = date('d/m/20y');
+        $id_formation = $inscription->formation_id;
+        $formation = Formation::find($id_formation);
 
         $data = [
             'sexe' => $request->input('sexe'),
@@ -146,7 +149,7 @@ class InscriptionController extends Controller
             'profession' => $request->input('profession'),
             'tel' => $request->input('tel'),
             'email' => $request->input('email'),
-            'formation' => $request->input('formation'),
+            'formation' => $formation->titre,
             'informations' => $informations,
             'telephones' => $telephones,
             'date' => $date,
@@ -157,27 +160,7 @@ class InscriptionController extends Controller
         $pdf = PDF::loadView('admin\inscriptions\pdf', $data);
 
         // Télécharger le PDF avec un nom spécifique
-        return $pdf->download($titre.'.pdf');
-
-        // Rediriger l'utilisateur vers une autre URL
-        // return redirect('/admin/inscriptions');
-
-
-
-        // // Générez une réponse personnalisée pour le téléchargement du PDF
-        // $response = Response::make($pdf->output());
-        // $response->header('Content-Type', 'application/pdf');
-        // $response->header('Content-Disposition', 'attachment; filename="' . $titre . '.pdf"');
-
-        // return $response;
-
-
-
-        // --------------------------------------------------------------------------------------------------
-
-
-        // --------------------------------------------------------------------------------------------------
-
+        return $pdf->download($titre . '.pdf');
     }
 
 
@@ -185,19 +168,38 @@ class InscriptionController extends Controller
 
     public function show($id)
     {
-        $inscription = Inscription::find($id);
+        $inscription = Inscription::rightJoin('formations', 'inscriptions.formation_id', '=', 'formations.id')
+            // ->where('inscriptions.validation', false)
+            ->where('inscriptions.id', $id)
+            ->first([
+                'inscriptions.*', // Sélectionne toutes les colonnes de la table inscriptions
+                'formations.titre as formation', // Renomme la colonne 'nom_formation' en 'formation_nom'
+            ]);
         return view('admin/inscriptions/voir', ['inscription' => $inscription]);
     }
 
 
 
 
+
+
+
     public function edit($id)
     {
-        $inscription = Inscription::find($id);
+        // $inscription = Inscription::find($id);
+        $inscription = Inscription::rightJoin('formations', 'inscriptions.formation_id', '=', 'formations.id')
+            ->where('inscriptions.validation', false)
+            ->where('inscriptions.id', $id)
+            ->first([
+                'inscriptions.*', // Sélectionne toutes les colonnes de la table inscriptions
+                'formations.titre as formation', // Renomme la colonne 'nom_formation' en 'formation_nom'
+            ]);
         $formations = Formation::all();
         return view('admin/inscriptions/modifier', ['inscription' => $inscription, 'formations' => $formations]);
     }
+
+
+
     //    |---------------------------------------------------|    
     //    |-------------validation d'inscription--------------|
     //    |---------------------------------------------------|
@@ -205,48 +207,55 @@ class InscriptionController extends Controller
     {
         $inscription = Inscription::find($id);
 
-        $formationchoi = $inscription->formation;
+        $formation_choisie = $inscription->formation_id;
 
-        // $sessions = Session::where('formation', $formationchoi)->where('statut', 'En attente')->get();
-        $sessions = Session::where('formation', $formationchoi)->get();
 
-        // $formations = Formation::all();
-        // return view('admin/inscriptions/valid', ['inscription' => $inscription, 'sessions' => $sessions, 'formations' => $formations]);
-        return view('admin/inscriptions/valid', ['inscription' => $inscription, 'sessions' => $sessions]);
+        $sessions = Session::where('formation_id', $formation_choisie)->get();
+
+        $formation_etudiant = Formation::find($formation_choisie);
+
+        $formations = Formation::all();
+
+        return view('admin/inscriptions/valid', ['inscription' => $inscription, 'sessions' => $sessions, 'formation_etudiant' => $formation_etudiant, 'formations' => $formations]);
     }
 
-    public function validesave(Request $request, $id)
+    public function validesave(EtudiantRequest $request, $id)
     {
         $etudiant = new Etudiant();
         $inscription = Inscription::find($id);
 
         // modification de la table inscriptions 
-        $inscription->session = $request->input('session');
-        $inscription->contact = (true);
-        $inscription->montant = $request->input('montant');
+        $inscription->validation = (true);
+
 
         $inscription->save();
 
 
         // enregistrement de l'etudiant dans la table etudiants
-        $etudiant->nom = $inscription->nom;
-        $etudiant->prenom = $inscription->prenom;
-        $etudiant->age = $inscription->age;
+        $etudiant->nom =  $request->input('nom');
+        $etudiant->prenom =  $request->input('prenom');
         $etudiant->sexe = $inscription->sexe;
-        $etudiant->wilaya = $inscription->wilaya;
-        $etudiant->tel = $inscription->tel;
-        $etudiant->email = $inscription->email;
+        $etudiant->wilaya =  $request->input('wilaya');
+        $etudiant->date_naissance =  $request->input('date_naissance');
+        $etudiant->lieu_naissance =  $request->input('lieu_naissance');
+        $etudiant->tel =  $request->input('tel');
+        $etudiant->email =  $request->input('email');
         $etudiant->profession = $inscription->profession;
-        $etudiant->formation = $inscription->formation;
-        $etudiant->session = $request->input('session');
+        $etudiant->session_id = $request->input('session');
         $etudiant->montant = $request->input('montant');
-        $etudiant->contact = (true);
+
+        if ($request->hasFile('photo')) {
+            // dd('OK===>>>Message de débogage : Image chargée') ;
+            $etudiant->photo = $request->photo->store('/public/images/stagiaires');
+        }else{
+            // dd('X===>>>Message de débogage : Image pas chargée') ;
+        }
 
         $etudiant->save();
 
 
-        $lenom = $inscription->nom;
-        $leprenom = $inscription->prenom;
+        $lenom = $etudiant->nom;
+        $leprenom = $etudiant->prenom;
 
         Alert::success('le stagiaire : ' . $lenom . ' ' . $leprenom . ' a bien été validé');
 
@@ -255,23 +264,35 @@ class InscriptionController extends Controller
         // telechargemnt de ficher pdf
         $informations = Information::all()->first();
         $telephones = Telephone::all();
-
+        //         
+        $formationchoi = $inscription->formation_id;
+        $formation = Formation::find($formationchoi);
+        $sessionchoi = $etudiant->session_id;
+        $session = Session::find($sessionchoi);
+        $session_nom = $session->nom;
+        
         $date = date('d/m/20y');
+        $sexe = ($etudiant->sexe == 'H') ? 'Homme' : 'Femme';
+
 
         $data = [
-            'sexe' => $request->input('sexe'),
-            'nom' => $request->input('nom'),
-            'prenom' => $request->input('prenom'),
-            'age' => $request->input('age'),
-            'wilaya' => $request->input('wilaya'),
-            'profession' => $request->input('profession'),
-            'tel' => $request->input('tel'),
-            'email' => $request->input('email'),
 
-            'formation' => $inscription->formation,
-            'session' => $request->input('session'),
-            'montant' => $request->input('montant'),
+            'sexe' => $sexe,
+            'nom' => $etudiant->nom,
+            'prenom' => $etudiant->prenom,
+            'age' => $inscription->age,
+            'date_naissance' => $etudiant->date_naissance,
+            'lieu_naissance' => $etudiant->lieu_naissance,
 
+            'wilaya' => $etudiant->wilaya,
+            'profession' => $etudiant->profession,
+            'tel' => $etudiant->tel,
+            'email' => $etudiant->email,
+
+            'formation' => $formation->titre,
+            'session' => $session_nom,
+            'montant' => $etudiant->montant,
+            'photo' => $etudiant->photo,
 
             'informations' => $informations,
             'telephones' => $telephones,
@@ -282,10 +303,9 @@ class InscriptionController extends Controller
         // $pdf = PDF::loadView('pdf',$data, compact('informations') );
         $pdf = PDF::loadView('admin.inscriptions.pdf_recu', $data);
 
-        $titre = $etudiant->nom .'_'. $etudiant->prenom;
+        $titre = $etudiant->nom . '_' . $etudiant->prenom;
         // Générer le PDF à partir d'une vue
-        return $pdf->download($titre.'.pdf');
-
+        return $pdf->download($titre . '.pdf');
     }
 
 
@@ -302,7 +322,7 @@ class InscriptionController extends Controller
         $inscription->profession = $request->input('profession');
         $inscription->tel = $request->input('tel');
         $inscription->email = $request->input('email');
-        $inscription->formation = $request->input('formation');
+        $inscription->formation_id = $request->input('formation');
 
         $lenom = $inscription->nom;
         $leprenom = $inscription->prenom;
@@ -486,85 +506,6 @@ class InscriptionController extends Controller
     }
 
 
-    public function filtrer(Request $request)
-    {
-        $ListeFormations = Formation::all();
-        $ListeInscriptions = Inscription::all();
-        $formation = $request->input('formation');
-        $contact = $request->input('contact');
-        $dateDebut = $request->input('date1');
-        $dateFin = $request->input('date2');
-
-        $valeur = '';
-
-        $from = $request->from;
-        $to = $request->to;
-
-        $chformation = 0;
-        $chdate = 0;
-        $chcontact = 0;
-        // filtre par formation
-        if ($request->input('checkformation')) {
-            $ListeInscriptions = Inscription::all()->where('formation', '=', $formation);
-            $chformation = 1;
-        }
-
-        // filtre par contact
-        if ($request->input('checkcontact')) {
-            $ListeInscriptions = Inscription::all()->where('contact', '=', $contact);
-            $chcontact = 1;
-        }
-
-        // filtre par dates
-        if ($request->input('checkdate')) {
-            $ListeInscriptions = Inscription::whereBetween('date', [$from . $dateDebut, $to . $dateFin])->get();
-            $chdate = 1;
-        }
-
-        // filtre par formation et contact
-        if ($request->input('checkformation') && $request->input('checkcontact')) {
-            // $ListeInscriptions = Inscription::all()->where('formation','=',$formation,'and','contact','=',$contact);
-            $ListeInscriptions = Inscription::all()->where('formation', '=', $formation)
-                ->where('contact', '=', $contact);
-            $chformation = 1;
-            $chcontact = 1;
-        }
-
-        // filtre par formation et dates
-        if ($request->input('checkformation') && $request->input('checkdate')) {
-            $ListeInscriptions = Inscription::whereBetween('date', [$dateDebut, $dateFin])
-                ->where('formation', '=', $formation)
-                ->get();
-            $chformation = 1;
-            $chdate = 1;
-        }
-
-        // filtre par contact et dates
-        if ($request->input('checkcontact') && $request->input('checkdate')) {
-            $ListeInscriptions = Inscription::whereBetween('date', [$dateDebut, $dateFin])
-                ->where('contact', '=', $contact)
-                ->get();
-            $chcontact = 1;
-            $chdate = 1;
-        }
-
-        // filtre par contact et dates et formation
-        if ($request->input('checkcontact') && $request->input('checkdate') && $request->input('checkformation')) {
-            $ListeInscriptions = Inscription::whereBetween('date', [$dateDebut, $dateFin])
-                ->where('formation', '=', $formation)
-                ->where('contact', '=', $contact)
-                ->get();
-            $chformation = 1;
-            $chcontact = 1;
-            $chdate = 1;
-        }
-
-
-
-        return view('admin.inscriptions.index', [
-            'inscriptions' => $ListeInscriptions, 'formations' => $ListeFormations, 'valeur' => $valeur, 'laformation' => $formation, 'lecontact' => $contact, 'ladatedebut' => $dateDebut, 'ladatefin' => $dateFin, 'chformation' => $chformation, 'chdate' => $chdate, 'chcontact' => $chcontact
-        ]);
-    }
 
 
 
@@ -573,25 +514,5 @@ class InscriptionController extends Controller
 
 
 
-    public function recherche(Request $request)
-    {
-        $ListeFormations = Formation::all();
-        $ListeInscriptions = Inscription::all();
-        $valeur = $request->input('valeur');
 
-        $formation = '';
-        $contact = '';
-        $dateDebut = '';
-        $dateFin = '';
-
-        $chformation = 0;
-        $chdate = 0;
-        $chcontact = 0;
-
-        $ListeInscriptions = Inscription::where('nom', 'like', "%$valeur%")
-            ->get();
-        return view('admin.inscriptions.index', [
-            'inscriptions' => $ListeInscriptions, 'formations' => $ListeFormations, 'valeur' => $valeur, 'laformation' => $formation, 'lecontact' => $contact, 'ladatedebut' => $dateDebut, 'ladatefin' => $dateFin, 'chformation' => $chformation, 'chdate' => $chdate, 'chcontact' => $chcontact
-        ]);
-    }
 }

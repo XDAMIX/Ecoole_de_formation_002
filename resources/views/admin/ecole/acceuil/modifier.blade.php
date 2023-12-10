@@ -55,7 +55,7 @@
 
     <div class="form-group">
         <label for="">Sous Titre:</label>
-        <input type="text" name="stitre1" class="form-control @if($errors->get('titre')) is-invalid @endif" id="validationServer02" placeholder="le titre" value="{{ $acceuil->sous_titre1 }}">
+        <input type="text" name="stitre1" class="form-control @if($errors->get('stitre1')) is-invalid @endif" id="validationServer02" placeholder="le sous-titre" value="{{ $acceuil->sous_titre1 }}">
                 <div id="validationServer02Feedback" class="invalid-feedback">
                     @if($errors->get('stitre1'))
                     @foreach($errors->get('stitre1') as $message)
@@ -69,7 +69,7 @@
 
     <div class="form-group">
         <label for="">Petit paragraphe:</label>
-        <textarea type="text" name="stitre2" class="form-control @if($errors->get('titre')) is-invalid @endif" id="validationServer03" placeholder="le titre" value="{{ $acceuil->sous_titre2}}">{{ $acceuil->sous_titre2 }}"</textarea>
+        <textarea type="text" name="stitre2" class="form-control @if($errors->get('stitre2')) is-invalid @endif" id="validationServer03" placeholder="le sous-titre 2" value="{{ $acceuil->sous_titre2}}">{{ $acceuil->sous_titre2 }}"</textarea>
                 <div id="validationServer03Feedback" class="invalid-feedback">
                     @if($errors->get('stitre2'))
                     @foreach($errors->get('stitre2') as $message)

@@ -13,7 +13,7 @@ class ProfRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,11 +27,15 @@ class ProfRequest extends FormRequest
             'sexe'      => 'required|min:1|max:255',
             'nom'       => 'required|min:1|max:255',
             'prenom'       => 'required|min:1|max:255',
-            'age'       => 'required',
-            'wilaya'    => 'required|min:1|max:255',
-            'specialite' => 'required|min:1|max:255',
+
+            // 'wilaya'    => 'required|min:1|max:255',
+            // 'adresse'    => 'required|min:1|max:255',
+            'date_naissance'    => 'required|min:1|max:255',
+            'lieu_naissance'       => 'required|min:1|max:255',
             'tel'       => 'required|min:1|max:255',
             'email'       => 'required|min:1|max:255',
+            // 'diplome'       => 'required|min:1|max:255',
         ];
     }
+
 }

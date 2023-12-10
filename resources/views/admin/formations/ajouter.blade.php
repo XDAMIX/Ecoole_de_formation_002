@@ -244,6 +244,6 @@
 
 
     {{-- footer  --}}
-    <div class="container" id="pied-page">
+    <div class="container" id="pied-page"></div>
 
     @endsection
