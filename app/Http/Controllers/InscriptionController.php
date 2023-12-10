@@ -267,7 +267,10 @@ class InscriptionController extends Controller
         //         
         $formationchoi = $inscription->formation_id;
         $formation = Formation::find($formationchoi);
-        $session = Session::where('formation_id', $formationchoi)->first();
+        $sessionchoi = $etudiant->session_id;
+        $session = Session::find($sessionchoi);
+        $session_nom = $session->nom;
+        
         $date = date('d/m/20y');
         $sexe = ($etudiant->sexe == 'H') ? 'Homme' : 'Femme';
 
@@ -287,7 +290,7 @@ class InscriptionController extends Controller
             'email' => $etudiant->email,
 
             'formation' => $formation->titre,
-            'session' => $session->nom,
+            'session' => $session_nom,
             'montant' => $etudiant->montant,
             'photo' => $etudiant->photo,
 

@@ -154,7 +154,7 @@
 
 
                                 <td>
-{{-- 
+
 
                                     <div style="text-align: center;">
                                         <form id="delete-form-{{ $etudiant->id }}"
@@ -181,7 +181,7 @@
 
            
 
-                                                    @if ($sessions->statut == 'Termine')
+                                                    @if ($session->statut == 'Termine')
                                                         <button class="btnmdf" style="background-color: #347df1"
                                                             id="btn-mdf-{{ $etudiant->id }}" type="button">
                                                             <span class="text"></span>
@@ -195,7 +195,7 @@
 
                                             </div>
                                         </form>
-                                    </div> --}}
+                                    </div>
                                 </td>
                             </tr>
 
