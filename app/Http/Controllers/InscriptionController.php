@@ -42,20 +42,6 @@ class InscriptionController extends Controller
 
 
 
-
-    // public function imprimertout()
-    // {
-    //     $ListeInscriptions = Inscription::orderBy('id', 'desc')->get();
-
-    //     $html = View::make('admin.inscriptions.imprimertout', ['inscriptions' => $ListeInscriptions])->render();
-    //     $pdf = new Dompdf();
-    //     $pdf->loadHtml($html);
-    //     $pdf->setPaper('A4', 'landscape');
-    //     $pdf->render();
-
-    //     return $pdf->stream('inscriptions.pdf');
-    // }
-
     public function create()
     {
         $ListeFormations = Formation::all();
@@ -210,13 +196,11 @@ class InscriptionController extends Controller
         $formation_choisie = $inscription->formation_id;
 
 
-        $sessions = Session::where('formation_id', $formation_choisie)->get();
-
         $formation_etudiant = Formation::find($formation_choisie);
 
         $formations = Formation::all();
 
-        return view('admin/inscriptions/valid', ['inscription' => $inscription, 'sessions' => $sessions, 'formation_etudiant' => $formation_etudiant, 'formations' => $formations]);
+        return view('admin/inscriptions/valid', ['inscription' => $inscription, 'formation_etudiant' => $formation_etudiant, 'formations' => $formations]);
     }
 
     public function validesave(EtudiantRequest $request, $id)

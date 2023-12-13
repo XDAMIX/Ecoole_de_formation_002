@@ -155,7 +155,9 @@ class EtudiantController extends Controller
         $formation_etudiant = Formation::find($formation_id);
         $formations = Formation::all();
 
-        $sessions_possibles = Session::where('formation_id', $formation_id)->get();
+        $sessions_possibles = Session::where('formation_id', $formation_id)
+        ->whereNotIn('statut', ['Terminée'])
+        ->get();
 
         return view('admin.etudant.modifier', [
             'etudiant' => $etudiant, 'formations' => $formations,
@@ -207,7 +209,9 @@ class EtudiantController extends Controller
     {
         try {
             // Récupérez les professeurs en fonction du titre de la formation
-            $sessionsFiltres = Session::where('formation_id', $id_formation)->get();
+            $sessionsFiltres = Session::where('formation_id', $id_formation)
+            ->whereNotIn('statut', ['Terminée'])
+            ->get();
 
             // Retournez les professeurs au format JSON
             return response()->json(['sessions' => $sessionsFiltres]);

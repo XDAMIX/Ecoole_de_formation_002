@@ -1,17 +1,15 @@
-<!-- Contenu du PDF -->
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ficher de préinscription </title>
+    <title>CERTIFICAT DE FORMATION</title>
 </head>
 <header>
     <div class="entete">
        <div class="logo">
-               <img class="logoe" src="{{public_path('storage/'.$informations->logo)}}" alt="logo">
+        <img class="img-fluid" src="{{ public_path('storage/' . $informations->logo) }}" alt="logo" style="height: 50px;">
        </div>  
        
     </div>  
@@ -19,23 +17,25 @@
 <body>
 <div >
     <div>
+        
         <h2 class="titre">CERTIFICAT DE FORMATION</h2>
-        <h2 class="titreformation">{{ $formation }} </h2>
+        <!-- <h2 class="titreformation">{{ $formation }} </h2> -->
     </div>
 
-    <div>
-        <h3 style="font-size: 170%;"> Informations Personnel </h3>
-    </div>
     <div class="infop">
         <ul >
-            <li>Sexe :  {{ $sexe }} </li>
+            <li>{{ $sexe }} </li>
             <li>Nom :  {{ $nom }} </li>
             <li>Prenom :  {{ $prenom }} </li>
-            <li>date debut  :  {{ $date_deb }} </li>
-            <li>date fin  :  {{ $date_fin }} </li>
-
-                     <br>
-            <li style="font-weight: bold;">Formation choise :  {{ $formation }}  </li>
+            <li>Date de naissance :  {{ $date_naissance }} </li>
+            <li>Lieu de naissance :  {{ $lieu_naissance }} </li>
+            
+            <br>
+            <li>Code certificat  :  {{ $code }} </li>
+            <li>Formation  :  <span style="font-weight: bold;">{{ $formation }}</span>   </li>
+            <li>Date debut  :  {{ $date_debut }} </li>
+            <li>Date fin  :  {{ $date_fin }} </li>
+            <li>Avec mention  :  {{ $mention }} </li>
 
         </ul>
     </div>
@@ -43,7 +43,7 @@
 
 </div>
 <div>     
-    <h5 id="date-inscription" class="date">ALger le  :   <span id="date-valeur">{{ $date }}</span></h5>
+    <h5 id="date-inscription" class="date">{{ $wilaya }} le :    <span id="date-valeur">{{ $date_obt }}</span></h5>
 
 </div>
 
@@ -51,7 +51,7 @@
 
 <footer>
     <div class="info">
-        <p>Telephone :{{$telephones->numero}} . Email : {{$informations->email}}  . Adresse : {{$informations->adresse}} . site web : www.formacorpor.com </p>
+         {{-- <p>Telephone :{{$telephones->numero}} . Email : {{$informations->email}}  . Adresse : {{$informations->adresse}} . site web : www.formacorpor.com </p>  --}}
     </div>
 </footer>
 </html>
@@ -67,25 +67,7 @@
          height: 100px;
          width: 20%;
     }
-    img.logo{
-       
-        
-          align-items: center;
-          background-color: rgb(180, 28, 28);
-         
-    }
-    .logoe{
-        width: 200px;
-            height: 100px;
-            margin-right: 20px;
-            display: inline-block;
-            background-color: rgb(59, 59, 59);
-    }
-    /* .logo{
-       
-        width: 20%;
-        max-height: 20%;
-    } */
+
     .info{
         /* background-color: aqua; */
         text-align: center;

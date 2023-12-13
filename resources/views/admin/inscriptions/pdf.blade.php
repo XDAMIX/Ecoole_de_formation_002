@@ -182,12 +182,11 @@ ini_set('display_errors', 1);
     </footer>
 
 
-    {{-- <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script> --}}
 
     <!-- Include Bootstrap JavaScript from CDN -->
 
     <script src="{{ public_path('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+
 
 
 
@@ -207,14 +206,6 @@ ini_set('display_errors', 1);
             font-weight: bold;
             font-style: bold;
         }
-
-        /* @font-face {
-    font-family: 'bootstrap-icons';
-    src: url('/fonts/bootstrap-icons/bootstrap-icons.woff') format('woff'),
-         url('/fonts/bootstrap-icons/bootstrap-icons.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-} */
 
         .bi {
             font-family: 'bootstrap-icons', sans-serif;
