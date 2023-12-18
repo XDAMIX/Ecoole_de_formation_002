@@ -117,7 +117,7 @@
                             <tbody>
                                 @foreach ($profs as $prof)
                                     <tr>
-                                        <td class="align-middle"><div style="background-image:url({{ asset('storage/' . $prof->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;"></div></td>
+                                        <td class="align-middle" style="width:80px;"><div style="background-image:url({{ asset('storage/' . $prof->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;"></div></td>
                                         <td class="align-middle">{{ $prof->nom }}</td>
                                         <td class="align-middle">{{ $prof->prenom }}</td>
 
@@ -125,7 +125,7 @@
                                         <td class="align-middle">{{ $prof->email }}</td>
       
 
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="width:240px;">
 
                                             <div class="container">
                                                 <div class="row">

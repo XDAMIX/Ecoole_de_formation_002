@@ -22,6 +22,7 @@ class ProfController extends Controller
     public function index() {
         $ListeProfs = Prof::where('nom', '!=', 'NEW_RECORD')
                   ->where('prenom', '!=', 'NEW_RECORD')
+                  ->orderBy('id', 'DESC')
                   ->get();
 
         return view('admin/prof/index',['profs'=>$ListeProfs]);
@@ -53,9 +54,12 @@ class ProfController extends Controller
         ->get();
 
         $data = [
+            'photo' => $prof->photo,
             'sexe' => $prof->sexe,
             'nom' => $prof->nom,
             'prenom' => $prof->prenom,
+            'date_naissance' => $prof->date_naissance,
+            'lieu_naissance' => $prof->lieu_naissance,
             'tel' => $prof->tel,
             'email' => $prof->email,
             'wilaya' => $prof->wilaya,
@@ -69,7 +73,7 @@ class ProfController extends Controller
 
         $titre = $prof->nom .'_'. $prof->prenom;
         // Générer le PDF à partir d'une vue
-        $pdf = PDF::loadView('admin.prof.pdf', $data);
+        $pdf = PDF::loadView('admin.prof.pdf', $data)->setPaper('A4', 'portrait');
 
         // Télécharger le PDF avec un nom spécifique
         return $pdf->download('Professeur_'.$titre.'.pdf');

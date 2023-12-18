@@ -19,31 +19,103 @@ ini_set('display_errors', 1);
     {{-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> --}}
 
 
-
-    <!-- Include Bootstrap CSS -->
-    {{-- <link href="{{ public_path('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
-
-
-
-    <!-- Include Bootstrap Icons CSS laravel -->
-    {{-- <link href="{{ public_path('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet"> --}}
-
-
-
-
-
-
-
     <!-- Include Bootstrap from CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
 
     <!-- Include Bootstrap Icons from CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+    {{-- css  --}}
+    <style>
+        @font-face {
+            font-family: 'Poppins';
+            src: url('/fonts/font-poppins/Poppins-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
 
+        @font-face {
+            font-family: 'Poppins-Bold';
+            src: url('/fonts/font-poppins/Poppins-ExtraBold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: bold;
+        }
 
+        .bi {
+            font-family: 'bootstrap-icons', sans-serif;
+            display: inline-block;
+            /* font-size: 1rem; */
+        }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffff;
+            color: black;
+            height: 100vh;
+        }
 
+        p {
+            font-size: 14px;
+            line-height: 10px;
+        }
+
+        h3,
+        h5 {
+            font-family: 'Poppins-Bold', sans-serif;
+        }
+
+        .titre {
+            background-color: #aaaaaa;
+            color: #ffff;
+            line-height: 1rem;
+            padding-left: 5px;
+        }
+
+        #entete {
+            margin-top: 10px;
+        }
+
+        #informations {
+            margin-top: 50px;
+            margin-bottom: 10px;
+        }
+
+        #informations #from-database {
+            margin-bottom: 30px;
+        }
+
+        #piedpage {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .contact {
+            font-size: 10px;
+        }
+
+        .contact-titre {
+            font-size: 14px;
+        }
+
+        footer {
+            position: relative;
+            padding-top: 30px;
+        }
+
+        .icones {
+            height: 12px;
+            margin-bottom: -5;
+            justify-content: center;
+            margin-right: 5px;
+        }
+
+        .icones-lg {
+            height: 10px;
+            margin-bottom: -5;
+            justify-content: center;
+            margin-right: 5px;
+        }
+    </style>
 </head>
 
 
@@ -162,7 +234,8 @@ ini_set('display_errors', 1);
 
                         <span> <img src="{{ public_path('icones/email.png') }}" class="img-fluid icones-lg"
                                 alt="..."> Email : {{ $informations->email }} | </span> <img
-                            src="{{ public_path('icones/globe.png') }}" class="img-fluid icones-lg" alt="..."> Site
+                            src="{{ public_path('icones/globe.png') }}" class="img-fluid icones-lg" alt="...">
+                        Site
                         web : www.formacorpro.com </span>
 
                     </p>
@@ -191,96 +264,7 @@ ini_set('display_errors', 1);
 
 
 
-    {{-- css  --}}
-    <style>
-        @font-face {
-            font-family: 'Poppins';
-            src: url('/fonts/font-poppins/Poppins-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
 
-        @font-face {
-            font-family: 'Poppins-Bold';
-            src: url('/fonts/font-poppins/Poppins-ExtraBold.ttf') format('truetype');
-            font-weight: bold;
-            font-style: bold;
-        }
-
-        .bi {
-            font-family: 'bootstrap-icons', sans-serif;
-            display: inline-block;
-            /* font-size: 1rem; */
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #ffff;
-            color: black;
-            height: 100vh;
-        }
-
-        p {
-            font-size: 14px;
-            line-height: 10px;
-        }
-
-        h3,
-        h5 {
-            font-family: 'Poppins-Bold', sans-serif;
-        }
-
-        .titre {
-            background-color: #aaaaaa;
-            color: #ffff;
-            line-height: 1rem;
-            padding-left: 5px;
-        }
-
-        #entete {
-            margin-top: 10px;
-        }
-
-        #informations {
-            margin-top: 50px;
-            margin-bottom: 10px;
-        }
-
-        #informations #from-database {
-            margin-bottom: 30px;
-        }
-
-        #piedpage {
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        .contact {
-            font-size: 10px;
-        }
-
-        .contact-titre {
-            font-size: 14px;
-        }
-
-        footer {
-            position: relative;
-            padding-top: 30px;
-        }
-
-        .icones {
-            height: 12px;
-            margin-bottom: -5;
-            justify-content: center;
-            margin-right: 5px;
-        }
-        .icones-lg {
-            height: 10px;
-            margin-bottom: -5;
-            justify-content: center;
-            margin-right: 5px;
-        }
-    </style>
 
 
 </body>

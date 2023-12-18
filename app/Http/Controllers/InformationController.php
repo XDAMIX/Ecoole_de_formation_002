@@ -28,13 +28,22 @@ class InformationController extends Controller
         if ($listeinformations->isEmpty()) {
             return redirect('/admin/ecole/save');
         }
-        
+        if ($acceuils ->isEmpty()) {
+
+            $acceuil = new Acceuil();
+            $acceuil->titre = '';
+            $acceuil->sous_titre1 = '';
+            $acceuil->sous_titre2 = '';
+            $acceuil->photo = '';
+    
+            $acceuil->save();
+        }
+
+        $listeinformations = Information::all();
+        $acceuils = Acceuil::all();
 
         return view('admin.ecole.index',[ 'informations'=>$listeinformations , 'liens'=>$listeliens , 'telephones'=>$listetelephones, 'acceuils' => $acceuils]);
     
-
-
-
     }
 
     public function create() {
@@ -44,14 +53,14 @@ class InformationController extends Controller
     public function store() {
         $information = new Information();
 
-        $information->nom = 'vide';
-        $information->adresse = 'vide';
-        $information->localisation = 'vide';
-        $information->email = 'vide';
-        $information->site_web = 'vide';
-        $information->heure_travail = 'vide';
-        $information->logo = 'vide';
-        $information->wilaya = 'vide';
+        $information->nom = '';
+        $information->adresse = '';
+        $information->localisation = '';
+        $information->email = '';
+        $information->site_web = '';
+        $information->heure_travail = '';
+        $information->logo = '';
+        $information->wilaya = '';
 
         $information->save();
 

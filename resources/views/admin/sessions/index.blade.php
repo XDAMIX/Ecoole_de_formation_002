@@ -117,16 +117,16 @@
                                 @foreach ($sessions as $session)
                                     <tr>
                                         {{-- <td scope="row">{{ $session->id }}</td> --}}
-                                        <td class="align-middle @if($session->statut == 'En attente') bg-primary text-white @elseif($session->statut == 'En cours' || $session->statut == 'Prolongée') bg-success text-white @elseif($session->statut == 'Terminée') bg-danger text-white @endif">{{ $session->nom }}</td>
-                                        <td class="align-middle @if($session->statut == 'En attente') bg-primary text-white @elseif($session->statut == 'En cours' || $session->statut == 'Prolongée') bg-success text-white @elseif($session->statut == 'Terminée') bg-danger text-white @endif">{{ $session->nom_prof }}-{{ $session->prenom_prof }}</td>
-                                        <td class="align-middle @if($session->statut == 'En attente') bg-primary text-white @elseif($session->statut == 'En cours' || $session->statut == 'Prolongée') bg-success text-white @elseif($session->statut == 'Terminée') bg-danger text-white @endif">{{ $session->formation }}</td>                                   
-                                        <td class="text-center align-middle @if($session->statut == 'En attente') bg-primary text-white @elseif($session->statut == 'En cours' || $session->statut == 'Prolongée') bg-success text-white @elseif($session->statut == 'Terminée') bg-danger text-white @endif">{{ $session->date_debut }}</td>
-                                        <td class="text-center align-middle @if($session->statut == 'En attente') bg-primary text-white @elseif($session->statut == 'En cours' || $session->statut == 'Prolongée') bg-success text-white @elseif($session->statut == 'Terminée') bg-danger text-white @endif">{{ $session->date_fin }}</td>
+                                        <td class="align-middle">{{ $session->nom }}</td>
+                                        <td class="align-middle">{{ $session->nom_prof }}-{{ $session->prenom_prof }}</td>
+                                        <td class="align-middle">{{ $session->formation }}</td>                                   
+                                        <td class="text-center align-middle">{{ $session->date_debut }}</td>
+                                        <td class="text-center align-middle">{{ $session->date_fin }}</td>
                 
                                         <td class="text-center align-middle @if($session->statut == 'En attente') bg-primary text-white @elseif($session->statut == 'En cours' || $session->statut == 'Prolongée') bg-success text-white @elseif($session->statut == 'Terminée') bg-danger text-white @endif"  class="action-column">{{ $session->statut }}</td>
                 
                                     
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="width:240px;">
 
                                             <div class="container">
                                                 <div class="row">

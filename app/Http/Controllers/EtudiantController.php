@@ -34,6 +34,7 @@ class EtudiantController extends Controller
             ->leftJoin('formations', function ($join_formations) {
                 $join_formations->on('sessions.formation_id', '=', 'formations.id');
             })
+            ->orderBy('etudiants.id', 'DESC')
             ->get([
                 'etudiants.*', 'sessions.nom as session', 'formations.titre as formation',
             ]);

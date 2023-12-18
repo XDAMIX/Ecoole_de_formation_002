@@ -118,7 +118,7 @@
                                 @foreach ($etudiants as $etudiant)
                                     <tr>
                                         {{-- <td class=" align-middle">{{ $etudiant->id }}</td> --}}
-                                        <td class=" align-middle"><div style="background-image:url({{ asset('storage/' . $etudiant->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;"></div></td>
+                                        <td class=" align-middle" style="width:80px;"><div style="background-image:url({{ asset('storage/' . $etudiant->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;"></div></td>
                                         <td class=" align-middle">{{ $etudiant->nom }}</td>
                                         <td class=" align-middle">{{ $etudiant->prenom }}</td>
 
@@ -128,7 +128,7 @@
                                         <td class=" align-middle">{{ $etudiant->formation }}</td>
                                         <td class=" align-middle">{{ $etudiant->session }}</td>
 
-                                        <td class=" align-middle">
+                                        <td class=" align-middle" style="width:240px;">
 
                                             <div class="container">
                                                 <div class="row">
