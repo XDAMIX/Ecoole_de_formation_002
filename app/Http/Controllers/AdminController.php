@@ -32,6 +32,22 @@ class AdminController extends Controller
     public function index()
     {
         $listeinformations = Information::all();
+        if ($listeinformations === null) {
+
+            $information = new Information();
+
+            $information->nom = '';
+            $information->adresse = '';
+            $information->localisation = '';
+            $information->email = '';
+            $information->site_web = '';
+            $information->heure_travail = '';
+            $information->logo = '';
+            $information->wilaya = '';
+    
+            $information->save();
+        }
+
 
         $total_formations = Formation::count();
         $total_sessions = Session::count();

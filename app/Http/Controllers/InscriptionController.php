@@ -32,6 +32,7 @@ class InscriptionController extends Controller
     {
         $ListeInscriptions = Inscription::rightJoin('formations', 'inscriptions.formation_id', '=', 'formations.id')
             ->where('inscriptions.validation', false)
+            ->orderBy('inscriptions.id', 'DESC')
             ->get([
                 'inscriptions.*', // Sélectionne toutes les colonnes de la table inscriptions
                 'formations.titre as formation', // Renomme la colonne 'nom_formation' en 'formation_nom'

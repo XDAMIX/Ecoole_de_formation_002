@@ -112,7 +112,7 @@
 
                                 @foreach ($inscriptions as $inscription)
                                     <tr>
-                                        <td>{{ $inscription->id }}</td>
+                                        <td style="width:50px;">{{ $inscription->id }}</td>
                                         {{-- <td>{{ $inscription->created_at }}</td> --}}
                                         <td>{{ $inscription->nom }}</td>
                                         <td>{{ $inscription->prenom }}</td>
@@ -126,7 +126,7 @@
                         <td  style=" color: @if ($inscription->contact == 0) red; @else green; @endif ">
                             @if ($inscription->contact == 0) NON @else OUI @endif</td> --}}
 
-                                        <td>
+                                        <td style="width:240px;">
 
                                             <div class="container">
                                                 <div class="row">

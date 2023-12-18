@@ -293,7 +293,7 @@
                                             @endif
 
 
-                                            <td class=" align-middle" style="width:320px;">
+                                            <td class=" align-middle" style="width:240px;">
 
                                                 <div class="container">
                                                     <div class="row">

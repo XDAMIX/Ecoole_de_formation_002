@@ -17,10 +17,12 @@ use App\Models\Banner;
 use App\Models\Question;
 use App\Http\Requests\InscriptionRequest;
 use App\Http\Requests\MessageRequest;
+use App\Models\Etudiant;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
+use PhpParser\Node\Stmt\Foreach_;
 
 class WebsiteController extends Controller
 {
@@ -32,6 +34,10 @@ class WebsiteController extends Controller
 
     public function readfromdatabase()
     {
+        $nombre_formations = Formation::count();
+        $nombre_etudiants = Etudiant::count();
+        $nombre_diplomes = Etudiant::where('etat_formation', '=', 'fin-de-la-formation')->count();
+        
         $ListeFormations = Formation::all();
         $ListePhotos = Photo::all();
         $ListeTem = Temoignage::all();
@@ -43,10 +49,39 @@ class WebsiteController extends Controller
         $telephones = Telephone::all();
         $paragraphes = Paragraphe::all();
 
+        if ($informations === null) {
+
+            $information = new Information();
+
+            $information->nom = '';
+            $information->adresse = '';
+            $information->localisation = '';
+            $information->email = '';
+            $information->site_web = '';
+            $information->heure_travail = '';
+            $information->logo = '';
+            $information->wilaya = '';
+    
+            $information->save();
+        }
+        if ($acceuil === null) {
+
+            $acceuil = new Acceuil();
+            $acceuil->titre = '';
+            $acceuil->sous_titre1 = '';
+            $acceuil->sous_titre2 = '';
+            $acceuil->photo = '';
+    
+            $acceuil->save();
+        }
+
+        $acceuil = Acceuil::all()->first();
+        $informations = Information::all()->first();
+
         return view('index', [
             'formations' => $ListeFormations, 'photos' => $ListePhotos, 'temoignages' => $ListeTem, 'banners' => $ListeBanners,
             'questions' => $ListeQuestions, 'acceuil' => $acceuil, 'informations' => $informations, 'liens' => $liens, 'telephones' => $telephones,
-            'paragraphes' => $paragraphes
+            'paragraphes' => $paragraphes, 'nb_formations' => $nombre_formations,'nb_stagiaires' => $nombre_etudiants,'nb_diplomes' => $nombre_diplomes,
         ]);
     }
 

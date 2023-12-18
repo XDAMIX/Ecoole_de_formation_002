@@ -41,6 +41,7 @@ class SessionController extends Controller
             ->leftJoin('profs', function ($join_profs) {
                 $join_profs->on('sessions.prof_id', '=', 'profs.id');
             })
+            ->orderBy('sessions.id', 'DESC')
             ->get([
                 'sessions.*', 'formations.titre as formation', 'profs.nom as nom_prof', 'profs.prenom as prenom_prof',
             ]);
@@ -176,7 +177,7 @@ class SessionController extends Controller
         $session->date_fin = $stop_date;
         $session->save();
         // -------------------------------------
-        $date_diplome = $stop_date->addDays(2);
+        $date_diplome = $stop_date->addDays(1);
         $fin_date = Carbon::today();
         $debut_date = $session->date_debut;
         // modifier formation pour etudiants
@@ -298,7 +299,7 @@ class SessionController extends Controller
         $etudiant->etat_formation = 'En-formation';
         $etudiant->save();
 
-        Alert::error($nom . ' ' . $prenom, ' a repris cours dans cette session ')->timerProgressBar(500);
+        Alert::success($nom . ' ' . $prenom, ' a repris cours dans cette session ')->timerProgressBar(500);
         return redirect('/admin/session/voir/' . $id_session);
     }
 
@@ -342,6 +343,13 @@ class SessionController extends Controller
         $date = Carbon::today();
         $date = $date->toDateString();
         $wilaya = $informations->wilaya;
+        $titre = $etudiant->nom . '_' . $etudiant->prenom;
+        $backgroundImage = public_path('/certificats/certificat.jpg');
+        $poppins = public_path('/fonts/font-poppins/Poppins-Regular.ttf');
+        $poppins_bold = public_path('/fonts/font-poppins/Poppins-Bold.ttf');
+        $greatvibes = public_path('/fonts/great-vibes/GreatVibes-Regular.ttf');
+ 
+
 
         $data = [
             'sexe' => $sexe,
@@ -363,20 +371,25 @@ class SessionController extends Controller
             'telephones' => $telephones,
             'date' => $date,
             'wilaya' => $wilaya,
+            'background' => $backgroundImage,
+            'poppins' => $poppins,
+            'poppins_bold' => $poppins_bold,
+            'greatvibes' => $greatvibes,
+
 
             // ... Autres données ...
         ];
 
         // $pdf = PDF::loadView('pdf',$data, compact('informations') );
-        $pdf = PDF::loadView('admin.sessions.diplome', $data)->setPaper('legal', 'landscape');
+        $pdf = PDF::loadView('admin.sessions.diplome', $data)->setPaper('A4', 'landscape');
 
-        $titre = $etudiant->nom . '_' . $etudiant->prenom;
+
         // Générer le PDF à partir d'une vue
         return $pdf->download('Diplôme_Stagiaire_' . $titre . '.pdf');
 
 
 
-        Alert::success('Le certificat pour: ' . $nom . ' ' . $prenom, ' à été téléchargé avec succès');
+        Alert::success('Le certificat pour: ' . $titre, ' à été téléchargé avec succès');
         return redirect('/admin/session/voir/' . $id_session);
     }
 
@@ -517,6 +530,11 @@ class SessionController extends Controller
             $date = Carbon::today();
             $date = $date->toDateString();
             $wilaya = $informations->wilaya;
+            $titre = $etudiant->nom . '_' . $etudiant->prenom;
+            $backgroundImage = public_path('/certificats/certificat.jpg');
+            $poppins = public_path('/fonts/font-poppins/Poppins-Regular.ttf');
+            $poppins_bold = public_path('/fonts/font-poppins/Poppins-Bold.ttf');
+            $greatvibes = public_path('/fonts/great-vibes/GreatVibes-Regular.ttf');
 
             $data = [
                 'sexe' => $sexe,
@@ -538,12 +556,15 @@ class SessionController extends Controller
                 'telephones' => $telephones,
                 'date' => $date,
                 'wilaya' => $wilaya,
+                'background' => $backgroundImage,
+                'poppins' => $poppins,
+                'poppins_bold' => $poppins_bold,
+                'greatvibes' => $greatvibes,
 
                 // ... Autres données ...
             ];
 
-            $pdf = PDF::loadView('admin.sessions.diplome', $data)->setPaper('legal', 'landscape');
-            $titre = $etudiant->nom . '_' . $etudiant->prenom;
+            $pdf = PDF::loadView('admin.sessions.diplome', $data)->setPaper('A4', 'landscape');
 
             // Enregistrez le PDF dans le dossier des certificats
             $pdf->save("certificats/{$nomSession}/Diplôme_Stagiaire_{$titre}.pdf");

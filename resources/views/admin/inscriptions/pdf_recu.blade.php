@@ -10,7 +10,7 @@ ini_set('display_errors', 1);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fichier d'inscription</title>
+    <title>Fiche d'inscription</title>
 
     <!-- Favicons -->
     <link href="{{ public_path('school-icon.ico') }}" rel="icon" type="image/x-icon">
@@ -72,21 +72,27 @@ ini_set('display_errors', 1);
         {{-- informations inscription  --}}
         <div class="row" id="informations">
             <div class="col-12" id="from-database">
-                <h3 class="titre"> Informations personnelles </h3>
-
+                <h3 class="titre text-light bg-dark"> Informations personnelles </h3>
+                
                 <div class="container-fluid">
                     <div class="row">
 
                         {{-- --------------------------------------  --}}
+                        <div class="row">
 
-                        <div class="col-6">
+                        </div>
+                        <div class="col-12">
                             <p>Nom : {{ $nom }} </p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <p>Prénom : {{ $prenom }} </p>
                         </div>
-                        {{-- --------------------------------------  --}}
 
+                        <div class="part col-12 text-center">
+                            <img class="img-fluid photo" style="" src="{{ public_path('storage/' . $photo) }}" alt="photo">
+                        </div>
+                        {{-- --------------------------------------  --}}
+                        
                         <div class="col-6">
                             <p>Date et lieu de naissance : {{ $date_naissance }} à {{ $lieu_naissance }}</p>
                         </div>
@@ -94,15 +100,15 @@ ini_set('display_errors', 1);
                         <div class="col-6">
                             <p>Wilaya :{{ $wilaya }} </p>
                         </div>
-
+                        
                         {{-- --------------------------------------  --}}
-
+                        
                         <div class="col-12">
                             <p>Profession :{{ $profession }} </p>
                         </div>
-
+                        
                         {{-- --------------------------------------  --}}
-
+                        
                         <div class="col-6">
                             <p>N° Tel: {{ $tel }} </p>
                         </div>
@@ -113,10 +119,11 @@ ini_set('display_errors', 1);
 
                         {{-- --------------------------------------  --}}
 
+                <h3 class="titre text-light bg-dark"> Formation :</h3>
                         <div class="col-6">
-                            <p>Formation : <span
-                                    style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;">{{ $formation }}
-                                </span></p>
+                            <p
+                            style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;">{{ $formation }}
+                        </p>
                         </div>
                         {{-- --------------------------------------  --}}
 
@@ -234,6 +241,7 @@ ini_set('display_errors', 1);
             background-color: #ffff;
             color: black;
             height: 100vh;
+            width: 100vw;
         }
 
         p {
@@ -280,8 +288,9 @@ ini_set('display_errors', 1);
         }
 
         footer {
-            position: relative;
+            position: static;
             padding-top: 30px;
+            bottom: 0;
         }
 
         .icones {
@@ -295,6 +304,13 @@ ini_set('display_errors', 1);
             margin-bottom: -5;
             justify-content: center;
             margin-right: 5px;
+        }
+        .photo {
+            float: right;
+            right: 0;
+            height: 150px;
+            margin-right: 20px;
+            margin-top: -50px;
         }
     </style>
 

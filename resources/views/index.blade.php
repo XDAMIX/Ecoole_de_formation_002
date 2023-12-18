@@ -12,26 +12,35 @@
                 @foreach ($paragraphes as $paragraphe)
                     <div class="row" style="padding-bottom: 50px;">
 
-                        <div class="col-md-12 section-title">
+                        <div class="col-12 section-title">
 
                             <h2 class="h2-theme">{{ $paragraphe->titre }}</h2>
 
                         </div>
 
+                        <div class="row">
 
-                        <div class="col-lg-6" data-aos="fade-right">
+                            <div class="col-lg-6 col-md-6 col-12" data-aos="fade-right"
+                                style="background-image: url({{ asset('storage/' . $paragraphe->photo) }} );background-size: cover;background-position: center;background-repeat: no-repeat;  height:450px;">
 
-                            <img src="{{ url('storage/' . $paragraphe->photo) }}" class="img-fluid" alt="">
+                            </div>
 
-                        </div>
+                            <div class="col-lg-6 col-md-6 col-12" data-aos="fade-left" style="padding: 20px;">
 
-                        <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-
-                            <h2 class="s-titre">{{ $paragraphe->sous_titre }}</h2>
-
-                            <p class="texte">{{ $paragraphe->paragraphe }}</p>
+                                <h2 class="s-titre text-center">{{ $paragraphe->sous_titre }}</h2>
 
 
+
+                                <div class="truncate-text" id="truncate-text{{ $paragraphe->id }}">
+                                    <p class="texte">{{ $paragraphe->paragraphe }}</p>
+                                    {{-- expand button  --}}
+                                    <button class="btn btn-light" onclick="toggleText({{ $paragraphe->id }})">Lire
+                                        la suite</button>
+
+                                </div>
+
+
+                            </div>
                         </div>
 
                     </div>
@@ -123,60 +132,48 @@
 
 
 
-
-
-
-
         <!-- ======= Testimonials Section ======= -->
         <section id="testimonials" class="testimonials">
-            <div class="container-fluid" data-aos="fade-up">
 
-                <div class="row">
-                    <div class="section-title col-12">
-                        <h2>Témoignages</h2>
-                    </div>
+            <div class="section-title">
+                <h2>Témoignages</h2>
+            </div>
 
-                    <div class="testimonials-slider swiper col-12" data-aos="fade-left" data-aos-delay="100">
-                        <div class="swiper-wrapper">
+            <div class="container" style="height:500px;">
 
-                            @foreach ($temoignages as $temoignage)
+                <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100" style="height:500px;">
+                    <div class="swiper-wrapper" style="height:500px;">
 
-                                <!-- testimonial item -->
-                                <div class="swiper-slide">
-                                    <div class="testimonial-item testimonials-box">
-                                        <div class="testimonial-text">
-                                            <p>
-                                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                                {{ $temoignage->mot }}
-                                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                            </p>
-
-                                        </div>
-                                        <div class="testimonial-author-box">
-
-                                            <div class="testimonial-author">
-                                                <img src="{{ 'storage/' . $temoignage->photo }}" class="testimonial-img"
-                                                    alt="">
-
-                                            </div>
-                                            
-                                            <h3>{{ $temoignage->nom }}</h3>
-                                            <h4>{{ $temoignage->poste }}</h4>
-                                        </div>
+                        @foreach ($temoignages as $temoignage)
+                            <!-- testimonial item -->
+                            <div class="swiper-slide" style="height:500px;">
+                                <div class="testimonial-wrap">
+                                    <div class="testimonial-item">
+                                        <img src="{{ 'storage/' . $temoignage->photo }}" class="testimonial-img"
+                                            alt="">
+                                        <h3>{{ $temoignage->nom }}</h3>
+                                        <h4>{{ $temoignage->poste }}</h4>
+                                        <p style="font-size: 12px !important;">
+                                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                            {{ $temoignage->mot }}
+                                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                        </p>
                                     </div>
                                 </div>
-                                <!-- End testimonial item -->
+                            </div>
+                            <!-- End testimonial item -->
+                        @endforeach
 
-                            @endforeach
-
-                        </div>
-                        <div class="swiper-pagination"></div>
                     </div>
+                    <div class="swiper-pagination"></div>
                 </div>
 
             </div>
-        </section>
-        <!-- End Testimonials Section -->
+        </section><!-- End Testimonials Section -->
+
+
+
+
 
 
 
@@ -259,7 +256,7 @@
                                 <div class="info-box mt-4">
                                     <i class="bx bx-envelope"></i>
                                     <h3>Email</h3>
-                                    <a href="">{{ $informations->email }}</a>
+                                    <a href="mailto:{{ $informations->email }}">{{ $informations->email }}</a>
                                 </div>
                             </div>
 
@@ -268,7 +265,7 @@
                                     <i class="bx bx-phone-call"></i>
                                     <h3>Appellez Nous</h3>
                                     @foreach ($telephones as $telephone)
-                                        <p>{{ $telephone->operateur }} : <a href="">{{ $telephone->numero }}</a>
+                                        <p>{{ $telephone->operateur }} : <a href="tel:{{ $telephone->numero }}">{{ $telephone->numero }}</a>
                                         </p> <br>
                                     @endforeach
                                 </div>
@@ -315,7 +312,7 @@
                                 </div>
 
                                 <div class="form-group" style="margin-top: 10px;text-align:center;">
-                                    <button type="submit" class="form-control btn btn-success">Envoyer le
+                                    <button type="submit" class="form-control btn btn-inscription">Envoyer le
                                         message</button>
                                 </div>
                         </form>
@@ -352,7 +349,7 @@
                                 Rejoignez Nous <br>
                                 sur<br><br>
                                 <!-- <strong>Phone:</strong> +1 5589 55488 55<br>
-                    <strong>Email:</strong> info@example.com<br> -->
+                        <strong>Email:</strong> info@example.com<br> -->
                             </p>
                             <div class="social-links mt-3" data-aos="flip-up">
                                 @foreach ($liens as $lien)
@@ -395,29 +392,32 @@
 
                                 <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
                                     <div class="count-box">
-                                        <i class="fas fa-users"></i>
-                                        <span data-purecounter-start="0" data-purecounter-end="10"
+                                        <i class="bi bi-building"></i>
+                                        <span data-purecounter-start="0" data-purecounter-end="{{ $nb_formations }}"
                                             data-purecounter-duration="1" class="purecounter"></span>
 
-                                        <p><strong>FORMATEURS</strong> consequuntur quae qui deca rode</p>
+                                        <p><strong>FORMATION SPÉCIALISÉE</strong> offerte au sein de notre établissement.
+                                        </p>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
                                     <div class="count-box">
-                                        <i class="far fa-building"></i>
-                                        <span data-purecounter-start="0" data-purecounter-end="15"
+                                        <i class="bi bi-people-fill"></i>
+                                        <span data-purecounter-start="0" data-purecounter-end="{{ $nb_stagiaires }}"
                                             data-purecounter-duration="1" class="purecounter"></span>
-                                        <p><strong>FORMATIONS</strong> adipisci atque cum quia aut numquam delectus</p>
+                                        <p><strong>CANDIDATS EN FORMATION</strong> accueillis avec enthousiasme par notre
+                                            école.</p>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 col-md-4 d-md-flex align-items-md-stretch">
                                     <div class="count-box">
-                                        <i class="fa fa-graduation-cap"></i>
-                                        <span data-purecounter-start="0" data-purecounter-end="150"
+                                        <i class="bi bi-award"></i>
+                                        <span data-purecounter-start="0" data-purecounter-end="{{ $nb_diplomes }}"
                                             data-purecounter-duration="1" class="purecounter"></span>
-                                        <p><strong>STAGIAIRES</strong> aut commodi quaerat. Aliquam ratione</p>
+                                        <p><strong>CERTIFICATIONS</strong> attribuées par notre établissement de formation.
+                                        </p>
                                     </div>
                                 </div>
 
@@ -458,3 +458,56 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 @endsection
+
+
+
+
+{{-- ---------------------------------------------------------------------------------------------------- --}}
+<script>
+    function toggleText(id) {
+        console.log("***ToggleText function called***");
+        console.log('id : ' + id);
+
+        var element = document.querySelector("#truncate-text" + id);
+
+        if (element) {
+            element.classList.toggle("expanded");
+            console.log("L'élément a été trouvé et la classe est switché");
+        } else {
+            console.error();
+            ("L'élément n'a pas été trouvé.");
+        }
+    }
+</script>
+
+{{-- ---------------------------------------------------------------------------------------------------- --}}
+<style>
+    .truncate-text .texte {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 300;
+        /* Limit to three lines */
+        -webkit-box-orient: vertical;
+        max-height: calc(6em * 3);
+        /* Adjust the line height accordingly */
+        transition: max-height 0.3s ease;
+        /* Add a smooth transition effect */
+    }
+
+    .truncate-text.expanded .texte {
+        max-height: none;
+        -webkit-line-clamp: 500;
+        /* Allow the full height for the expanded state */
+    }
+
+    .truncate-text.expanded button {
+        display: inline-block;
+        /* Hide the "Lire la suite" button by default */
+    }
+
+    .truncate-text button {
+        display: inline-block;
+        /* Display the "Lire la suite" button in expanded mode */
+    }
+</style>
+{{-- ---------------------------------------------------------------------------------------------------- --}}

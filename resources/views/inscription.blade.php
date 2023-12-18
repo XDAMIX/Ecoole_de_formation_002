@@ -24,6 +24,20 @@
             margin-bottom: 50px;
         }
     </style>
+<style>
+    .btn{
+      width:150px;
+      padding: 10px 15px;
+      border-radius: 50px;
+      font-size: 16px;
+      /* color: black;  */
+      font-weight:bold; 
+      text-transform: uppercase;
+    }
+    i{
+      /* font-size: 18px; */
+    }
+  </style>
 
 <div class="container-fluid">
     
@@ -31,7 +45,7 @@
         <div class="row justify-content-center">
 
             <div class="col-12" style="text-align: center;">
-                <h2><i class="fa-solid fa-file-pen icons"></i> Inscription en-ligne</h2>
+                <h1 style="color: black; font-weight:bold; text-transform: uppercase;"><i class="bi bi-card-text icons"></i> Inscription en-ligne</h1>
             </div>
 
         </div>
@@ -138,7 +152,7 @@
                                 <div class="col-md-8 form-group" id="wilaya">
                                     <label for="">Wilaya de résidence :</label>
 
-                                    <select class="form-control" name="wilaya">
+                                    <select class="form-control form-select" name="wilaya">
                                         <option value="Adrar">Adrar-01 </option>
                                         <option value="Chlef">Chlef-02 </option>
                                         <option value="Laghouat">Laghouat-03</option>
@@ -290,7 +304,7 @@
                                     <label for="">Veuillez choisir la Formation auquelle vous êtes intéressé
                                         :</label>
 
-                                    <select class="form-control" name="formation">
+                                    <select class="form-control form-select" name="formation">
                                         @foreach ($formations as $formation)
                                             <option value="{{ $formation->id }}">{{ $formation->titre }}</option>
                                         @endforeach
@@ -305,14 +319,14 @@
                                 <div class="col-6 form-group">
 
                                     <button type="button" onclick="sauvegarder()"
-                                        class="btn btn-outline-success alpa shadow"><i
+                                        class="btn btn-success alpa shadow"><i
                                             class="bi bi-check2"></i><span class="btn-description">Valider</span></button>
 
 
                                 </div>
                                 <div class="col-6 form-group">
 
-                                    <a href="/" class="btn btn-outline-danger alpa shadow"><i
+                                    <a href="/" class="btn btn-danger alpa shadow"><i
                                             class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
 
                                 </div>

@@ -29,14 +29,14 @@
                     </div>
                     <hr>
 
-                    <div class="row">
+                    <div class="row text-center">
                         
-                        <div class="col-6 py-3">
+                        <div class="col-12 py-3">
                             <h3>Titre de la formation :</h3>
                             <h5> {{ $formation->titre }} </h5>
                         </div>
     
-                        <div class="col-6 py-3">
+                        <div class="col-12 py-3">
                             <h3>La duré de la formation :</h3>
                             <h5> {{ $formation->dure }} </h5>
                         </div>
@@ -73,6 +73,6 @@
 </div>
 
     {{-- footer  --}}
-<div class="container" id="pied-page">
+<div class="container" id="pied-page"></div>
 
 @endsection
