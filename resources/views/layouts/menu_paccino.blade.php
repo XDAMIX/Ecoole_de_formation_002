@@ -45,6 +45,7 @@
 
   <!-- Scripts -->
   @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
+  {{-- @vite(['resources/css/admin.css']) --}}
 
 
 </head>
@@ -151,9 +152,9 @@
           </nav> --}}
 
 
-          <a class="btn btn-light" href="/">
-            <i class="bi bi-house"></i>
-            Retour à l'acceuil
+          <a class="btn btn-light shadow" href="/">
+            <i class="bi bi-house-fill"></i>
+            acceuil
           </a>
 
 

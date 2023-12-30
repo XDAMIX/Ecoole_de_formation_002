@@ -30,7 +30,8 @@ class InscriptionRequest extends FormRequest
             'age'       => 'required',
             'wilaya'    => 'required|min:1|max:255',
             'formation' => 'required|min:1|max:255',
-            'tel'       => 'required|min:1|max:255',
+            'tel' => 'required|min:1|max:255',
+            'email'       => 'required|min:1|max:255',
         ];
     }
 }

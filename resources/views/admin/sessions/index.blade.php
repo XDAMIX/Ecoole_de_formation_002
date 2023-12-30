@@ -14,439 +14,282 @@
     </div>
 </div>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 style="font-size: 25px;text-align: center">Liste des sessions</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive" id="session-list">
-                                <table class="table cell-border compact hover " id="example" width="100%" cellspacing="0">
-                                    <thead>
-                                       
-                                        
-                                        <th >ID</th>
-                                        <th >nom</th>
-                                        <th >prof</th>
-                                        <th >formtion</th>
 
-                                        <th >date debut</th>
-                                        <th >date fin</th>
-                                        <th >staut</th>
-                                       
-                                        
-                                       
-                                        <th >action</th>
-                                    </thead>
-            
-                                    <tbody>
-             @foreach($sessions as $session)
-                    <tr class="ligne-session" style="cursor: pointer" data-session-id="{{ $session->id }}">
-                       
-                        <td>{{ $session->id }}</td>
-                        <td>{{ $session->nom }}</td>
-                        <td>{{ $session->prof }}</td>
-                        <td>{{ $session->formation }}</td>
-                    
-                        <td>{{ $session->date_debut }}</td>
-                        <td>{{ $session->date_fin }}</td>
-                        {{-- <td>{{ $session->statut }}</td> --}}
+    {{-- javascript DataTables --}}
 
-                        {{-- <td style=" color: @if($session->statut == 'En attente') bg-secondary text-white; @elseif($session->statut == 'En cours') bg-primary text-white; @elseif($session->statut == 'Termine') bg-success text-white; @endif ">{{ $session->statut }}</td> --}}
-                        <td class="@if($session->statut == 'En attente') bg-secondary text-white @elseif($session->statut == 'En cours') bg-primary text-white @elseif($session->statut == 'Termine') bg-danger text-white @endif"  class="action-column">{{ $session->statut }}</td>
-
-                    
-                       
-                <td class="action-column">
-
-                        
-                                            <div style="text-align: center;">
-                                                <form  id="delete-form-{{ $session->id }}" action="{{ url('/admin/session/'.$session->id.'/delete') }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <div class="bt-en-ligne">
-                                                     <div class="bt-en-ligne-div">
-                            
-                                                    
-                                                     <button class="btnmdf"  style="background-color: #347df1;" id="btn-mdf-{{$session->id}}" type="button">
-                                                        <span class="text"></span>
-                                                        <span class="icon">
-                                                            <i class="bi bi-pen"></i>
-                                                        </span>
-                                                     </button>
-                            
-                                                    
-                                                          <button class="btnsup" style="background-color: #e82121" id="btn-{{$session->id}}" type="button">
-                                                                 <span class="text"></span>
-                                                                 <span class="icon">
-                                                                <i class="bi bi-trash3"></i>
-                                                                 </span>
-                                                         </button>
-                                                     </div>
-
-                                                 </div>
-                            
-                            
-                            
-                            
-                                                  </form>
-                                            </div>
-                        </td>
-                    </tr>
-
-
-{{-- scrype pour le clic sur le tableau --}}
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var lignesSession = document.querySelectorAll(".ligne-session");
-
-        // Ajoutez un gestionnaire d'événements aux lignes de session
-        lignesSession.forEach(function (ligne) {
-            ligne.addEventListener("click", function (event) {
-                // Vérifiez si l'élément cliqué n'est pas dans la colonne d'action
-                if (!event.target.closest(".action-column")) {
-                    // Si l'élément cliqué n'est pas dans la colonne d'action, alors redirigez l'utilisateur
-                    // Récupérez l'ID de la session à partir de l'attribut data
-                    const sessionId = this.getAttribute("data-session-id");
-
-                    // Redirigez l'utilisateur vers la page "Voir Session" avec l'ID en paramètre
-                    window.location.href = "{{ url('/admin/session/voir') }}/" + sessionId;
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                processing: true,
+                dom: '<"buttons-container"lBfrtip>', // Custom button container
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ], // Specify the options
+                buttons: [{
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Excel',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"></i> PDF',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i> Imprimer',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'colvis',
+                        text: '<i class="fas fa-columns"></i> Affichage des Colonnes',
+                        className: 'btn btn-dark'
+                    },
+                ],
+                language: {
+                    "lengthMenu": "Afficher _MENU_ éléments par page",
+                    "zeroRecords": "Aucun enregistrement trouvé",
+                    "info": "Page _PAGE_ sur _PAGES_",
+                    "infoEmpty": "Aucun enregistrement disponible",
+                    "infoFiltered": "(filtré de _MAX_ total des enregistrements)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                },
+                initComplete: function() {
+                    // Ajouter des styles personnalisés
+                    $('.dataTables_length select').css('width',
+                        '60px'); // ajustez la largeur selon vos besoins
                 }
             });
         });
-    });
-</script>
-
-
-
-
-
-                    <script>
-
-                        //    <!-- script pour le button supprimer  -->
-
-                           var bouton = document.getElementById("btn-{{ $session->id }}");
-                            bouton.addEventListener("click",function(){
-                                const swalWithBootstrapButtons = Swal.mixin({
-                                    customClass: {
-                                        confirmButton: 'btn btn-success',
-                                        cancelButton: 'btn btn-danger'
-                                    },
-                                    buttonsStyling: false
-                                })
-                                swalWithBootstrapButtons.fire({
-                                    title: 'Vous êtes sûr  !   {{ $session->nom}}',
-                                    text: "Voulez-vous supprimer la session : {{ $session->nom}}",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Supprimer!',
-                                    cancelButtonText: 'Annuler!',
-                                    reverseButtons: true
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        // Soumettre le formulaire de suppression
-                                        var form = document.getElementById("delete-form-{{ $session->id}}");
-                                         form.submit();
-                                        swalWithBootstrapButtons.fire(
-                                            'Supprimer !',
-                                            'Votre session  {{ $session->nom }}  a ete supprime.',
-                                            'success'
-                                        )
-                                    } else if (
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-                                      
-                                    }
-                                })
-                            });
-                        //    <!-- script pour le button modifer   -->
-
-                           var boutonmdf = document.getElementById("btn-mdf-{{ $session->id}}");
-                           boutonmdf.addEventListener("click",function(){
-                                const swalWithBootstrapButtons = Swal.mixin({
-                                    customClass: {
-                                        confirmButton: 'btn btn-success',
-                                        cancelButton: 'btn btn-danger'
-                                    },
-                                    buttonsStyling: false
-                                })
-                                swalWithBootstrapButtons.fire({
-                                    title: 'MODIFER !',
-                                    text: "Voulez-vous  modifier la session : {{ $session->nom }}",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'OUI, Modifer!',
-                                    cancelButtonText: 'NO, Annuler!',
-                                    reverseButtons: true
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        window.location.href="{{ url('/admin/session/'.$session->id.'/edit') }}"
-
-                                    } else if (
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-
-                                    }
-                                })
-                            });
-                        //    <!-- script pour le button statut   -->
-                        var boutonmdf = document.getElementById("btn-statut-{{ $session->id}}");
-boutonmdf.addEventListener("click", function () {
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger',
-        },
-        buttonsStyling: false,
-    });
-
-    swalWithBootstrapButtons
-        .fire({
-            title: 'STATUT de session {{ $session->nom }}',
-            text: "Choisissez le statut de la session : {{ $session->nom }}",
-            icon: 'warning',
-            showCancelButton: true, // Ne pas afficher le bouton "Annuler"
-            showConfirmButton:false,
-            confirmButtonText: 'confirme',
-            confirmButtonColor: '#6c757d', // Couleur personnalisée pour le bouton "En Attente"
-            reverseButtons: true,
-            focusConfirm: false, // N'active pas le bouton automatiquement
-            html: `
-                <button id="btn-attente" class="btn btn-secondary">En Attente</button>
-                <button id="btn-cours" class="btn btn-primary">En Cours</button>
-                <button id="btn-termine" class="btn btn-success">Terminé</button>
-            `,
-        })
-        .then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "{{ url('/admin/session/'.$session->id.'/statutatt') }}?status=attente";
-                
-            } else if (result.dismiss === Swal.DismissReason.close) {
-                // L'utilisateur a fermé la boîte de dialogue
-            }
-        });
-
-    // Ajouter des écouteurs d'événements aux boutons personnalisés
-    const btnAttente = document.getElementById("btn-attente");
-    btnAttente.addEventListener("click", function () {
-        window.location.href = "{{ url('/admin/session/'.$session->id.'/statutatt') }}";
-    });
-
-    const btnCours = document.getElementById("btn-cours");
-    btnCours.addEventListener("click", function () {
-        window.location.href = "{{ url('/admin/session/'.$session->id.'/statutcour') }}";
-    });
-
-    const btnTermine = document.getElementById("btn-termine");
-    btnTermine.addEventListener("click", function () {
-        window.location.href = "{{ url('/admin/session/'.$session->id.'/statutterm') }}";
-    });
-});
-
-
-
-
-function getColorClass($statut) {
-    switch ($statut) {
-        case 'En Attente':
-            return 'bg-secondary text-white'; // Gris
-        case 'En Cours':
-            return 'bg-primary text-white';   // Bleu
-        case 'Terminé':
-            return 'bg-success text-white';  // Vert
-        default:
-            return 'bg-secondary text-white'; // Par défaut, utilisez la classe "bg-secondary"
-    }
-}
-
-
-                        </script>
-
-
-
-
-
-
-<!-- Ajoutez le code JavaScript après la création de la table -->
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Sélectionnez toutes les cellules de la colonne "Action" ayant la classe "btn-mdf"
-        const actionCells = document.querySelectorAll(".btn-mdf");
-
-        // Parcourez les cellules et empêchez le clic
-        actionCells.forEach(function (cell) {
-            cell.addEventListener("click", function (event) {
-                // Empêchez le déclenchement de l'événement de clic
-                event.stopPropagation();
-            });
-        });
-    });
-</script>
-
-
-
-
-
-
-                        
-                    @endforeach
-                                    </tbody>
-                                </table>
-
-
-                                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-                                
- 
-                                <script>
-                                    // scrypte pour bare de recherche et pdf print et excel
-                                    $(document).ready(function() {
-                                    $('#example').DataTable( {
-                                        dom: 'Bfrtip',
-                                        buttons: [
-                                            'excel', 'pdf', 'print'
-                                        ]
-                                    } );
-                                } );
-                                </script>
-
-                   
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-                <!-- /.container-fluid -->
-
-
-            {{-- css pour le bouton modifer --}}
-            <style>
-             .btnmdf{
-             appearance: none;
-             background-color: transparent;
-             border: 0.125em solid #1A1A1A;
-             border-radius: 0.9375em;
-             box-sizing: border-box;
-             color: #090606;
-             cursor: pointer;
-             display: inline-block;
-             font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-             font-size: 16px;
-             font-weight: 600;
-             line-height: normal;
-             margin: 0;
-             min-height: 1em;
-             min-width: 0;
-             outline: none;
-             padding: 0.5em ;
-             text-align: center;
-             text-decoration: none;
-             transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-             user-select: none;
-             -webkit-user-select: none;
-             touch-action: manipulation;
-             will-change: transform;
-            
-            }
-            
-            .btnmdf:disabled {
-             pointer-events: none;
-            }
-            
-            .btnmdf:hover {
-             color: #fff;
-             background-color: #1A1A1A;
-             box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-             transform: translateY(-2px);
-            }
-            
-            .btnmdf:active {
-             box-shadow: none;
-             transform: translateY(0);
-            }
-            </style>
-            
-            {{-- style pour le bouton supprimer  --}}
-            <style>
-                .btnsup{
-                    appearance: none;
-             background-color: transparent;
-             border: 0.125em solid #1A1A1A;
-             border-radius: 0.9375em;
-             box-sizing: border-box;
-             color: #070707;
-             cursor: pointer;
-             display: inline-block;
-             font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-             font-size: 16px;
-             font-weight: 600;
-             line-height: normal;
-             margin: 0;
-             min-height: 1em;
-             min-width: 0;
-             outline: none;
-             padding: 0.5em ;
-             text-align: center;
-             text-decoration: none;
-             transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-             user-select: none;
-             -webkit-user-select: none;
-             touch-action: manipulation;
-             will-change: transform;
-            }
-            
-            .btnsup:disabled {
-             pointer-events: none;
-            }
-            
-            .btnsup:hover {
-             color: #fff;
-             background-color: #1A1A1A;
-             box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-             transform: translateY(-2px);
-            }
-            
-            .btnsup:active {
-             box-shadow: none;
-             transform: translateY(0);
-            }
-            </style>
-
-
-
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Obtenez l'URL actuelle de la page
-        const currentPageUrl = window.location.href;
-    
-        // Restaurer la position de défilement stockée en tant que cookie
-        const scrollPosition = parseInt(localStorage.getItem(currentPageUrl) || 0);
-        window.scrollTo(0, scrollPosition);
-    
-        // Enregistrer la position de défilement lorsque la page est défilée
-        window.addEventListener("scroll", function () {
-            const currentPosition = window.pageYOffset;
-            localStorage.setItem(currentPageUrl, currentPosition);
-        });
-    });
     </script>
-    
-                    
+
+    {{-- CSS  --}}
+
+    <style>
+        .buttons-container {
+            text-align: left;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #titre-page {
+            margin-bottom: 20px;
+        }
+    </style>
+
+
+{{-- -------------------------------------------------------------------------------------- --}}
+  {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
+
+
+
+    {{-- html  --}}
+
+    <div class="container-fluid" style="padding-top:10px;padding-bottom:80px;">
+        <div class="row animate__animated animate__backInLeft">
+            <div class="col-md-12">
+                <div class="card shadow" style="background-color: #ffff;">
+                    <div class="card-body">
+                        <table id="example" class="table table-bordered " style="width:100%">
+                            <thead>
+                                <tr>
+                                    {{-- <th  scope="col">N°</th> --}}
+                                    <th  scope="col">Titre</th>
+                                    <th  scope="col">Profésseur</th>
+                                    <th  scope="col">Formation</th>
+                                    <th  scope="col">Date début</th>
+                                    <th  scope="col">Date fin</th>
+                                    <th  scope="col">Statut</th>
+                                   
+                                    
+                                    <th  scope="col">Action</th>
+                            </thead>
+
+                            <tbody class="table-group-divider">
+                                @foreach ($sessions as $session)
+                                    <tr>
+                                        {{-- <td scope="row">{{ $session->id }}</td> --}}
+                                        <td class="align-middle">{{ $session->nom }}</td>
+                                        <td class="align-middle">{{ $session->nom_prof }}-{{ $session->prenom_prof }}</td>
+                                        <td class="align-middle">{{ $session->formation }}</td>                                   
+                                        <td class="text-center align-middle">{{ $session->date_debut }}</td>
+                                        <td class="text-center align-middle">{{ $session->date_fin }}</td>
                 
+                                        <td class="text-center align-middle @if($session->statut == 'En attente') bg-primary text-white @elseif($session->statut == 'En cours' || $session->statut == 'Prolongée') bg-success text-white @elseif($session->statut == 'Terminée') bg-danger text-white @endif"  class="action-column">{{ $session->statut }}</td>
+                
+                                    
+                                        <td class="align-middle" style="width:240px;">
+
+                                            <div class="container">
+                                                <div class="row">
+
+                                                    <div class="col-4">
+                                                        {{-- show button    --}}
+                                                        <form class="show-form"
+                                                            action="{{ url('/admin/session/voir/' . $session->id ) }}"
+                                                            method="GET">
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="btn btn-outline-info alpa shadow"><i
+                                                                    class="bi bi-eye"></i></button>
+                                                        </form>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        {{-- edit button    --}}
+                                                        <form class="edit-form" action=""
+                                                            data-id="{{ $session->id }}"
+                                                            data-name="{{ $session->nom }}"
+                                                            method="GET">
+                                                            @csrf
+                                                            <button type="button" onclick="edit_confirmation(this)"
+                                                                class="btn btn-outline-primary alpa shadow"><i
+                                                                    class="bi bi-pen"></i></button>
+                                                        </form>
+                                                    </div>
+
+
+                                                    <div class="col-4">
+                                                        {{-- delete button  --}}
+                                                        <form class="delete-form" action=""
+                                                            data-id="{{ $session->id }}"
+                                                            data-name="{{ $session->nom }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" onclick="supprimer_confirmation(this)"
+                                                                class="btn btn-outline-danger alpa shadow"><i
+                                                                    class="bi bi-trash3"></i></button>
+                                                        </form>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+
+                                    </tr>
+                                    
+                                @endforeach
+                                
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    {{-- <th   scope="col">N°</th> --}}
+                                    <th   scope="col">Titre</th>
+                                    <th   scope="col">Profésseur</th>
+                                    <th   scope="col">Formation</th>
+                                    <th   scope="col">Date début</th>
+                                    <th   scope="col">Date fin</th>
+                                    <th   scope="col">Statut</th>
+                                   
+                                    
+                                    <th >Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{-- -------------------------------------------------------------------------------------- --}}
+
+
+
+        {{-- script suppression  --}}
+        <script>
+            function supprimer_confirmation(button) {
+                // Utilisez le bouton pour obtenir le formulaire parent
+                const form = button.closest('.delete-form');
+
+                // Vérifiez si le formulaire a été trouvé
+                if (form) {
+                    // Utilisez le formulaire pour extraire l'ID
+                    const id = form.dataset.id;
+                    const name = form.dataset.name;
+
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) de vouloir supprimer cette session ?",
+                        text: name,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonColor: "#198754",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Oui, Supprime-le",
+                        cancelButtonText: "Non, Annuler",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                            form.action = `/admin/session/${id}/delete`;
+                            form.submit();
+
+                            Swal.fire({
+                                title: "Session supprimée !",
+                                icon: "success"
+                            });
+                        }
+                    });
+                } else {
+                    console.error("Le formulaire n'a pas été trouvé.");
+                }
+            }
+        </script>
+
+
+
+
+        {{-- script modifier  --}}
+        <script>
+            function edit_confirmation(button) {
+                // Utilisez le bouton pour obtenir le formulaire parent
+                const form = button.closest('.edit-form');
+
+                // Vérifiez si le formulaire a été trouvé
+                if (form) {
+                    // Utilisez le formulaire pour extraire l'ID
+                    const id = form.dataset.id;
+                    const name = form.dataset.name;
+
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) de vouloir modifier cette session?",
+                        text: name,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonColor: "#198754",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Oui",
+                        cancelButtonText: "Non",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                            form.action = `/admin/session/${id}/edit`;
+                            form.submit();
+                        }
+                    });
+                } else {
+                    console.error("Le formulaire n'a pas été trouvé.");
+                }
+            }
+        </script>
+
+
+
+
+{{-- -----------------------------------------------------------------------------------------------------    --}}
+
+   
 
 {{-- footer  --}}
 <div class="container" id="pied-page">

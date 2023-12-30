@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('temoignages', function (Blueprint $table) {
-            $table->Increments('id');
+            $table->id();
             $table->string('nom');
             $table->string('poste');
             $table->text('mot',16383);

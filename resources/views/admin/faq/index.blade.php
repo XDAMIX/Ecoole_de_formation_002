@@ -1,507 +1,270 @@
 @extends('layouts.admin_menu')
 @section('content')
-
-
-
-{{-- retour à l'acceuil  --}}
-<div class="container" id="titre-page">
-    <div class="row">
-        <div class="col-2 d-flex align-items-center">
-            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
-        </div>
-        <div class="col-10 d-flex align-items-center">
-            <h2>Foire au questions</h2>
+    {{-- retour à l'acceuil  --}}
+    <div class="container" id="titre-page">
+        <div class="row">
+            <div class="col-2 d-flex align-items-center">
+                <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
+                        class="btn-description">Acceuil</span></a>
+            </div>
+            <div class="col-10 d-flex align-items-center">
+                <h2>Foire au questions</h2>
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="container-fluid" style="padding-top: 10px;">
+    {{-- -------------------------------------------------------------------------------------- --}}
+
+    <div class="container" style="padding-top: 10px;">
+        <div class="row faq">
+
+            <div class="col-12">
+
+                <ul class="faq-list" style="width: 100%;">
+
+                    @foreach ($questions as $question)
+                        <div class="row">
+
+                            <div class="col-12 animate__animated animate__backInLeft" style="margin-bottom: 10px;">
+
+                                <div class="card shadow">
+
+                                    <div class="card-body">
+                                        <li>
+
+                                            <div data-bs-toggle="collapse" class="collapsed question"
+                                            href="{{ '#faq' . $question->id }}" style="padding:20px;">
+                                            <i class="bi bi-chevron-down icon-show ifaq"></i><i
+                                                class="bi bi-chevron-up icon-close ifaq"></i>
+                                                <label for="">Question : {{ $question->id }}</label>
+                                                <p>{{ $question->question }}</p>
+                                            </div>
+
+                                            <div id="{{ 'faq' . $question->id }}" class="collapse"
+                                                data-bs-parent=".faq-list" style="padding-left:26px;color:rgb(55, 75, 172);">
+                                                <label for="" style="padding-left: 26px;">Réponse :</label>
+                                                <p>{{ $question->reponse }}</p>
+                                            </div>
+
+                                        </li>
+
+                                        {{-- bouttons --}}
+                                        <div class="form-group row" id="double-btn"
+                                            style="padding-top:10px;text-align:center;">
 
 
+                                            <div class="col-6">
+
+                                                {{-- edit button    --}}
+                                                <form class="edit-form" action="" data-id="{{ $question->id }}"
+                                                    data-name="{{ $question->question }}" method="GET">
+                                                    @csrf
+                                                    <button type="button" onclick="edit_confirmation(this)"
+                                                        class="btn btn-outline-primary alpa shadow"
+                                                        style="margin-bottom: 5px;"><i class="bi bi-pen"></i> <span
+                                                            class="btn-description">Modifier</span></button>
+                                                </form>
+
+                                            </div>
 
 
+                                            <div class="col-6">
 
-    <div class="row " style="justify-content: center; align-items: center;">
-        @foreach($questions as $question)
-        <div class="col-md-4">
+                                                {{-- delete button  --}}
+                                                <form class="delete-form" action="" data-id="{{ $question->id }}"
+                                                    data-name="{{ $question->question }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" onclick="supprimer_confirmation(this)"
+                                                        class="btn btn-outline-danger alpa shadow"><i
+                                                            class="bi bi-trash3"></i>
+                                                        <span class="btn-description">Supprimer</span></button>
+                                                </form>
 
+                                            </div>
 
-            <div class="carde">
-                <div class="temporary_text">
-                    <h6 style="text-align: center;">Question</h6>
-                    <p class="carde_quistion">{{$question->question}}</p>
-                </div>
-                <div class="carde_content">
-                    <!-- <span class="carde_title" style="text-align: center;">Repnse</span> -->
-                    <h6 style="text-align: center;">Réponse</h6>
-                    <!-- <span class="carde_subtitle">Thsi is a subtitle of this page. Let us see how it looks on the Web.</span> -->
-                    <p class="carde_description"> {{$question->reponse}} </p>
-
-                    <div style="text-align: center;">
-                        <form id="delete-form-{{ $question->id }}" action="{{ url('/admin/faq/'.$question->id.'/delete') }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <div class="bt-en-ligne">
-                                <div class="bt-en-ligne-div">
-
-
-                         <button class="btn-mdf btn-r" id="btn-mdf-{{$question->id}}" type="button">
-                            <span class="text">Modifier</span>
-                            <span class="icon">
-                                <i class="bi bi-pen"></i>
-                            </span>
-                        </button>
-
-                         </div>
-
-                         <div class="bt-en-ligne-div"   id="mydiv">
-                              <button class="btn-sup btn-r" id="btn-{{$question->id}}" type="button">
-                                     <span class="text">Supprimer</span>
-                                     <span class="icon">
-                                    <i class="bi bi-trash3"></i>
-                                     </span>
-                             </button>
-                         </div>
-                    </div>
-
-
-
-
-                    </form>
-                    </div>
                                         </div>
-              </div>
+                                        {{-- bouttons         --}}
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
 
+                </ul>
 
+            </div>
+        </div>
 
-            <script>
-
-                                               //    <!-- script pour le button supprimer  -->
-
-                                                  var bouton = document.getElementById("btn-{{$question->id}}");
-                                                   bouton.addEventListener("click",function(){
-                                                       const swalWithBootstrapButtons = Swal.mixin({
-                                                           customClass: {
-                                                               confirmButton: 'btn btn-success',
-                                                               cancelButton: 'btn btn-danger'
-                                                           },
-                                                           buttonsStyling: false
-                                                       })
-                                                       swalWithBootstrapButtons.fire({
-                                                           title: 'Vous êtes sûr ! ',
-                                                           text: "Voulez-vous supprimer cette question  .? ",
-                                                           icon: 'warning',
-                                                           showCancelButton: true,
-                                                           confirmButtonText: 'OUI, Supprimer!',
-                                                           cancelButtonText: 'NO, Annuler!',
-                                                           reverseButtons: true
-                                                       }).then((result) => {
-                                                           if (result.isConfirmed) {
-                                                               // Soumettre le formulaire de suppression
-                                                               var form = document.getElementById("delete-form-{{ $question->id }}");
-                                                                form.submit();
-                                                               swalWithBootstrapButtons.fire(
-                                                                   'Deleted!',
-                                                                   'Your file has been deleted.',
-                                                                   'success'
-                                                               )
-                                                           } else if (
-                                                               result.dismiss === Swal.DismissReason.cancel
-                                                           ) {
-                                                               swalWithBootstrapButtons.fire(
-                                                                   'Cancelled',
-                                                                   'Your file is safe :)',
-                                                                   'error'
-                                                               )
-                                                           }
-                                                       })
-                                                   });
-                                               //    <!-- script pour le button modifer   -->
-
-                                                  var boutonmdf = document.getElementById("btn-mdf-{{ $question->id}}");
-                                                  boutonmdf.addEventListener("click",function(){
-                                                       const swalWithBootstrapButtons = Swal.mixin({
-                                                           customClass: {
-                                                               confirmButton: 'btn btn-success',
-                                                               cancelButton: 'btn btn-danger'
-                                                           },
-                                                           buttonsStyling: false
-                                                       })
-                                                       swalWithBootstrapButtons.fire({
-                                                           title: 'MODIFER !   {{ $question->id}}',
-                                                           text: "Voulez-vous faire des modifcation ",
-                                                           icon: 'warning',
-                                                           showCancelButton: true,
-                                                           confirmButtonText: 'OUI, Modifer!',
-                                                           cancelButtonText: 'NO, Annuler!',
-                                                           reverseButtons: true
-                                                       }).then((result) => {
-                                                           if (result.isConfirmed) {
-                                                               window.location.href="{{ url('/admin/faq/'.$question->id.'/edit') }}"
-
-                                                           } else if (
-                                                               result.dismiss === Swal.DismissReason.cancel
-                                                           ) {
-
-                                                           }
-                                                       })
-                                                   });
-                                               </script>
-
-
-</div>
-        @endforeach
     </div>
-</div>
 
-<!-- css pour la nouvelle structure  -->
+    {{-- -------------------------------------------------------------------------------------- --}}
+    <style>
+        /*--------------------------------------------------------------
+          # Frequently Asked Questioins
+          --------------------------------------------------------------*/
+        .faq {
+            padding: 60px 0;
+        }
 
-<style>
-    .carde {
-        position: relative;
-        /* width: 400px; */
-        height: 250px;
-        color: #2e2d31;
-        background: purple;
-        overflow: hidden;
-        border-radius: 20px;
-        margin: 5px;
-        box-shadow: 5px 5px 5px 5px gray;
-    }
+        .faq .faq-list {
+            padding: 0;
+            list-style: none;
+        }
 
-    .carde_quistion {
-        font-size: 14px;
-        text-decoration: none;
-        position: absolute;
-        padding-top: 2px;
-    }
+        .faq .faq-list li {
+            border-bottom: 1px solid #d9f1f2;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            font-size: 18px;
+        }
 
-    .carde:hover .carde_quistion {
-        opacity: 1;
-        transition-delay: .25s;
-    }
+        .faq .faq-list .question {
+            display: block;
+            position: relative;
+            font-family: var(--fontfr4);
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 400;
+            padding-left: 25px;
+            cursor: pointer;
+            color: var(--color4);
+            transition: 0.3s;
+        }
 
-    .temporary_text {
-        /* font-weight: bold; */
-        font-size: 24px;
-        padding: 6px 12px;
-        color: #f8f8f8;
-    }
+        .faq .faq-list .ifaq {
+            font-size: 16px;
+            position: relative;
+            /* position: absolute; */
+            /* left: 0;
+            top: -2px; */
+            padding-right: 5px;
+        }
 
-    .carde_title {
-        font-weight: bold;
-    }
+        .faq .faq-list p {
+            margin-bottom: 0;
+            padding: 10px 0 0 25px;
+        }
 
-    .carde_content {
-        /* position: absolute; */
-        left: 0;
-        bottom: 0;
-        /* edit the width to fit card */
-        width: 100%;
-        height: 100%;
-        padding: 20px;
-        background: #f2f2f2;
-        border-top-left-radius: 20px;
-        /* edit here to change the height of the content box */
-        transform: translateY(150px);
-        transition: transform .25s;
-    }
+        .faq .faq-list .icon-show {
+            display: none;
+        }
 
-    .carde_content::before {
-        content: '';
-        position: absolute;
-        top: -47px;
-        right: -45px;
-        width: 100px;
-        height: 100px;
-        transform: rotate(-175deg);
-        border-radius: 50%;
-        box-shadow: inset 48px 48px #f2f2f2;
-    }
+        .faq .faq-list .collapsed {
+            color: black;
+        }
 
-    .carde_title {
-        color: #131313;
-        line-height: 15px;
-    }
+        .faq .faq-list .collapsed:hover {
+            color: var(--color4);
+        }
 
-    .carde_subtitle {
-        display: block;
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
+        .faq .faq-list .collapsed .icon-show {
+            display: inline-block;
+            transition: 0.6s;
+        }
 
-    .carde_description {
-        font-size: 14px;
-        opacity: 0;
-        transition: opacity .5s;
-    }
-
-    .carde:hover .carde_content {
-        transform: translateY(0);
-    }
-
-    .carde:hover .carde_description {
-        opacity: 1;
-        transition-delay: .25s;
-    }
-</style>
+        .faq .faq-list .collapsed .icon-close {
+            display: none;
+            transition: 0.2s;
+        }
+        label{
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    </style>
 
 
-<style>
-    .head {
-        text-align: center;
-        color: var(--color5);
-    }
-
-    .carde {
-        /* text-align: center;
-        margin-bottom: 10px;
-        background-color: white; */
-    }
-
-    .carde-body {
-        padding: 10px;
-    }
-
-    label {
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-
-    .buttons {
-        padding: 10px;
-        text-align: center;
-    }
-
-    .grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 20px;
-  }
-</style>
-{{-- new style  --}}
-
-<style>
-    
-  /* boutton ajouter une formation */
-
-.button-add-new {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 38px;
-  border-radius: 16px;
-  border: 1px solid transparent;
-  color: #FFFFFF;
-  background-color: #1DC9A0;
-  font-size: 20px;
-  letter-spacing: 1px;
-  transition: all 0.15s linear;
- }
- 
- .button-add-new:hover {
-  background-color: rgba(29, 201, 160, 0.08);
-  border-color: #1DC9A0;
-  color: #1DC9A0;
-  transform: translateY(-5px) scale(1.05);
- }
- 
- .button-add-new:active {
-  background-color: transparent;
-  border-color: #1DC9A0;
-  color: #1DC9A0;
-  transform: translateY(5px) scale(0.95);
- }
- 
- .button-add-new:disabled {
-  background-color: rgba(255, 255, 255, 0.16);
-  color: #8E8E93;
-  border-color: #8E8E93;
- }
- /* -------------------  fin  ------------- */
-
- /* button modifer */
-
- .btn-mdf {
-                              width: 150px;
-                              height: 50px;
-                              cursor: pointer;
-                              display: flex;
-                              align-items: center;
-                              background: #5EB1FD;
-                              border: none;
-                              border-radius: 10px;
-                              box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-                              background:#3165F6;
-                              white-space: nowrap; 
-                              
-                            }
-                            .in{
-                              position: absolute;
-                              bottom: 0;
-                              left: 0;
-                              width: 100%;
-                              padding: 10px;
-                              
-                            }
-                            
-                            .btn-mdf span {
-                              transition: 200ms;
-                            }
-                            
-                            .btn-mdf .text {
-                              transform: translateX(20px);
-                              color: white;
-                              font-weight: bold;
-                              text-align: center;
-                            }
-
-                            
-                            .btn-mdf .icon {
-                              position: absolute;
-                              /* border-left: 1px solid #5EB1FD; */
-                              transform: translateX(110px);
-                              height: 40px;
-                              width: 40px;
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                              padding-top: 0px;
-                            }
-                            
-                            .btn-mdf .i {
-                              /* width: 15px; */
-                              fill: #eee;
-                            }
-                            
-                            .btn-mdf:hover {
-                              background: #5EB1FD;
-                            }
-                            
-                            .btn-mdf:hover .text {
-                              color: transparent;
-                            }
-                            
-                            .btn-mdf:hover .icon {
-                              width: 150px;
-                              border-left: none;
-                              transform: translateX(0);
-                            }
-                            
-                            .btn-mdf:focus {
-                              outline: none;
-                            }
-                            
-                            .btn-mdf:active .icon svg {
-                              transform: scale(0.8);
-                            }
-
-                            /* -------fin mdf------ */
- /* button supprimer */
-
-
-                              .btn-sup {
-                                        width: 150px;
-                                        height: 50px;
-                                        cursor: pointer;
-                                        display: flex;
-                                        align-items: center;
-                                        background: red;
-                                        border: none;
-                                        border-radius: 10px;
-                                        box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-                                        background:#e62222;
-                                        white-space: nowrap;  
-
-                                                                          
-                                      }
-                                      
-                                       
-                                      .btn-sup span {
-                                        transition: 200ms;
-                                    
-                                        
-                                       }
-                                       
-                                       .btn-sup .text {
-                                        transform: translateX(20px);
-                                        color: white;
-                                        font-weight: bold;
-                                        text-align: center;
-                           
-                                       }
-                                      
-                                       
-                                       .btn-sup .icon {
-                                        position: absolute;
-                                        /* border-left: 1px solid #5EB1FD; */
-                                        transform: translateX(110px);
-                                        height: 40px;
-                                        width: 40px;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        padding-top: 0px;
-                                       }
-                                       
-                                       .btn-sup .i {
-                                        /* width: 15px; */
-                                        fill: #eee;
-                                       
-                                       }
-                                       
-                                       .btn-sup:hover {
-                                        background: #ff3636;
-                                       }
-                                       
-                                       .btn-sup:hover .text {
-                                        color: transparent;
-                                       }
-                                       
-                                       .btn-sup:hover .icon {
-                                        width: 150px;
-                                        border-left: none;
-                                        transform: translateX(0);
-                                       }
-                                       
-                                       .btn-sup:focus {
-                                        outline: none;
-                                       }
-                                       
-                                       .btn-sup:active .icon svg {
-                                        transform: scale(0.8);
-                                       }
-                                       /* fin btn sup */
-
-                                                                                       /* aligniement de bouton sur les div  */
- .bt-en-ligne{
-
-display: flex;
-
-justify-content: center;
-/* position: fixed; */
-bottom: 0;
-left: 0;
-right: 0;
-margin: auto;
-}
-.bt-en-ligne-div{
-margin: 1%;
-}
-
-/* fin */
+    {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
 
 
 
-</style>
+
+        {{-- script suppression  --}}
+        <script>
+            function supprimer_confirmation(button) {
+                // Utilisez le bouton pour obtenir le formulaire parent
+                const form = button.closest('.delete-form');
+  
+                // Vérifiez si le formulaire a été trouvé
+                if (form) {
+                    // Utilisez le formulaire pour extraire l'ID
+                    const id = form.dataset.id;
+                    const name = form.dataset.name;
+  
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) de vouloir supprimer cette Question/Réponse ?",
+                        // text: name,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonColor: "#198754",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Oui, Supprime-la",
+                        cancelButtonText: "Non, Annuler",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                            form.action = `/admin/faq/${id}/delete`;
+                            form.submit();
+  
+                            Swal.fire({
+                                title: "Question/Réponse supprimée !",
+                                icon: "success"
+                            });
+                        }
+                    });
+                } else {
+                    console.error("Le formulaire n'a pas été trouvé.");
+                }
+            }
+        </script>
+  
+  
+  
+  
+        {{-- script modifier  --}}
+        <script>
+            function edit_confirmation(button) {
+                // Utilisez le bouton pour obtenir le formulaire parent
+                const form = button.closest('.edit-form');
+  
+                // Vérifiez si le formulaire a été trouvé
+                if (form) {
+                    // Utilisez le formulaire pour extraire l'ID
+                    const id = form.dataset.id;
+                    const name = form.dataset.name;
+  
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) de vouloir modifier cette Question/Réponse ?",
+                        // text: name,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonColor: "#198754",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Oui",
+                        cancelButtonText: "Non",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                            form.action = `/admin/faq/${id}/edit`;
+                            form.submit();
+                        }
+                    });
+                } else {
+                    console.error("Le formulaire n'a pas été trouvé.");
+                }
+            }
+        </script>
 
 
-{{-- footer  --}}
-<div class="container" id="pied-page">
 
 
-@endsection
+
+
+
+    {{-- footer  --}}
+    <div class="container" id="pied-page">
+
+        
+    @endsection

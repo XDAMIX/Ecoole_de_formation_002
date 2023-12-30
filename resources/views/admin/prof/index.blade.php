@@ -1,301 +1,294 @@
 @extends('layouts.admin_menu')
 @section('content')
-
-
-{{-- retour à l'acceuil  --}}
-<div class="container" id="titre-page">
-    <div class="row">
-        <div class="col-2 d-flex align-items-center">
-            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
-        </div>
-        <div class="col-10 d-flex align-items-center">
-            <h2>Profésseurs</h2>
+    {{-- retour à l'acceuil  --}}
+    <div class="container" id="titre-page">
+        <div class="row">
+            <div class="col-2 d-flex align-items-center">
+                <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
+                        class="btn-description">Acceuil</span></a>
+            </div>
+            <div class="col-10 d-flex align-items-center">
+                <h2>Liste des Profésseurs</h2>
+            </div>
         </div>
     </div>
-</div>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">liste des Profs</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="example" width="100%" cellspacing="0">
-                                    <thead>
-                                        <th>N°</th>
-                                        <th >sexe</th>
-                                        <th >nom</th>
-                                        <th >Prénom</th>
-                        
-                                        <th >Âge</th>
-                                        <th >email</th>
-                                        <th >tel</th>
-                                        <th >specialite</th>
-                                        
-                                       
-                                        <th >action</th>
-                                    </thead>
-            
-                                    <tbody>
-                                        @foreach($profs as $prof)
-                    <tr>
-                        <td>{{ $prof->id }}</td>
-                        <td>{{ $prof->sexe }}</td>
-                        <td>{{ $prof->nom }}</td>
-                        <td>{{ $prof->prenom }}</td>
-                    
-                        <td>{{ $prof->age }}</td>
-                        <td>{{ $prof->email }}</td>
-                        <td>{{ $prof->tel }}</td>
-                        <td>{{ $prof->specialite }}</td>
-                       
-                
 
-                        <td>
-                                            <div style="text-align: center;">
-                                                <form  id="delete-form-{{ $prof->id }}" action="{{ url('/admin/prof/'.$prof->id.'/delete') }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
 
-                                                <div class="bt-en-ligne">
-                                                     <div class="bt-en-ligne-div">
-                            
-                                                     <!-- <button class="btn-mdf btn-r" id="btn-mdf-{{ $prof->id}}" type="button" onclick="window.location.href='{{ url('/admin/prof/'.$prof->id.'/edit') }}';"> -->
-                                                     <button class="btnmdf"  style="background-color: #347df1;" id="btn-mdf-{{$prof->id}}" type="button">
-                                                        <span class="text"></span>
-                                                        <span class="icon">
-                                                            <i class="bi bi-pen"></i>
-                                                        </span>
-                                                     </button>
-           
-                                                          <button  class="btnsup" style="background-color: #e82121"  id="btn-{{$prof->id}}" type="button">
-                                                                 <span class="text"></span>
-                                                                 <span class="icon">
-                                                                <i class="bi bi-trash3"></i>
-                                                                 </span>
-                                                         </button>
-                                                    
-                                                     </div>
-                                                 </div>
-                            
-                            
-                            
-                            
-                                                  </form>
+    {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
+
+    {{-- javascript DataTables --}}
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                processing: true,
+                dom: '<"buttons-container"lBfrtip>', // Custom button container
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ], // Specify the options
+                buttons: [{
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Excel',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"></i> PDF',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i> Imprimer',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'colvis',
+                        text: '<i class="fas fa-columns"></i> Affichage des Colonnes',
+                        className: 'btn btn-dark'
+                    },
+                ],
+                language: {
+                    "lengthMenu": "Afficher _MENU_ éléments par page",
+                    "zeroRecords": "Aucun enregistrement trouvé",
+                    "info": "Page _PAGE_ sur _PAGES_",
+                    "infoEmpty": "Aucun enregistrement disponible",
+                    "infoFiltered": "(filtré de _MAX_ total des enregistrements)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                },
+                initComplete: function() {
+                    // Ajouter des styles personnalisés
+                    $('.dataTables_length select').css('width',
+                        '60px'); // ajustez la largeur selon vos besoins
+                }
+            });
+        });
+    </script>
+
+    {{-- CSS  --}}
+
+    <style>
+        .buttons-container {
+            text-align: left;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #titre-page {
+            margin-bottom: 20px;
+        }
+    </style>
+    {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
+
+
+
+    {{-- html  --}}
+
+    <div class="container-fluid" style="padding-top:10px;padding-bottom:80px;">
+        <div class="row animate__animated animate__backInLeft">
+            <div class="col-md-12">
+                <div class="card shadow" style="background-color: #ffff;">
+                    <div class="card-body">
+                        <table id="example" class="table table-bordered text-center" style="width:100%">
+                        {{-- <table id="example" class="table cell-border compact hover" style="width:100%;"> --}}
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    {{-- <th>Sexe</th> --}}
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+
+                                    <th>N° de téléphone</th>
+                                    <th>E-Mail</th>
+                                    {{-- <th>Specialite</th> --}}
+
+
+                                    <th>Actions</th>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($profs as $prof)
+                                    <tr>
+                                        <td class="align-middle" style="width:80px;"><div style="background-image:url({{ asset('storage/' . $prof->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;"></div></td>
+                                        <td class="align-middle">{{ $prof->nom }}</td>
+                                        <td class="align-middle">{{ $prof->prenom }}</td>
+
+                                        <td class="align-middle">{{ $prof->tel }}</td>
+                                        <td class="align-middle">{{ $prof->email }}</td>
+      
+
+                                        <td class="align-middle" style="width:240px;">
+
+                                            <div class="container">
+                                                <div class="row">
+
+                                                    <div class="col-4">
+                                                        {{-- show button    --}}
+                                                        <form class="show-form"
+                                                            action="{{ url('/admin/prof/' . $prof->id . '/voir') }}"
+                                                            method="GET">
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="btn btn-outline-info alpa shadow"><i
+                                                                    class="bi bi-eye"></i></button>
+                                                        </form>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        {{-- edit button    --}}
+                                                        <form class="edit-form" action=""
+                                                            data-id="{{ $prof->id }}"
+                                                            data-name="{{ $prof->nom . ' ' . $prof->prenom }}"
+                                                            method="GET">
+                                                            @csrf
+                                                            <button type="button" onclick="edit_confirmation(this)"
+                                                                class="btn btn-outline-primary alpa shadow"><i
+                                                                    class="bi bi-pen"></i></button>
+                                                        </form>
+                                                    </div>
+
+                                                    {{-- validate button  --}}
+
+                                                    <div class="col-4">
+                                                        {{-- delete button  --}}
+                                                        <form class="delete-form" action=""
+                                                            data-id="{{ $prof->id }}"
+                                                            data-name="{{ $prof->nom . ' ' . $prof->prenom }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" onclick="supprimer_confirmation(this)"
+                                                                class="btn btn-outline-danger alpa shadow"><i
+                                                                    class="bi bi-trash3"></i></button>
+                                                        </form>
+                                                    </div>
+
+
                                                 </div>
-                        </td>
-                    </tr>
+                                            </div>
 
 
-                    <script>
+                                        </td>
 
-                        //    <!-- script pour le button supprimer  -->
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Photo</th>
+                                    {{-- <th>Sexe</th> --}}
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
 
-                           var bouton = document.getElementById("btn-{{ $prof->id }}");
-                            bouton.addEventListener("click",function(){
-                                const swalWithBootstrapButtons = Swal.mixin({
-                                    customClass: {
-                                        confirmButton: 'btn btn-success',
-                                        cancelButton: 'btn btn-danger'
-                                    },
-                                    buttonsStyling: false
-                                })
-                                swalWithBootstrapButtons.fire({
-                                    title: 'Vous êtes sûr  !   {{ $prof->nom}}',
-                                    text: "Voulez-vous supprimer le prof: {{ $prof->nom}}",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Supprimer!',
-                                    cancelButtonText: 'Annuler!',
-                                    reverseButtons: true
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        // Soumettre le formulaire de suppression
-                                        var form = document.getElementById("delete-form-{{ $prof->id}}");
-                                         form.submit();
-                                        swalWithBootstrapButtons.fire(
-                                            'Deleted!',
-                                            'Your file has been deleted.',
-                                            'success'
-                                        )
-                                    } else if (
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-                                        swalWithBootstrapButtons.fire(
-                                            'Cancelled',
-                                            'Your file is safe :)',
-                                            'error'
-                                        )
-                                    }
-                                })
-                            });
-                        //    <!-- script pour le button modifer   -->
-
-                           var boutonmdf = document.getElementById("btn-mdf-{{ $prof->id}}");
-                           boutonmdf.addEventListener("click",function(){
-                                const swalWithBootstrapButtons = Swal.mixin({
-                                    customClass: {
-                                        confirmButton: 'btn btn-success',
-                                        cancelButton: 'btn btn-danger'
-                                    },
-                                    buttonsStyling: false
-                                })
-                                swalWithBootstrapButtons.fire({
-                                    title: 'MODIFER !',
-                                    text: "Voulez-vous faire modifier les information de le prof: {{ $prof->nom }}",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'OUI, Modifer!',
-                                    cancelButtonText: 'NO, Annuler!',
-                                    reverseButtons: true
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        window.location.href="{{ url('/admin/prof/'.$prof->id.'/edit') }}"
-
-                                    } else if (
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-
-                                    }
-                                })
-                            });
-                        </script>
-                    @endforeach
-                                    </tbody>
-                                </table>
+                                    <th>N° de téléphone</th>
+                                    <th>E-Mail</th>
+                                    {{-- <th>Specialite</th> --}}
 
 
-                                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-                                
- 
-                                <script>
-                                    $(document).ready(function() {
-                                    $('#example').DataTable( {
-                                        dom: 'Bfrtip',
-                                        buttons: [
-                                            'copy', 'csv', 'excel', 'pdf', 'print'
-                                        ]
-                                    } );
-                                } );
-                                </script>
-                                
-
-                            </div>
-                        </div>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
-
                 </div>
+            </div>
+        </div>
+    </div>
 
 
 
-                <!-- /.container-fluid -->
+
+
+    {{-- footer  --}}
+    <div class="container" id="pied-page">
 
 
 
-{{-- css pour le bouton modifer --}}
-<style>
-    .btnmdf{
-    appearance: none;
-    background-color: transparent;
-    border: 0.125em solid #1A1A1A;
-    border-radius: 0.9375em;
-    box-sizing: border-box;
-    color: #090606;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 16px;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
-    min-height: 1em;
-    min-width: 0;
-    outline: none;
-    padding: 0.5em ;
-    text-align: center;
-    text-decoration: none;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    will-change: transform;
-   
-   }
-   
-   .btnmdf:disabled {
-    pointer-events: none;
-   }
-   
-   .btnmdf:hover {
-    color: #fff;
-    background-color: #1A1A1A;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-    transform: translateY(-2px);
-   }
-   
-   .btnmdf:active {
-    box-shadow: none;
-    transform: translateY(0);
-   }
-   </style>
-   
-   {{-- style pour le bouton supprimer  --}}
-   <style>
-       .btnsup{
-           appearance: none;
-    background-color: transparent;
-    border: 0.125em solid #1A1A1A;
-    border-radius: 0.9375em;
-    box-sizing: border-box;
-    color: #070707;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 16px;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
-    min-height: 1em;
-    min-width: 0;
-    outline: none;
-    padding: 0.5em ;
-    text-align: center;
-    text-decoration: none;
-    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    will-change: transform;
-   }
-   
-   .btnsup:disabled {
-    pointer-events: none;
-   }
-   
-   .btnsup:hover {
-    color: #fff;
-    background-color: #1A1A1A;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-    transform: translateY(-2px);
-   }
-   
-   .btnsup:active {
-    box-shadow: none;
-    transform: translateY(0);
-   }
-   </style>
+        {{-- script suppression  --}}
+        <script>
+            function supprimer_confirmation(button) {
+                // Utilisez le bouton pour obtenir le formulaire parent
+                const form = button.closest('.delete-form');
+
+                // Vérifiez si le formulaire a été trouvé
+                if (form) {
+                    // Utilisez le formulaire pour extraire l'ID
+                    const id = form.dataset.id;
+                    const name = form.dataset.name;
+
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) de vouloir supprimer ce profésseur ?",
+                        text: name,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonColor: "#198754",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Oui, Supprime-le",
+                        cancelButtonText: "Non, Annuler",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                            form.action = `/admin/prof/${id}/delete`;
+                            form.submit();
+
+                            Swal.fire({
+                                title: "Profésseur supprimée !",
+                                icon: "success"
+                            });
+                        }
+                    });
+                } else {
+                    console.error("Le formulaire n'a pas été trouvé.");
+                }
+            }
+        </script>
 
 
 
-{{-- footer  --}}
-<div class="container" id="pied-page">
 
-@endsection
+        {{-- script modifier  --}}
+        <script>
+            function edit_confirmation(button) {
+                // Utilisez le bouton pour obtenir le formulaire parent
+                const form = button.closest('.edit-form');
+
+                // Vérifiez si le formulaire a été trouvé
+                if (form) {
+                    // Utilisez le formulaire pour extraire l'ID
+                    const id = form.dataset.id;
+                    const name = form.dataset.name;
+
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) de vouloir modifier ce profésseur?",
+                        text: name,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonColor: "#198754",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Oui",
+                        cancelButtonText: "Non",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                            form.action = `/admin/prof/${id}/edit`;
+                            form.submit();
+                        }
+                    });
+                } else {
+                    console.error("Le formulaire n'a pas été trouvé.");
+                }
+            }
+        </script>
+
+
+
+
+    @endsection

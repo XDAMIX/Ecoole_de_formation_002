@@ -1,673 +1,766 @@
 @extends('layouts.admin_menu')
 @section('content')
+    {{-- retour en arrière  --}}
+    <div class="container" id="titre-page">
+        <div class="row">
+            <div class="col-2 d-flex align-items-center">
+                <a href="{{ url('/admin/session') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
+                        class="btn-description">Retour</span></a>
+            </div>
+            <div class="col-10 d-flex align-items-center">
+                <h2>Informations de la session</h2>
+            </div>
+        </div>
+    </div>
 
 
 
+    {{-- -------------------------------------------------------------------------------------- --}}
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-4'">
-                               <h1 class="m-0 font-weight-bold " style="text-align: center"> {{ $sessions->nom}}</h1>
+    <!-- DataTales Example -->
+    <div class="container-fluid" style="padding-top:10px;padding-bottom:80px;">
+        <div class="row animate__animated animate__backInLeft">
+            <div class="col-md-12">
+                <div class="card shadow" style="background-color: #ffff;">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 style="padding-top:10px; padding-bottom:10px;">Informations de la session</h3>
+                            </div>
                         </div>
-                      
-                        
-                        <div class="card-header py-3 d-flex justify-content-between">
 
-                            <h5 class="m-0 font-weight-bold "> <i class="bi bi-award  fa-2xl" style="color: rgb(244, 176, 94)"></i>  Formation  :  <span style="text-align: center;font-size: 20px" > {{ $sessions->formation}}</span></h5>
-                           
-                            <div >
-                                @if ($sessions->statut == 'En attente')
-                                <h5 style="text-align: center;font-size: 20px;color: #656972;" class="font-weight-bold "> <i class="fa-solid fa-stopwatch fa-bounce fa-2xl" style="color: #656972;"></i> {{ $sessions->statut}}</h5>
-                                @elseif ($sessions->statut == 'En cours')
-                                <h5 style="text-align: center;font-size: 20px;color: #297ce8;" class="font-weight-bold "><i class="fa-solid fa-spinner fa-spin fa-2xl " style="color: #297ce8;"></i> {{ $sessions->statut}}</h5>
-                                @elseif ($sessions->statut == 'Termine')
-                                 <h5 style="text-align: center;font-size: 20px;color: #e82121;" class="font-weight-bold "> <i class="fa-solid fa-ban fa-shake  fa-2xl" style="color: #e82121;"></i> {{ $sessions->statut}}</h5>
-                                @endif
+                        {{-- ---------------------------------------------------------- --}}
+
+                        <div class="row">
+
+                            {{-- ---------------------------------------------------------- --}}
+                            <div class="col-12 col-md-4">
+
+                                <div class="row cote-gauche shadow carte">
+
+                                    <div class="col-12 icon">
+                                        <i class="fa-solid fa-award"></i>
+                                    </div>
+
+                                    <div class="col-12 titre">
+                                        <h5 class="">Formation :</h5>
+                                    </div>
+
+                                    <div class="col-12 titre">
+                                        <h5 class="font-weight-bold">{{ $session->titre_formation }} </h5>
+
+                                    </div>
+
+                                    <div class="col-12"
+                                        style="height: 400px; background-image:url({{ asset('storage/' . $session->photo_formation) }});background-size: cover;background-position: center;background-repeat: no-repeat">
+
+                                    </div>
+
+
+                                </div>
                             </div>
 
-                        </div>
+                            {{-- ---------------------------------------------------------- --}}
+                            <div class="col-12 col-md-4">
+                                <div class="row cote-centre shadow carte">
+
+                                    <div class="col-12 icon">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+
+                                    <div class="col-12 titre">
+                                        <h5 class="">Session :</h5>
+                                    </div>
+
+                                    <div class="col-12 titre">
+                                        <h5 class="font-weight-bold">{{ $session->nom }}</h5>
+                                    </div>
 
 
-                        <div class="card-header py-3 ">
-                            <h5 class="m-0 font-weight-bold "> <i class="fa-solid fa-chalkboard-user  fa-2xl"></i>  Prof  : <span style="text-align: center;font-size: 20px" class="font-weight-bold ">{{ $sessions->prof}}</span>  </h5>
-                        </div>
+                                    <div class="col-12 infos" style="height: 80px;">
+                                        {{-- <h6 class="font-weight-bold">Etat :</h6> --}}
+                                        <div class="col-12 infos">
+                                            @if ($session->statut == 'En attente')
+                                                <h5 style="text-align: center;font-size: 20px;color: #1141ae; margin-top:20px;"
+                                                    class="font-weight-bold"> <i
+                                                        class="fa-solid fa-stopwatch fa-bounce fa-2xl"
+                                                        style="color: #1141ae; margin-right:5px;"></i>
+                                                    {{ $session->statut }}</h5>
+                                            @elseif ($session->statut == 'En cours')
+                                                <h5 style="text-align: center;font-size: 20px;color: #06823a; margin-top:20px;"
+                                                    class="font-weight-bold"><i class="fa-solid fa-spinner fa-spin fa-2xl "
+                                                        style="color: #06823a; margin-right:5px;"></i>
+                                                    {{ $session->statut }}
+                                                </h5>
+                                            @elseif ($session->statut == 'Terminée')
+                                                <h5 style="text-align: center;font-size: 20px;color: #e82121; margin-top:20px;"
+                                                    class="font-weight-bold"> <i class="fa-solid fa-ban fa-fade  fa-2xl"
+                                                        style="color: #e82121; margin-right:5px;"></i>
+                                                    {{ $session->statut }}
+                                                </h5>
+                                            @elseif ($session->statut == 'Prolongée')
+                                                <h5 style="text-align: center;font-size: 20px;color: #c7e821; margin-top:20px;"
+                                                    class="font-weight-bold"><i
+                                                        class="fa-sharp fa-solid fa-plus fa-bounce  fa-2xl"
+                                                        style="color: #c7e821; margin-right:5px;"></i>
+                                                    {{ $session->statut }}
+                                                </h5>
+                                            @endif
+                                        </div>
+                                    </div>
 
 
-                        <div class="card-header py-3  d-flex justify-content-between">
-                    
-                            
-                            <h6 class="m-0 font-weight-bold "> <i class="fas fa-calendar-day fa-2xl" style="color: #347df1;"></i> Debut  :  <span style="color:#347df1; ">{{ $sessions->date_debut}}</span></h6>
-                            <h6 class="m-0 font-weight-bold "><i class="fas fa-calendar-day fa-2xl" style="color: #e82121;"></i> Fin  : <span style="color:#e82121; ">{{ $sessions->date_fin}}</span></h6>
-                        </div>
+
+                                    <div class="col-12 infos text-center">
+                                        <h6 class="font-weight-bold ">Date de Début : {{ $session->date_debut }}</h6>
+
+                                    </div>
+
+                                    <div class="col-12 infos text-center">
+                                        <h6 class="font-weight-bold ">Date de Fin : {{ $session->date_fin }}</h6>
+
+                                    </div>
+
+                                    <div class="col-12 titre" style="height: 10px;"></div>
+
+                                    <div class="col-12 boutons">
+
+                                        @if ($session->statut == 'En attente')
+                                            <div class="text-center">
+                                                {{-- démmarer button    --}}
+                                                <form class="play-form"
+                                                    action="{{ url('/admin/session/voir/' . $session->id . '/demmarer_session') }}"
+                                                    data-id="{{ $session->id }}" data-name="{{ $session->nom }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-success alpa shadow"
+                                                        onclick="play_confirmation(this)"><i class="bi bi-play-circle-fill"
+                                                            style="font-size: 30px; padding-right:5px;"></i><br>Marquer le
+                                                        début de la formation</button>
+                                                </form>
+                                            </div>
+                                        @elseif ($session->statut == 'En cours' || $session->statut == 'Prolongée')
+                                            <div class="text-center">
+                                                {{-- arrêter button    --}}
+                                                <form class="stop-form"
+                                                    action="{{ url('/admin/session/voir/' . $session->id . '/arreter_session') }}"
+                                                    data-id="{{ $session->id }}" data-name="{{ $session->nom }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-danger alpa shadow"
+                                                        onclick="stop_confirmation(this)"><i class="bi bi-stop-circle-fill"
+                                                            style="font-size: 30px; padding-right:5px;"></i><br>Marquer la
+                                                        fin de la formation</button>
+                                                </form>
+                                            </div>
+                                        @elseif ($session->statut == 'Terminée')
+                                            <div class="text-center">
+
+                                                {{-- telecharger tout les certificats button    --}}
+                                                <form class="certificats-form"
+                                                    action="{{ url('/admin/session/voir/' . $session->id . '/certificats_session') }}"
+                                                    data-id_session="{{ $session->id }}" data-name="{{ $session->nom }}"
+                                                    method="GET">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-success alpa shadow"
+                                                        onclick="certificats_confirmation(this)"><i class="bi bi-patch-check"
+                                                            style="font-size: 30px; padding-right:5px;"></i><br>Télécharger tout les certificats</button>
+                                                </form>
+                                                <br>
+                                                {{-- prolonger button    --}}
+                                                <form class="plus-form"
+                                                    action="{{ url('/admin/session/voir/' . $session->id . '/prolonger_session') }}"
+                                                    data-id="{{ $session->id }}" data-name="{{ $session->nom }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-warning alpa shadow"
+                                                        onclick="plus_confirmation(this)"><i class="bi bi-plus-circle-fill"
+                                                            style="font-size: 30px; padding-right:5px;"></i><br>Faire
+                                                        prolonger la durée de la formation</button>
+                                                </form>
+
+                                            </div>
+                                        @endif
+
+                                    </div>
+                                    <div class="col-12" style="height: 80px;"></div>
 
 
+                                </div>
 
 
-                            <div >
-                                @if ($sessions->statut == 'En attente')
-                                                         <div style="text-align: center">
-                                                            <button  class="dmr" id="dmr"> 
-                                                                Demmarer la session
-                                                            </button>
-                                                        </div>  
-                                @elseif ($sessions->statut == 'En cours')
-                                                           <div style="text-align: center" >
-                                                                <button class="trm" id="trm"> 
-                                                                    terminre la session
-                                                                </button>
-                                                            </div> 
-                                @elseif ($sessions->statut == 'Termine')
-                                                        <div style="text-align: center" >
-                                                            <button class="fin" id="fin"> 
-                                                                session terminé
-                                                            </button>
-                                                        </div>  
-                                @endif
                             </div>
-                 
-                         
-                        <div class="card-header py-4">
-                            
+                            {{-- ---------------------------------------------------------- --}}
+                            <div class="col-12 col-md-4">
+
+                                <div class="row cote-droite shadow carte">
+
+                                    <div class="col-12 icon">
+                                        <i class="fa-solid fa-person-chalkboard"></i>
+                                    </div>
+
+                                    <div class="col-12 titre">
+                                        <h5 class="">Profésseur :</h5>
+                                    </div>
+
+                                    <div class="col-12 titre">
+                                        <h5 class="font-weight-bold">
+                                            @if ($session->sexe_prof == 'H')
+                                                Mr :
+                                            @else
+                                                Mme :
+                                            @endif
+                                            {{ $session->nom_prof }}-{{ $session->prenom_prof }}
+                                        </h5>
+                                    </div>
+                                    <div class="col-12 photo">
+                                        <img src="{{ asset('storage/' . $session->photo_prof) }}" alt="image-prof"
+                                            style="height:200px;width:185px;">
+                                    </div>
+
+                                    <div class="col-12 titre">
+                                        <h4 class="font-weight-bold"> Contact:</h4>
+                                    </div>
+
+                                    <div class="col-12 ">
+                                        <h5 class="infos text-center font-weight-bold"><i class="bi bi-phone"></i> N° tel
+                                            :</h5>
+                                        <h5 class="infos text-center">{{ $session->tel_prof }} </h5>
+                                    </div>
+                                    <div class="col-12 ">
+                                        <h5 class="infos text-center font-weight-bold"><i class="bi bi-envelope"></i>
+                                            e-mail :</h5>
+                                        <h5 class="infos text-center">{{ $session->email_prof }}</h5>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
                         </div>
-                            <h3 style="text-align: center;margin: 3px;">Liste des candidats</h3>
-                        
-                      
-                        <div class="card-body">
-                            <div class="table-responsive" id="session-list">
-                                <table class="table cell-border compact hover " id="example" width="100%" cellspacing="0">
-                                    <thead>
-                                       
-                                        
+
+
+
+
+
+
+
+
+                        {{-- -------------------------------------------------------------------------------------- --}}
+                        <div class="row">
+                            <div class="col-12">
+                                <h3 style="padding-top:10px; padding-bottom:10px;">Liste des stagiaires </h3>
+                            </div>
+
+
+
+
+                            <table id="example" class="table table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
                                         {{-- <th >ID</th> --}}
-                                        <th >nom</th>
-                                        <th >prenom</th>
-                                        <th >age</th>
+                                        <th>Photo</th>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>N° tel</th>
+                                        <th>e-mail</th>
+                                        <th>état</th>
 
-                                        <th >tel</th>
-                                    
-  
-                                        <th >action</th>
-                                    </thead>
-            
-                                    <tbody>
-                                        @foreach($inscriptions as $inscription)
-                    {{-- <tr class="ligne-session" style="cursor: pointer" data-session-id="{{ $session->id }}"> --}}
-                    <tr class="" style="cursor: pointer" >
-                       
-                        {{-- <td>{{ $inscription->id }}</td> --}}
-                        <td>{{ $inscription->nom }}</td>
-                        <td>{{ $inscription->prenom }}</td>
-                        <td>{{ $inscription->age }}</td>
-                        <td>{{ $inscription->tel }}</td>
-                    
-                        
-                        {{-- <td class="@if($session->statut == 'En attente') bg-secondary text-white @elseif($session->statut == 'En cours') bg-primary text-white @elseif($session->statut == 'Termine') bg-success text-white @endif">{{ $session->statut }}</td> --}}
 
-                    
-                       
-                <td>
+                                        <th>Actions</th>
+                                </thead>
 
-                        
-                                            <div style="text-align: center;">
-                                                <form  id="delete-form-{{ $inscription->id }}" action="{{ url('/admin/inscriptions/'.$inscription->id.'/sup_ins_sesion') }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <div class="bt-en-ligne">
-                                                     
-                                                    <div class="bt-en-ligne-div"   id="mydiv">
-                                                    
-                                                     
-                            
-                                                     
-                                                                                            {{-- BOUTON SUPPRIMER --}}
-                                                     
-                                                          <button class="btnsup" style="background-color: #e82121 ;" class="btn-mdf btn-r" id="btn-{{$inscription->id}}" type="button">
-                                                                 <span class="text"></span>
-                                                                 <span class="icon">
-                                                                    <i class="fa-solid fa-trash"></i>
-                                                                 </span>
-                                                         </button>
-                                                     
-                                                                                                {{-- BOUTON PRINT --}}
+                                <tbody class="text-center">
+                                    @foreach ($etudiants as $etudiant)
+                                        <tr>
+                                            {{-- <td class=" align-middle">{{ $etudiant->id }}</td> --}}
+                                            <td class=" align-middle" style="width:100px;">
+                                                <div
+                                                    style="background-image:url({{ asset('storage/' . $etudiant->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 100px; width: 90px; margin-left:5px; margin-right:5px;">
+                                                </div>
+                                            </td>
+                                            <td class=" align-middle">{{ $etudiant->nom }}</td>
+                                            <td class=" align-middle">{{ $etudiant->prenom }}</td>
+                                            <td class=" align-middle">{{ $etudiant->tel }}</td>
+                                            <td class=" align-middle">{{ $etudiant->email }}</td>
+                                            @if ($etudiant->etat_formation == 'En-formation' || $etudiant->etat_formation == 'fin-de-la-formation')
+                                                <td class="align-middle" style="color:rgb(7, 101, 46);">
+                                                    {{ $etudiant->etat_formation }}</td>
+                                            @else
+                                                <td class="align-middle" style="color:rgb(193, 52, 52);">
+                                                    {{ $etudiant->etat_formation }}</td>
+                                            @endif
 
-                                                                                                @if ($sessions->statut == 'Termine')
-                                                                                                        <button class="btnmdf" style="background-color: #347df1" id="btn-mdf-{{$inscription->id}}" type="button">
-                                                                                                            <span class="text"></span>
-                                                                                                            <span class="icon">
-                                                                                                                <i class="fa-solid fa-print"></i>   
-                                                                                                            </span>
-                                                                                                        </button>
-                                                                                                    @endif
+
+                                            <td class=" align-middle" style="width:240px;">
+
+                                                <div class="container">
+                                                    <div class="row">
+
+                                                        @if ($etudiant->etat_formation == 'fin-de-la-formation')
+                                                            <div class="col-12">
+                                                                {{-- show button    --}}
+
+                                                                <form class="certificat-form" action=""
+                                                                    data-id_session="{{ $session->id }}"
+                                                                    data-id_etudiant="{{ $etudiant->id }}"
+                                                                    data-name="{{ $etudiant->nom . ' ' . $etudiant->prenom }}"
+                                                                    method="GET">
+                                                                    @csrf
+                                                                    <button type="button"
+                                                                        onclick="certificat_confirmation(this)"
+                                                                        class="btn btn-outline-primary alpa shadow"><i
+                                                                            class="bi bi-patch-check"></i>
+                                                                        Certificat</button>
+                                                                </form>
+
+                                                            </div>
+                                                        @endif
+
+
+                                                        {{-- exclure button  --}}
+                                                        @if ($session->statut !== 'Terminée'  &&  $etudiant->etat_formation !== 'Exclu' )
+                                                            <div class="col-12">
+                                                                {{-- delete button  --}}
+                                                                <form class="delete-form" action=""
+                                                                    data-id_session="{{ $session->id }}"
+                                                                    data-id_etudiant="{{ $etudiant->id }}"
+                                                                    data-name="{{ $etudiant->nom . ' ' . $etudiant->prenom }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    <button type="button"
+                                                                        onclick="supprimer_confirmation(this)"
+                                                                        class="btn btn-outline-danger alpa shadow"><i
+                                                                            class="bi bi-trash3"></i> Exclure</button>
+                                                                </form>
+                                                            </div>
+                                                        @endif
+
+                                                        @if ($session->statut !== 'Terminée'  &&  $etudiant->etat_formation == 'Exclu' )
+                                                            <div class="col-12">
+                                                                {{-- reprendre formation button  --}}
+                                                                <form class="reprendre-form" action=""
+                                                                    data-id_session="{{ $session->id }}"
+                                                                    data-id_etudiant="{{ $etudiant->id }}"
+                                                                    data-name="{{ $etudiant->nom . ' ' . $etudiant->prenom }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    <button type="button"
+                                                                        onclick="reprendre_confirmation(this)"
+                                                                        class="btn btn-outline-success alpa shadow"><i
+                                                                            class="bi bi-mortarboard"></i> Reprendre</button>
+                                                                </form>
+                                                            </div>
+                                                        @endif
 
                                                     </div>
-      
-                                                 </div>
-                                                  </form>
                                                 </div>
-                        </td>
-                    </tr>
 
 
 
-                    <script>
-                         //    <!-- script pour le button termine la session   -->
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
-         var boutontrm = document.getElementById("trm");
-                           boutontrm.addEventListener("click",function(){
-                                const swalWithBootstrapButtons = Swal.mixin({
-                                    customClass: {
-                                        confirmButton: 'btn btn-success ',
-                                        cancelButton: 'btn btn-danger'
-                                    },
-                                    buttonsStyling: false
-                                })
-                                swalWithBootstrapButtons.fire({
-                                    title: 'cloturer la sessionla  ',
-                                    text: "Voulez-vous cloturer la session  : {{ $sessions->nom }} ",
-                                    icon: 'question',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'OUI',
-                                    cancelButtonText: 'NO',
-                                    reverseButtons: true
-                                  
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        
-                                       
-                                       
-                                        window.location.href="{{ url('/admin/session/'.$sessions->id.'/statutterm') }}"
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        {{-- <th>ID</th> --}}
+                                        <th>Photo</th>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>N° tel</th>
+                                        <th>e-mail</th>
+                                        <th>état</th>
 
-                                    } else if (
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-
-                                    }
-                                })
-                            });
-                    </script>
-
-                    <script>
-                          
-        //    <!-- script pour le button demmarer la session  -->
-
-        var boutondmr = document.getElementById("dmr");
-                           boutondmr.addEventListener("click",function(){
-                                const swalWithBootstrapButtons = Swal.mixin({
-                                    customClass: {
-                                        confirmButton: 'btn btn-success ',
-                                        cancelButton: 'btn btn-danger'
-                                    },
-                                    buttonsStyling: false
-                                })
-                                swalWithBootstrapButtons.fire({
-                                    title: 'Demmarer la session ',
-                                    text: "Voulez-vous Demmare la session  : {{ $sessions->nom }} ",
-                                    icon: 'question',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'OUI',
-                                    cancelButtonText: 'NO',
-                                    reverseButtons: true
-                                  
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        // window.location.href="{{ url('/admin/inscriptions/'.$inscription->id.'/imprime1') }}"
-                                        window.location.href="{{ url('/admin/session/'.$sessions->id.'/statutcour') }}"
-
-                                    } else if (
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-
-                                    }
-                                })
-                            });
-
-                    </script>
-
-                    <script>
-
-                        //    <!-- script pour le button supprimer  -->
-
-                           var bouton = document.getElementById("btn-{{ $inscription->id }}");
-                            bouton.addEventListener("click",function(){
-                                const swalWithBootstrapButtons = Swal.mixin({
-                                    customClass: {
-                                        confirmButton: 'btn btn-success',
-                                        cancelButton: 'btn btn-danger'
-                                    },
-                                    buttonsStyling: false
-                                })
-                                swalWithBootstrapButtons.fire({
-                                    
-                                    title: ' supprimer !',
-                                    text: "Voulez-vous supprimer {{ $inscription->nom}} {{ $inscription->prenom}}  de la session : {{ $sessions->nom}}",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Supprimer',
-                                    cancelButtonText: 'Annuler',
-                                    reverseButtons: true
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        // Soumettre le formulaire de suppression
-                                        var form = document.getElementById("delete-form-{{ $inscription->id}}");
-                                         form.submit();
-                                        swalWithBootstrapButtons.fire(
-                                            'Supprimer !',
-                                            'le condidat {{ $inscription->nom }} {{ $inscription->prenom }}  a ete supprime de la session {{ $sessions->nom }}.',
-                                            'success'
-                                        )
-                                    } else if (
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-                                        swalWithBootstrapButtons.fire(
-                                            'Cancelled',
-                                            'Your file is safe :)',
-                                            'error'
-                                        )
-                                    }
-                                })
-                            });
-                        //    <!-- script pour le button imprimier diplome 1   -->
-
-                           var boutonmdf = document.getElementById("btn-mdf-{{ $inscription->id}}");
-                           boutonmdf.addEventListener("click",function(){
-                                const swalWithBootstrapButtons = Swal.mixin({
-                                    customClass: {
-                                        confirmButton: 'btn btn-success ',
-                                        cancelButton: 'btn btn-danger ml-2'
-                                    },
-                                    buttonsStyling: false
-                                })
-                                swalWithBootstrapButtons.fire({
-                                    title: 'imprimer Deplome !',
-                                    text: "Voulez-vous  imprimer  deplope pour  : {{ $inscription->nom }} {{ $inscription->prenom }}",
-                                    icon: 'question',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'OUI',
-                                    cancelButtonText: 'NO',
-                                    reverseButtons: true
-                                  
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        window.location.href="{{ url('/admin/inscriptions/'.$inscription->id.'/imprime1') }}"
-                                    } else if (
-                                        result.dismiss === Swal.DismissReason.cancel
-                                    ) {
-
-                                    }
-                                })
-                            });
- 
-      
-                     </script>
-
-@if(session('telechargertout'))
-    <script>
-        // Redirection JavaScript vers l'URL spécifiée
-        window.location.href = "{{ url('/admin/inscriptions/'.$sessions->id.'/imprimertout') }}";
-        setTimeout(function() {
-            location.reload();
-        }, 1000); 
-    </script>
-   
-@endif
-
-
-
-{{-- scrype pour le clic sur le tableau --}}
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const lignesSession = document.querySelectorAll(".ligne-session");
-
-        // Ajoutez un gestionnaire d'événements aux lignes de session
-        lignesSession.forEach(function (ligne) {
-            ligne.addEventListener("click", function () {
-                // Récupérez l'ID de la session à partir de l'attribut data
-                const sessionId = this.getAttribute("data-session-id");
-
-                // Redirigez l'utilisateur vers la page souhaitée avec l'ID en paramètre
-                window.location.href = "{{ url('/admin/session/'.$inscription->id.'/voir') }}?session_id=" + sessionId;
-              
-            });
-        });
-    });
-</script>
-
-
-
-
-
-
-                        
-                    @endforeach
-                                    </tbody>
-                                </table>
-
-
-                                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-                                
- 
-                                <script>
-                                    // Script pour la barre de recherche, PDF, impression et Excel
-                                    $(document).ready(function() {
-                                        $('#example').DataTable( {
-                                            dom: 'Bfrtip',
-                                            buttons: [
-                                             
-                                                {
-                                                    extend: 'excel',
-                                                    text: '<span class="button-text"><i class="fa-solid fa-table"></i> Excel</span>',
-                                                    className: 'button-centered'
-                                                },
-                                                {
-                                                    extend: 'pdf',
-                                                    text: '<span class="button-text"><i class="fa-solid fa-file-pdf"></i> PDF</span>',
-                                                    className: 'button-centered'
-                                                },
-                                                {
-                                                    extend: 'print',
-                                                    text: '<span class="button-text">   <i class="fa-solid fa-print"></i>  Impression</span>',
-                                                    className: 'button-centered'
-                                                },
-                                               
-                                                
-                                            ]
-                                        } );
-                                    } );
-                                </script>
-                                
-                                <style>
-                                    .button-text {
-                                        font-weight: bold;
-                                    }
-                                
-                                    .button-centered {
-                                        text-align: center;
-                                    }
-                                </style>
-
-                   
-
-
-                            </div>
+                                        <th>Actions</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
-
                 </div>
+            </div>
+        </div>
+    </div>
 
 
+    {{-- ---------------------------------------------------------- --}}
+    <style>
+        .icon {
+            font-size: 40px;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            height: 60px;
+            /* background-color: #06823a; */
+        }
 
-                <!-- /.container-fluid -->
+        .titre {
+            font-size: 20px;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            height: 30px;
+            /* background-color: #9019cc; */
+        }
 
+        .infos {
+            font-size: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            height: 30px;
+            /* background-color: #a31616; */
+        }
 
+        .photo {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
 
+        .carte {
+            height: 640px;
+            margin: 10px;
+            padding: 20px;
+        }
 
+        .boutons button {
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 40px;
+            padding: 5px 10px;
+            text-transform: uppercase;
+            color: #ffff;
+        }
+    </style>
 
+    {{-- ---------------------------------------------------------- --}}
 
+    {{-- script démmarer session  --}}
+    <script>
+        function play_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.play-form');
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Obtenez l'URL actuelle de la page
-        const currentPageUrl = window.location.href;
-    
-        // Restaurer la position de défilement stockée en tant que cookie
-        const scrollPosition = parseInt(localStorage.getItem(currentPageUrl) || 0);
-        window.scrollTo(0, scrollPosition);
-    
-        // Enregistrer la position de défilement lorsque la page est défilée
-        window.addEventListener("scroll", function () {
-            const currentPosition = window.pageYOffset;
-            localStorage.setItem(currentPageUrl, currentPosition);
-        });
-    });
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id = form.dataset.id;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir démmarer cette session ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
     </script>
 
-                                                    {{-- bouton  --}}
-<style>
-
-/*  le nouveu bouton  */
-
-/* style pour le bouton demmarer le session */
-.dmr {
-  font-size: 18px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: inline-block;
-  text-align: center;
-  font-weight: bold;
-  padding: 0.7em 2em;
-  border: 3px solid mediumturquoise;
-  border-radius: 2px;
-  position: relative;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
-  color: mediumturquoise;
-  text-decoration: none;
-  transition: 0.3s ease all;
-  z-index: 1;
-  cursor: pointer;
-}
-
-.dmr:before {
-  transition: 0.5s all ease;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  right: 50%;
-  bottom: 0;
-  opacity: 0;
-  content: '';
-  background-color: lightblue;
-  z-index: -1;
-}
-
-.dmr:hover, button:focus {
-  color: white;
-}
-
-.dmr:hover:before, button:focus:before {
-  transition: 0.5s all ease;
-  left: 0;
-  right: 0;
-  opacity: 1;
-}
-
-.dmr:active {
-  transform: scale(0.9);
-}
-                            /* style pour le bouton terminerl la session */
-.trm {
-  font-size: 18px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: inline-block;
-  text-align: center;
-  font-weight: bold;
-  padding: 0.7em 2em;
-  border: 3px solid #e82121;
-  border-radius: 2px;
-  position: relative;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
-  color: #e82121;
-  text-decoration: none;
-  transition: 0.3s ease all;
-  z-index: 1;
-  cursor: pointer;
-}
-
-.trm:before {
-  transition: 0.5s all ease;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  right: 50%;
-  bottom: 0;
-  opacity: 0;
-  content: '';
-  background-color: #eb8282;
-  z-index: -1;
-}
-
-.trm:hover, button:focus {
-  color: white;
-}
-
-.trm:hover:before, button:focus:before {
-  transition: 0.5s all ease;
-  left: 0;
-  right: 0;
-  opacity: 1;
-}
-
-.trm:active {
-  transform: scale(0.9);
-}
-                            /* style pour bouton fin  */
-.fin {
-  font-size: 18px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: inline-block;
-  text-align: center;
-  font-weight: bold;
-  padding: 0.7em 2em;
-  border: 3px solid #353232;
-  border-radius: 2px;
-  position: relative;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
-  color: #353232;
-  text-decoration: none;
-  transition: 0.3s ease all;
-  z-index: 1;
-  cursor: pointer;
-  background-color: gray
-}
-
-</style>
-{{-- css pour le bouton modifer --}}
-<style>
- .btnmdf{
- appearance: none;
- background-color: transparent;
- border: 0.125em solid #1A1A1A;
- border-radius: 0.9375em;
- box-sizing: border-box;
- color: #000000;
- cursor: pointer;
- display: inline-block;
- font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
- font-size: 16px;
- font-weight: 600;
- line-height: normal;
- margin: 0;
- min-height: 1em;
- min-width: 0;
- outline: none;
- padding: 0.5em ;
- text-align: center;
- text-decoration: none;
- transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
- user-select: none;
- -webkit-user-select: none;
- touch-action: manipulation;
- will-change: transform;
-
-}
-
-.btnmdf:disabled {
- pointer-events: none;
-}
-
-.btnmdf:hover {
- color: #fff;
- background-color: #1A1A1A;
- box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
- transform: translateY(-2px);
-}
-
-.btnmdf:active {
- box-shadow: none;
- transform: translateY(0);
-}
-</style>
-
-{{-- style pour le bouton supprimer  --}}
-<style>
-    .btnsup{
-        appearance: none;
- background-color: transparent;
- border: 0.125em solid #1A1A1A;
- border-radius: 0.9375em;
- box-sizing: border-box;
- color: #000000;
- cursor: pointer;
- display: inline-block;
- font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
- font-size: 16px;
- font-weight: 600;
- line-height: normal;
- margin: 0;
- min-height: 1em;
- min-width: 0;
- outline: none;
- padding: 0.5em ;
- text-align: center;
- text-decoration: none;
- transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
- user-select: none;
- -webkit-user-select: none;
- touch-action: manipulation;
- will-change: transform;
-}
-
-.btnsup:disabled {
- pointer-events: none;
-}
-
-.btnsup:hover {
- color: #fff;
- background-color: #1A1A1A;
- box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
- transform: translateY(-2px);
-}
-
-.btnsup:active {
- box-shadow: none;
- transform: translateY(0);
-}
-</style>
-
-
-
-    {{-- scripte pour changer le bouton  --}}
+    {{-- script arrêter session  --}}
     <script>
-        let sessionStarted = false;
-        
-        function toggleSession() {
-          const button = document.getElementById("sessionButton");
-        
-          if (sessionStarted) {
-            // Si la session est déjà démarrée, on la termine
-            sessionStarted = false;
-            button.innerHTML = "Démarrer la session";
-            button.style.backgroundColor = "#4CAF50";
-          } else {
-            // Si la session n'est pas encore démarrée, on la démarre
-            sessionStarted = true;
-            button.innerHTML = "Terminer la session";
-            button.style.backgroundColor = "#FF5733";
-          }
+        function stop_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.stop-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id = form.dataset.id;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir arrêter cette session ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
         }
-        </script>
-      
-        </body>
-        </html>       
-                
+    </script>
+
+    {{-- script arrêter session  --}}
+    <script>
+        function plus_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.plus-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id = form.dataset.id;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir prolonger la durée de cette session ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
 
 
-@endsection
+{{-- ---------------------------------------------------------- --}}
+
+    {{-- script exclure etudiant  --}}
+    <script>
+        function supprimer_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.delete-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id_session = form.dataset.id_session;
+                const id_etudiant = form.dataset.id_etudiant;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir exclure cet(te) etudiant(e) ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        form.action = `/admin/session/voir/${id_session}/${id_etudiant}/delete_etudiant`;
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+    {{-- script reprendre etudiant  --}}
+    <script>
+        function reprendre_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.reprendre-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id_session = form.dataset.id_session;
+                const id_etudiant = form.dataset.id_etudiant;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de laisser cet(te) etudiant(e) reprendre la formation ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        form.action = `/admin/session/voir/${id_session}/${id_etudiant}/reprendre_etudiant`;
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+{{-- ---------------------------------------------------------- --}}
+
+    {{-- script telecharger le certificat pour le stagiaire  --}}
+    <script>
+        function certificat_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.certificat-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id_session = form.dataset.id_session;
+                const id_etudiant = form.dataset.id_etudiant;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir telecharger le certificat pour cet(te) etudiant(e) ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.action = `/admin/session/voir/${id_session}/${id_etudiant}/certificat_etudiant`;
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+    {{-- script telecharger tout les certificats pour la session  --}}
+    <script>
+        function certificats_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.certificats-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id_session = form.dataset.id_session;
+                const name = form.dataset.name;
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir telecharger tout les certificats pour cette session ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.action = `/admin/session/voir/${id_session}/certificats_session`;
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+
+
+
+    {{-- ---------------------------------------------------------- --}}
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
+    </script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js">
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js">
+    </script>
+
+
+
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                processing: true,
+                dom: '<"buttons-container"lBfrtip>', // Custom button container
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ], // Specify the options
+                buttons: [{
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Excel',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"></i> PDF',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i> Imprimer',
+                        className: 'btn btn-dark'
+                    },
+                    {
+                        extend: 'colvis',
+                        text: '<i class="fas fa-columns"></i> Affichage des Colonnes',
+                        className: 'btn btn-dark'
+                    },
+                ],
+                language: {
+                    "lengthMenu": "Afficher _MENU_ éléments par page",
+                    "zeroRecords": "Aucun enregistrement trouvé",
+                    "info": "Page _PAGE_ sur _PAGES_",
+                    "infoEmpty": "Aucun enregistrement disponible",
+                    "infoFiltered": "(filtré de _MAX_ total des enregistrements)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                },
+                initComplete: function() {
+                    // Ajouter des styles personnalisés
+                    $('.dataTables_length select').css('width',
+                        '60px'); // ajustez la largeur selon vos besoins
+                }
+            });
+        });
+    </script>
+
+
+    {{-- -----------------------------------------------------------------------------------------------------    --}}
+
+
+
+    {{-- footer  --}}
+    <div class="container" id="pied-page">
+    @endsection

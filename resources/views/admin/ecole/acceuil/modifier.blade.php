@@ -28,16 +28,16 @@
 
 
 <div class="container" style="padding-top: 10px;">
-    <div class="row">
+    <div class="row animate__animated animate__backInLeft">
         
         <div class="col-md-12">
-        <div class="card" style="background-color: #ffff;">
-                <div class="card-header"style="text-align:center;">
+        <div class="card shadow" style="background-color: #ffff;">
+                {{-- <div class="card-header"style="text-align:center;">
                   <a style="font-size: 20px;">Banner d'acceuil sur le site web</a>
-                </div>
+                </div> --}}
                 <div class="card-body">
 
-     <form action="{{ url('/admin/ecole/acceuil/'.$acceuil->id.'/update') }}" method="post" enctype="multipart/form-data">
+     <form class="edit-form" action="{{ url('/admin/ecole/acceuil/'.$acceuil->id.'/update') }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -55,7 +55,7 @@
 
     <div class="form-group">
         <label for="">Sous Titre:</label>
-        <input type="text" name="stitre1" class="form-control @if($errors->get('titre')) is-invalid @endif" id="validationServer02" placeholder="le titre" value="{{ $acceuil->sous_titre1 }}">
+        <input type="text" name="stitre1" class="form-control @if($errors->get('stitre1')) is-invalid @endif" id="validationServer02" placeholder="le sous-titre" value="{{ $acceuil->sous_titre1 }}">
                 <div id="validationServer02Feedback" class="invalid-feedback">
                     @if($errors->get('stitre1'))
                     @foreach($errors->get('stitre1') as $message)
@@ -65,22 +65,11 @@
                 </div>
     </div>
 
-    {{-- <div class="form-group">
-        <label for="">SousTitre2:</label>
-        <input type="text" name="stitre2" class="form-control @if($errors->get('titre')) is-invalid @endif" id="validationServer03" placeholder="le titre" value="{{ $acceuil->sous_titre2 }}">
-                <div id="validationServer03Feedback" class="invalid-feedback">
-                    @if($errors->get('stitre2'))
-                    @foreach($errors->get('stitre2') as $message)
-                    {{ $message }}
-                    @endforeach
-                    @endif
-                </div>
-    </div> --}}
 
 
     <div class="form-group">
         <label for="">Petit paragraphe:</label>
-        <textarea type="text" name="stitre2" class="form-control @if($errors->get('titre')) is-invalid @endif" id="validationServer03" placeholder="le titre" value="{{ $acceuil->sous_titre2}}">{{ $acceuil->sous_titre2 }}"</textarea>
+        <textarea type="text" name="stitre2" class="form-control @if($errors->get('stitre2')) is-invalid @endif" id="validationServer03" placeholder="le sous-titre 2" value="{{ $acceuil->sous_titre2}}">{{ $acceuil->sous_titre2 }}"</textarea>
                 <div id="validationServer03Feedback" class="invalid-feedback">
                     @if($errors->get('stitre2'))
                     @foreach($errors->get('stitre2') as $message)
@@ -117,7 +106,9 @@
     <div class="row formulaire-btn">
         <div class="form-group col-12">
 
-            <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button>
+            <button type="button" onclick="sauvegarder(this)" class="btn btn-outline-success alpa shadow"><i
+                class="bi bi-check2"></i><span
+                class="btn-description">Enregistrer</span></button>
 
         </div>
     </div>
@@ -132,17 +123,44 @@
 
 
 
-    <!-- teste -->
-    <!-- <div class="row" style="margin-top: 150px;margin-bottom: 150px;">
-        <form action="">
-        <input type="file" name="file" id="file" accept="image/*" onchange="previewImage();">
-        <img src="vide" class="img-fluid rounded" alt="teste image upload and show" id="preview">
-        </form>
-    </div> -->
-    <!-- teste -->
+
 
 
 </div>
+    {{-- --------------------------------------------------------------     --}}
 
+    {{-- script sauvegarder  --}}
+    <script>
+        function sauvegarder(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.edit-form');
+    
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+    
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir enregistrer les modifications ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+
+{{-- ------------------------------ --}}
+    {{-- footer  --}}
+    <div class="container" id="pied-page">
 
 @endsection

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('paragraphes', function (Blueprint $table) {
-            $table->Increments('id');
+            $table->id();
             $table->string('titre')->nullable();
             $table->string('photo')->nullable();
             $table->text('paragraphe',16383);

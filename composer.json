@@ -60,10 +60,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [],
-            // "providers": [
-            //     "Barryvdh\DomPDF\ServiceProvider"
-            // ]
+            "dont-discover": []
         }
     },
     "config": {

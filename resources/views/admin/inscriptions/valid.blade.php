@@ -1,745 +1,596 @@
 @extends('layouts.admin_menu')
 @section('content')
 
-<div class="container" style="padding-top: 120px;">
-    <div class="row">
-        <div class="col-md-12">
-        <div class="card">
 
-
-            
-                <div class="card-body centered-container" style="padding-top:300px;">
-  
-<form class="form" id="form_insc" action="{{url('/admin/inscriptions/'.$inscription->id.'/valideupdate')}}" method="POST">
-@csrf
-@method('PUT')
-<div class="card-header"style="text-align:center;">
-  <!-- <a style="font-size: 20px;"><i class="bi bi-person"></i>Modifier les informations de la Formation</a> -->
-    <h4>validation de candidat : {{ $inscription->nom }} {{ $inscription->prenom }} <i class="fa-solid fa-file-pen"></i></h4>
-
-  
-</div>
-
-<div class="form__group field" >
-      <h5 style="text-align: center">vous informations</h5>
-      <br>
-  {{-- information personnelle --}}
-    
-   </div>
-
-{{--  nom et prenom --}}
-      <label>
-        <input class="input" id="nom" type="text" name="nom" placeholder="" required="" value="{{ $inscription->nom }}">
-        <span>Nom</span>
-    </label> 
-      <label>
-        <input class="input" id="prenom" type="text" name="prenom" placeholder="" required="" value="{{ $inscription->prenom }}">
-        <span>Prénom</span>
-    </label> 
-   {{-- fin nom et prenom  --}}
-   
-
-<hr>
-
-
-{{-- session avec boucle --}}
-<div class="col form-group">
-    <label style="color: white ; font-size: 20px" for="">Choisir une session : </label><br>
-    <select class="form-control" name="session" id="session">
-        {{-- <option value="{{ $inscription->formation }}" style="color: red">{{ $inscription->formation }}</option> --}}
-     @foreach($sessions as $session)
-    <option value="{{ $session->nom }}">{{ $session->nom }}-- {{ $session->formation }} --{{ $session->prof }} </option>
-    
-    @endforeach
-    </select>
-
-
- 
-   
-</div>
-{{-- fin  --}}
-
-<br>
-
-<label for="montant"> Montant : </label>
-<input type="text" id="montant" name="montant" placeholder="Saisissez le montant d'argent" />
-
-
-
-
-<br>
-
-    {{--  new --}}
-    <div style="text-align: center;">
-        <div class="bt-en-ligne">
-             <div class="bt-en-ligne-div">
-
-           
-             <button class="btn-mdf btn-r" id="btn-val" type="button">
-                <span class="text">Validé</span>
-                <span class="icon">
-                    <i class="bi bi-pen"></i>
-                </span>
-             </button>
-
-             </div>
-
-             <div class="bt-en-ligne-div"   id="mydiv">
-                  <button class="btn-sup btn-r" id="btn" type="button">
-                         <span class="text">Annuler</span>
-                         <span class="icon">
-                        <i class="bi bi-trash3"></i>
-                         </span>
-                 </button>
-             </div>
-         </div>
-
-  </div>
-  
-{{-- fin --}}
-</form>
-
-                </div>
+    <div class="container" id="titre-page">
+        <div class="row">
+            <div class="col-2 d-flex align-items-center">
+                <a href="{{ url('/admin/inscriptions') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
+                        class="btn-description">Retour</span></a>
             </div>
-
+            <div class="col-10 d-flex align-items-center">
+                <h2>Valider l'inscription</h2>
+            </div>
         </div>
     </div>
-</div>
 
 
-<script>
+    {{-- ---------------------------------------------------------- --}}
 
-    //    <!-- script pour le button annuler -->
+    <div class="container" style="padding-top: 10px;">
+        <div class="row justify-content-center animate__animated animate__backInLeft">
+            <div class="col-md-12">
+                <div class="card shadow" style="background-color: #ffff;">
+                    {{-- <div class="card-header"style="text-align:center;">
+                <a style="font-size: 20px;">Formulaire d'inscription</a>
+              </div> --}}
+                    <div class="card-body">
 
-       var bouton = document.getElementById("btn");
-        bouton.addEventListener("click",function(){
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
-            swalWithBootstrapButtons.fire({
-                title: 'voulez vous annuler validation..?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'OUI',
-                cancelButtonText: 'NO',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Soumettre le formulaire de suppression
-                   
-                    //  form.submit();
-                    window.location.href="{{ url('/')}}"
-                    swalWithBootstrapButtons.fire(
-                        'Inscription annuler',
-                        'Votre inscription a ete annuler',
-                        'success'
-                    )
-                } else if (
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your file is safe :)',
-                        'error'
-                    )
-                }
-            })
-        });
-    //    <!-- script pour le button  Modifier  -->
+                        <form class="validation-form"
+                            action="{{ url('/admin/inscriptions/' . $inscription->id . '/valideupdate') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
 
 
 
-    // sripte pour le boutton valide 
 
-     
-//  new code 
-    var boutonmdf = document.getElementById("btn-val");
-boutonmdf.addEventListener("click", function () {
-  
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger'
-    },
-    buttonsStyling: false
-  })
+                            {{-- sexe ,nom ,prenom  --}}
+                            {{-- ---------------------------------------------------------- --}}
+                            <div class="row espace-inputs">
 
-  swalWithBootstrapButtons.fire({
-    title: `Modifier ! `, // Utilisez la valeur sélectionnée ici
-    text: `Voulez-vous valide l'inscription  ..?`,
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonText: 'OUI, valide',
-    cancelButtonText: 'NO, Annuler !',
-    reverseButtons: true
-    // fin de new code 
-            }).then((result) => {
-                if (result.isConfirmed) {
+                                <div class="col-12">
+                                    <h5 style="text-align: center"><i class="bi bi-person-fill"></i> informations
+                                        personnelles</h5>
+                                    <hr>
+                                </div>
 
-                   // Validation des champs
-            var montantInput = document.getElementById("montant");
-            
-            
-            var montant = montantInput.value.trim();
-       
-            var isValid = true;
-            
-           
-            
-            if (isNaN(montant) || montant <= 0) {
-              montantInput.style.backgroundColor = 'red';
-                isValid = false;
-            } else {
-              montantInput.style.backgroundColor = ''; // Reset background color
-            }
-            
-            if (isValid) {
-                const form = document.getElementById("form_insc");
-                form.submit();
-                 // Attendre un court délai (par exemple 1000 ms) avant de rediriger
-                      setTimeout(function () {
-                          window.location.href = '/admin/inscriptions';
-                      }, 1000);
-
-            } else {
-                swalWithBootstrapButtons.fire({
-                    icon: 'error',
-                    title: 'Champs invalides',
-                    text: 'Veuillez remplir tous les champs correctement.',
-                });
-            }
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            // Action à prendre si l'utilisateur annule
-        }
-            })
-        });
+                                <div class="col-12">
 
 
-        //  script pour rendre la couleur white pour les input on clic
-        
-        var montantInput = document.getElementById("montant");
-       
-// Ajoutez des gestionnaires d'événements pour les événements de clic (ou focus)
-montantInput.addEventListener("click", function () {
-  montantInput.style.backgroundColor = "white";
-});
+                                    <div class="row">
+                                        <div class="col-12 col-md-8 gauche informations">
 
-    </script>
-{{--  new projct css  --}}
+                                            <div class="row">
 
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var montantInput = document.getElementById("montant");
-  
-    // Écoutez l'événement de saisie de l'utilisateur
-    montantInput.addEventListener("input", function() {
-      // Remplacez tout ce qui n'est pas un nombre par du vide
-      this.value = this.value.replace(/[^0-9]/g, "");
-    });
-  });
-  </script>
+                                                <div class="col-12 col-md-4 form-group">
+                                                    <label for="">sexe :</label>
+                                                    <select class="form-control form-select" name="sexe">
+                                                        <option value="{{ $inscription->sexe }}" style="display:none;" selected>
+                                                            @if ($inscription->sexe == 'H')
+                                                                HOMME
+                                                            @else
+                                                                FEMME
+                                                            @endif
+                                                        </option>
+                                                        <option value="H">HOMME</option>
+                                                        <option value="F">FEMME</option>
+                                                    </select>
+                                                </div>
 
 
+                                                <div class="col-12 col-md-4 form-group" id="nom">
+                                                    <label for="">Nom :</label>
 
-<style>
+                                                    <input type="text" name="nom"
+                                                        class="form-control @if ($errors->get('nom')) is-invalid @endif"
+                                                        id="validationNom" placeholder="Veuillez saisir votre nom ici"
+                                                        value="{{ $inscription->nom }}">
+                                                    <div id="validationNomFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('nom'))
+                                                            @foreach ($errors->get('nom') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-12 col-md-4 form-group" id="prenom">
+                                                    <label for="">Prénom :</label>
+
+                                                    <input type="text" name="prenom"
+                                                        class="form-control @if ($errors->get('prenom')) is-invalid @endif"
+                                                        id="validationPrenom" placeholder="Veuillez saisir votre prénom ici"
+                                                        value="{{ $inscription->prenom }}">
+                                                    <div id="validationPrenomFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('prenom'))
+                                                            @foreach ($errors->get('prenom') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-12 col-md-6 form-group" id="date_naissance">
+                                                    <label for="">Date de naissance :</label>
+
+                                                    <input type="date" name="date_naissance"
+                                                        class="form-control @if ($errors->get('date_naissance')) is-invalid @endif"
+                                                        id="validationDate">
+                                                    <div id="validationDateFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('date_naissance'))
+                                                            @foreach ($errors->get('date_naissance') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-12 col-md-6 form-group" id="lieu_naissance">
+                                                    <label for="">lieu de naissance :</label>
+
+                                                    <input type="text" name="lieu_naissance"
+                                                        class="form-control @if ($errors->get('lieu_naissance')) is-invalid @endif"
+                                                        id="validationLieu"
+                                                        placeholder="Veuillez saisir le lieu de naissance ici">
+                                                    <div id="validationLieuFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('lieu_naissance'))
+                                                            @foreach ($errors->get('lieu_naissance') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+
+
+                                                <div class="col-12 col-md-6 form-group" id="wilaya">
+                                                    <label for="">Wilaya de résidence :</label>
+
+                                                    <select class="form-control form-select" name="wilaya">
+
+                                                        <option value="{{ $inscription->wilaya }}" style="display:none;"
+                                                            selected>
+                                                            {{ $inscription->wilaya }}</option>
+
+                                                        <option value="Adrar">Adrar-01 </option>
+                                                        <option value="Chlef">Chlef-02 </option>
+                                                        <option value="Laghouat">Laghouat-03</option>
+                                                        <option value="Oum El Bouaghi">Oum El Bouaghi-04 </option>
+                                                        <option value="Batna">Batna-05 </option>
+                                                        <option value="Béjaïa">Béjaïa-06 </option>
+                                                        <option value="Biskra">Biskra-07 </option>
+                                                        <option value="Béchar">Béchar-08 </option>
+                                                        <option value="Blida">Blida-09 </option>
+                                                        <option value="Bouira">Bouira-10 </option>
+
+                                                        <option value="Tamanrasset">Tamanrasset-11 </option>
+                                                        <option value="Tébessa">Tébessa-12 </option>
+                                                        <option value="Tlemcen">Tlemcen-13 </option>
+                                                        <option value="Tiaret">Tiaret-14 </option>
+                                                        <option value="Tizi Ouzou">Tizi Ouzou-15</option>
+                                                        <option value="Alger">Alger-16 </option>
+                                                        <option value="Djelfa">Djelfa-17 </option>
+                                                        <option value="Jijel">Jijel-18</option>
+                                                        <option value="Sétif">Sétif-19 </option>
+                                                        <option value="Saïda">Saïda-20 </option>
+
+                                                        <option value="Skikda">Skikda-21 </option>
+                                                        <option value="Sidi Bel Abbès">Sidi Bel Abbès-22 </option>
+                                                        <option value="Annaba">Annaba-23 </option>
+                                                        <option value="Guelma">Guelma-24 </option>
+                                                        <option value="Constantine">Constantine-25 </option>
+                                                        <option value="Médéa">Médéa-26 </option>
+                                                        <option value="Mostaganem">Mostaganem-27</option>
+                                                        <option value="M'Sila">M'Sila-28 </option>
+                                                        <option value="Mascara">Mascara-29 </option>
+                                                        <option value="Ouargla">Ouargla-30 </option>
+
+                                                        <option value="Oran">Oran-31 </option>
+                                                        <option value="El Bayadh">El Bayadh-32 </option>
+                                                        <option value="Illizi">Illizi-33</option>
+                                                        <option value="Bordj Bou Arreridj">Bordj Bou Arreridj-34 </option>
+                                                        <option value="Boumerdès">Boumerdès-35 </option>
+                                                        <option value="El Tarf">El Tarf-36 </option>
+                                                        <option value="Tindouf">Tindouf-37 </option>
+                                                        <option value="Tissemsilt">Tissemsilt-38 </option>
+                                                        <option value="El Oued">El Oued-39 </option>
+                                                        <option value="Khenchela">Khenchela-40 </option>
+
+                                                        <option value="Souk Ahras">Souk Ahras-41 </option>
+                                                        <option value="Tipaza">Tipaza-42 </option>
+                                                        <option value="Mila">Mila-43 </option>
+                                                        <option value="Aïn Defla">Aïn Defla-44 </option>
+                                                        <option value="Naâma">Naâma-45 </option>
+                                                        <option value="Aïn Témouchent">Aïn Témouchent-46 </option>
+                                                        <option value="Ghardaïa">Ghardaïa-47 </option>
+                                                        <option value="Relizane">Relizane-48 </option>
+                                                        <option value="Timimoun">Timimoun-49 </option>
+                                                        <option value="Bordj Badji Mokhtar">Bordj Badji Mokhtar-50
+                                                        </option>
+
+                                                        <option value="Ouled Djellal">Ouled Djellal-51</option>
+                                                        <option value="Béni Abbès">Béni Abbès-52</option>
+                                                        <option value="In Salah ">In Salah-53</option>
+                                                        <option value="In Guezzam">In Guezzam-54</option>
+                                                        <option value="Touggourt ">Touggourt-55</option>
+                                                        <option value="Djanet">Djanet-56 </option>
+                                                        <option value="El M'Ghair">El M'Ghair-57 </option>
+                                                        <option value="El Meniaa">El Meniaa-58 </option>
+
+                                                    </select>
+
+                                                </div>
+
+                                                <div class="col-12 col-md-6 form-group" id="tel">
+                                                    <label for="">Proféssion :</label>
+
+                                                    <input type="text" name="profession"
+                                                        class="form-control @if ($errors->get('profession')) is-invalid @endif"
+                                                        id="validationProfession"
+                                                        placeholder="Veuillez saisir la proféssion ici"
+                                                        value="{{ $inscription->profession }}">
+                                                    <div id="validationProfessionFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('profession'))
+                                                            @foreach ($errors->get('profession') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+
+                                                <div class="col-12 col-md-6 form-group" id="tel">
+                                                    <label for="">N° de téléphone :</label>
+
+                                                    <input type="text" name="tel"
+                                                        class="form-control @if ($errors->get('tel')) is-invalid @endif"
+                                                        id="validationTel" placeholder="Veuillez saisir le numéro ici"
+                                                        value="{{ $inscription->tel }}">
+                                                    <div id="validationTelFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('tel'))
+                                                            @foreach ($errors->get('tel') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-12 col-md-6 form-group" id="email">
+                                                    <label for="">e-mail :</label>
+
+                                                    <input type="text" name="email"
+                                                        class="form-control @if ($errors->get('email')) is-invalid @endif"
+                                                        id="validationEmail" placeholder="Veuillez saisir le email ici"
+                                                        value="{{ $inscription->email }}">
+                                                    <div id="validationEmailFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('email'))
+                                                            @foreach ($errors->get('email') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="">Photo:</label>
+                                                <input name="photo" type="file"
+                                                    class="form-control @if ($errors->get('photo')) is-invalid @endif"
+                                                    required id="validationPhoto" Accept="image/*"
+                                                    placeholder="veuillez choisir une image">
+                                                <div id="validationPhotoFeedback" class="invalid-feedback">
+                                                    @if ($errors->get('photo'))
+                                                        @foreach ($errors->get('photo') as $message)
+                                                            {{ $message }}
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div class="col-12 col-md-4 droite photo">
+                                            <label>Photo:</label>
+                                            <div id="imagePreview"
+                                                style="background-image:;background-size: cover;background-position: center;background-repeat: no-repeat;  height: 290px; width: 250px; margin-left:20px; margin-right:20px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                            </div>
+
+
+
+
+                            {{-- formation --}}
+                            {{-- -------------------------------------------------------------------------- --}}
+
+                            <div class="row espace-inputs justify-content-center">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h5 style="text-align: center"><i class="bi bi-mortarboard-fill"></i> Formation</h5>
+                                    <hr>
+                                </div>
+
+                                <div class="col-12 col-md-6 form-group" style="text-align: center;">
+                                    <label for="">Veuillez choisir la Formation :</label>
+
+                                    <select class="form-control form-select" name="formation" id="formation">
+                                        <option value="{{ $formation_etudiant->id }}" style="display:none;" selected>{{ $formation_etudiant->titre }}</option>
+                                        @foreach ($formations as $formation)
+                                            <option value="{{ $formation->id }}" >{{ $formation->titre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-md-6 form-group" style="text-align: center;">
+                                    <label for="">Veuillez choisir la Session :</label>
+
+                                    <select class="form-control form-select @if ($errors->get('session')) is-invalid @endif" name="session" id="session" id="validationSession" >
+                                            {{-- liste des sessions selon la formation --}}
+                                    </select>
+
+                                    <div id="validationSessionFeedback" class="invalid-feedback">
+                                        @if ($errors->get('session'))
+                                            @foreach ($errors->get('session') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            {{-- paiement --}}
+                            {{-- ---------------------------------------------------------- --}}
+
+                            <div class="row espace-inputs justify-content-center">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Paiement</h5>
+                                    <hr>
+                                </div>
+                                <div class="col-md-6 form-group" id="montant" style="text-align: center;">
+
+
+                                    <label for="">Montant Payé :</label>
+
+                                    <input type="text" value="0" name="montant"
+                                        class="form-control @if ($errors->get('montant')) is-invalid @endif"
+                                        id="validationServer04"
+                                        placeholder="Veuillez saisir le montant d'argent encaissé">
+
+                                    <div id="validationServer04Feedback" class="invalid-feedback">
+                                        @if ($errors->get('montant'))
+                                            @foreach ($errors->get('montant') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {{-- <hr> --}}
+                            <br>
+                            <div class="row formulaire-btn">
+
+                                {{-- form buttons  --}}
+                                <div class="form-group row justify-content-center text-center">
+                                    <div class="col-6">
+                                        <button type="button" onclick="validation(this)"
+                                            class="btn btn-outline-success alpa shadow"><i
+                                                class="bi bi-check2 icons"></i>Enregistrer</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="btn btn-outline-danger alpa shadow"
+                                            href="{{ '/admin/inscriptions' }}"><i class="bi bi-x icons"></i>Annuler</a>
+                                    </div>
+                                </div>
+
+                        </form>
+                        {{-- form de redirection --}}
+                        <form class="redirect-form" action="{{ url('/admin/inscriptions') }}" method="GET"></form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+    {{-- ---------------------------------------------------------- --}}
+    <script>
+        // Fonction pour effectuer la requête AJAX
+        function filtrerSessions() {
+            var id_Formation = $('#formation').val();
     
-
-/* center le div */
-.centered-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 120vh; /* Hauteur équivalente à la hauteur de la fenêtre visible */
-}
-
-
-
-    /*  new project  */
-
-
-    .form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 350px;
-  background-color: #355891;
-  padding: 20px;
-  border-radius: 10px;
-  position: relative;
-}
-
-.message {
-  color: #355891;
-  font-size: 14px;
-}
-
-.flex {
-  display: flex;
-  width: 100%;
-  gap: 6px;
-}
-
-.form label {
-  position: relative;
-}
-
-.form label .input {
-  width: 100%;
-  padding: 10px 10px 20px 10px;
-  outline: 0;
-  border: 1px solid #355891;
-  border-radius: 5px;
-}
-
-.form label .input + span {
-  position: absolute;
-  left: 10px;
-  top: 15px;
-  color: #355891;
-  font-size: 0.9em;
-  cursor: text;
-  transition: 0.3s ease;
-}
-
-.form label .input:placeholder-shown + span {
-  top: 15px;
-  font-size: 0.9em;
-}
-
-.form label .input:focus + span,.form label .input:valid + span {
-  top: 30px;
-  font-size: 0.7em;
-  font-weight: 600;
-}
-
-.form label .input:valid + span {
-  color: green;
-}
-
-.input01 {
-  width: 100%;
-  padding: 10px 10px 20px 10px;
-  outline: 0;
-  border: 1px solid #355891;
-  border-radius: 5px;
-}
-
-.form label .input01 + span {
-  position: absolute;
-  left: 10px;
-  top: 50px;
-  color: #355891;
-  font-size: 0.9em;
-  cursor: text;
-  transition: 0.3s ease;
-}
-
-.form label .input01:placeholder-shown + span {
-  top: 40px;
-  font-size: 0.9em;
-}
-
-.form label .input01:focus + span,.form label .input01:valid + span {
-  top: 50px;
-  font-size: 0.7em;
-  font-weight: 600;
-}
-
-.form label .input01:valid + span {
-  color: green;
-}
-
-.fancy {
-  background-color: white;
-  border: 2px solid #355891;
-  border-radius: 0px;
-  box-sizing: border-box;
-  color: #355891;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 390;
-  letter-spacing: 2px;
-  margin: 0;
-  outline: none;
-  overflow: visible;
-  padding: 8px 30px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  text-transform: none;
-  transition: all 0.3s ease-in-out;
-  user-select: none;
-  font-size: 13px;
-}
-
-.fancy::before {
-  content: " ";
-  width: 1.7rem;
-  height: 2px;
-  background: #355891;
-  top: 50%;
-  left: 1.5em;
-  position: absolute;
-  transform: translateY(-50%);
-  transform: translateX(230%);
-  transform-origin: center;
-  transition: background 0.3s linear, width 0.3s linear;
-}
-
-.fancy .text {
-  font-size: 1.125em;
-  line-height: 1.33333em;
-  padding-left: 2em;
-  display: block;
-  text-align: left;
-  transition: all 0.3s ease-in-out;
-  text-transform: lowercase;
-  text-decoration: none;
-  color: #355891;
-  transform: translateX(30%);
-}
-
-.fancy .top-key {
-  height: 2px;
-  width: 1.5625rem;
-  top: -2px;
-  left: 0.625rem;
-  position: absolute;
-  background: #355891;
-  transition: width 0.5s ease-out, left 0.3s ease-out;
-}
-
-.fancy .bottom-key-1 {
-  height: 2px;
-  width: 1.5625rem;
-  right: 1.875rem;
-  bottom: -2px;
-  position: absolute;
-  background: #355891;
-  transition: width 0.5s ease-out, right 0.3s ease-out;
-}
-
-.fancy .bottom-key-2 {
-  height: 2px;
-  width: 0.625rem;
-  right: 0.625rem;
-  bottom: -2px;
-  position: absolute;
-  background: #355891;
-  transition: width 0.5s ease-out, right 0.3s ease-out;
-}
-
-.fancy:hover {
-  color: #355891;
-  background: #5f82a9;
-}
-
-.fancy:hover::before {
-  width: 1.5rem;
-  background: #355891;
-}
-
-.fancy:hover .text {
-  color: white;
-  padding-left: 1.5em;
-}
-
-.fancy:hover .top-key {
-  left: -2px;
-  width: 0px;
-}
-
-.fancy:hover .bottom-key-1,
- .fancy:hover .bottom-key-2 {
-  right: 0;
-  width: 0;
-}
-/* fin */
-
-
-.form__group {
-  position: relative;
-  padding: 20px 0px 5px;
-  margin-top: 10px;
-  width: 100%;
-  max-width: 700px;
-}
-
-
-.form__label {
-  position: absolute;
-  display: block;
-  transition: 0.40s;
-  font-size: 20px;
-  color: #116399;
-  pointer-events: none;
-  padding-bottom: 30px;
-  top: -10px;
-  font-weight: 700;
-  padding-left: 5px;
-}
-.form__field {
-  font-family: inherit;
-  width: 100%;
-  border: none;
-  border-bottom:2px solid #9b9b9b;
-  outline: 0;
-  font-size: 22px;
-  color: rgb(0, 0, 0);
-  padding: 7px 0 ;
-  background: transparent;
-  transition: border-color 0.2s;
-  font-weight: bold;
-}
-.form__field::placeholder {
-  color: transparent;
-}
-
-.form__field:placeholder-shown ~ .form__label {
-  font-size: 24px;
-  cursor: text;
-  top: 20px;
-
-}
-.form__field:focus ~ .form__label {
-  position: absolute;
-  top: -5px;
-  display: block;
-  transition: 0.2s;
-  font-size: 17px;
-  color: #38caef;
-  font-weight: 700;
-  
-}
-.form__field:required, .form__field:invalid {
-  box-shadow: none;
-}
-
-/*  bouton enregistrier */
-
-/* boutton ajouter une formation */
-
-.button-add-new {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 38px;
-  border-radius: 16px;
-  border: 1px solid transparent;
-  color: #FFFFFF;
-  background-color: #1DC9A0;
-  font-size: 20px;
-  letter-spacing: 1px;
-  transition: all 0.15s linear;
- }
- 
- .button-add-new:hover {
-  background-color: rgba(29, 201, 160, 0.08);
-  border-color: #1DC9A0;
-  color: #1DC9A0;
-  transform: translateY(-5px) scale(1.05);
- }
- 
- .button-add-new:active {
-  background-color: transparent;
-  border-color: #1DC9A0;
-  color: #1DC9A0;
-  transform: translateY(5px) scale(0.95);
- }
- 
- .button-add-new:disabled {
-  background-color: rgba(255, 255, 255, 0.16);
-  color: #8E8E93;
-  border-color: #8E8E93;
- }
- /* -------------------  fin  ------------- */
-
-/* button modifer */
-
-.btn-mdf {
-                              width: 150px;
-                              height: 50px;
-                              cursor: pointer;
-                              display: flex;
-                              align-items: center;
-                              background: #5EB1FD;
-                              border: none;
-                              border-radius: 10px;
-                              box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-                              background:#3165F6;
-                              white-space: nowrap; 
-                              
-                            }
-                            .in{
-                              position: absolute;
-                              bottom: 0;
-                              left: 0;
-                              width: 100%;
-                              padding: 10px;
-                              
-                            }
-                            
-                            .btn-mdf span {
-                              transition: 200ms;
-                            }
-                            
-                            .btn-mdf .text {
-                              transform: translateX(20px);
-                              color: white;
-                              font-weight: bold;
-                              text-align: center;
-                            }
-
-                            
-                            .btn-mdf .icon {
-                              position: absolute;
-                              /* border-left: 1px solid #5EB1FD; */
-                              transform: translateX(110px);
-                              height: 40px;
-                              width: 40px;
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                              padding-top: 0px;
-                            }
-                            
-                            .btn-mdf .i {
-                              /* width: 15px; */
-                              fill: #eee;
-                            }
-                            
-                            .btn-mdf:hover {
-                              background: #5EB1FD;
-                            }
-                            
-                            .btn-mdf:hover .text {
-                              color: transparent;
-                            }
-                            
-                            .btn-mdf:hover .icon {
-                              width: 150px;
-                              border-left: none;
-                              transform: translateX(0);
-                            }
-                            
-                            .btn-mdf:focus {
-                              outline: none;
-                            }
-                            
-                            .btn-mdf:active .icon svg {
-                              transform: scale(0.8);
-                            }
-
-                            /* -------fin mdf------ */
-                              /* button supprimer */
-
-
-                              .btn-sup {
-                                        width: 150px;
-                                        height: 50px;
-                                        cursor: pointer;
-                                        display: flex;
-                                        align-items: center;
-                                        background: red;
-                                        border: none;
-                                        border-radius: 10px;
-                                        box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-                                        background:#e62222;
-                                        white-space: nowrap;  
-
-                                                                          
-                                      }
-                                      
-                                       
-                                      .btn-sup span {
-                                        transition: 200ms;
-                                    
-                                        
-                                       }
-                                       
-                                       .btn-sup .text {
-                                        transform: translateX(20px);
-                                        color: white;
-                                        font-weight: bold;
-                                        text-align: center;
-                           
-                                       }
-                                      
-                                       
-                                       .btn-sup .icon {
-                                        position: absolute;
-                                        /* border-left: 1px solid #5EB1FD; */
-                                        transform: translateX(110px);
-                                        height: 40px;
-                                        width: 40px;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        padding-top: 0px;
-                                       }
-                                       
-                                       .btn-sup .i {
-                                        /* width: 15px; */
-                                        fill: #eee;
-                                       
-                                       }
-                                       
-                                       .btn-sup:hover {
-                                        background: #ff3636;
-                                       }
-                                       
-                                       .btn-sup:hover .text {
-                                        color: transparent;
-                                       }
-                                       
-                                       .btn-sup:hover .icon {
-                                        width: 150px;
-                                        border-left: none;
-                                        transform: translateX(0);
-                                       }
-                                       
-                                       .btn-sup:focus {
-                                        outline: none;
-                                       }
-                                       
-                                       .btn-sup:active .icon svg {
-                                        transform: scale(0.8);
-                                       }
-                                       /* fin btn sup */
-                                       .bt-en-ligne{
-
-display: flex;
-
-justify-content: center;
-/* position: fixed; */
-bottom: 0;
-left: 0;
-right: 0;
-margin: auto;
-}
-.bt-en-ligne-div{
-margin: 1%;
-}
-
-/* fin */
-
-
-</style>
-
-
-{{-- new project  --}}
+            $.ajax({
+                url: '/get-sessions/' + id_Formation,
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#session').empty();
+                    $.each(response.sessions, function(key, value) {
+                        $('#session').append('<option value="' + value.id + '">' + value.nom +
+                            '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+    
+        $(document).ready(function() {
+            // Appeler la fonction au chargement de la page
+            filtrerSessions();
+    
+            // Écouter les changements de la valeur de la formation
+            $('#formation').change(function() {
+                // Appeler la fonction lors du changement de la sélection
+                filtrerSessions();
+            });
+        });
+    </script>
 
 
 
 
+    {{-- script sauvegarder  --}}
+    <script>
+        function validation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form1 = document.querySelector('.validation-form');
+            const form2 = document.querySelector('.redirect-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form1 && form2) {
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir valider cette inscription ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then(async (result) => {
+                    try {
+                        if (result.isConfirmed) {
+                            // Soumettre le premier formulaire
+                            await form1.submit();
+
+                            // Attendez que le premier formulaire soit soumis avant de soumettre le deuxième
+                            await new Promise(resolve => setTimeout(resolve,
+                                10000)); // 5 seconde de délai (ajustez si nécessaire)
+
+                            form2.submit();
+                        }
+                    } catch (error) {
+                        console.error("Erreur lors de la soumission du formulaire : ", error);
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+    <script>
+        async function sauvegarder() {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form1 = document.querySelector('.inscription-form');
+            const form2 = document.querySelector('.redirect-form');
+
+            // Vérifiez si le formulaire a été trouvé
+            if (form1 && form2) {
+
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir enregistrer cette inscription ?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then(async (result) => {
+                    try {
+                        if (result.isConfirmed) {
+                            // Soumettre le premier formulaire
+                            await form1.submit();
+
+                            // Attendez que le premier formulaire soit soumis avant de soumettre le deuxième
+                            await new Promise(resolve => setTimeout(resolve,
+                                5000)); // 1 seconde de délai (ajustez si nécessaire)
+
+                            form2.submit();
+                        }
+                    } catch (error) {
+                        console.error("Erreur lors de la soumission du formulaire : ", error);
+                    }
+                });
+            } else {
+                console.error("Il y a une erreur !");
+            }
+        }
+    </script>
 
 
 
-@endsection
+    <script>
+        // affichage de l'image
+        // --------------------------------------------------------------------------------------
+
+        // Sélection de l'élément input
+        const input = document.getElementById('validationPhoto');
+
+        // Écoute de l'événement 'change' sur l'input
+        input.addEventListener('change', function() {
+            // Vérification s'il y a un fichier sélectionné
+            if (input.files && input.files[0]) {
+                // Création d'un objet FileReader
+                const reader = new FileReader();
+
+                // Événement 'load' déclenché lorsque la lecture est terminée
+                reader.onload = function(e) {
+                    // Mise à jour de l'attribut src de l'élément img avec les données de l'image
+                    // document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('imagePreview').style.backgroundImage = "url('" + e.target.result +
+                        "')";
+                };
+
+                // Lecture du contenu de l'image en tant que URL de données
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+
+        // choix de l'image
+        // -----------------------------------------------------------------------------------------
+
+        // Sélection de l'élément img
+        const imagePreview = document.getElementById('imagePreview');
+
+        // Écoute de l'événement 'click' sur l'image
+        imagePreview.addEventListener('click', function() {
+            // Clic sur l'élément input
+            document.getElementById('validationPhoto').click();
+        });
+    </script>
+
+
+    <div class="container" id="pied-page"></div>
+
+    @endsection

@@ -4,8 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Prof extends Model
 {
     use HasFactory;
+        
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+
+    public function cours()
+    {
+        return $this->hasMany(Cour::class, 'prof_id');
+    }
+    
 }

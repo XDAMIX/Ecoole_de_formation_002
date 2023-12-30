@@ -17,10 +17,13 @@ use App\Models\Banner;
 use App\Models\Question;
 use App\Http\Requests\InscriptionRequest;
 use App\Http\Requests\MessageRequest;
+use App\Models\Etudiant;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
+use PhpParser\Node\Stmt\Foreach_;
+
 class WebsiteController extends Controller
 {
 
@@ -31,6 +34,10 @@ class WebsiteController extends Controller
 
     public function readfromdatabase()
     {
+        $nombre_formations = Formation::count();
+        $nombre_etudiants = Etudiant::count();
+        $nombre_diplomes = Etudiant::where('etat_formation', '=', 'fin-de-la-formation')->count();
+        
         $ListeFormations = Formation::all();
         $ListePhotos = Photo::all();
         $ListeTem = Temoignage::all();
@@ -42,9 +49,40 @@ class WebsiteController extends Controller
         $telephones = Telephone::all();
         $paragraphes = Paragraphe::all();
 
-        return view('index',['formations'=>$ListeFormations,'photos'=>$ListePhotos,'temoignages'=>$ListeTem,'banners'=>$ListeBanners,
-        'questions'=>$ListeQuestions,'acceuil'=>$acceuil,'informations'=>$informations,'liens'=>$liens,'telephones'=>$telephones,
-        'paragraphes'=>$paragraphes]);
+        if ($informations === null) {
+
+            $information = new Information();
+
+            $information->nom = '';
+            $information->adresse = '';
+            $information->localisation = '';
+            $information->email = '';
+            $information->site_web = '';
+            $information->heure_travail = '';
+            $information->logo = '';
+            $information->wilaya = '';
+    
+            $information->save();
+        }
+        if ($acceuil === null) {
+
+            $acceuil = new Acceuil();
+            $acceuil->titre = '';
+            $acceuil->sous_titre1 = '';
+            $acceuil->sous_titre2 = '';
+            $acceuil->photo = '';
+    
+            $acceuil->save();
+        }
+
+        $acceuil = Acceuil::all()->first();
+        $informations = Information::all()->first();
+
+        return view('index', [
+            'formations' => $ListeFormations, 'photos' => $ListePhotos, 'temoignages' => $ListeTem, 'banners' => $ListeBanners,
+            'questions' => $ListeQuestions, 'acceuil' => $acceuil, 'informations' => $informations, 'liens' => $liens, 'telephones' => $telephones,
+            'paragraphes' => $paragraphes, 'nb_formations' => $nombre_formations,'nb_stagiaires' => $nombre_etudiants,'nb_diplomes' => $nombre_diplomes,
+        ]);
     }
 
 
@@ -60,7 +98,7 @@ class WebsiteController extends Controller
         $telephones = Telephone::all();
         $liens = Lien::all();
 
-        return view('inscription',['formations'=>$ListeFormations,'informations'=>$informations,'telephones'=>$telephones,'liens'=>$liens]);
+        return view('inscription', ['formations' => $ListeFormations, 'informations' => $informations, 'telephones' => $telephones, 'liens' => $liens]);
     }
 
 
@@ -76,7 +114,7 @@ class WebsiteController extends Controller
         $telephones = Telephone::all();
         $liens = Lien::all();
 
-        return view('inscription_directe',['formation'=>$LaFormation,'informations'=>$informations,'telephones'=>$telephones,'liens'=>$liens]);
+        return view('inscription_directe', ['formation' => $LaFormation, 'informations' => $informations, 'telephones' => $telephones, 'liens' => $liens]);
     }
 
 
@@ -85,12 +123,13 @@ class WebsiteController extends Controller
 
 
 
-    public function voir_formation($id){
+    public function voir_formation($id)
+    {
         $LaFormation = formation::find($id);
-        $informations= Information::all()->first();
+        $informations = Information::all()->first();
         $telephones = Telephone::all();
         $liens = Lien::all();
-        return view('voirplus',['formation'=>$LaFormation,'informations'=>$informations,'telephones'=>$telephones,'liens'=>$liens]);
+        return view('voirplus', ['formation' => $LaFormation, 'informations' => $informations, 'telephones' => $telephones, 'liens' => $liens]);
     }
 
 
@@ -99,7 +138,9 @@ class WebsiteController extends Controller
 
 
 
-    public function save_inscription(InscriptionRequest $request) {
+    public function save_inscription(InscriptionRequest $request)
+    {
+        // ... sauvegarder l'inscription
         $inscription = new Inscription();
 
         $inscription->sexe = $request->input('sexe');
@@ -108,80 +149,56 @@ class WebsiteController extends Controller
         $inscription->age = $request->input('age');
         $inscription->wilaya = $request->input('wilaya');
         $inscription->profession = $request->input('profession');
-
         $inscription->tel = $request->input('tel');
         $inscription->email = $request->input('email');
+        $inscription->formation_id = $request->input('formation');
 
-        $inscription->formation = $request->input('formation');
-        // $inscription->date = now();
-        
-        
-        $lenom = $request->input('nom');
-        $leprenom = $request->input('prenom');
+
 
         $inscription->save();
 
-        $titre = $lenom.' '.$leprenom;
+        $lenom = $request->input('nom');
+        $leprenom = $request->input('prenom');
+        $titre = $lenom . ' ' . $leprenom;
 
-        Alert::success($titre, 'Votre inscription en-ligne a été éffectuée avec succès! merci à bientôt')->position('center')->autoClose(7000);
+        Alert::success($titre, 'Votre inscription en-ligne a été éffectuée avec succès! merci')->position('center')->autoClose(5000);
 
-// ... Validation des données et téléchargements de fichiers ...
+
+        // ... Validation des données et téléchargements de fichiers ...
+
+        $informations = Information::all()->first();
+        $telephones = Telephone::all();
         
-$informations= Information::all()->first();
-$telephones = Telephone::all();
+        $id_formation = $inscription->formation_id;
+        $formation = Formation::find($id_formation);
 
-$date=date('d/m/20y');
+        $date = date('d/m/20y');
 
-$data = [
-    'sexe' => $request->input('sexe'),
-    'nom' => $request->input('nom'),
-    'prenom' => $request->input('prenom'),
-    'age' => $request->input('age'),
-    'wilaya' => $request->input('wilaya'),
-    'profession' => $request->input('profession'),
-    'tel' => $request->input('tel'),
-    'email' => $request->input('email'),
-    'formation' => $request->input('formation'),
-    'informations' => $informations,
-    'telephones' => $telephones ,
-    'date'=>$date,
-    // ... Autres données ...
-];
-
-
-// $pdf = PDF::loadView('pdf',$data, compact('informations') );
-$pdf = PDF::loadView('pdf',$data);
-
-$pdfOutput = $pdf->output();
-
-  // Générer le PDF et définir l'entête de la réponse
-  $response = Response::make($pdfOutput, 200, [
-    'Content-Type' => 'application/pdf',
-    // 'Content-Disposition' => 'inline; filename="registration.pdf"',
-     // L'option "inline" indique au navigateur d'ouvrir le fichier PDF directement.
-    'Content-Disposition' => 'attachment; filename="'.$lenom.'_'.$leprenom.'_inscription_formacorp.pdf"', 
-    // L'option "attachment" indique au navigateur de télécharger le fichier.
-    'Content-Length' => strlen($pdfOutput),
-    
-]);
-
-return $response;
-
-    // Charger la vue avec JavaScript pour effectuer la redirection après un court délai
-    // return View::make('redirect')->with('response', $response);
-
-// Rediriger vers la racine après le téléchargement
-// return $response->withHeaders([
-//     'Refresh' => '3; url=/',
-// ]);
-
-// return $pdf->stream('pdf');
-// return $pdf->download('pdf');
-
-// return redirect('/');
+        $data = [
+            'sexe' => $request->input('sexe'),
+            'nom' => $request->input('nom'),
+            'prenom' => $request->input('prenom'),
+            'age' => $request->input('age'),
+            'wilaya' => $request->input('wilaya'),
+            'profession' => $request->input('profession'),
+            'tel' => $request->input('tel'),
+            'email' => $request->input('email'),
+            'formation' => $formation->titre,
+            'informations' => $informations,
+            'telephones' => $telephones,
+            'date' => $date,
+            // ... Autres données ...
+        ];
 
 
-}
+        // Générer le PDF à partir d'une vue
+        $pdf = PDF::loadView('pdf', $data);
+
+        // Télécharger le PDF avec un nom spécifique
+        return $pdf->download($titre . '.pdf');
+
+
+    }
 
 
 
@@ -189,7 +206,8 @@ return $response;
 
 
 
-    public function send_the_message(MessageRequest $request) {
+    public function send_the_message(MessageRequest $request)
+    {
         $message = new Message();
 
         $message->name = $request->input('name');
@@ -203,24 +221,24 @@ return $response;
 
         $titre = $request->input('name');
 
-        Alert::success($titre , 'Votre message a été envoyé avec succès ! merci')->position('center')->autoClose(2000);
+        Alert::success($titre, 'Votre message a été envoyé avec succès ! merci')->position('center')->autoClose(2000);
 
         return redirect('/');
-     }
+    }
 
 
 
     //  PACCINO TESTE DOM-PDF
-    
+
     public function teste_pdf()
-{
-    $data = [
-        'title' => 'teste de PDF avec DOMPDF',
-        'content' => 'Contenu de mon PDF...'
-    ];
+    {
+        $data = [
+            'title' => 'teste de PDF avec DOMPDF',
+            'content' => 'Contenu de mon PDF...'
+        ];
 
-    $pdf = PDF::loadView('template', $data);
+        $pdf = PDF::loadView('template', $data);
 
-    return $pdf->download('teste-pdf.pdf');
-}
+        return $pdf->download('teste-pdf.pdf');
+    }
 }
