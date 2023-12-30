@@ -44,9 +44,9 @@
     <div class="container animate__animated animate__backInLeft" id="titre-page">
         <div class="row justify-content-center">
 
-            <div class="col-12" style="text-align: center;">
-                <h1 style="color: black; font-weight:bold; text-transform: uppercase;"><i class="bi bi-card-text icons"></i> Inscription en-ligne</h1>
-            </div>
+        <div class="col-12" style="text-align: center;">
+            <h2><i class="fa-solid fa-file-pen icons"></i>  Inscription en-ligne</h2>
+        </div>
 
         </div>
     </div>
@@ -60,24 +60,23 @@
                     {{-- <div class="card-header"style="text-align:center;">
                 <a style="font-size: 20px;">Formulaire d'inscription</a>
               </div> --}}
-                    <div class="card-body">
-
-                        <form class="inscription-form" action="{{ url('/inscription/save') }}" method="POST">
-                            @csrf
-
-
+              <div class="card-body">
+  
+<form action="{{url('/inscription/save')}}" method="POST">
+@csrf
 
 
 
-                            {{-- sexe ,nom ,prenom  --}}
-                            {{-- ---------------------------------------------------------- --}}
-                            <div class="row espace-inputs">
 
-                                <div class="col-md-12">
-                                    <h5 style="text-align: center"><i class="bi bi-person-fill"></i> informations
-                                        personnelles</h5>
-                                    <hr>
-                                </div>
+
+{{-- sexe ,nom ,prenom  --}}
+{{-- ---------------------------------------------------------- --}}
+<div class="row espace-inputs"> 
+  
+  <div class="col-md-12">
+    <h5 style="text-align: center"><i class="bi bi-person-fill"></i>  informations personnelles</h5>
+    <hr>
+  </div>
 
                                 <div class="col-md-4 form-group" id="sexe">
                                     <label for="">sexe :</label>
@@ -315,28 +314,20 @@
 
                             <hr>
 
-                            <div class="row formulaire-btn" style="margin-top:20px;margin-bottom:30px;">
-                                <div class="col-6 form-group">
+<div class="row formulaire-btn">
+    <div class="col-12 form-group">
 
-                                    <button type="button" onclick="sauvegarder()"
-                                        class="btn btn-success alpa shadow"><i
-                                            class="bi bi-check2"></i><span class="btn-description">Valider</span></button>
+        <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Valider</span></button>
+        {{-- <button type="submit" class="btn btn-primary alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button> --}}
+        {{-- <button type="submit" class="form-control btn btn-primary">Submit</button> --}}
 
+    </div>
+</div>
 
-                                </div>
-                                <div class="col-6 form-group">
+</form>
 
-                                    <a href="/" class="btn btn-danger alpa shadow"><i
-                                            class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
-
-                                </div>
-                            </div>
-
-                        </form>
-                        {{-- form de redirection --}}
-                        <form class="redirect-form" action="{{ url('/') }}" method="GET"></form>
-                    </div>
-                </div>
+</div>
+</div>
 
             </div>
         </div>
@@ -345,50 +336,19 @@
 
 
 
-    </div>
-
-
-    {{-- script sauvegarder  --}}
-    <script>
-        async function sauvegarder() {
-            // Utilisez le bouton pour obtenir le formulaire parent
-            const form1 = document.querySelector('.inscription-form');
-            const form2 = document.querySelector('.redirect-form');
-
-            // Vérifiez si le formulaire a été trouvé
-            if (form1 && form2) {
-
-                Swal.fire({
-                    title: "Êtes-vous sûr(e) de vouloir enregistrer cette inscription ?",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonColor: "#198754",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Oui",
-                    cancelButtonText: "Non",
-                }).then(async (result) => {
-                    try {
-                        if (result.isConfirmed) {
-                            // Soumettre le premier formulaire
-                            await form1.submit();
-
-                            // Attendez que le premier formulaire soit soumis avant de soumettre le deuxième
-                            await new Promise(resolve => setTimeout(resolve,
-                            10000)); // 5 seconde de délai (ajustez si nécessaire)
-
-                            form2.submit();
-                        }
-                    } catch (error) {
-                        console.error("Erreur lors de la soumission du formulaire : ", error);
-                    }
-                });
-            } else {
-                console.error("Il y a une erreur !");
-            }
-        }
-    </script>
-
-
 </div>
 
-@endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
