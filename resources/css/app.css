@@ -8,7 +8,7 @@
   --color1: #FFFFFF;
   --color2: #c4bfbf86;
   --color3: #000000;
-  --color4: #7fff2aff;
+  --color4: rgb(244, 133, 21);
   --color5: #0055d4ff;
 
 
@@ -495,7 +495,7 @@ color: var(--color1);
   display: flex;
   justify-content: center;
   --color-text: #ffffff;
-  --color-background: #16FF59;
+  --color-background: var(--color4);
   --color-outline: #057F3F;
   --color-shadow: #0c3f25;
 }
