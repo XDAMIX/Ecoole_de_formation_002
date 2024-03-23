@@ -7,12 +7,15 @@
                 <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
                         class="btn-description">Acceuil</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center">
+            <div class="col-8  text-center">
                 <h2>Témoignages</h2>
+            </div>
+                        <div class="col-2 d-flex align-items-center">
+                <a href="{{ url('/admin/temoignages/nouveau') }}" class="btn btn-success"><i class="fa-solid fa-plus fa-beat-fade"></i><span
+                        class="btn-description">Ajouter </span></a>
             </div>
         </div>
     </div>
-
     {{-- ---------------------------------------------------------------------------------------------------- --}}
 
     <div class="container" style="padding-top: 10px;">

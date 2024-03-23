@@ -1,0 +1,31 @@
+{
+  "_jquery-a07c7b7c.js": {
+    "file": "assets/jquery-a07c7b7c.js"
+  },
+  "resources/css/admin.css": {
+    "file": "assets/admin-d2487963.css",
+    "isEntry": true,
+    "src": "resources/css/admin.css"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-b4073cab.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/admin.js": {
+    "file": "assets/admin-75d16d3b.js",
+    "imports": [
+      "_jquery-a07c7b7c.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/admin.js"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-9b26ab49.js",
+    "imports": [
+      "_jquery-a07c7b7c.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
