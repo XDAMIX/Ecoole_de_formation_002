@@ -3,17 +3,22 @@
 
 
 {{-- retour à l'acceuil  --}}
+
 <div class="container" id="titre-page">
     <div class="row">
         <div class="col-2 d-flex align-items-center">
-            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span class="btn-description">Acceuil</span></a>
+            <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
+                    class="btn-description">Acceuil</span></a>
         </div>
-        <div class="col-10 d-flex align-items-center">
+        <div class="col-8  text-center">
             <h2>Sessions</h2>
+        </div>
+                    <div class="col-2 d-flex align-items-center">
+            <a href="{{ url('/admin/session/ajouter') }}" class="btn btn-success"><i class="fa-solid fa-plus fa-beat-fade"></i><span
+                    class="btn-description">Ajouter </span></a>
         </div>
     </div>
 </div>
-
 
     {{-- javascript DataTables --}}
 
