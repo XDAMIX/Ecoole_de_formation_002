@@ -332,6 +332,8 @@
                                 class="fa-solid fa-bars submenu-i"></i>Liste des formations</a>
                         <a class="collapse-item" href="{{ url('/admin/formation/nouveau') }}"><i
                                 class="fa-regular fa-square-plus submenu-i"></i>Ajouter</a>
+                        <a class="collapse-item" href="{{ url('/admin/types_p') }}"><i
+                                class="fa-regular fa-square-plus submenu-i"></i>type des paiement</a>
                     </div>
                 </div>
             </li>
