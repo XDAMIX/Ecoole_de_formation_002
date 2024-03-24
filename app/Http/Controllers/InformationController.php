@@ -57,10 +57,13 @@ class InformationController extends Controller
         $information->adresse = '';
         $information->localisation = '';
         $information->email = '';
-        $information->site_web = '';
         $information->heure_travail = '';
-        $information->logo = '';
-        $information->wilaya = '';
+        // $information->wilaya = '';
+        // $information->site_web = '';
+        // $information->logo_blanc = '';
+        // $information->logo_couleurs = '';
+        // $information->num_agrement = '';
+        // $information->date_agrement = '';
 
         $information->save();
 
@@ -81,8 +84,14 @@ class InformationController extends Controller
         $information->email = $request->input('email');
         $information->site_web = $request->input('site_web');
         $information->heure_travail = $request->input('heure_travail');
-        if($request->hasFile('logo')){
-            $information->logo = $request->logo->store('/public/images/logo');
+        $information->num_agrement = $request->input('num_agrement');
+        $information->date_agrement = $request->input('date_agrement');
+
+        if($request->hasFile('logo_blanc')){
+            $information->logo_blanc = $request->logo_blanc->store('/public/images/logo');
+        }
+        if($request->hasFile('logo_couleurs')){
+            $information->logo_couleurs = $request->logo_couleurs->store('/public/images/logo');
         }
 
         $information->save();
