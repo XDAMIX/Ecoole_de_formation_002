@@ -20,6 +20,7 @@ use App\Http\Controllers\ActualitesController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\ProfController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TypePsController;
 use App\Http\Controllers\ValideController;
 
 
@@ -73,6 +74,7 @@ Route::controller(InscriptionController::class)->group(function () {
     Route::delete('/admin/inscriptions/{id}/delete', 'destroy');
     Route::get('/admin/inscriptions/filtrer', 'filtrer');
     Route::get('/admin/inscriptions/recherche', 'recherche')->name('recherche');
+
     // creer le pdf de la liste des inscriptions
     Route::get('/admin/inscriptions/imprimer', 'imprimertout');
     // Route::get('/admin/inscriptions/imprimer', [InscriptionController::class, 'imprimer'])->header('Content-Type', 'application/pdf');
@@ -261,6 +263,20 @@ Route::controller(ParagrapheController::class)->group(function () {
 // ---------                Route pour la page Actualites          ----------
 // --------------------------------------------------------------------------
 Route::get('/actualites', [ActualitesController::class, 'index'])->name('actualites');
+
+
+
+// --------------------------------------------------------------------------
+// ---------                Route pour type de paiement       ----------
+// --------------------------------------------------------------------------
+Route::controller(TypePsController::class)->group(function () {
+    Route::get('/admin/types_p', 'index');
+    Route::get('/admin/types_p/nouveau', 'create');
+    Route::post('/admin/types_p/save', 'store');
+    Route::get('/admin/types_p/{id}/edit', 'edit');
+    Route::put('/admin/types_p/{id}/update', 'update');
+    Route::delete('/admin/types_p/{id}/delete', 'destroy');
+});
 
 
 Auth::routes();
