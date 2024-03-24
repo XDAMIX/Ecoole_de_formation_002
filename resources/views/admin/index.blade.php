@@ -128,7 +128,7 @@
                 
                 <div class="logo animate__animated animate__swing">
                     @foreach ($informations as $information)
-                    <img src="{{ asset('storage/' . $information->logo) }}" class="img-fluid" alt="logo"
+                    <img src="{{ asset('storage/' . $information->logo_couleurs) }}" class="img-fluid" alt="logo"
                     style="height: 150px;margin-bottom:30px;">
                     @endforeach
                 </div>

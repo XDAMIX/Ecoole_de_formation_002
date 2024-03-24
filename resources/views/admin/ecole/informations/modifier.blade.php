@@ -2,17 +2,30 @@
 @section('content')
 
     <script>
-        function previewImage() {
-            var file = document.getElementById("validationServer06").files;
+        function previewImage1() {
+            var file = document.getElementById("validationLogoBlanc").files;
             if (file.length > 0) {
                 var fileReader = new FileReader();
 
                 fileReader.onload = function(event) {
-                    document.getElementById("preview").setAttribute("src", event.target.result)
+                    document.getElementById("preview1").setAttribute("src", event.target.result)
                 };
                 fileReader.readAsDataURL(file[0]);
             }
-        }
+        };
+
+        function previewImage2() {
+            var file = document.getElementById("validationLogoCouleurs").files;
+            if (file.length > 0) {
+                var fileReader = new FileReader();
+
+                fileReader.onload = function(event) {
+                    document.getElementById("preview2").setAttribute("src", event.target.result)
+                };
+                fileReader.readAsDataURL(file[0]);
+            }
+        };
+
     </script>
 
 
@@ -44,7 +57,9 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="form-group">
+                        <div class="row">
+                              
+                            <div class="col-12 form-group">
                                 <label for="">Nom de l'école:</label>
                                 <input type="text" name="nom"
                                     class="form-control @if ($errors->get('nom')) is-invalid @endif"
@@ -58,8 +73,36 @@
                                 </div>
                             </div>
 
+                            <div class="col-6 form-group">
+                                <label for="">N° d'agrément:</label>
+                                <input type="text" name="num_agrement"
+                                    class="form-control @if ($errors->get('num_agrement')) is-invalid @endif"
+                                    id="validationNumAgrement" placeholder="n° d'agrément" value="{{ $information->num_agrement }}">
+                                <div id="validationNumAgrementFeedback" class="invalid-feedback">
+                                    @if ($errors->get('num_agrement'))
+                                        @foreach ($errors->get('num_agrement') as $message)
+                                            {{ $message }}
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
 
-                            <div class="form-group" id="wilaya">
+                            <div class="col-6 form-group">
+                                <label for="">Date d'agrément:</label>
+                                <input type="date" name="date_agrement"
+                                    class="form-control @if ($errors->get('date_agrement')) is-invalid @endif"
+                                    id="validationDateAgrement" placeholder="date d'agrément" value="{{ $information->date_agrement }}">
+                                <div id="validationDateAgrementFeedback" class="invalid-feedback">
+                                    @if ($errors->get('date_agrement'))
+                                        @foreach ($errors->get('date_agrement') as $message)
+                                            {{ $message }}
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 form-group" id="wilaya">
                                 <label for="">Wilaya :</label>
 
                                 <select class="form-control form-select" name="wilaya">
@@ -135,7 +178,7 @@
 
                             </div>
 
-                            <div class="form-group">
+                            <div class="col-12 form-group">
                                 <label for="">Adresse:</label>
                                 <input type="text" name="adresse"
                                     class="form-control @if ($errors->get('adresse')) is-invalid @endif"
@@ -149,7 +192,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="col-12 form-group">
                                 <label for="">Localisation:</label>
                                 <textarea type="text" name="localisation" class="form-control @if ($errors->get('localisation')) is-invalid @endif"
                                     id="validationLocalisation" placeholder="Localisation">{{ $information->localisation }}</textarea>
@@ -162,7 +205,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="col-6 form-group">
                                 <label for="">E-Mail:</label>
                                 <input type="text" name="email"
                                     class="form-control @if ($errors->get('email')) is-invalid @endif"
@@ -176,7 +219,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="col-6 form-group">
                                 <label for="">Site-Web:</label>
                                 <input type="text" name="site_web"
                                     class="form-control @if ($errors->get('site_web')) is-invalid @endif"
@@ -190,7 +233,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="col-12 form-group">
                                 <label for="">Heure de travail:</label>
                                 <input type="text" name="heure_travail"
                                     class="form-control @if ($errors->get('nom')) is-invalid @endif"
@@ -206,37 +249,72 @@
                             </div>
 
 
-                            <div class="form-group">
-                                <label for="">Logo:</label>
-                                <input type="file" name="logo"
-                                    class="form-control @if ($errors->get('logo')) is-invalid @endif"
-                                    id="validationLogo" accept="image/*" onchange="previewImage();"
-                                    value="{{ $information->logo }}">
+                            <div class="col-12 form-group">
 
-                                {{-- <div id="validationLogoFeedback" class="invalid-feedback">
-                                    @if ($errors->get('logo'))
-                                        @foreach ($errors->get('logo') as $message)
+                                <label for="">Logo blanc:</label>
+                                <input type="file" name="logo_blanc"
+                                    class="form-control @if ($errors->get('logo_blanc')) is-invalid @endif"
+                                    id="validationLogoBlanc" accept="image/*" onchange="previewImage1();"
+                                    value="{{ $information->logo_blanc }}">
+
+                                <div id="validationLogoBlancFeedback" class="invalid-feedback">
+                                    @if ($errors->get('logo_blanc'))
+                                        @foreach ($errors->get('logo_blanc') as $message)
                                             {{ $message }}
                                         @endforeach
                                     @endif
-                                </div> --}}
-
-                                <div class="col-12" style="text-align: center;">
-                                    <img src="{{ asset('storage/' . $information->logo) }}" class="img-fluid rounded"
-                                        alt=""
-                                        style="height:250px;width:auto; margin-top: 15px;margin-bottom: 15px;"
-                                        id="preview">
                                 </div>
 
+                            </div>
 
+                            <div class="col-12 form-group">
+
+                                <label for="">Logo couleurs:</label>
+                                <input type="file" name="logo_couleurs"
+                                    class="form-control @if ($errors->get('logo_couleurs')) is-invalid @endif"
+                                    id="validationLogoCouleurs" accept="image/*" onchange="previewImage2();"
+                                    value="{{ $information->logo_couleurs }}">
+
+                                <div id="validationLogoCouleursFeedback" class="invalid-feedback">
+                                    @if ($errors->get('logo_couleurs'))
+                                        @foreach ($errors->get('logo_couleurs') as $message)
+                                            {{ $message }}
+                                        @endforeach
+                                    @endif
+                                </div>
 
                             </div>
+
+
+                            <div class="row">
+
+                                <div class="col-6" style="text-align: center;">
+                                    <p>LOGO BLANC :</p>
+                                    <img src="{{ asset('storage/' . $information->logo_blanc) }}" class="img-fluid rounded"
+                                        alt=""
+                                        style="height:auto; width:350px; margin-top: 15px;margin-bottom: 15px;"
+                                        id="preview1">
+                                </div>
+
+                                <div class="col-6" style="text-align: center;">
+                                    <p>LOGO COULEURS :</p>
+                                    <img src="{{ asset('storage/' . $information->logo_couleurs) }}" class="img-fluid rounded"
+                                        alt=""
+                                        style="height:auto; width:350px; margin-top: 15px;margin-bottom: 15px;"
+                                        id="preview2">
+                                </div>
+
+                            </div>
+
+                        </div>  
+
+
 
                             <br>
 
 
 
-                            <div class="form-group row justify-content-center text-center">
+                            <div class="form-group row justify-content-center text-center" style="margin-top: 50px;margin-bottom: 50px;">
                                 <div class="col-6">
                                     <button type="button" onclick="sauvegarder(this)"
                                         class="btn btn-outline-success alpa shadow"><i class="bi bi-check2"></i><span

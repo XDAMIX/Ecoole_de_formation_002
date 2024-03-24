@@ -8,43 +8,37 @@
             <div class="section-title">
                 <h2>A PROPOS DE NOUS</h2>
             </div>
-            <div class="container-fluid" data-aos="fade-up">
+            <div class="container" data-aos="fade-up">
                 @foreach ($paragraphes as $paragraphe)
-                    <div class="row" style="padding-bottom: 50px;">
+                    <div class="row presentation" style="padding-bottom: 50px;">
 
                         <div class="col-12 section-title">
-
-                            <h2 class="h2-theme">{{ $paragraphe->titre }}</h2>
-
+                            <h3 class="h2-theme">{{ $paragraphe->titre }}</h3>
                         </div>
 
                         <div class="row">
 
-                            <div class="col-lg-6 col-md-6 col-12" data-aos="fade-right"
-                                style="background-image: url({{ asset('storage/' . $paragraphe->photo) }} );background-size: cover;background-position: center;background-repeat: no-repeat;  height:450px;">
-
+                            <div class="col-lg-6 col-md-6 col-12 order-1" data-aos="fade-right"
+                                style="background-image: url({{ asset('storage/' . $paragraphe->photo) }} );background-size: cover;background-position: center;background-repeat: no-repeat;  height:450px;"
+                                id="partie1_{{ $loop->iteration }}">
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-12" data-aos="fade-left" style="padding: 20px;">
-
+                            <div class="col-lg-6 col-md-6 col-12 order-2" data-aos="fade-left" style="padding: 20px;"
+                                id="partie2_{{ $loop->iteration }}">
                                 <h2 class="s-titre text-center">{{ $paragraphe->sous_titre }}</h2>
-
-
 
                                 <div class="truncate-text" id="truncate-text{{ $paragraphe->id }}">
                                     <p class="texte">{{ $paragraphe->paragraphe }}</p>
-                                    {{-- expand button  --}}
-                                    <button class="btn btn-light" onclick="toggleText({{ $paragraphe->id }})">Lire
-                                        la suite</button>
-
+                                    <button class="btn btn-light" onclick="toggleText({{ $paragraphe->id }})">Lire la
+                                        suite</button>
                                 </div>
-
-
                             </div>
+
                         </div>
 
                     </div>
                 @endforeach
+
 
             </div>
         </section>
@@ -265,7 +259,8 @@
                                     <i class="bx bx-phone-call"></i>
                                     <h3>Appellez Nous</h3>
                                     @foreach ($telephones as $telephone)
-                                        <p>{{ $telephone->operateur }} : <a href="tel:{{ $telephone->numero }}">{{ $telephone->numero }}</a>
+                                        <p>{{ $telephone->operateur }} : <a
+                                                href="tel:{{ $telephone->numero }}">{{ $telephone->numero }}</a>
                                         </p> <br>
                                     @endforeach
                                 </div>
@@ -349,7 +344,7 @@
                                 Rejoignez Nous <br>
                                 sur<br><br>
                                 <!-- <strong>Phone:</strong> +1 5589 55488 55<br>
-                        <strong>Email:</strong> info@example.com<br> -->
+                                <strong>Email:</strong> info@example.com<br> -->
                             </p>
                             <div class="social-links mt-3" data-aos="flip-up">
                                 @foreach ($liens as $lien)
@@ -439,7 +434,7 @@
                 &copy; Copyright <strong><span>{{ $informations->nom }}</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Designed by <a href="#">Infinity-Concepts</a>
+                Designed by <a href="#">bitech</a>
             </div>
         </div>
     </footer>
@@ -458,6 +453,65 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 @endsection
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Sélectionner tous les éléments avec la classe 'presentation'
+        var presentations = document.querySelectorAll('.presentation');
+
+        var i = 1;
+        var currentOrder = '1';
+
+        presentations.forEach(function(presentation) {
+
+            console.log("Changement d'ordre " + i);
+
+            i++;
+            
+            
+
+            var partie1 = presentation.querySelector('[id^="partie1_"]');
+            var partie2 = presentation.querySelector('[id^="partie2_"]');
+            
+   
+            var activated = 'non';
+
+  
+            function changeOrder() {
+                
+                if (currentOrder === '1' && activated === 'non') {
+                    partie1.classList.remove('order-1');
+                    partie1.classList.add('order-2');
+                    partie2.classList.remove('order-2');
+                    partie2.classList.add('order-1');
+                    currentOrder = '2';
+                    activated = 'oui';
+                    console.log(currentOrder);
+                } else if (currentOrder === '2' && activated === 'non') {
+                    partie1.classList.remove('order-2');
+                    partie1.classList.add('order-1');
+                    partie2.classList.remove('order-1');
+                    partie2.classList.add('order-2');
+                    currentOrder = '1';
+                    activated = 'oui';
+                    console.log(currentOrder);
+                }
+            }
+
+            // Appeler la fonction pour changer l'ordre lors du chargement de la page
+            changeOrder();
+        });
+    });
+</script>
+
+
+
+
+
 
 
 

@@ -90,6 +90,19 @@
                                         <p class="data"> {{ $information->heure_travail }} </p>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-4">
+                                        <p class="titre"><i class="bi bi-calendar-date icons"></i>N° et date d'agrément:
+                                        </p>
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <p class="data">N° {{ $information->num_agrement }} | Date {{ $information->date_agrement }}</p>
+                                    </div>
+                                </div>
+
+
+
                             </div>
 
                             <div class="col-md-4 justify-content-center" id="droite">
@@ -97,7 +110,7 @@
                                     <p class="titre"><i class="bi bi-file-image icons"></i>Logo:</p>
                                 </div>
                                 <div class="col-12" style="text-align: center;">
-                                    <img src="{{ asset('storage/' . $information->logo) }}" alt="..." class="img-fluid"
+                                    <img src="{{ asset('storage/' . $information->logo_couleurs) }}" alt="..." class="img-fluid"
                                         style="width:300px;">
                                 </div>
                             </div>
