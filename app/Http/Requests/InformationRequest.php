@@ -30,7 +30,10 @@ class InformationRequest extends FormRequest
             'email'        => 'required|min:1|max:255',
             'heure_travail'=> 'required|min:1|max:255',
             'wilaya'       => 'required|min:1|max:255',
-            // 'logo'         => 'required',
+            'num_agrement'       => 'required|min:1|max:255',
+            'date_agrement'       => 'required|min:1|max:255',
+            // 'logo_blanc'         => 'required',
+            // 'logo_couleurs'         => 'required',
         ];
     }
 }
