@@ -123,6 +123,43 @@
                             </div>
 
 
+
+
+                                                        {{-- paiement --}}
+                            {{-- ---------------------------------------------------------- --}}
+
+                            <div class="row espace-inputs justify-content-center">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Paiement</h5>
+                                    <hr>
+                                </div>
+                                <div class="row">
+                                    @foreach ($types as $type)
+                                <div class="col-md-3 form-group" id="montant" style="text-align: center;">
+                                    
+                                    
+                                    
+                                    <label for=""> {{ $type->titre }} :</label>
+
+                                    <input type="text" value="0" name="montant"
+                                        class="form-control @if ($errors->get('montant')) is-invalid @endif"
+                                        id="validationServer04"
+                                        placeholder="Veuillez saisir le montant d'argent encaissé">
+
+                                    <div id="validationServer04Feedback" class="invalid-feedback">
+                                        @if ($errors->get('montant'))
+                                            @foreach ($errors->get('montant') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                                @endforeach
+                                
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="photo">Photo :</label>
                                 {{-- <input name="photo" type="file" class="form-control @if ($errors->get('photo')) is-invalid @endif" required  id="validationPhoto" Accept="image/*" onchange="previewImage();"> --}}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Formation;
+use App\Models\TypePs;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\FormationRequest;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -29,7 +30,8 @@ class FormationController extends Controller
 
 
     public function create() {
-        return view('admin.formations.ajouter');
+        $types = TypePs::all();
+        return view('admin.formations.ajouter',['types'=> $types]);
     }
 
     public function store(FormationRequest $request) {
