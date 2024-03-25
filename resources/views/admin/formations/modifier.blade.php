@@ -41,11 +41,8 @@
                 </div> --}}
                     <div class="card-body">
 
-                        <div class="col-12 text-center">
-                            <img id="imagePreview" class="" src="{{ asset('storage/' . $formation->photo) }}"
-                                alt="l'image n'a pas été sélectionné!" style="height: 300px;width: auto;">
-                        </div>
-                        <hr>
+
+
 
 
                         <form class="edit-form" action="{{ url('/admin/formation/' . $formation->id . '/update') }}"
@@ -53,95 +50,240 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="form-group">
-                                <label for="">Titre:</label>
-                                <input type="text" name="titre"
-                                    class="form-control @if ($errors->get('titre')) is-invalid @endif"
-                                    id="ValidationTitre" placeholder="le titre" value="{{ $formation->titre }}" required>
-                                <div id="ValidationTitreFeedback" class="invalid-feedback">
-                                    @if ($errors->get('titre'))
-                                        @foreach ($errors->get('titre') as $message)
-                                            {{ $message }}
+                            <div class="row">
+
+                                <div class="col-12 form-group">
+                                    <label for="">Titre:</label>
+                                    <input type="text" name="titre"
+                                        class="form-control @if ($errors->get('titre')) is-invalid @endif"
+                                        id="ValidationTitre" placeholder="le titre" value="{{ $formation->titre }}"
+                                        required>
+                                    <div id="ValidationTitreFeedback" class="invalid-feedback">
+                                        @if ($errors->get('titre'))
+                                            @foreach ($errors->get('titre') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="col-12 form-group">
+                                    <label for="">Duré:</label>
+                                    <input type="text" name="dure"
+                                        class="form-control @if ($errors->get('dure')) is-invalid @endif"
+                                        id="validationDure" placeholder="la duré" value="{{ $formation->dure }}" required>
+                                    <div id="validationDureFeedback" class="invalid-feedback">
+                                        @if ($errors->get('dure'))
+                                            @foreach ($errors->get('dure') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group">
+                                    <label for="">Description:</label>
+                                    <textarea type="text" name="description" class="form-control @if ($errors->get('description')) is-invalid @endif"
+                                        id="validationDescription" placeholder="la description" value="{{ $formation->description }}" required>{{ $formation->description }}</textarea>
+                                    <div id="validationDescriptionFeedback" class="invalid-feedback">
+                                        @if ($errors->get('description'))
+                                            @foreach ($errors->get('description') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 form-group">
+                                    <label for="">Public concerné:</label>
+                                    <textarea type="text" name="publique" class="form-control @if ($errors->get('publique')) is-invalid @endif"
+                                        id="validationPublic" placeholder="le public concerné" value="{{ $formation->publique }}" required>{{ $formation->publique }}</textarea>
+                                    <div id="validationPublicFeedback" class="invalid-feedback">
+                                        @if ($errors->get('publique'))
+                                            @foreach ($errors->get('publique') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 form-group">
+                                    <label for="">Objectifs:</label>
+                                    <textarea type="text" name="objectifs" class="form-control @if ($errors->get('objectifs')) is-invalid @endif"
+                                        id="validationObjectifs" placeholder="les objectifs de la formation" value="{{ $formation->objectifs }}" required>{{ $formation->objectifs }}</textarea>
+                                    <div id="validationObjectifsFeedback" class="invalid-feedback">
+                                        @if ($errors->get('objectifs'))
+                                            @foreach ($errors->get('objectifs') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {{-- paiement --}}
+                            {{-- ---------------------------------------------------------- --}}
+
+                            <div class="row espace-inputs justify-content-center">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Tarifs : (en Dinars)</h5>
+                                    <hr>
+                                </div>
+
+                                <div class="row">
+
+                                    @if ($types && $types->count() == 1)
+                                        @foreach ($types as $type)
+                                            <div class="col-12 form-group" id="montant" style="text-align: center;">
+                                                <label for=""> {{ $type->titre }} :</label>
+
+                                                <input type="number" name="montant_{{ $type->titre }}" pattern="[0-9]*"
+                                                    class="form-control @if ($errors->get('montant')) is-invalid @endif"
+                                                    id="validationMontant_{{ $loop->index }}"
+                                                    onfocus="attachKeyPressEvent(this.id)"
+                                                    onblur="detachKeyPressEvent(this.id)"
+                                                    placeholder="Veuillez saisir le montant"
+                                                    @foreach ($paiements as $paiement)
+                                                        @if ($paiement->titre == $type->titre)
+                                                            value="{{ $paiement->prix }}"
+                                                        @endif @endforeach>
+                                                <div id="validationMontantFeedback" class="invalid-feedback">
+                                                    @if ($errors->get('montant'))
+                                                        @foreach ($errors->get('montant') as $message)
+                                                            {{ $message }}
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+
+                                            </div>
                                         @endforeach
                                     @endif
+
+                                    @if ($types && $types->count() == 2)
+                                        @foreach ($types as $type)
+                                            <div class="col-12 col-md-6 form-group" id="montant" pattern="[0-9]*"
+                                                style="text-align: center;">
+                                                <label for=""> {{ $type->titre }} :</label>
+
+                                                <input type="number" name="montant_{{ $type->titre }}"
+                                                    class="form-control @if ($errors->get('montant')) is-invalid @endif"
+                                                    id="validationMontant_{{ $loop->index }}"
+                                                    onfocus="attachKeyPressEvent(this.id)"
+                                                    onblur="detachKeyPressEvent(this.id)"
+                                                    placeholder="Veuillez saisir le montant"
+                                                    @foreach ($paiements as $paiement)
+                                                        @if ($paiement->titre == $type->titre)
+                                                            value="{{ $paiement->prix }}"
+                                                    @endif @endforeach>
+
+                                                <div id="validationMontantFeedback" class="invalid-feedback">
+                                                    @if ($errors->get('montant'))
+                                                        @foreach ($errors->get('montant') as $message)
+                                                            {{ $message }}
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+                                    @if ($types && $types->count() == 3)
+                                        @foreach ($types as $type)
+                                            <div class="col-12 col-md-4 form-group" id="montant"
+                                                style="text-align: center;">
+                                                <label for=""> {{ $type->titre }} :</label>
+
+                                                <input type="number" name="montant_{{ $type->titre }}" pattern="[0-9]*"
+                                                    class="form-control @if ($errors->get('montant')) is-invalid @endif"
+                                                    id="validationMontant_{{ $loop->index }}"
+                                                    onfocus="attachKeyPressEvent(this.id)"
+                                                    onblur="detachKeyPressEvent(this.id)"
+                                                    placeholder="Veuillez saisir le montant"
+                                                    @foreach ($paiements as $paiement)
+                                                        @if ($paiement->titre == $type->titre)
+                                                            value="{{ $paiement->prix }}"
+                                                        @endif @endforeach
+                                                    >
+
+                                                <div id="validationMontantFeedback" class="invalid-feedback">
+                                                    @if ($errors->get('montant'))
+                                                        @foreach ($errors->get('montant') as $message)
+                                                            {{ $message }}
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+
+                                    @if ($types && $types->count() >= 4)
+                                        @foreach ($types as $type)
+                                            <div class="col-12 col-md-3 form-group" id="montant"
+                                                style="text-align: center;">
+                                                <label for=""> {{ $type->titre }} :</label>
+
+                                                <input type="number" name="montant_{{ $type->titre }}" pattern="[0-9]*"
+                                                    class="form-control @if ($errors->get('montant')) is-invalid @endif"
+                                                    id="validationMontant_{{ $loop->index }}"
+                                                    onfocus="attachKeyPressEvent(this.id)"
+                                                    onblur="detachKeyPressEvent(this.id)"
+                                                    placeholder="Veuillez saisir le montant"
+                                                    @foreach ($paiements as $paiement)
+                                                        @if ($paiement->titre == $type->titre)
+                                                            value="{{ $paiement->prix }}"
+                                                        @endif @endforeach>
+
+                                                <div id="validationMontantFeedback" class="invalid-feedback">
+                                                    @if ($errors->get('montant'))
+                                                        @foreach ($errors->get('montant') as $message)
+                                                            {{ $message }}
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+
                                 </div>
 
 
 
-                            </div>
 
-                            <div class="form-group">
-                                <label for="">Duré:</label>
-                                <input type="text" name="dure"
-                                    class="form-control @if ($errors->get('dure')) is-invalid @endif"
-                                    id="validationDure" placeholder="la duré" value="{{ $formation->dure }}" required>
-                                <div id="validationDureFeedback" class="invalid-feedback">
-                                    @if ($errors->get('dure'))
-                                        @foreach ($errors->get('dure') as $message)
-                                            {{ $message }}
-                                        @endforeach
-                                    @endif
+
+                                <div class="col-12 form-group">
+                                    <label for="photo">Photo :</label>
+                                    {{-- <input name="photo" type="file" class="form-control @if ($errors->get('photo')) is-invalid @endif" required  id="validationPhoto" Accept="image/*" onchange="previewImage();"> --}}
+                                    <input name="photo" type="file"
+                                        class="form-control @if ($errors->get('photo')) is-invalid @endif"
+                                        id="validationPhoto" Accept="image/*" placeholder="veuillez choisir une image"
+                                        required>
+                                    <div id="validationPhotoFeedback" class="invalid-feedback">
+                                        @if ($errors->get('photo'))
+                                            @foreach ($errors->get('photo') as $message)
+                                                {{ $message }}
+                                            @endforeach
+                                        @endif
+                                    </div>
+
+
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="">Description:</label>
-                                <textarea type="text" name="description" class="form-control @if ($errors->get('description')) is-invalid @endif"
-                                    id="validationDescription" placeholder="la description" value="{{ $formation->description }}" required>{{ $formation->description }}</textarea>
-                                <div id="validationDescriptionFeedback" class="invalid-feedback">
-                                    @if ($errors->get('description'))
-                                        @foreach ($errors->get('description') as $message)
-                                            {{ $message }}
-                                        @endforeach
-                                    @endif
+                                <div class="col-12 text-center">
+                                    <img id="imagePreview" class=""
+                                        src="{{ asset('storage/' . $formation->photo) }}"
+                                        alt="l'image n'a pas été sélectionné!" style="height: 300px;width: auto;">
                                 </div>
+
                             </div>
-
-
-                            <div class="form-group">
-                                <label for="">Public concerné:</label>
-                                <textarea type="text" name="publique" class="form-control @if ($errors->get('publique')) is-invalid @endif"
-                                    id="validationPublic" placeholder="le public concerné" value="{{ $formation->publique }}" required>{{ $formation->publique }}</textarea>
-                                <div id="validationPublicFeedback" class="invalid-feedback">
-                                    @if ($errors->get('publique'))
-                                        @foreach ($errors->get('publique') as $message)
-                                            {{ $message }}
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="">Objectifs:</label>
-                                <textarea type="text" name="objectifs" class="form-control @if ($errors->get('objectifs')) is-invalid @endif"
-                                    id="validationObjectifs" placeholder="les objectifs de la formation" value="{{ $formation->objectifs }}" required>{{ $formation->objectifs }}</textarea>
-                                <div id="validationObjectifsFeedback" class="invalid-feedback">
-                                    @if ($errors->get('objectifs'))
-                                        @foreach ($errors->get('objectifs') as $message)
-                                            {{ $message }}
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="photo">Photo :</label>
-                                {{-- <input name="photo" type="file" class="form-control @if ($errors->get('photo')) is-invalid @endif" required  id="validationPhoto" Accept="image/*" onchange="previewImage();"> --}}
-                                <input name="photo" type="file"
-                                    class="form-control @if ($errors->get('photo')) is-invalid @endif"
-                                    id="validationPhoto" Accept="image/*" placeholder="veuillez choisir une image" required>
-                                <div id="validationPhotoFeedback" class="invalid-feedback">
-                                    @if ($errors->get('photo'))
-                                        @foreach ($errors->get('photo') as $message)
-                                            {{ $message }}
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-
-                            
 
                             <br>
                             <div class="form-group row justify-content-center text-center">
@@ -246,7 +388,24 @@
     </script>
 
 
+<script>
+    function attachKeyPressEvent(inputId) {
+        var inputElement = document.getElementById(inputId);
+        inputElement.addEventListener('keypress', validateNumberInput);
+    }
 
+    function detachKeyPressEvent(inputId) {
+        var inputElement = document.getElementById(inputId);
+        inputElement.removeEventListener('keypress', validateNumberInput);
+    }
+
+    function validateNumberInput(event) {
+        var keyCode = event.keyCode || event.which;
+        if (keyCode < 48 || keyCode > 57) {
+            event.preventDefault();
+        }
+    }
+</script>
 
 
 
