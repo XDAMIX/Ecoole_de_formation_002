@@ -14,12 +14,13 @@ class FormationController extends Controller
 {
     public function __construct()
     {
-       $this->middleware('auth'); 
+        $this->middleware('auth');
     }
 
-    public function index() {
+    public function index()
+    {
         $ListeFormations = Formation::all();
-        return view('admin.formations.index',['formations'=>$ListeFormations]);
+        return view('admin.formations.index', ['formations' => $ListeFormations]);
     }
 
 
@@ -30,12 +31,14 @@ class FormationController extends Controller
     }
 
 
-    public function create() {
+    public function create()
+    {
         $types = TypePs::all();
-        return view('admin.formations.ajouter',['types'=> $types]);
+        return view('admin.formations.ajouter', ['types' => $types]);
     }
 
-    public function store(FormationRequest $request) {
+    public function store(FormationRequest $request)
+    {
         $nvformation = new Formation();
 
         $nvformation->titre = $request->input('titre');
@@ -43,7 +46,7 @@ class FormationController extends Controller
         $nvformation->description = $request->input('description');
         $nvformation->publique = $request->input('publique');
         $nvformation->objectifs = $request->input('objectifs');
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
             $nvformation->photo = $request->photo->store('/public/images/formations');
         }
 
@@ -59,71 +62,91 @@ class FormationController extends Controller
 
         $types = TypePs::all();
 
-        foreach($types as $type){
+        foreach ($types as $type) {
             $nvPrix = new TypePaiement();
             $nvPrix->type_id = $type->id;
             $nvPrix->titre = $type->titre;
             $nvPrix->formation_id = $id_formation;
-            $montant = $request->input('montant_'.$type->titre);
+            $montant = $request->input('montant_' . $type->titre);
             if ($montant !== null && $montant !== '') {
-                $nvPrix->prix = $request->input('montant_'.$type->titre);
-            }
-            else{
+                $nvPrix->prix = $request->input('montant_' . $type->titre);
+            } else {
                 $nvPrix->prix = '0';
             }
             $nvPrix->save();
         }
-        
+
         Alert::success($titre, 'a bien été enregistré');
         return redirect('/admin/formations');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $formation = Formation::find($id);
         $types = TypePs::all();
-        $paiements = TypePaiement::where('formation_id','=',$id)->get();
-        return view('admin.formations.modifier',['formation' => $formation,'types' => $types,'paiements' => $paiements]);
+        $paiements = TypePaiement::where('formation_id', '=', $id)->get();
+        return view('admin.formations.modifier', ['formation' => $formation, 'types' => $types, 'paiements' => $paiements]);
     }
 
-    public function update(FormationRequest $request,$id) {
+    public function update(FormationRequest $request, $id)
+    {
         $formation = Formation::find($id);
         $formation->titre = $request->input('titre');
         $formation->dure = $request->input('dure');
         $formation->description = $request->input('description');
         $formation->publique = $request->input('publique');
         $formation->objectifs = $request->input('objectifs');
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
             $formation->photo = $request->photo->store('/public/images/formations');
         }
 
         $formation->save();
 
         $types = TypePs::all();
-        $paiements = TypePaiement::where('formation_id','=',$id)->get();
+        $paiements = TypePaiement::where('formation_id', '=', $id)->get();
 
-        foreach($types as $type){
+        if ($paiements->isEmpty()) {
+            foreach ($types as $type) {
+                $nvPrix = new TypePaiement();
+                $nvPrix->type_id = $type->id;
+                $nvPrix->titre = $type->titre;
+                $nvPrix->formation_id = $id;
+                $montant = $request->input('montant_' . $type->titre);
+                if ($montant !== null && $montant !== '') {
+                    $nvPrix->prix = $request->input('montant_' . $type->titre);
+                } else {
+                    $nvPrix->prix = '0';
+                }
+                $nvPrix->save();
+            }
 
-            foreach($paiements as $paiement){
-                if($paiement->titre == $type->titre){
-                    $montant = $request->input('montant_'.$type->titre);
-                    if ($montant !== null && $montant !== '') {
-                        $paiement->prix = $request->input('montant_'.$type->titre);
+        } else {
+            // Le tableau $paiements n'est pas vide
+            foreach ($types as $type) {
+
+                foreach ($paiements as $paiement) {
+                    if ($paiement->titre == $type->titre) {
+                        $montant = $request->input('montant_' . $type->titre);
+                        if ($montant !== null && $montant !== '') {
+                            $paiement->prix = $request->input('montant_' . $type->titre);
+                        } else {
+                            $paiement->prix = '0';
+                        }
+                        $paiement->save();
                     }
-                    else{
-                        $paiement->prix = '0';
-                    }
-                    $paiement->save();
                 }
             }
         }
 
-        return redirect('/admin/formations');
 
+
+        return redirect('/admin/formations');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $formation = Formation::find($id);
-        $formation->delete();     
+        $formation->delete();
         return redirect('/admin/formations');
     }
 }
