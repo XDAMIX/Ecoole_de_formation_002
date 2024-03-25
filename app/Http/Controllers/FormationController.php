@@ -61,6 +61,7 @@ class FormationController extends Controller
 
         foreach($types as $type){
             $nvPrix = new TypePaiement();
+            $nvPrix->type_id = $type->id;
             $nvPrix->titre = $type->titre;
             $nvPrix->formation_id = $id_formation;
             $montant = $request->input('montant_'.$type->titre);

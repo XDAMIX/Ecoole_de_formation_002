@@ -22,6 +22,7 @@ return new class extends Migration
                 ->on('formations');
  
 
+            $table->string('type_id')->nullable();
             $table->string('titre')->nullable();
             $table->integer('prix')->default(0);
             $table->timestamps();
