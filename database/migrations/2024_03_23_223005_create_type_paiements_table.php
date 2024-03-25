@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('type_payement', function (Blueprint $table) {
+        Schema::create('type_paiements', function (Blueprint $table) {
             $table->id();
             
             $table->unsignedBigInteger('formation_id')->nullable();
@@ -22,8 +22,8 @@ return new class extends Migration
                 ->on('formations');
  
 
-            $table->string('titre');
-            $table->integer('prix');
+            $table->string('titre')->nullable();
+            $table->integer('prix')->default(0);
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_payement');
+        Schema::dropIfExists('type_paiements');
     }
 };

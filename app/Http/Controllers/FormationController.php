@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Formation;
 use App\Models\TypePs;
+use App\Models\TypePaiement;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\FormationRequest;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -50,6 +51,27 @@ class FormationController extends Controller
         $titre = $request->input('titre');
 
         $nvformation->save();
+
+        // pour enregistrer les prix 
+        $formation = Formation::latest()->first();
+
+        $id_formation = $formation->id;
+
+        $types = TypePs::all();
+
+        foreach($types as $type){
+            $nvPrix = new TypePaiement();
+            $nvPrix->titre = $type->titre;
+            $nvPrix->formation_id = $id_formation;
+            $montant = $request->input('montant_'.$type->titre);
+            if ($montant !== null && $montant !== '') {
+                $nvPrix->prix = $request->input('montant_'.$type->titre);
+            }
+            else{
+                $nvPrix->prix = '0';
+            }
+            $nvPrix->save();
+        }
         
         Alert::success($titre, 'a bien été enregistré');
         return redirect('/admin/formations');
@@ -57,7 +79,9 @@ class FormationController extends Controller
 
     public function edit($id) {
         $formation = Formation::find($id);
-        return view('admin.formations.modifier',['formation' => $formation]);
+        $types = TypePs::all();
+        $paiements = TypePaiement::where('formation_id','=',$id)->get();
+        return view('admin.formations.modifier',['formation' => $formation,'types' => $types,'paiements' => $paiements]);
     }
 
     public function update(FormationRequest $request,$id) {
@@ -72,6 +96,26 @@ class FormationController extends Controller
         }
 
         $formation->save();
+
+        $types = TypePs::all();
+        $paiements = TypePaiement::where('formation_id','=',$id)->get();
+
+        foreach($types as $type){
+
+            foreach($paiements as $paiement){
+                if($paiement->titre == $type->titre){
+                    $montant = $request->input('montant_'.$type->titre);
+                    if ($montant !== null && $montant !== '') {
+                        $paiement->prix = $request->input('montant_'.$type->titre);
+                    }
+                    else{
+                        $paiement->prix = '0';
+                    }
+                    $paiement->save();
+                }
+            }
+        }
+
         return redirect('/admin/formations');
 
     }

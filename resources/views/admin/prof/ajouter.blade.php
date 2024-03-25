@@ -294,20 +294,7 @@
                                                     </div>
 
 
-                                                    <div class="form-group">
-                                                        <label for="">Photo:</label>
-                                                        <input name="photo" type="file"
-                                                            class="form-control @if ($errors->get('photo')) is-invalid @endif"
-                                                            id="validationPhoto" Accept="image/*"
-                                                            placeholder="veuillez choisir une image">
-                                                        <div id="validationPhotoFeedback" class="invalid-feedback">
-                                                            @if ($errors->get('photo'))
-                                                                @foreach ($errors->get('photo') as $message)
-                                                                    {{ $message }}
-                                                                @endforeach
-                                                            @endif
-                                                        </div>
-                                                    </div>
+                                                    
 
                                                 </div>
 
@@ -315,8 +302,23 @@
 
                                             <div class="col-12 col-md-4 droite photo">
                                                 <label>Photo:</label>
-                                                <div id="imagePreview"
+                                                <div class="shadow" id="imagePreview"
                                                     style="background-image:;background-size: cover;background-position: center;background-repeat: no-repeat;  height: 290px; width: 250px; margin-left:20px; margin-right:20px;">
+                                                </div>
+                                                <br><br>
+                                                <div class="form-group">
+                                                    {{-- <label for="">Photo:</label> --}}
+                                                    <input name="photo" type="file"
+                                                        class="form-control @if ($errors->get('photo')) is-invalid @endif"
+                                                        id="validationPhoto" Accept="image/*"
+                                                        placeholder="veuillez choisir une image">
+                                                    <div id="validationPhotoFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('photo'))
+                                                            @foreach ($errors->get('photo') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
 
