@@ -22,7 +22,7 @@
                 <a href="{{ url('/admin/types_p') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                         class="btn-description">Retour</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-center">
                 <h2>Modifier les informations de d'un type</h2>
             </div>
         </div>
@@ -31,18 +31,13 @@
 
     {{-- -------------------------------------------------------------------------------------- --}}
 
-    <div class="container">
+    <div class="container-fluid d-flex justify-content-center align-items-center ">
 
         <div class="row animate__animated animate__backInLeft">
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
 
                     <div class="card-body">
-
-
-                        <hr>
-
-
                         <form class="edit-form" action="{{ url('/admin/types_p/' . $type->id . '/update') }}"
                             method="POST" enctype="multipart/form-data">
                             @csrf
@@ -60,26 +55,10 @@
                                         @endforeach
                                     @endif
                                 </div>
-
-
-
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            {{-- ----------------- --}}
                             
-
+                            {{-- ----------------- --}}
                             <br>
                             <div class="form-group row justify-content-center text-center">
                                 <div class="col-6">
@@ -92,9 +71,6 @@
                                             class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
                                 </div>
                             </div>
-
-
-
                         </form>
 
                     </div>

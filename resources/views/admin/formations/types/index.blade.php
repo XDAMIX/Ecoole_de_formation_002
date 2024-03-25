@@ -1,9 +1,6 @@
 @extends('layouts.admin_menu')
 @section('content')
-
-
-
-
+   
     {{-- retour à l'acceuil  --}}
     <div class="container" id="titre-page">
         <div class="row">
@@ -22,112 +19,208 @@
     </div>
 
 
-            
-                    <div class="card shadow col-6 ">
- 
-                        <div class="card-body" style="text-align: center">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="example" width="100%" cellspacing="0">
-                                    <thead style="text-align: center">
-
-                                        <th >ID</th>
-                                        <th >titre</th>
-                                        <th >Actions</th>
-                                    </thead>
-            
-                                    <tbody>
-                                        @foreach($types as $type)
-                    <tr>
-                        <td>{{ $type->id }}</td>
-                        <td>{{ $type->titre }}</td>
-
-                        <td>
-                            <div    style="text-align: center;">
-                               
-                                <form action="{{ url('/admin/types_p/'.$type->id.'/delete') }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <div class="stylediv">
-                                            <a href="{{ url('/admin/types_p/'.$type->id.'/edit') }}" class="button-33" ><i class="bi bi-pen"></i></a>  
-                                          
-                                    </div>
-                                    <div class="stylediv">
-                                            <button type="submit" onclick="return confirm('Êtes vous sure?')" class="button-33"><i class="bi bi-trash3"></i></button>
-                                    </div>
-                                    
-
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                                    </tbody>
-                                </table>
 
 
-                                <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-                                
- 
-                                
+    {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
 
-                            </div>
-                        </div>
+    {{-- javascript DataTables --}}
+
+
+
+    {{-- CSS  --}}
+
+    <style>
+        .buttons-container {
+            text-align: left;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #titre-page {
+            margin-bottom: 20px;
+        }
+    </style>
+    {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
+
+
+
+    {{-- html  --}}
+
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="padding-top:10px;padding-bottom:80px; ">
+        <div class="row animate__animated animate__backInLeft">
+            <div class="col-md-12">
+                <div class="card shadow" style="background-color: #ffff;">
+                    <div class="card-body">
+                        <table id="example" class="table table-bordered"  style="width:100%">
+                            <thead style="text-align: center">
+                                <tr>
+                                    <th >ID</th>
+      
+                                    <th>Titre</th>
+                                  
+
+                                    <th>Actions</th>
+                            </thead>
+
+                            <tbody class="text-center">
+                                @foreach ($types as $type)
+                                    <tr>
+                                        <td class=" align-middle">{{ $type->id }}</td>
+                                  
+                                        <td class=" align-middle">{{ $type->titre}}</td>
+                            
+
+                                        
+
+                                        <td style="width:240px;">
+
+                                            <div class="container">
+                                                <div class="container-fluid d-flex justify-content-center align-items-center">
+
+                                                   
+                                                    <div class="col-4">
+                                                        {{-- edit button    --}}
+                                                        <form class="edit-form" action="" data-id="{{ $type->id }}"
+                                                            data-name="{{ $type->titre }}"
+                                                            method="GET">
+                                                            @csrf
+                                                            <button type="button" onclick="edit_confirmation(this)"
+                                                                class="btn btn-outline-primary alpa shadow"><i
+                                                                    class="bi bi-pen"></i></button>
+                                                        </form>
+                                                    </div>
+
+                                                    {{-- validate button  --}}
+
+                                                    <div class="col-4">
+                                                        {{-- delete button  --}}
+                                                        <form class="delete-form" action=""
+                                                            data-id="{{ $type->id }}"
+                                                            data-name="{{ $type->titre }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" onclick="supprimer_confirmation(this)"
+                                                                class="btn btn-outline-danger alpa shadow"><i
+                                                                    class="bi bi-trash3"></i></button>
+                                                        </form>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+         
+                        </table>
                     </div>
-
                 </div>
-
-                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
-                
-
-                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 
 
-                <style>
-          
-
-/* CSS */
-.button-33 {
-    
-  background-color: #c2fbd7;
-  border-radius: 100px;
-  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-  color: green;
-  cursor: pointer;
-  display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  padding: 7px 20px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 250ms;
-  border: 0;
-  font-size: 16px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-33:hover {
-  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-  transform: scale(1.05) rotate(-1deg);
-}
-
-/* style de dive  */
-
-.stylediv{
-   
-    display: inline-block;
-        margin-right: 10px;
-}
-                </style>
 
 
-    
-@endsection
+
+    {{-- footer  --}}
+    <div class="container" id="pied-page"></div>
+
+
+
+        {{-- script suppression  --}}
+        <script>
+            function supprimer_confirmation(button) {
+                // Utilisez le bouton pour obtenir le formulaire parent
+                const form = button.closest('.delete-form');
+
+                // Vérifiez si le formulaire a été trouvé
+                if (form) {
+                    // Utilisez le formulaire pour extraire l'ID
+                    const id = form.dataset.id;
+                    const name = form.dataset.name;
+
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) de vouloir supprimer ce type ?",
+                        text: name,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonColor: "#198754",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Oui, Supprime-le",
+                        cancelButtonText: "Non, Annuler",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                            form.action = `/admin/types_p/${id}/delete`;
+                            form.submit();
+
+                            Swal.fire({
+                                title: "Type supprimée !",
+                                icon: "success"
+                            });
+                        }
+                    });
+                } else {
+                    console.error("Le formulaire n'a pas été trouvé.");
+                }
+            }
+        </script>
+
+
+
+
+        {{-- script modifier  --}}
+        <script>
+            function edit_confirmation(button) {
+                // Utilisez le bouton pour obtenir le formulaire parent
+                const form = button.closest('.edit-form');
+
+                // Vérifiez si le formulaire a été trouvé
+                if (form) {
+                    // Utilisez le formulaire pour extraire l'ID
+                    const id = form.dataset.id;
+                    const name = form.dataset.name;
+
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) de vouloir modifier cet(te) stagiaire ?",
+                        text: name,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonColor: "#198754",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Oui",
+                        cancelButtonText: "Non",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                            form.action = `/admin/types_p/${id}/edit`;
+                            form.submit();
+                        }
+                    });
+                } else {
+                    console.error("Le formulaire n'a pas été trouvé.");
+                }
+            }
+        </script>
+
+
+
+        {{-- --------------------------------------------------------------------------------------------------------------------------------------------   --}}
+
+
+
+
+
+
+
+        {{-- footer  --}}
+        <div class="container" id="pied-page">
+        @endsection
