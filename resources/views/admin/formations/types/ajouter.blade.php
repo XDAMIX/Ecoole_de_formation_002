@@ -22,7 +22,7 @@
                 <a href="{{ url('/admin/types_p') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                         class="btn-description">Retour</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center">
+            <div class=" d-flex align-items-center justify-content-center">
                 <h2>Ajouter un nouveau type</h2>
             </div>
         </div>
@@ -31,10 +31,10 @@
 
 {{-- -------------------------------------------------------------------------------------- --}}
 
-    <div class="container">
+    <div class="container-fluid d-flex justify-content-center align-items-center ">
 
         <div class="row animate__animated animate__backInLeft">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
 
                     <div class="card-body">
@@ -70,7 +70,7 @@
                                             class="btn-description">Enregistrer</span></button>
                                 </div>
                                 <div class="col-6">
-                                    <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/formations' }}"><i
+                                    <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/types_p' }}"><i
                                             class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
                                 </div>
                             </div>
