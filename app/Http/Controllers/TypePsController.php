@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TypePs;
+use App\Models\TypePaiement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -75,6 +76,12 @@ class TypePsController extends Controller
     {
         $type= TypePs::find($id);
         $type->delete();
+        
+        $type_sups = TypePaiement::where("type_id","=",$id )->get();
+        foreach($type_sups as $type_sup){
+
+            $type_sup->delete(); 
+        }
         return redirect('/admin/types_p');
     }
 }
