@@ -17,90 +17,118 @@
   }
 </style>
 
-    <div class="container" style="padding-top: 100px;">
+ 
+
+
+    <div class="container" style="padding-top: 100px;" id="titre-page">
         <div class="row">
-            <div class="col-12 py-3 text-center">
+            <div class="col-2 d-flex align-items-center">
                 <a href="{{ url('/formations/') }}" class="btn btn-dark alpa shadow"
                     style="margin-bottom: 5px;"><i class="bi bi-arrow-left-circle-fill"></i> <span class="btn-description">Retour</span></a>
             </div>
-            <div class="col-12 py-4 text-center">
-                <h1 style="color: black; font-weight:bold; text-transform: uppercase;">Formation : {{ $formation->titre }}
-                </h1>
+            <div class=" d-flex align-items-center justify-content-center">
+                <h1>{{ $formation->titre }}</h1>
+        
             </div>
         </div>
     </div>
 
 
-    <div class="container animate__animated animate__backInLeft">
+    <div class="container">
 
-      <div class="row justify-content-center ">
-
-          <div class="col-md-8 text-center">
-              <div class="card shadow text-center" style="background-color: #ffff;">
-                  {{-- <div class="card-header"style="text-align:center;">
-                <a style="font-size: 20px;">Nouveau bloc de présentation</a>
-              </div> --}}
-                  <div class="card-body text-center">
-  
-                      <div class="col-12">
-                          <img id="imagePreview" class="" src="{{ asset('storage/' . $formation->photo) }}" alt="image manquante !"
-                              style="height: 300px;width: auto;">
-                      </div>
-                      <hr>
-  
-                      <div class="row text-center">
-                          
-                          <div class="col-12 py-3">
-                              <h3>Titre de la formation :</h3>
-                              <h5> {{ $formation->titre }} </h5>
-                          </div>
-      
-                          <div class="col-12 py-3">
-                              <h3>La duré de la formation :</h3>
-                              <h5> {{ $formation->dure }} </h5>
-                          </div>
-      
-                          <div class="col-12 py-3">
-                              <h3>Description de la formation :</h3>
-                              <p> {{ $formation->description }} </p>
-                          </div>
-      
-                          <div class="col-12 py-3">
-                              <h3>Public concerné :</h3>
-                              <p> {{ $formation->publique }} </p>
-                          </div>
-      
-                          <div class="col-12 py-3">
-                              <h3>Objectifs :</h3>
-                              <p> {{ $formation->objectifs }} </p>
-                          </div>
-  
-
-                          <div class="col-12 py-5">
-
-                            {{-- edit button    --}}
-                            <form class="register-form" action="" data-id="{{ $formation->id }}"
-                                data-name="{{ $formation->titre }}" method="GET">
-                                @csrf
-                                <button type="button" onclick="register_confirmation(this)"
-                                    class="btn btn-success alpa shadow"
-                                    style="margin-bottom: 5px;"><i class="bi bi-mortarboard-fill"></i> <span
-                                        class="btn-description">S'Inscrir</span></button>
-                            </form>
-
+        <div class="row animate__animated animate__backInLeft">
+            <div class="col-md-12">
+                <div class="card shadow" style="background-color: #ffff;">
+    
+                    <div class="card-body">
+    
+                        <div class="row">
+                            {{-- <div style="text-align: center">
+                                <h3 style="color: rebeccapurple; font-size: 30px">{{ $formation->titre }}</h3>
+                                
+                            </div> --}}
+                            <div class="col-md-6">
+                                <div class="row">
+                            
+                                    <div>
+                                        <h3><i class="fa-solid fa-people-group"></i> Public concerné :</h3>
+                                        <p> {{ $formation->publique }} </p>
+                                        
+                                    </div>
+                                    <div class="col-12 py-3">
+                                        <h3> <i class="fa-solid fa-bullseye"></i> Objectifs :</h3>
+                                        <p> {{ $formation->objectifs }} </p>
+                                    </div>
+                                    <div>
+                                        <h3> <i
+                                            class="fa-solid fa-stopwatch"></i> Duré :  {{ $formation->dure }}</h3>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <img id="imagePreview" class="img-fluid" src="{{ asset('storage/' . $formation->photo) }}" alt="L'image n'a pas été sélectionnée!" style="height: 300px;width: auto;">
+                                </div>
+                            </div>
                         </div>
-                      </div>
-  
-  
-  
-  
-  
-                      
-                  </div>
-              </div>
-  
-          </div>
-      </div>
+                        <hr>
+    
+                        <div class="row">
+                            
+                        
+        
+                            <div class="col-12 py-3">
+                                <h3>Description de la formation :</h3>
+                                <p> {{ $formation->description }} </p>
+                            </div>
+        
+                                {{-- ----------------- --}}
+    <hr>
+    <div class="col-12 py-5 text-center">
+
+        {{-- edit button    --}}
+        <form class="register-form" action="" data-id="{{ $formation->id }}"
+            data-name="{{ $formation->titre }}" method="GET">
+            @csrf
+            <button type="button" onclick="register_confirmation(this)"
+                class="btn btn-success alpa shadow"
+                style="margin-bottom: 5px;"><i class="bi bi-mortarboard-fill"></i> <span
+                    class="btn-description">S'Inscrir</span></button>
+        </form>
+
+    </div>
+                               
+                                {{-- ----------------- --}}
+    
+    
+                        </div>
+                    </div>
+    
+                </div>
+            
+    
+    
+         </div>
+    
+                        </div>
+    
+    
+    
+    
+    
+                        
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    
+    
+    </div>
+
+
+     
   
   
   </div>

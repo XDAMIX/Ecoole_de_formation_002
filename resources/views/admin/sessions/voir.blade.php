@@ -177,7 +177,7 @@
                                                     <button type="button" class="btn btn-warning alpa shadow"
                                                         onclick="plus_confirmation(this)"><i class="bi bi-plus-circle-fill"
                                                             style="font-size: 30px; padding-right:5px;"></i><br>Faire
-                                                        prolonger la durée de la formation</button>
+                                                        prolonger</button>
                                                 </form>
 
                                             </div>
