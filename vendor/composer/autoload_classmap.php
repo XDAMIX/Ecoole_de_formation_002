@@ -77,6 +77,7 @@ return array(
     'App\\Models\\Session' => $baseDir . '/app/Models/Session.php',
     'App\\Models\\Telephone' => $baseDir . '/app/Models/Telephone.php',
     'App\\Models\\Temoignage' => $baseDir . '/app/Models/Temoignage.php',
+    'App\\Models\\TypePaiement' => $baseDir . '/app/Models/TypePaiement.php',
     'App\\Models\\TypePs' => $baseDir . '/app/Models/TypePs.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

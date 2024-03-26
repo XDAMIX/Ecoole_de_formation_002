@@ -9,6 +9,7 @@ use App\Models\Formation;
 use App\Models\Session;
 use App\Models\Information;
 use App\Models\Telephone;
+use App\Models\TypePaiement;
 use App\Http\Requests\InscriptionRequest;
 use App\Http\Requests\EtudiantRequest;
 
@@ -217,19 +218,29 @@ class InscriptionController extends Controller
         
         $inscription->save();
 
+        $id_paiement = $request->input('tarif');
+
+        $paiement = TypePaiement::find($id_paiement);
+        $tarif = $paiement->titre;
+        $prix = $paiement->prix;
+
 
         // enregistrement de l'etudiant dans la table etudiants
         $etudiant->nom =  $request->input('nom');
         $etudiant->prenom =  $request->input('prenom');
-        $etudiant->sexe = $inscription->sexe;
+        $etudiant->sexe = $request->input('sexe');
         $etudiant->wilaya =  $request->input('wilaya');
+        $etudiant->adresse =  $request->input('adresse');
         $etudiant->date_naissance =  $request->input('date_naissance');
         $etudiant->lieu_naissance =  $request->input('lieu_naissance');
         $etudiant->tel =  $request->input('tel');
         $etudiant->email =  $request->input('email');
-        $etudiant->profession = $inscription->profession;
+        $etudiant->profession = $request->input('profession');
         $etudiant->session_id = $request->input('session');
-        $etudiant->montant = $request->input('montant');
+
+        $etudiant->id_tarif = $request->input('tarif');
+        $etudiant->tarif = $tarif;
+        $etudiant->prix_formation = $prix;
 
         if ($request->hasFile('photo')) {
             // dd('OK===>>>Message de débogage : Image chargée') ;

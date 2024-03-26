@@ -122,7 +122,6 @@ class FormationController extends Controller
                 }
                 $nvPrix->save();
             }
-
         } else {
             // Le tableau $paiements n'est pas vide
             foreach ($types as $type) {
@@ -137,6 +136,42 @@ class FormationController extends Controller
                         }
                         $paiement->save();
                     }
+                }
+            }
+
+
+
+            // Boucle sur chaque type de paiement
+            foreach ($types as $type) {
+                // Réinitialisez la variable $paiement_exist pour chaque type de paiement
+                $paiement_exist = false;
+
+                // Parcourez chaque paiement existant pour vérifier s'il correspond au type actuel
+                foreach ($paiements as $paiement) {
+                    if ($paiement->titre == $type->titre) {
+                        // Si un paiement correspond, mettez $paiement_exist à true et sortez de la boucle
+                        $paiement_exist = true;
+                        break;
+                    }
+                }
+
+                // Si $paiement_exist est toujours false, cela signifie que ce type de paiement n'existe pas encore
+                if (!$paiement_exist) {
+                    $nvPrix = new TypePaiement();
+                    $nvPrix->type_id = $type->id;
+                    $nvPrix->titre = $type->titre;
+                    $nvPrix->formation_id = $id;
+
+                    // Vérifiez si le montant pour ce type de paiement est fourni dans la requête
+                    $montant = $request->input('montant_' . $type->titre);
+                    if ($montant !== null && $montant !== '') {
+                        $nvPrix->prix = $montant;
+                    } else {
+                        $nvPrix->prix = '0';
+                    }
+
+                    // Sauvegardez le nouveau paiement
+                    $nvPrix->save();
                 }
             }
         }

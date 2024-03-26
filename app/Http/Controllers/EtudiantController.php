@@ -9,6 +9,7 @@ use App\Models\Formation;
 use App\Models\Session;
 use App\Models\Information;
 use App\Models\Telephone;
+use App\Models\TypePaiement;
 use RealRashid\SweetAlert\Facades\Alert;
 use Dompdf\Dompdf;
 use PDF;
@@ -57,13 +58,17 @@ class EtudiantController extends Controller
     public function create()
     {
         $formations = Formation::all();
-        $sessions = Session::all();
-        return view('admin/etudant/ajouter', ['formations' => $formations, 'sessions' => $sessions]);
+        return view('admin/etudant/ajouter', ['formations' => $formations]);
     }
 
     public function store(EtudiantRequest $request)
     {
 
+        $id_paiement = $request->input('tarif');
+
+        $paiement = TypePaiement::find($id_paiement);
+        $tarif = $paiement->titre;
+        $prix = $paiement->prix;
 
         $etudiant = new Etudiant();
 
@@ -73,13 +78,17 @@ class EtudiantController extends Controller
         $etudiant->date_naissance = $request->input('date_naissance');
         $etudiant->lieu_naissance = $request->input('lieu_naissance');
         $etudiant->wilaya = $request->input('wilaya');
+        $etudiant->adresse = $request->input('adresse');
         $etudiant->profession = $request->input('profession');
 
 
         $etudiant->tel = $request->input('tel');
         $etudiant->email = $request->input('email');
         $etudiant->session_id = $request->input('session');
-        $etudiant->montant = $request->input('montant');
+
+        $etudiant->id_tarif = $request->input('tarif');
+        $etudiant->tarif = $tarif;
+        $etudiant->prix_formation = $prix;
 
         if ($request->hasFile('photo')) {
             $etudiant->photo = $request->photo->store('/public/images/stagiaires');
@@ -160,14 +169,26 @@ class EtudiantController extends Controller
         ->whereNotIn('statut', ['Terminée'])
         ->get();
 
+        $tarifs_formation = TypePaiement::where('formation_id', $formation_id)->get();
+
         return view('admin.etudant.modifier', [
             'etudiant' => $etudiant, 'formations' => $formations,
-            'session_etudiant' => $session_etudiant, 'formation_etudiant' => $formation_etudiant, 'sessions' => $sessions_possibles
+            'session_etudiant' => $session_etudiant, 'formation_etudiant' => $formation_etudiant, 'sessions' => $sessions_possibles,
+            'tarifs_formation' => $tarifs_formation,
         ]);
     }
 
     public function update(EtudiantRequest $request, $id)
     {
+
+
+        $id_paiement = $request->input('tarif');
+
+        $paiement = TypePaiement::find($id_paiement);
+        $tarif = $paiement->titre;
+        $prix = $paiement->prix;
+
+
         $etudiant = Etudiant::find($id);
         $etudiant->sexe = $request->input('sexe');
         $etudiant->nom = $request->input('nom');
@@ -175,13 +196,17 @@ class EtudiantController extends Controller
         $etudiant->date_naissance = $request->input('date_naissance');
         $etudiant->lieu_naissance = $request->input('lieu_naissance');
         $etudiant->wilaya = $request->input('wilaya');
+        $etudiant->adresse = $request->input('adresse');
         $etudiant->profession = $request->input('profession');
-
 
         $etudiant->tel = $request->input('tel');
         $etudiant->email = $request->input('email');
         $etudiant->session_id = $request->input('session');
-        $etudiant->montant = $request->input('montant');
+
+        $etudiant->id_tarif = $request->input('tarif');
+        $etudiant->tarif = $tarif;
+        $etudiant->prix_formation = $prix;
+
 
         if ($request->hasFile('photo')) {
             $etudiant->photo = $request->photo->store('/public/images/stagiaires');
@@ -216,6 +241,23 @@ class EtudiantController extends Controller
 
             // Retournez les professeurs au format JSON
             return response()->json(['sessions' => $sessionsFiltres]);
+        } catch (\Exception $e) {
+            // Log the exception for debugging
+            \Log::error($e);
+
+            // Return an error response
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
+    }
+
+    public function getTarifs($id_formation)
+    {
+        try {
+            // Récupérez les professeurs en fonction du titre de la formation
+            $tarifsFiltres = TypePaiement::where('formation_id', $id_formation)->get();
+
+            // Retournez les professeurs au format JSON
+            return response()->json(['tarifs' => $tarifsFiltres]);
         } catch (\Exception $e) {
             // Log the exception for debugging
             \Log::error($e);
