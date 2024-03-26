@@ -27,7 +27,10 @@ class FormationController extends Controller
     public function show($id)
     {
         $formation = Formation::find($id);
-        return view('admin.formations.voir', ['formation' => $formation]);
+        $types = TypePs::all();
+        $paiements = TypePaiement::where('formation_id', '=', $id)->get();
+        
+        return view('admin.formations.voir', ['formation' => $formation,'types'=>$types,'paiements' => $paiements]);
     }
 
 
