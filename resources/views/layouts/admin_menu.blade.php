@@ -150,6 +150,24 @@
                 SITE WEB
             </div>
 
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/') }}" data-bs-toggle="collapse"
+                    data-bs-target="#collapseSite" aria-expanded="true" aria-controls="collapseSite">
+                    <i class="bi bi-globe"></i>
+                    <span>SITE VITRINE</span>
+                </a>
+                <div id="collapseSite" class="collapse" aria-labelledby="headingSite"
+                    data-bs-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        {{-- <h6 class="collapse-header">Menu :</h6> --}}
+                        <a class="collapse-item" href="{{ url('/') }}" target="_blank"><i
+                                class="fa-solid fa-bars submenu-i"></i>Consulter</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#collapseInfo"

@@ -47,7 +47,7 @@
                                 </div>
 
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-12">
 
@@ -60,7 +60,8 @@
                                                 <div class="col-12 col-md-4 form-group">
                                                     <label for="">sexe :</label>
                                                     <select class="form-control form-select" name="sexe">
-                                                        <option value="{{ $etudiant->sexe }}" style="display:none;" selected>
+                                                        <option value="{{ $etudiant->sexe }}" style="display:none;"
+                                                            selected>
                                                             @if ($etudiant->sexe == 'H')
                                                                 HOMME
                                                             @else
@@ -150,7 +151,7 @@
 
 
 
-                                                <div class="col-12 col-md-6 form-group" id="wilaya">
+                                                <div class="col-12 col-md-4 form-group" id="wilaya">
                                                     <label for="">Wilaya de résidence :</label>
 
                                                     <select class="form-control form-select" name="wilaya">
@@ -227,9 +228,26 @@
 
                                                 </div>
 
+                                                <div class="col-12 col-md-8 form-group" id="adresse">
+                                                    <label for="">Adresse :</label>
+
+                                                    <input type="text" name="adresse"
+                                                        class="form-control @if ($errors->get('adresse')) is-invalid @endif"
+                                                        id="validationAdresse" placeholder="Veuillez saisir l'adresse ici"
+                                                        value="{{ $etudiant->adresse }}">
+                                                    <div id="validationAdresseFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('adresse'))
+                                                            @foreach ($errors->get('adresse') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
                                                 <div class="col-12 col-md-6 form-group" id="tel">
                                                     <label for="">Proféssion :</label>
-        
+
                                                     <input type="text" name="profession"
                                                         class="form-control @if ($errors->get('profession')) is-invalid @endif"
                                                         id="validationProfession"
@@ -242,13 +260,13 @@
                                                             @endforeach
                                                         @endif
                                                     </div>
-        
+
                                                 </div>
 
 
                                                 <div class="col-12 col-md-6 form-group" id="tel">
                                                     <label for="">N° de téléphone :</label>
-        
+
                                                     <input type="text" name="tel"
                                                         class="form-control @if ($errors->get('tel')) is-invalid @endif"
                                                         id="validationTel"
@@ -261,13 +279,13 @@
                                                             @endforeach
                                                         @endif
                                                     </div>
-        
+
                                                 </div>
-        
-        
+
+
                                                 <div class="col-12 col-md-6 form-group" id="email">
                                                     <label for="">e-mail :</label>
-        
+
                                                     <input type="text" name="email"
                                                         class="form-control @if ($errors->get('email')) is-invalid @endif"
                                                         id="validationEmail" placeholder="Veuillez saisir le email ici"
@@ -279,7 +297,7 @@
                                                             @endforeach
                                                         @endif
                                                     </div>
-        
+
                                                 </div>
 
 
@@ -338,8 +356,9 @@
                                 <div class="col-12 col-md-6 form-group" style="text-align: center;">
                                     <label for="">Veuillez choisir la Formation :</label>
 
-                                    <select class="form-control form-select" name="formation" id="formation">
-                                        <option value="" style="display:none;" selected>{{ $formation_etudiant->titre }}</option>
+                                    <select class="form-control form-select text-center" name="formation" id="formation">
+                                        <option value="" style="display:none;" selected>
+                                            {{ $formation_etudiant->titre }}</option>
                                         @foreach ($formations as $formation)
                                             <option value="{{ $formation->id }}">{{ $formation->titre }}</option>
                                         @endforeach
@@ -349,8 +368,11 @@
                                 <div class="col-12 col-md-6 form-group" style="text-align: center;">
                                     <label for="">Veuillez choisir la Session :</label>
 
-                                    <select class="form-control form-select @if ($errors->get('session')) is-invalid @endif" name="session" id="session" id="validationSession" >
-                                        <option value="{{ $etudiant->session_id }}" style="display:none;" selected>{{ $session_etudiant->nom }}</option>
+                                    <select
+                                        class="form-control form-select @if ($errors->get('session')) is-invalid @endif text-center"
+                                        name="session" id="session" id="validationSession">
+                                        <option value="{{ $etudiant->session_id }}" style="display:none;" selected>
+                                            {{ $session_etudiant->nom }}</option>
                                         @foreach ($sessions as $session)
                                             <option value="{{ $session->id }}">{{ $session->nom }}</option>
                                         @endforeach
@@ -367,33 +389,52 @@
 
                             </div>
 
-                            
+                            {{-- paiement --}}
+                            {{-- ---------------------------------------------------------- --}}
                             <div class="row espace-inputs justify-content-center">
-                                <div class="col-12">
+                                <div class="col-md-12">
                                     <hr>
-                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Paiement</h5>
+                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Paiement (Veuillez
+                                        choisir le tarif)</h5>
                                     <hr>
                                 </div>
-                                <div class="col-md-6 form-group" id="montant" style="text-align: center;">
 
+                                <div class="col-12 form-group" style="text-align: center;">
+                                    <div class="row justify-content-center">
 
-                                    <label for="">Montant Payé :</label>
+                                        <div class="col-6">
+                                            <select
+                                                class="form-control form-select @if ($errors->get('tarif')) is-invalid @endif text-center"
+                                                name="tarif" id="tarif" id="validationTarif">
+                                                <option value="{{ $etudiant->id_tarif }}" style="display:none;" selected>
+                                                    {{ $etudiant->tarif }} {{ $etudiant->prix_formation }} DA</option>
+                                                @foreach ($tarifs_formation as $tarif_formation)
+                                                    <option value="{{ $tarif_formation->id }}">
+                                                        {{ $tarif_formation->titre }} {{ $tarif_formation->prix }} DA
+                                                    </option>
+                                                @endforeach
 
-                                    <input type="text" name="montant"
-                                        class="form-control @if ($errors->get('montant')) is-invalid @endif"
-                                        id="validationMontant"
-                                        placeholder="Veuillez saisir le montant d'argent encaissé" value="{{ $etudiant->montant }}">
+                                                {{-- liste des tarifs selon la formation --}}
+                                            </select>
 
-                                    <div id="validationMontantFeedback" class="invalid-feedback">
-                                        @if ($errors->get('montant'))
-                                            @foreach ($errors->get('montant') as $message)
-                                                {{ $message }}
-                                            @endforeach
-                                        @endif
+                                            <div id="validationTarifFeedback" class="invalid-feedback">
+                                                @if ($errors->get('tarif'))
+                                                    @foreach ($errors->get('tarif') as $message)
+                                                        {{ $message }}
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
+
+
                             </div>
+
+
+
 
 
 
@@ -466,6 +507,8 @@
     </script>
 
 
+
+    {{-- ---------------------------------------------------------- --}}
     <script>
         // Fonction pour effectuer la requête AJAX
         function filtrerSessions() {
@@ -490,58 +533,85 @@
             });
         }
 
+        function filtrerTarifs() {
+            var id_Formation = $('#formation').val();
+
+            $.ajax({
+                url: '/get-tarifs/' + id_Formation,
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#tarif').empty();
+                    $.each(response.tarifs, function(key, value) {
+                        $('#tarif').append('<option style="text-align:center;" value="' + value.id +
+                            '">' + value.titre + ' ' + value.prix + '  DA' + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
         $(document).ready(function() {
             // Appeler la fonction au chargement de la page
             filtrerSessions();
+            filtrerTarifs();
 
             // Écouter les changements de la valeur de la formation
             $('#formation').change(function() {
                 // Appeler la fonction lors du changement de la sélection
                 filtrerSessions();
+                filtrerTarifs();
             });
         });
     </script>
 
-<script>
-    // affichage de l'image
-    // --------------------------------------------------------------------------------------
-
-    // Sélection de l'élément input
-    const input = document.getElementById('validationPhoto');
-
-    // Écoute de l'événement 'change' sur l'input
-    input.addEventListener('change', function() {
-        // Vérification s'il y a un fichier sélectionné
-        if (input.files && input.files[0]) {
-            // Création d'un objet FileReader
-            const reader = new FileReader();
-
-            // Événement 'load' déclenché lorsque la lecture est terminée
-            reader.onload = function(e) {
-                // Mise à jour de l'attribut src de l'élément img avec les données de l'image
-                // document.getElementById('imagePreview').src = e.target.result;
-                document.getElementById('imagePreview').style.backgroundImage = "url('" + e.target.result +
-                    "')";
-            };
-
-            // Lecture du contenu de l'image en tant que URL de données
-            reader.readAsDataURL(input.files[0]);
-        }
-    });
 
 
-    // choix de l'image
-    // -----------------------------------------------------------------------------------------
 
-    // Sélection de l'élément img
-    const imagePreview = document.getElementById('imagePreview');
+    <script>
+        // affichage de l'image
+        // --------------------------------------------------------------------------------------
 
-    // Écoute de l'événement 'click' sur l'image
-    imagePreview.addEventListener('click', function() {
-        // Clic sur l'élément input
-        document.getElementById('validationPhoto').click();
-    });
-</script>
+        // Sélection de l'élément input
+        const input = document.getElementById('validationPhoto');
+
+        // Écoute de l'événement 'change' sur l'input
+        input.addEventListener('change', function() {
+            // Vérification s'il y a un fichier sélectionné
+            if (input.files && input.files[0]) {
+                // Création d'un objet FileReader
+                const reader = new FileReader();
+
+                // Événement 'load' déclenché lorsque la lecture est terminée
+                reader.onload = function(e) {
+                    // Mise à jour de l'attribut src de l'élément img avec les données de l'image
+                    // document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('imagePreview').style.backgroundImage = "url('" + e.target.result +
+                        "')";
+                };
+
+                // Lecture du contenu de l'image en tant que URL de données
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+
+        // choix de l'image
+        // -----------------------------------------------------------------------------------------
+
+        // Sélection de l'élément img
+        const imagePreview = document.getElementById('imagePreview');
+
+        // Écoute de l'événement 'click' sur l'image
+        imagePreview.addEventListener('click', function() {
+            // Clic sur l'élément input
+            document.getElementById('validationPhoto').click();
+        });
+    </script>
 
 
 
@@ -549,4 +619,5 @@
     <div class="container" id="pied-page"></div>
 
 
-    @endsection
+
+@endsection

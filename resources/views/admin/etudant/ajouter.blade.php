@@ -16,7 +16,7 @@
     </div>
 
 
-{{-- ---------------------------------------------------------- --}}
+    {{-- ---------------------------------------------------------- --}}
     <div class="container" style="padding-top: 10px;">
         <div class="row justify-content-center animate__animated animate__backInLeft">
             <div class="col-md-12">
@@ -26,14 +26,15 @@
               </div> --}}
                     <div class="card-body">
 
-                        <form class="inscription-form" action="{{ url('/admin/etudiant/save') }}" method="POST" enctype="multipart/form-data">
+                        <form class="inscription-form" action="{{ url('/admin/etudiant/save') }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
 
 
 
 
 
-    
+
 
 
                             {{-- sexe ,nom ,prenom  --}}
@@ -47,7 +48,7 @@
                                 </div>
 
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-12">
 
@@ -88,7 +89,8 @@
 
                                                     <input type="text" name="prenom"
                                                         class="form-control @if ($errors->get('prenom')) is-invalid @endif"
-                                                        id="validationPrenom" placeholder="Veuillez saisir votre prénom ici">
+                                                        id="validationPrenom"
+                                                        placeholder="Veuillez saisir votre prénom ici">
                                                     <div id="validationPrenomFeedback" class="invalid-feedback">
                                                         @if ($errors->get('prenom'))
                                                             @foreach ($errors->get('prenom') as $message)
@@ -140,7 +142,7 @@
 
 
 
-                                                <div class="col-12 col-md-6 form-group" id="wilaya">
+                                                <div class="col-12 col-md-4 form-group" id="wilaya">
                                                     <label for="">Wilaya de résidence :</label>
 
                                                     <select class="form-control form-select" name="wilaya">
@@ -214,9 +216,26 @@
 
                                                 </div>
 
-                                                <div class="col-12 col-md-6 form-group" id="tel">
+                                                <div class="col-12 col-md-8 form-group" id="adresse">
+                                                    <label for="">Adresse :</label>
+
+                                                    <input type="text" name="adresse"
+                                                        class="form-control @if ($errors->get('adresse')) is-invalid @endif"
+                                                        id="validationAdresse" placeholder="Veuillez saisir l'adresse ici"
+                                                        value="">
+                                                    <div id="validationAdresseFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('adresse'))
+                                                            @foreach ($errors->get('adresse') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-12 form-group" id="tel">
                                                     <label for="">Proféssion :</label>
-        
+
                                                     <input type="text" name="profession"
                                                         class="form-control @if ($errors->get('profession')) is-invalid @endif"
                                                         id="validationProfession"
@@ -228,13 +247,13 @@
                                                             @endforeach
                                                         @endif
                                                     </div>
-        
+
                                                 </div>
 
 
                                                 <div class="col-12 col-md-6 form-group" id="tel">
                                                     <label for="">N° de téléphone :</label>
-        
+
                                                     <input type="text" name="tel"
                                                         class="form-control @if ($errors->get('tel')) is-invalid @endif"
                                                         id="validationTel"
@@ -246,13 +265,13 @@
                                                             @endforeach
                                                         @endif
                                                     </div>
-        
+
                                                 </div>
-        
-        
+
+
                                                 <div class="col-12 col-md-6 form-group" id="email">
                                                     <label for="">e-mail :</label>
-        
+
                                                     <input type="text" name="email"
                                                         class="form-control @if ($errors->get('email')) is-invalid @endif"
                                                         id="validationEmail" placeholder="Veuillez saisir le email ici">
@@ -263,7 +282,7 @@
                                                             @endforeach
                                                         @endif
                                                     </div>
-        
+
                                                 </div>
 
 
@@ -288,7 +307,7 @@
 
                                         <div class="col-12 col-md-4 droite photo">
                                             <label>Photo:</label>
-                                            <div id="imagePreview"
+                                            <div class="shadow" id="imagePreview"
                                                 style="background-image:;background-size: cover;background-position: center;background-repeat: no-repeat;  height: 290px; width: 250px; margin-left:20px; margin-right:20px;">
                                             </div>
                                         </div>
@@ -321,7 +340,7 @@
                                 <div class="col-12 col-md-6 form-group" style="text-align: center;">
                                     <label for="">Veuillez choisir la Formation :</label>
 
-                                    <select class="form-control form-select" name="formation" id="formation">
+                                    <select class="form-control form-select text-center" name="formation" id="formation">
                                         @foreach ($formations as $formation)
                                             <option value="{{ $formation->id }}">{{ $formation->titre }}</option>
                                         @endforeach
@@ -331,10 +350,12 @@
                                 <div class="col-12 col-md-6 form-group" style="text-align: center;">
                                     <label for="">Veuillez choisir la Session :</label>
 
-                                    <select class="form-control form-select @if ($errors->get('session')) is-invalid @endif" name="session" id="session" id="validationSession" >
+                                    <select
+                                        class="form-control form-select @if ($errors->get('session')) is-invalid @endif text-center"
+                                        name="session" id="session" id="validationSession">
                                         {{-- liste des sessions selon la formation --}}
                                     </select>
-                                    
+
                                     <div id="validationSessionFeedback" class="invalid-feedback">
                                         @if ($errors->get('session'))
                                             @foreach ($errors->get('session') as $message)
@@ -346,35 +367,45 @@
 
                             </div>
 
-                            
+
+
+                            {{-- paiement --}}
+                            {{-- ---------------------------------------------------------- --}}
                             <div class="row espace-inputs justify-content-center">
-                                <div class="col-12">
+                                <div class="col-md-12">
                                     <hr>
-                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Paiement</h5>
+                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Paiement (Veuillez
+                                        choisir le tarif)</h5>
                                     <hr>
                                 </div>
-                                <div class="col-md-6 form-group" id="montant" style="text-align: center;">
 
+                                <div class="col-12 form-group" style="text-align: center;">
+                                    <div class="row justify-content-center">
 
-                                    <label for="">Montant Payé :</label>
+                                        <div class="col-6">
+                                            <select
+                                                class="form-control form-select @if ($errors->get('tarif')) is-invalid @endif text-center"
+                                                name="tarif" id="tarif" id="validationTarif">
+                                                {{-- liste des tarifs selon la formation --}}
+                                            </select>
 
-                                    <input type="text" name="montant" value="0" 
-                                        class="form-control @if ($errors->get('montant')) is-invalid @endif"
-                                        id="validationMontant"
-                                        placeholder="Veuillez saisir le montant d'argent encaissé">
+                                            <div id="validationTarifFeedback" class="invalid-feedback">
+                                                @if ($errors->get('tarif'))
+                                                    @foreach ($errors->get('tarif') as $message)
+                                                        {{ $message }}
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
 
-                                    <div id="validationMontantFeedback" class="invalid-feedback">
-                                        @if ($errors->get('montant'))
-                                            @foreach ($errors->get('montant') as $message)
-                                                {{ $message }}
-                                            @endforeach
-                                        @endif
                                     </div>
 
                                 </div>
+
+
                             </div>
 
-                        {{-- -------------------------------------------------------------------------- --}}
+                            {{-- -------------------------------------------------------------------------- --}}
 
                             <hr>
 
@@ -382,8 +413,8 @@
                                 <div class="col-6 form-group">
 
                                     <button type="button" onclick="sauvegarder()"
-                                        class="btn btn-outline-success alpa shadow"><i
-                                            class="bi bi-check2"></i><span class="btn-description">Valider</span></button>
+                                        class="btn btn-outline-success alpa shadow"><i class="bi bi-check2"></i><span
+                                            class="btn-description">Valider</span></button>
 
 
                                 </div>
@@ -415,126 +446,156 @@
 
     {{-- script sauvegarder  --}}
     <script>
-      async function sauvegarder() {
-          // Utilisez le bouton pour obtenir le formulaire parent
-          const form1 = document.querySelector('.inscription-form');
-          const form2 = document.querySelector('.redirect-form');
-  
-          // Vérifiez si le formulaire a été trouvé
-          if (form1 && form2) {
-  
-              Swal.fire({
-                  title: "Êtes-vous sûr(e) de vouloir enregistrer ce stagiaire ?",
-                  icon: "question",
-                  showCancelButton: true,
-                  confirmButtonColor: "#198754",
-                  cancelButtonColor: "#d33",
-                  confirmButtonText: "Oui",
-                  cancelButtonText: "Non",
-              }).then(async (result) => {
-                  try {
-                      if (result.isConfirmed) {
-                          // Soumettre le premier formulaire
-                          await form1.submit();
-                          
-                          // Attendez que le premier formulaire soit soumis avant de soumettre le deuxième
-                          await new Promise(resolve => setTimeout(resolve, 10000)); // 5 seconde de délai (ajustez si nécessaire)
-                          
-                          form2.submit();
-                      }
-                  } catch (error) {
-                      console.error("Erreur lors de la soumission du formulaire : ", error);
-                  }
-              });
-          } else {
-              console.error("Il y a une erreur !");
-          }
-      }
-  </script>
-  
+        async function sauvegarder() {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form1 = document.querySelector('.inscription-form');
+            const form2 = document.querySelector('.redirect-form');
 
+            // Vérifiez si le formulaire a été trouvé
+            if (form1 && form2) {
 
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir enregistrer ce stagiaire ?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then(async (result) => {
+                    try {
+                        if (result.isConfirmed) {
+                            // Soumettre le premier formulaire
+                            await form1.submit();
 
+                            // Attendez que le premier formulaire soit soumis avant de soumettre le deuxième
+                            await new Promise(resolve => setTimeout(resolve,
+                            10000)); // 5 seconde de délai (ajustez si nécessaire)
 
-
-  <script>
-    // Fonction pour effectuer la requête AJAX
-    function filtrerSessions() {
-        var id_Formation = $('#formation').val();
-
-        $.ajax({
-            url: '/get-sessions/' + id_Formation,
-            type: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                $('#session').empty();
-                $.each(response.sessions, function(key, value) {
-                    $('#session').append('<option value="' + value.id + '">' + value.nom +
-                        '</option>');
+                            form2.submit();
+                        }
+                    } catch (error) {
+                        console.error("Erreur lors de la soumission du formulaire : ", error);
+                    }
                 });
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
+            } else {
+                console.error("Il y a une erreur !");
+            }
+        }
+    </script>
+
+
+
+
+
+
+    {{-- ---------------------------------------------------------- --}}
+    <script>
+        // Fonction pour effectuer la requête AJAX
+        function filtrerSessions() {
+            var id_Formation = $('#formation').val();
+
+            $.ajax({
+                url: '/get-sessions/' + id_Formation,
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#session').empty();
+                    $.each(response.sessions, function(key, value) {
+                        $('#session').append('<option value="' + value.id + '">' + value.nom +
+                            '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function filtrerTarifs() {
+            var id_Formation = $('#formation').val();
+
+            $.ajax({
+                url: '/get-tarifs/' + id_Formation,
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#tarif').empty();
+                    $.each(response.tarifs, function(key, value) {
+                        $('#tarif').append('<option style="text-align:center;" value="' + value.id +
+                            '">' + value.titre + ' ' + value.prix + '  DA' + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            // Appeler la fonction au chargement de la page
+            filtrerSessions();
+            filtrerTarifs();
+
+            // Écouter les changements de la valeur de la formation
+            $('#formation').change(function() {
+                // Appeler la fonction lors du changement de la sélection
+                filtrerSessions();
+                filtrerTarifs();
+            });
+        });
+    </script>
+
+
+
+
+
+    <script>
+        // affichage de l'image
+        // --------------------------------------------------------------------------------------
+
+        // Sélection de l'élément input
+        const input = document.getElementById('validationPhoto');
+
+        // Écoute de l'événement 'change' sur l'input
+        input.addEventListener('change', function() {
+            // Vérification s'il y a un fichier sélectionné
+            if (input.files && input.files[0]) {
+                // Création d'un objet FileReader
+                const reader = new FileReader();
+
+                // Événement 'load' déclenché lorsque la lecture est terminée
+                reader.onload = function(e) {
+                    // Mise à jour de l'attribut src de l'élément img avec les données de l'image
+                    // document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('imagePreview').style.backgroundImage = "url('" + e.target.result +
+                        "')";
+                };
+
+                // Lecture du contenu de l'image en tant que URL de données
+                reader.readAsDataURL(input.files[0]);
             }
         });
-    }
 
-    $(document).ready(function() {
-        // Appeler la fonction au chargement de la page
-        filtrerSessions();
 
-        // Écouter les changements de la valeur de la formation
-        $('#formation').change(function() {
-            // Appeler la fonction lors du changement de la sélection
-            filtrerSessions();
+        // choix de l'image
+        // -----------------------------------------------------------------------------------------
+
+        // Sélection de l'élément img
+        const imagePreview = document.getElementById('imagePreview');
+
+        // Écoute de l'événement 'click' sur l'image
+        imagePreview.addEventListener('click', function() {
+            // Clic sur l'élément input
+            document.getElementById('validationPhoto').click();
         });
-    });
-</script>
+    </script>
 
-<script>
-// affichage de l'image
-// --------------------------------------------------------------------------------------
-
-// Sélection de l'élément input
-const input = document.getElementById('validationPhoto');
-
-// Écoute de l'événement 'change' sur l'input
-input.addEventListener('change', function() {
-    // Vérification s'il y a un fichier sélectionné
-    if (input.files && input.files[0]) {
-        // Création d'un objet FileReader
-        const reader = new FileReader();
-
-        // Événement 'load' déclenché lorsque la lecture est terminée
-        reader.onload = function(e) {
-            // Mise à jour de l'attribut src de l'élément img avec les données de l'image
-            // document.getElementById('imagePreview').src = e.target.result;
-            document.getElementById('imagePreview').style.backgroundImage = "url('" + e.target.result +
-                "')";
-        };
-
-        // Lecture du contenu de l'image en tant que URL de données
-        reader.readAsDataURL(input.files[0]);
-    }
-});
-
-
-// choix de l'image
-// -----------------------------------------------------------------------------------------
-
-// Sélection de l'élément img
-const imagePreview = document.getElementById('imagePreview');
-
-// Écoute de l'événement 'click' sur l'image
-imagePreview.addEventListener('click', function() {
-    // Clic sur l'élément input
-    document.getElementById('validationPhoto').click();
-});
-</script>
-
-        {{-- footer  --}}
-        <div class="container" id="pied-page"></div>
+    {{-- footer  --}}
+    <div class="container" id="pied-page"></div>
 
 @endsection

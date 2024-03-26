@@ -56,7 +56,8 @@
                                                 <div class="col-12 col-md-4 form-group">
                                                     <label for="">sexe :</label>
                                                     <select class="form-control form-select" name="sexe">
-                                                        <option value="{{ $inscription->sexe }}" style="display:none;" selected>
+                                                        <option value="{{ $inscription->sexe }}" style="display:none;"
+                                                            selected>
                                                             @if ($inscription->sexe == 'H')
                                                                 HOMME
                                                             @else
@@ -147,7 +148,7 @@
 
 
 
-                                                <div class="col-12 col-md-6 form-group" id="wilaya">
+                                                <div class="col-12 col-md-4 form-group" id="wilaya">
                                                     <label for="">Wilaya de résidence :</label>
 
                                                     <select class="form-control form-select" name="wilaya">
@@ -225,7 +226,24 @@
 
                                                 </div>
 
-                                                <div class="col-12 col-md-6 form-group" id="tel">
+                                                <div class="col-12 col-md-8 form-group" id="adresse">
+                                                    <label for="">Adresse :</label>
+
+                                                    <input type="text" name="adresse"
+                                                        class="form-control @if ($errors->get('adresse')) is-invalid @endif"
+                                                        id="validationAdresse" placeholder="Veuillez saisir l'adresse ici"
+                                                        value="">
+                                                    <div id="validationAdresseFeedback" class="invalid-feedback">
+                                                        @if ($errors->get('adresse'))
+                                                            @foreach ($errors->get('adresse') as $message)
+                                                                {{ $message }}
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-12 col-md-12 form-group" id="tel">
                                                     <label for="">Proféssion :</label>
 
                                                     <input type="text" name="profession"
@@ -306,7 +324,7 @@
 
                                         <div class="col-12 col-md-4 droite photo">
                                             <label>Photo:</label>
-                                            <div id="imagePreview"
+                                            <div class="shadow" id="imagePreview"
                                                 style="background-image:;background-size: cover;background-position: center;background-repeat: no-repeat;  height: 290px; width: 250px; margin-left:20px; margin-right:20px;">
                                             </div>
                                         </div>
@@ -338,9 +356,10 @@
                                     <label for="">Veuillez choisir la Formation :</label>
 
                                     <select class="form-control form-select" name="formation" id="formation">
-                                        <option value="{{ $formation_etudiant->id }}" style="display:none;" selected>{{ $formation_etudiant->titre }}</option>
+                                        <option value="{{ $formation_etudiant->id }}" style="display:none;" selected>
+                                            {{ $formation_etudiant->titre }}</option>
                                         @foreach ($formations as $formation)
-                                            <option value="{{ $formation->id }}" >{{ $formation->titre }}</option>
+                                            <option value="{{ $formation->id }}">{{ $formation->titre }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -348,8 +367,10 @@
                                 <div class="col-12 col-md-6 form-group" style="text-align: center;">
                                     <label for="">Veuillez choisir la Session :</label>
 
-                                    <select class="form-control form-select @if ($errors->get('session')) is-invalid @endif" name="session" id="session" id="validationSession" >
-                                            {{-- liste des sessions selon la formation --}}
+                                    <select
+                                        class="form-control form-select @if ($errors->get('session')) is-invalid @endif"
+                                        name="session" id="session" id="validationSession">
+                                        {{-- liste des sessions selon la formation --}}
                                     </select>
 
                                     <div id="validationSessionFeedback" class="invalid-feedback">
@@ -361,6 +382,8 @@
                                     </div>
                                 </div>
 
+
+
                             </div>
 
 
@@ -370,28 +393,35 @@
                             <div class="row espace-inputs justify-content-center">
                                 <div class="col-md-12">
                                     <hr>
-                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Paiement</h5>
+                                    <h5 style="text-align: center"><i class="bi bi-cash-stack"></i> Paiement (Veuillez
+                                        choisir le tarif)</h5>
                                     <hr>
                                 </div>
-                                <div class="col-md-6 form-group" id="montant" style="text-align: center;">
 
+                                <div class="col-12 form-group" style="text-align: center;">
+                                    <div class="row justify-content-center">
 
-                                    <label for="">Montant Payé :</label>
+                                        <div class="col-6">
+                                            <select
+                                                class="form-control form-select @if ($errors->get('tarif')) is-invalid @endif text-center"
+                                                name="tarif" id="tarif" id="validationTarif">
+                                                {{-- liste des tarifs selon la formation --}}
+                                            </select>
 
-                                    <input type="text" value="0" name="montant"
-                                        class="form-control @if ($errors->get('montant')) is-invalid @endif"
-                                        id="validationServer04"
-                                        placeholder="Veuillez saisir le montant d'argent encaissé">
+                                            <div id="validationTarifFeedback" class="invalid-feedback">
+                                                @if ($errors->get('tarif'))
+                                                    @foreach ($errors->get('tarif') as $message)
+                                                        {{ $message }}
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
 
-                                    <div id="validationServer04Feedback" class="invalid-feedback">
-                                        @if ($errors->get('montant'))
-                                            @foreach ($errors->get('montant') as $message)
-                                                {{ $message }}
-                                            @endforeach
-                                        @endif
                                     </div>
 
                                 </div>
+
+
                             </div>
 
                             {{-- <hr> --}}
@@ -432,7 +462,7 @@
         // Fonction pour effectuer la requête AJAX
         function filtrerSessions() {
             var id_Formation = $('#formation').val();
-    
+
             $.ajax({
                 url: '/get-sessions/' + id_Formation,
                 type: 'GET',
@@ -451,15 +481,39 @@
                 }
             });
         }
-    
+
+        function filtrerTarifs() {
+            var id_Formation = $('#formation').val();
+
+            $.ajax({
+                url: '/get-tarifs/' + id_Formation,
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $('#tarif').empty();
+                    $.each(response.tarifs, function(key, value) {
+                        $('#tarif').append('<option style="text-align:center;" value="' + value.id +
+                            '">' + value.titre + ' ' + value.prix + '  DA' + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
         $(document).ready(function() {
             // Appeler la fonction au chargement de la page
             filtrerSessions();
-    
+            filtrerTarifs();
+
             // Écouter les changements de la valeur de la formation
             $('#formation').change(function() {
                 // Appeler la fonction lors du changement de la sélection
                 filtrerSessions();
+                filtrerTarifs();
             });
         });
     </script>
@@ -593,4 +647,4 @@
 
     <div class="container" id="pied-page"></div>
 
-    @endsection
+@endsection
