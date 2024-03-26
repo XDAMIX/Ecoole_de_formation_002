@@ -29,10 +29,12 @@ class EtudiantRequest extends FormRequest
             'date_naissance'    => 'required',
             'lieu_naissance'    => 'required|min:1|max:255',
             'session'=> 'required|min:1|max:255',
+            'tarif'=> 'required|min:1|max:255',
             // 'photo' => 'required',
 
             // 'sexe'   => 'required|min:1|max:255',
             // 'wilaya' => 'required|min:1|max:255',
+            'adresse'  => 'required|min:1|max:255',
             'tel'  => 'required|min:1|max:255',
             'email'  => 'required|min:1|max:255',
         ];

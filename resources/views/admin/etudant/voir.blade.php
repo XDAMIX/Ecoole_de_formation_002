@@ -47,7 +47,7 @@
                                             </div>
 
                                             <div class="col-md-4">
-                                                <h6>sexe :</h6>
+                                                <h6>Sexe :</h6>
                                                 <p>
                                                     @if ($etudiant->sexe == 'H')
                                                         HOMME
@@ -138,12 +138,17 @@
                             {{-- -------------------------------------- --}}
                             <div class="col-12" id="paiement">
                                 <h5><i class="bi bi-cash-stack"></i> Paiement</h5>
-                                <div class="row" style="padding-top: 10px;padding-bottom:10px;">
-                                    <div class="col-md-12 text-center">
-                                        <h6>Montant payé:</h6>
-                                        <p>{{ $etudiant->montant }} DA</p>
+                                <div class="row justify-content-center" style="padding-top: 10px;padding-bottom:10px;">
+                                    <div class="col-md-2 text-center">
+                                        <h6>Tarif :</h6>
+                                        <p>{{ $etudiant->tarif }}</p>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <h6>Prix :</h6>
+                                        <p>{{ $etudiant->prix_formation }} DA</p>
                                     </div>
                                 </div>
+                                <hr>
                             </div>
 
                             {{-- -------------------------------------- --}}

@@ -117,6 +117,7 @@ Route::controller(EtudiantController::class)->group(function () {
     Route::get('/get-sessions/{id_formation}', 'getSessions');
     Route::get('/admin/etudiant/{id}/download', 'telecharger_pdf_etudiant');
     Route::get('/admin/caisse', 'caisse');
+    Route::get('/get-tarifs/{id_formation}', 'getTarifs');
 });
 // --------------------------------------------------------------------------
 // ---------                Route pour Profs                   ----------

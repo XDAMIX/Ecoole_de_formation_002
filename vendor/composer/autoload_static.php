@@ -663,6 +663,7 @@ class ComposerStaticInitda57ae409123d235317f6ea01c50f106
         'App\\Models\\Session' => __DIR__ . '/../..' . '/app/Models/Session.php',
         'App\\Models\\Telephone' => __DIR__ . '/../..' . '/app/Models/Telephone.php',
         'App\\Models\\Temoignage' => __DIR__ . '/../..' . '/app/Models/Temoignage.php',
+        'App\\Models\\TypePaiement' => __DIR__ . '/../..' . '/app/Models/TypePaiement.php',
         'App\\Models\\TypePs' => __DIR__ . '/../..' . '/app/Models/TypePs.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
