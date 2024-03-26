@@ -17,12 +17,9 @@
   }
 </style>
 
- 
-
-
     <div class="container" style="padding-top: 100px;" id="titre-page">
         <div class="row">
-            <div class="col-2 d-flex align-items-center">
+            <div class="col-12 d-flex align-items-center">
                 <a href="{{ url('/formations/') }}" class="btn btn-dark alpa shadow"
                     style="margin-bottom: 5px;"><i class="bi bi-arrow-left-circle-fill"></i> <span class="btn-description">Retour</span></a>
             </div>

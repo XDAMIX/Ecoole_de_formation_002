@@ -21,6 +21,7 @@ use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\ProfController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TypePsController;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ValideController;
 
 
@@ -272,6 +273,20 @@ Route::get('/actualites', [ActualitesController::class, 'index'])->name('actuali
 // --------------------------------------------------------------------------
 Route::controller(TypePsController::class)->group(function () {
     Route::get('/admin/types_p', 'index');
+    Route::get('/admin/types_p/nouveau', 'create');
+    Route::post('/admin/types_p/save', 'store');
+    Route::get('/admin/types_p/{id}/edit', 'edit');
+    Route::put('/admin/types_p/{id}/update', 'update');
+    Route::delete('/admin/types_p/{id}/delete', 'destroy');
+});
+// --------------------------------------------------------------------------
+// ---------                Route pour  paiement       ----------
+// --------------------------------------------------------------------------
+Route::controller(PaiementController::class)->group(function () {
+    Route::get('/admin/paiement', 'index');
+    Route::get('/admin/paiement/{id}/voir', 'show');
+
+    
     Route::get('/admin/types_p/nouveau', 'create');
     Route::post('/admin/types_p/save', 'store');
     Route::get('/admin/types_p/{id}/edit', 'edit');

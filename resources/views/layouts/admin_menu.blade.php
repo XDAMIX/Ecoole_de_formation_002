@@ -395,6 +395,7 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="" data-bs-toggle="collapse"
                     data-bs-target="#collapseSessions" aria-expanded="true" aria-controls="collapseSessions">
@@ -411,6 +412,17 @@
                                 class="fa-regular fa-square-plus submenu-i"></i>Nouvelle session</a>
                     </div>
                 </div>
+            </li>
+
+                                    {{-- ------------------------ --}}
+                                    {{-- --------paiement-------- --}}
+                                    {{-- ------------------------ --}}
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/admin/paiement') }}" >
+                    <i class="fa-solid fa-people-group"></i>
+                    <span>PAIEMENT</span>
+                </a>
+
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
