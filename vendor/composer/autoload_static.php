@@ -613,6 +613,7 @@ class ComposerStaticInitda57ae409123d235317f6ea01c50f106
         'App\\Http\\Controllers\\InscriptionController' => __DIR__ . '/../..' . '/app/Http/Controllers/InscriptionController.php',
         'App\\Http\\Controllers\\LienController' => __DIR__ . '/../..' . '/app/Http/Controllers/LienController.php',
         'App\\Http\\Controllers\\MessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/MessageController.php',
+        'App\\Http\\Controllers\\PaiementController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaiementController.php',
         'App\\Http\\Controllers\\ParagrapheController' => __DIR__ . '/../..' . '/app/Http/Controllers/ParagrapheController.php',
         'App\\Http\\Controllers\\PhotoController' => __DIR__ . '/../..' . '/app/Http/Controllers/PhotoController.php',
         'App\\Http\\Controllers\\ProfController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfController.php',

@@ -27,6 +27,7 @@ return array(
     'App\\Http\\Controllers\\InscriptionController' => $baseDir . '/app/Http/Controllers/InscriptionController.php',
     'App\\Http\\Controllers\\LienController' => $baseDir . '/app/Http/Controllers/LienController.php',
     'App\\Http\\Controllers\\MessageController' => $baseDir . '/app/Http/Controllers/MessageController.php',
+    'App\\Http\\Controllers\\PaiementController' => $baseDir . '/app/Http/Controllers/PaiementController.php',
     'App\\Http\\Controllers\\ParagrapheController' => $baseDir . '/app/Http/Controllers/ParagrapheController.php',
     'App\\Http\\Controllers\\PhotoController' => $baseDir . '/app/Http/Controllers/PhotoController.php',
     'App\\Http\\Controllers\\ProfController' => $baseDir . '/app/Http/Controllers/ProfController.php',
