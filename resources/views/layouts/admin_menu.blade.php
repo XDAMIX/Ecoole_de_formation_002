@@ -213,7 +213,7 @@
                 <a class="nav-link collapsed" href="" data-bs-toggle="collapse"
                     data-bs-target="#collapseActualites" aria-expanded="true" aria-controls="collapseActualites">
                     <i class="fa-solid fa-camera"></i>
-                    <span>ACTUALITES</span>
+                    <span>ACTUALITÉS</span>
                 </a>
                 <div id="collapseActualites" class="collapse" aria-labelledby="headingActualites"
                     data-bs-parent="#accordionSidebar">
@@ -253,7 +253,7 @@
                 <a class="nav-link collapsed" href="" data-bs-toggle="collapse"
                     data-bs-target="#collapseTemoignages" aria-expanded="true" aria-controls="collapseTemoignages">
                     <i class="fa-solid fa-user-group"></i>
-                    <span>TEMOIGNAGES</span>
+                    <span>TÉMOIGNAGES</span>
                 </a>
                 <div id="collapseTemoignages" class="collapse" aria-labelledby="headingTemoignages"
                     data-bs-parent="#accordionSidebar">
@@ -361,7 +361,7 @@
                 <a class="nav-link collapsed" href="" data-bs-toggle="collapse"
                     data-bs-target="#collapseProfs" aria-expanded="true" aria-controls="collapseProfs">
                     <i class="fa-solid fa-chalkboard-user"></i>
-                    <span>PROFESSEURS</span>
+                    <span>PROFÉSSEURS</span>
                 </a>
                 <div id="collapseProfs" class="collapse" aria-labelledby="headingProfs"
                     data-bs-parent="#accordionSidebar">
@@ -400,7 +400,7 @@
                 <a class="nav-link collapsed" href="" data-bs-toggle="collapse"
                     data-bs-target="#collapseSessions" aria-expanded="true" aria-controls="collapseSessions">
                     <i class="fa-solid fa-people-group"></i>
-                    <span>SESSION</span>
+                    <span>SESSIONS</span>
                 </a>
                 <div id="collapseSessions" class="collapse" aria-labelledby="headingSessions"
                     data-bs-parent="#accordionSidebar">
@@ -417,13 +417,31 @@
                                     {{-- ------------------------ --}}
                                     {{-- --------paiement-------- --}}
                                     {{-- ------------------------ --}}
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ url('/admin/paiement') }}" >
                     <i class="fa-solid fa-people-group"></i>
                     <span>PAIEMENT</span>
                 </a>
 
+            </li> --}}
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="" data-bs-toggle="collapse"
+                    data-bs-target="#collapsePaiements" aria-expanded="true" aria-controls="collapseCaisse">
+                    <i class="bi bi-cash-stack"></i>
+                    <span>PAIEMENTS</span>
+                </a>
+                <div id="collapsePaiements" class="collapse" aria-labelledby="headingCaisse"
+                    data-bs-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        {{-- <h6 class="collapse-header">Menu :</h6> --}}
+                        <a class="collapse-item" href="{{ url('/admin/paiement') }}"><i
+                                class="fa-solid fa-bars submenu-i"></i>Liste</a>
+                    </div>
+                </div>
             </li>
+
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">

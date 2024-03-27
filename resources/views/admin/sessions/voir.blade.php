@@ -53,7 +53,7 @@
                                     </div>
 
                                     <div class="col-12"
-                                        style="height: 400px; background-image:url({{ asset('storage/' . $session->photo_formation) }});background-size: cover;background-position: center;background-repeat: no-repeat">
+                                        style="height: 400px; background-image:url({{ asset('storage/' . $session->photo_formation) }});background-size: cover;background-position: center;background-repeat: no-repeat; margin-top:5px;">
 
                                     </div>
 
