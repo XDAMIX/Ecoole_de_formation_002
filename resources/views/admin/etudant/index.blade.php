@@ -101,7 +101,7 @@
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     <div class="card-body">
-                        <table id="example" class="table table-bordered" style="width:100%">
+                        <table id="example" class="table table-bordered cell-border" style="width:100%">
                             <thead>
                                 <tr>
                                     {{-- <th >ID</th> --}}

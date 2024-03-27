@@ -346,16 +346,19 @@
                     if (result.isConfirmed) {
                         // Utiliser result.value pour obtenir la valeur du champ de saisie
                         const montant = result.value;
-                        form1.action = "/admin/paiement/save/" + etudiantID + "/" + userID + "/" + montant;
-                        form1.submit();
+                        if(montant > 0){
 
-                        Swal.fire({
+                            form1.action = "/admin/paiement/save/" + etudiantID + "/" + userID + "/" + montant;
+                            form1.submit();
+                            
+                            Swal.fire({
                             title: "Paiement effectué",
                             text: "Votre paiement a été effectué avec succès",
                             icon: "success",
                             timer: 5000, // Time in milliseconds
                             showConfirmButton: false
                         });
+                    }
 
                     }
                 }).catch(error => {
