@@ -31,7 +31,7 @@
 
                                             <div class="col-md-4">
                                                 <h6>Identifiant :</h6>
-                                                <p>{{ $etudiant->id }}</p>
+                                                <p>{{ $etudiant->code }}</p>
 
                                             </div>
 

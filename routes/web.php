@@ -286,11 +286,11 @@ Route::controller(PaiementController::class)->group(function () {
     Route::get('/admin/paiement', 'index');
     Route::get('/admin/paiement/{id}/voir', 'show');
     Route::post('/admin/paiement/save/{id_etudiant}/{id_user}/{montant}', 'versement');
-
+    Route::get('/admin/paiement/{id}/download', 'facture');
+    
     
     // Route::get('/admin/types_p/nouveau', 'create');
     // Route::post('/admin/types_p/save', 'store');
-    // Route::get('/admin/types_p/{id}/edit', 'edit');
     // Route::put('/admin/types_p/{id}/update', 'update');
     // Route::delete('/admin/types_p/{id}/delete', 'destroy');
 });

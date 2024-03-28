@@ -31,7 +31,7 @@
 
                                             <div class="col-md-4">
                                                 <h6>Identifiant :</h6>
-                                                <p>{{ $etudiant->id }}</p>
+                                                <p>{{ $etudiant->code }}</p>
 
                                             </div>
 
@@ -172,9 +172,7 @@
                                                 <i class="bi bi-plus-circle" style="padding-right: 5px;"></i> Ajouter un nouveau Versement </button>
                                         </form>
 
-                                        {{-- <form action="/admin/paiement/{{ $etudiant->id }}/voir" id="redirect-form" method="GET">
-                                            @csrf
-                                        </form> --}}
+    
 
                                     </div>
                                 </div>
@@ -189,7 +187,7 @@
                                                     <th class="text-center">Date</th>
                                                     <th class="text-center">Encaissé par</th>
                                                     <th class="text-center">montant</th>
-                                                    {{-- <th>Actions</th> --}}
+                                               
                                             </thead>
 
                                             <tbody class="text-center">
@@ -201,33 +199,7 @@
                                                         <td class="align-middle">{{ $paiement->montant }} DA</td>
 
 
-                                                        {{-- <td class=" align-middle" style="width:100px;">
-
-                                                            <div class="container">
-                                                                <div class="row">
-
-                                                                    <div class="col-12">
-                                                                        
-                                                                        <form class="show-form"
-                                                                            action="{{ url('/admin/paiement/' . $paiement->id . '/voir') }}"
-                                                                            method="GET">
-                                                                            @csrf
-                                                                            <button type="submit"
-                                                                                class="btn btn-outline-info alpa shadow"
-                                                                                style="width: 70px">
-                                                                                <i
-                                                                                    class="bi bi-currency-dollar"></i></button>
-                                                                        </form>
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                            </div>
-
-
-
-                                                        </td> --}}
+ 
                                                     </tr>
                                                 @endforeach
 
@@ -248,12 +220,14 @@
                                     <div class="col-12 form-group" style="padding:40px;">
                                         {{-- bouton de sauvegarde  --}}
                                         <form class="download-form"
-                                            action="{{ url('/admin/etudiant/' . $etudiant->id . '/download') }}"
+                                            action="{{ url('/admin/paiement/' . $etudiant->id . '/download') }}"
                                             method="GET">
                                             @csrf
-                                            <button type="button" onclick="telecharger(this)"
-                                                class="btn btn-outline-danger alpa shadow"><i
-                                                    class="bi bi-filetype-pdf icons"></i>Télécharger la facture</button>
+                                            @if ($reste==0)
+                                                     <button type="button" onclick="telecharger(this)"
+                                                     class="btn btn-outline-danger alpa shadow"><i
+                                                     class="bi bi-filetype-pdf icons"></i>Télécharger la facture</button>
+                                            @endif
                                         </form>
 
                                     </div>
@@ -273,7 +247,9 @@
                     </div>
                 </div>
 
-
+                <form action="" id="form2" method="GET">
+                    @csrf
+                </form>
 
 
 
@@ -290,7 +266,7 @@
                 if (form) {
 
                     Swal.fire({
-                        title: "Êtes-vous sûr(e) de vouloir télécharger la fiche d'inscription de stagiaire ?",
+                        title: "Êtes-vous sûr(e) de vouloir télécharger la facture de paiement totale ?",
                         text: name,
                         icon: "question",
                         showCancelButton: true,
@@ -316,7 +292,10 @@
             function versement(button) {
 
                 // const form1 = document.getElementById('add-form');
-                const form1 = button.closest('.add-form');
+                // const form1 = button.closest('.add-form');
+
+                const form1 = document.getElementsByClassName('add-form')[0];
+                const form2 = document.getElementById('form2');
 
                 var etudiantID = button.parentElement.dataset.etudiant;
 
@@ -357,8 +336,14 @@
                             icon: "success",
                             timer: 5000, // Time in milliseconds
                             showConfirmButton: false
-                        });
-                    }
+                         });
+                                         // Redirect to another page after 1 second 
+                            setTimeout(function() {
+                            form2.action = "/admin/paiement/" + etudiantID + "/voir";
+                            
+                            form2.submit();
+                             }, 5000);
+                        }
 
                     }
                 }).catch(error => {
@@ -369,7 +354,48 @@
             }
         </script>
 
+<script>
+    function frais_examen(button) {
+        // Récupérer l'ID de l'étudiant
+        var etudiantId = '{{ $etudiant->id }}';
+        //envoyer vers valider paiement
+        const form = document.getElementsByClassName('examen-valider')[0];
+        const form2 = document.getElementById('form2');
 
+        if (form) {
+            Swal.fire({
+                title: "Paiement des frais d'examen d'état",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonColor: "#198754",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Non",
+                confirmButtonText: "Oui, Valider"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.action = "/admin/paiement/" + etudiantId + "/btn_ex";
+                    form.submit();
+
+                    Swal.fire({
+                        title: "Paiement éffectué",
+                        text: "Votre paiement a été effectué avec succès",
+                        icon: "success",
+                        timer: 5000, // Time in milliseconds
+                        showConfirmButton: false
+                    });
+
+                    // Redirect to another page after 1 second 
+                    setTimeout(function() {
+                        form2.action = "/admin/paiement/" + etudiantId + "/voir";
+                        form2.submit();
+                    }, 5000);
+                }
+            });
+        } else {
+            console.error("Le formulaire n'a pas été trouvé.");
+        }
+    }
+</script>
 
 
 

@@ -212,11 +212,11 @@ class InscriptionController extends Controller
 
         // modification de la table inscriptions 
         $inscription->validation = (true);
+        $inscription->save();
 
 
 // ajouter l'etudiant sur la table etudiant et  save 
         
-        $inscription->save();
 
         $id_paiement = $request->input('tarif');
 
@@ -238,6 +238,9 @@ class InscriptionController extends Controller
         $etudiant->profession = $request->input('profession');
         $etudiant->session_id = $request->input('session');
 
+        // ---------------------ajouter id inscription a la table etudiant
+        $etudiant->id_inscription = $inscription->id;
+        // ---------------
         $etudiant->id_tarif = $request->input('tarif');
         $etudiant->tarif = $tarif;
         $etudiant->prix_formation = $prix;

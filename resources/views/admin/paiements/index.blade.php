@@ -22,14 +22,22 @@
 
     <script>
         $(document).ready(function() {
-            $('#example').DataTable({
+            $('#example thead th').eq(3).attr('width', '30%');
+ 
+            new DataTable('#example', {
+                
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '400px',
+
                 processing: true,
+
                 dom: '<"buttons-container"lBfrtip>', // Custom button container
                 lengthMenu: [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ], // Specify the options
-             
+              
             
                 initComplete: function() {
                     // Ajouter des styles personnalisés
@@ -39,6 +47,7 @@
             });
         });
     </script>
+
 
     {{-- CSS  --}}
 
@@ -65,7 +74,7 @@
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     <div class="card-body">
-                        <table id="example" class="table table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered display " style="width:100%">
                             <thead>
                                 <tr>
                                     {{-- <th >ID</th> --}}
