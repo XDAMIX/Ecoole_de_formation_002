@@ -31,10 +31,10 @@ class TypePsController extends Controller
 
         $nvtype->titre = $request->input('titre');
         
-        $titre = $request->input('titre');
-
+        
         $nvtype->save();
         
+        $titre = $request->input('titre');
         Alert::success($titre, 'a bien été enregistré');
         return redirect('/admin/types_p');
     }

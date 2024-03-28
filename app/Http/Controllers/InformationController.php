@@ -103,6 +103,10 @@ class InformationController extends Controller
 
     }
 
+
+
+  
+
     public function destroy() {
 
     }

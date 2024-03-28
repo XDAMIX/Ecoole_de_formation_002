@@ -214,11 +214,14 @@
 
             <div class="col-12">
                 <h3 class="titre"> Dossier a fournir </h3>
-                <p>-Copie de la pièce d'identité</p>
+                @foreach ($dossiers as $dossier)
+                <p>-{{ $dossier->titre }}</p>
+                @endforeach
+                {{-- <p>-Copie de la pièce d'identité</p>
                 <p>-Extrait de naissance</p>
                 <p>-Fiche de résidence</p>
                 <p>-(02) photos</p>
-                <p>-CV</p>
+                <p>-CV</p> --}}
             </div>
         </div>
 

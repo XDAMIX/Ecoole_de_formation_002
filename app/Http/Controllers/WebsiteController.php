@@ -18,6 +18,7 @@ use App\Models\Question;
 use App\Http\Requests\InscriptionRequest;
 use App\Http\Requests\MessageRequest;
 use App\Models\Etudiant;
+use App\Models\Dossier;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
 use Illuminate\Support\Facades\Response;
@@ -168,7 +169,7 @@ class WebsiteController extends Controller
 
         $informations = Information::all()->first();
         $telephones = Telephone::all();
-        
+        $dossiers = Dossier::all();
         $id_formation = $inscription->formation_id;
         $formation = Formation::find($id_formation);
 
@@ -187,6 +188,7 @@ class WebsiteController extends Controller
             'informations' => $informations,
             'telephones' => $telephones,
             'date' => $date,
+            'dossiers' => $dossiers,
             // ... Autres données ...
         ];
 

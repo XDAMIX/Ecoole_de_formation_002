@@ -22,6 +22,7 @@ use App\Http\Controllers\ProfController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TypePsController;
 use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\DossierController;
 use App\Http\Controllers\ValideController;
 
 
@@ -279,6 +280,7 @@ Route::controller(TypePsController::class)->group(function () {
     Route::put('/admin/types_p/{id}/update', 'update');
     Route::delete('/admin/types_p/{id}/delete', 'destroy');
 });
+
 // --------------------------------------------------------------------------
 // ---------                Route pour  paiement       ----------
 // --------------------------------------------------------------------------
@@ -287,12 +289,19 @@ Route::controller(PaiementController::class)->group(function () {
     Route::get('/admin/paiement/{id}/voir', 'show');
     Route::post('/admin/paiement/save/{id_etudiant}/{id_user}/{montant}', 'versement');
     Route::get('/admin/paiement/{id}/download', 'facture');
-    
-    
-    // Route::get('/admin/types_p/nouveau', 'create');
-    // Route::post('/admin/types_p/save', 'store');
-    // Route::put('/admin/types_p/{id}/update', 'update');
-    // Route::delete('/admin/types_p/{id}/delete', 'destroy');
+
+});
+
+// --------------------------------------------------------------------------
+// ---------                Route pour Dossier        ----------
+// --------------------------------------------------------------------------
+Route::controller(DossierController::class)->group(function () {
+    Route::get('/admin/dossier', 'index');
+    Route::get('/admin/dossier/nouveau', 'create');
+    Route::post('/admin/dossier/save', 'store');
+    Route::get('/admin/dossier/{id}/edit', 'edit');
+    Route::put('/admin/dossier/{id}/update', 'update');
+    Route::delete('/admin/dossier/{id}/delete', 'destroy');
 });
 
 

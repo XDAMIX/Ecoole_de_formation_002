@@ -108,7 +108,7 @@
                                     // Création du graphique
                                     var ctx = document.getElementById('graphiqueTotalPaiementsJour').getContext('2d');
                                     var graphique = new Chart(ctx, {
-                                        type: 'bar',
+                                        type: 'line',
                                         data: {
                                             labels: dates, // Dates sur l'axe des abscisses
                                             datasets: [{
