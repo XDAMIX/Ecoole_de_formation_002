@@ -337,6 +337,8 @@ class EtudiantController extends Controller
         $totalMoi = Paiement::whereMonth('date_paiement', Carbon::now()->month)->sum('montant');
         $totalAnnee = Paiement::whereYear('date_paiement', $annee)->sum('montant');
 
+
+        
         $paiements = Paiement::leftJoin('users', function ($join_users) {
             $join_users->on('paiements.user_id', '=', 'users.id');
         })
@@ -344,14 +346,37 @@ class EtudiantController extends Controller
                 'paiements.*', 'users.name as user', 'paiements.date_paiement as date', 'paiements.montant as montant',
             ]);
 
+
+
         $paiements_par_jour = Paiement::selectRaw('date_paiement, SUM(montant) as total_paiements')
             ->groupBy('date_paiement')
             ->get();
+
+
+
+
+        $paiements_par_formation = Paiement::leftJoin('etudiants', function ($join_etudiants) {
+            $join_etudiants->on('paiements.etudiant_id', '=', 'etudiants.id');
+        })
+        ->leftJoin('sessions', function ($join_sessions) {
+            $join_sessions->on('etudiants.session_id', '=', 'sessions.id');
+        })
+        ->leftJoin('formations', function ($join_formations) {
+            $join_formations->on('sessions.formation_id', '=', 'formations.id');
+        })
+
+        ->selectRaw(' SUM(montant) as total_paiements , formations.titre')
+            ->groupBy('formations.titre')
+            ->get();
+
+
+
 
         return view('admin/caisse/caisse', [
             'totalJour' => $totalJour, 'totalMoi' => $totalMoi, 'totalAnnee' => $totalAnnee
             , 'paiements' => $paiements
             , 'paiements_par_jour' => $paiements_par_jour
+            , 'paiements_par_formation' => $paiements_par_formation
         ]);
     }
 }
