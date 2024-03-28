@@ -122,7 +122,7 @@ public function versement($id_etudiant,$id_user,$montant){
     $date = date('d/m/20y');
     $etudiants = Etudiant::find($id_etudiant);
 
-    $etudiant = $id_etudiant;
+   
     $session_id = $etudiants->session_id;
     $session = Session::find($session_id);
     $formation_id = $session->formation_id;
@@ -130,7 +130,7 @@ public function versement($id_etudiant,$id_user,$montant){
 
     $nom = $etudiants->nom;
     $prenom = $etudiants->prenom;
-    $id = $id_etudiant;
+
     $code = $etudiants->code;
     $formation = $formation->titre;
     $session = $session->nom;
