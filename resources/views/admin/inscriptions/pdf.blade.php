@@ -1,7 +1,4 @@
-{{-- @php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-@endphp --}}
+{{-- PRE-INSCRIPTION  --}}
 
 
 <!DOCTYPE html>
@@ -46,12 +43,19 @@ ini_set('display_errors', 1);
             display: inline-block;
             /* font-size: 1rem; */
         }
-
+        html{
+            height: 297mm;
+            width: 210mm;
+            padding: 0;
+            margin: 0;
+        }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #ffff;
             color: black;
             height: 100vh;
+            width: 100vw;
+            padding: 30px;
         }
 
         p {
@@ -104,14 +108,14 @@ ini_set('display_errors', 1);
 
         .icones {
             height: 12px;
-            margin-bottom: -5;
+            /* margin-bottom: -5; */
             justify-content: center;
             margin-right: 5px;
         }
 
         .icones-lg {
             height: 10px;
-            margin-bottom: -5;
+            /* margin-bottom: -5; */
             justify-content: center;
             margin-right: 5px;
         }
@@ -125,18 +129,25 @@ ini_set('display_errors', 1);
     <div class="container-fluid" id="entete">
         {{-- logo et nom de ecole  --}}
         <div class="row justify-content-center text-center">
-            <div class="col-12">
+
+            <div class="col-3">
                 {{-- <img class="img-fluid" src="{{public_path('storage/'.$informations->logo)}}" alt="logo" style="height: 100px;"> --}}
-                <img class="img-fluid" src="{{ public_path('storage/' . $informations->logo) }}" alt="logo"
+                <img class="img-fluid" src="{{ public_path('storage/' . $informations->logo_couleurs) }}" alt="logo"
                     style="height: 100px;">
 
             </div>
-            <div class="col-12">
-                <h1 style="font-weight: bold;padding-top:10px;">{{ $informations->nom }}</h1>
+            
+            <div class="col-9" style="float: right;margin-top:-150px;margin-right:80px;text-align:center;">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 style="font-weight: bold;padding-top:10px;">{{ $informations->nom }}</h1>
+                    </div>
+                    <div class="col-12">
+                        <h3>Accusé de réception de votre inscription en ligne</h3>
+                    </div>
+                </div>
             </div>
-            <div class="col-12">
-                <h3>Accusé de réception de votre inscription en ligne</h3>
-            </div>
+
         </div>
     </div>
 
@@ -164,19 +175,19 @@ ini_set('display_errors', 1);
                         </div>
 
                         <div class="col-6">
-                            <p>Wilaya :{{ $wilaya }} </p>
+                            <p>Wilaya : {{ $wilaya }} </p>
                         </div>
 
                         {{-- --------------------------------------  --}}
 
                         <div class="col-12">
-                            <p>Profession :{{ $profession }} </p>
+                            <p>Profession / Niveau d'études  : {{ $profession }} </p>
                         </div>
 
                         {{-- --------------------------------------  --}}
 
                         <div class="col-6">
-                            <p>N° Tel: {{ $tel }} </p>
+                            <p>N° Tel : {{ $tel }} </p>
                         </div>
 
                         <div class="col-6">
@@ -234,9 +245,8 @@ ini_set('display_errors', 1);
 
                         <span> <img src="{{ public_path('icones/email.png') }}" class="img-fluid icones-lg"
                                 alt="..."> Email : {{ $informations->email }} | </span> <img
-                            src="{{ public_path('icones/globe.png') }}" class="img-fluid icones-lg" alt="...">
-                        Site
-                        web : www.formacorpro.com </span>
+                            src="{{ public_path('icones/globe.png') }}" class="img-fluid icones-lg" alt="..."> Site
+                        web : {{ $informations->site_web }} </span>
 
                     </p>
                     <p class="contact">
