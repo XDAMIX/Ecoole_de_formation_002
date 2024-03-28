@@ -113,7 +113,7 @@
                                 </div>
 
 
-                                <div class="col-md-8 form-group" id="wilaya">
+                                <div class="col-md-4 form-group" id="wilaya">
                                     <label for="">Wilaya de résidence :</label>
 
                                     <select class="form-control" name="wilaya">
@@ -185,15 +185,8 @@
 
                                 </div>
 
-                            </div>
-
-
-                            {{-- ,profession --}}
-                            {{-- -------------------------------------------------------------------------- --}}
-                            <div class="row espace-inputs">
-
-                                <div class="col-md-12 form-group" id="profession">
-                                    <label for="">Votre profession :</label>
+                                <div class="col-md-4 form-group" id="profession">
+                                    <label for="">Votre profession / Niveau d'études :</label>
 
                                     <input type="text" name="profession"
                                         class="form-control @if ($errors->get('profession')) is-invalid @endif"
@@ -209,6 +202,8 @@
                                 </div>
 
                             </div>
+
+
 
 
 

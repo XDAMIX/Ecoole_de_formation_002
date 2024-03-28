@@ -96,7 +96,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <h6>Proféssion :</h6>
+                                <h6>Proféssion / Niveau d'études :</h6>
                                 <p>{{ $inscription->profession }}</p>
 
                             </div>

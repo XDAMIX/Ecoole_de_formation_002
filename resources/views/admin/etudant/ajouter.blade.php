@@ -234,7 +234,7 @@
                                                 </div>
 
                                                 <div class="col-12 form-group" id="tel">
-                                                    <label for="">Proféssion :</label>
+                                                    <label for="">Proféssion / Niveau d'études :</label>
 
                                                     <input type="text" name="profession"
                                                         class="form-control @if ($errors->get('profession')) is-invalid @endif"

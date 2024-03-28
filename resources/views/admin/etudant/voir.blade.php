@@ -88,7 +88,7 @@
 
 
                                             <div class="col-md-4">
-                                                <h6>Profession :</h6>
+                                                <h6>Profession / Niveau d'études :</h6>
                                                 <p>{{ $etudiant->profession }}</p>
 
                                             </div>
