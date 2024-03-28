@@ -657,6 +657,7 @@ class ComposerStaticInitda57ae409123d235317f6ea01c50f106
         'App\\Models\\Inscription' => __DIR__ . '/../..' . '/app/Models/Inscription.php',
         'App\\Models\\Lien' => __DIR__ . '/../..' . '/app/Models/Lien.php',
         'App\\Models\\Message' => __DIR__ . '/../..' . '/app/Models/Message.php',
+        'App\\Models\\Paiement' => __DIR__ . '/../..' . '/app/Models/Paiement.php',
         'App\\Models\\Paragraphe' => __DIR__ . '/../..' . '/app/Models/Paragraphe.php',
         'App\\Models\\Photo' => __DIR__ . '/../..' . '/app/Models/Photo.php',
         'App\\Models\\Prof' => __DIR__ . '/../..' . '/app/Models/Prof.php',

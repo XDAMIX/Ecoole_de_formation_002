@@ -71,6 +71,7 @@ return array(
     'App\\Models\\Inscription' => $baseDir . '/app/Models/Inscription.php',
     'App\\Models\\Lien' => $baseDir . '/app/Models/Lien.php',
     'App\\Models\\Message' => $baseDir . '/app/Models/Message.php',
+    'App\\Models\\Paiement' => $baseDir . '/app/Models/Paiement.php',
     'App\\Models\\Paragraphe' => $baseDir . '/app/Models/Paragraphe.php',
     'App\\Models\\Photo' => $baseDir . '/app/Models/Photo.php',
     'App\\Models\\Prof' => $baseDir . '/app/Models/Prof.php',

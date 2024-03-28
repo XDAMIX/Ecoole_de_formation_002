@@ -42,7 +42,10 @@
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
 
-
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
 
 
@@ -654,6 +657,7 @@
 
 
 
+        
 
 
         {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
@@ -665,7 +669,6 @@
   <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script>
   <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}" rel="stylesheet"></script>
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}" rel="stylesheet"></script>
-
 
 
 

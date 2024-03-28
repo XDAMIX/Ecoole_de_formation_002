@@ -22,7 +22,14 @@
 
     <script>
         $(document).ready(function() {
-            $('#example').DataTable({
+            $('#example thead th').eq(3).attr('width', '30%');
+ 
+            new DataTable('#example', {
+                
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '400px',
+
                 processing: true,
                 // dom: '<"buttons-container"lBfrtip>', 
                 lengthMenu: [

@@ -443,7 +443,9 @@
 
                         </form>
                         {{-- form de redirection --}}
-                        <form class="redirect-form" action="{{ url('/admin/inscriptions') }}" method="GET"></form>
+
+                        
+                        <form class="redirect-form" action="{{ url('/admin/paiement/'. $inscription->id .'/voir') }}" method="GET"></form>
                     </div>
                 </div>
 
