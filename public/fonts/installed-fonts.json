@@ -3,8 +3,16 @@
         "normal": "great_vibes_normal_1e93dc078852ebde2feecede36ac4c57"
     },
     "poppins": {
-        "normal": "C:\\xampp\\htdocs\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_normal_442dffd12abdf0df26c14405d3f49bfa",
-        "bold": "poppins_bold_2d1c4b360c3ac297e98fc2cfd808a2cc"
+        "normal": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_normal_76df55b5114b1626b7db1a4cd816c320",
+        "bold": "poppins_bold_cc53e8e8659afa950c49e4494cbb2708",
+        "300_italic": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_300_italic_46499ec162ba8af0ad28f576e0382331",
+        "italic": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_italic_46f7bdbdf77aa49af27cab32f47b02b2",
+        "500_italic": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_500_italic_83f345f757b30738ee99ef9b96589d38",
+        "600_italic": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_600_italic_f6e14eb28f6569b01d97dd391cd1ff56",
+        "bold_italic": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_bold_italic_63009d4c1527e2ff6a6ee5e7d6d2e03e",
+        "300": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_300_56a45aadd6f4717d0b29e006a9a82359",
+        "500": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_500_90dcab88268cf6d3f77b33841917903c",
+        "600": "C:\\xampp\\htdocs\\EF_new\\new new\\ecole_formation\\Ecoole_de_formation_002\\public\\fonts\/\/poppins_600_ab2317e82e93420e320bf10d17d6c75b"
     },
     "poppins_bold": {
         "bold": "poppins_bold_bold_af1cdccafb6f41808fa6a65c223d32ac"

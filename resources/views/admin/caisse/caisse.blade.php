@@ -101,6 +101,9 @@
                                     // Création du graphique
                                     var ctx = document.getElementById('graphiqueTotalPaiements').getContext('2d');
                                     var graphique = new Chart(ctx, {
+                                        // type: 'scatter',
+                                        // type: 'polarArea',
+                                        // type: 'bar',
                                         type: 'line',
                                         data: {
                                             labels: dates, // Dates sur l'axe des abscisses
