@@ -218,7 +218,7 @@
 <div class="row espace-inputs"> 
 
   <div class="col-md-12 form-group" id="profession">
-    <label for="">Votre profession :</label>
+    <label for="">Votre profession / Niveau d'études :</label>
 
     <input type="text" name="profession" class="form-control @if($errors->get('profession')) is-invalid @endif" id="validationServer04" placeholder="Veuillez saisir votre profession ici">
     <div id="validationServer04Feedback" class="invalid-feedback">
