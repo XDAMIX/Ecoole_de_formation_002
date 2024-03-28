@@ -707,6 +707,11 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 processing: true,
+                // scroller
+                scrollCollapse: true,
+                scroller: true,
+                scrollY: 400 ,
+                // ----------
                 // dom: '<"buttons-container"lBfrtip>', 
                 lengthMenu: [
                     [10, 25, 50, -1],
