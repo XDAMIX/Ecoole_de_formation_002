@@ -197,6 +197,12 @@
             const date_fin = document.querySelector('#date-fin');
             const table = $('#example').DataTable({
                 processing: true,
+
+                                // scroller
+                                scrollCollapse: true,
+                                scroller: true,
+                                scrollY: 400 ,
+                                // ----------
                 // dom: '<"buttons-container"lBfrtip>', 
                 lengthMenu: [
                     [10, 25, 50, -1],
