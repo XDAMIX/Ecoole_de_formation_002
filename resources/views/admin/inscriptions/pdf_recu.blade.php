@@ -1,7 +1,4 @@
-{{-- @php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-@endphp --}}
+{{-- VALIDATION STAGIAIRE  --}}
 
 
 <!DOCTYPE html>
@@ -15,8 +12,6 @@ ini_set('display_errors', 1);
     <!-- Favicons -->
     <link href="{{ public_path('school-icon.ico') }}" rel="icon" type="image/x-icon">
 
-    <!-- Google Fonts -->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> --}}
 
 
 
@@ -53,18 +48,24 @@ ini_set('display_errors', 1);
     <div class="container-fluid" id="entete">
         {{-- logo et nom de ecole  --}}
         <div class="row justify-content-center text-center">
-            <div class="col-12">
-                {{-- <img class="img-fluid" src="{{public_path('storage/'.$informations->logo)}}" alt="logo" style="height: 100px;"> --}}
-                <img class="img-fluid" src="{{ public_path('storage/' . $informations->logo) }}" alt="logo"
-                    style="height: 100px;">
 
+            <div class="col-3">
+                {{-- <img class="img-fluid" src="{{public_path('storage/'.$informations->logo)}}" alt="logo" style="height: 100px;"> --}}
+                <img class="img-fluid" src="{{ public_path('storage/' . $informations->logo_couleurs) }}" alt="logo"
+                    style="height: 100px;">
             </div>
-            <div class="col-12">
-                <h1 style="font-weight: bold;padding-top:10px;">{{ $informations->nom }}</h1>
+
+            <div class="col-9" style="float: right;margin-top:-150px;margin-right:160px;text-align:center;">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 style="font-weight: bold;padding-top:10px;">{{ $informations->nom }}</h1>
+                    </div>
+                    <div class="col-12">
+                        <h3>Fiche d'inscription de stagiaire</h3>
+                    </div>
+                </div>
             </div>
-            <div class="col-12">
-                <h3>Fiche d'inscription de stagiaire</h3>
-            </div>
+
         </div>
     </div>
 
@@ -98,19 +99,19 @@ ini_set('display_errors', 1);
                         </div>
 
                         <div class="col-6">
-                            <p>Wilaya :{{ $wilaya }} </p>
+                            <p>Wilaya : {{ $wilaya }} </p>
                         </div>
                         
                         {{-- --------------------------------------  --}}
                         
                         <div class="col-12">
-                            <p>Profession :{{ $profession }} </p>
+                            <p>Profession / Niveau d'études : {{ $profession }} </p>
                         </div>
                         
                         {{-- --------------------------------------  --}}
                         
                         <div class="col-6">
-                            <p>N° Tel: {{ $tel }} </p>
+                            <p>N° Tel : {{ $tel }} </p>
                         </div>
 
                         <div class="col-6">
@@ -121,9 +122,9 @@ ini_set('display_errors', 1);
 
                 <h3 class="titre text-light bg-dark"> Formation :</h3>
                         <div class="col-6">
-                            <p
+                            <p >Formation : <span
                             style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;">{{ $formation }}
-                        </p>
+                        </span></p>
                         </div>
                         {{-- --------------------------------------  --}}
 
@@ -134,11 +135,11 @@ ini_set('display_errors', 1);
                         </div>
                         {{-- --------------------------------------  --}}
 
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <p>Montant payé : <span
                                     style="font-family: 'Poppins-Bold',sans-serif; text-transform: uppercase;">{{ $montant }} DA
                                 </span></p>
-                        </div>
+                        </div> --}}
 
                         <div class="col-6">
                             <p>Date d'inscription : {{ $date }}</p>
@@ -222,26 +223,28 @@ ini_set('display_errors', 1);
             font-style: bold;
         }
 
-        /* @font-face {
-    font-family: 'bootstrap-icons';
-    src: url('/fonts/bootstrap-icons/bootstrap-icons.woff') format('woff'),
-         url('/fonts/bootstrap-icons/bootstrap-icons.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-} */
 
         .bi {
             font-family: 'bootstrap-icons', sans-serif;
-            display: inline-block;
+            /* display: inline-block; */
             /* font-size: 1rem; */
+            margin-bottom: 10px;
         }
 
+        html{
+            height: 297mm;
+            width: 210mm;
+            padding: 0;
+            margin: 0;
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #ffff;
             color: black;
             height: 100vh;
             width: 100vw;
+            padding: 30px;
         }
 
         p {
@@ -295,13 +298,13 @@ ini_set('display_errors', 1);
 
         .icones {
             height: 12px;
-            margin-bottom: -5;
+            /* margin-bottom: -5; */
             justify-content: center;
             margin-right: 5px;
         }
         .icones-lg {
             height: 10px;
-            margin-bottom: -5;
+            /* margin-bottom: -5; */
             justify-content: center;
             margin-right: 5px;
         }
@@ -310,7 +313,7 @@ ini_set('display_errors', 1);
             right: 0;
             height: 150px;
             margin-right: 20px;
-            margin-top: -50px;
+            margin-top: -60px;
         }
     </style>
 

@@ -12,54 +12,288 @@
             </div>
         </div>
     </div>
-{{-- ---------------------------------------------------------------------------------------------------------------------- --}}
 
-<div class="container bg-white animate__animated animate__backInLeft" style="padding: 50px;margin-top:10px;">
 
-<hr>
+    {{-- ---------------------------------------------------------------------------------------------------------------------- --}}
+    <style>
+        .buttons-container {
+            text-align: left;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgb(255, 255, 255);
+        }
 
-    <div class="row">
+        #titre-page {
+            margin-bottom: 20px;
+        }
+    </style>
+    {{-- ---------------------------------------------------------------------------------------------------------------------- --}}
 
-        <div class="col-6">
-            <h1>Aujourd'huit : {{ \Carbon\Carbon::now()->toDateString() }}</h1>
-        </div>
-        <div class="col-6 justify-content-center text-center">
-            <h1 style="color: green" id="jour">{{ $totalJour }} DA</h1>
+    {{-- html  --}}
+    <div class="container-fluid" style="padding-top:10px;padding-bottom:80px;">
+        <div class="row animate__animated animate__backInLeft">
+            <div class="col-md-12">
+                <div class="card shadow" style="background-color: #ffff;">
+                    <div class="card-body">
+
+
+                        <div class="row mt-1 mb-5">
+                            <div class="col-12 text-primary">
+                                <h5>Résumé des paiements :</h5>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <h6>Aujourd'huit : {{ \Carbon\Carbon::now()->toDateString() }}</h6>
+                            </div>
+                            <div class="col-6 justify-content-center text-center">
+                                <h6 style="color: green" id="jour">{{ $totalJour }} DA</h1>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <h6>En ce mois-ci : {{ \Carbon\Carbon::now()->format('F') }}</h6>
+                            </div>
+                            <div class="col-6 justify-content-center text-center">
+                                <h6 style="color: green" id="moi">{{ $totalMoi }} DA</h6>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <h6>Cette année : <span>{{ \Carbon\Carbon::now()->format('Y') }}</span></h6>
+
+                            </div>
+                            <div class="col-6 justify-content-center text-center">
+                                <h6 style="color: green" id="annee">{{ $totalAnnee }} DA</h6>
+                            </div>
+                        </div>
+
+                        <hr>
+                        {{-- ---------------------------------------------------------------------------------------------------------------------- --}}
+                        <div class="row mt-5 mb-5">
+                            <div class="col-12 text-primary">
+                                <h5>Graphe des paiements par jour:</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+
+                                <canvas id="graphiqueTotalPaiements" width="400" height="200"></canvas>
+
+                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                <script>
+                                    // Extraction des données de $paiements_par_jour
+                                    var dates = [];
+                                    var totalPaiements = [];
+                                    <?php foreach ($paiements_par_jour as $paiement) { ?>
+                                    dates.push('<?php echo $paiement->date_paiement; ?>');
+                                    totalPaiements.push(<?php echo $paiement->total_paiements; ?>);
+                                    <?php } ?>
+
+                                    // Création du graphique
+                                    var ctx = document.getElementById('graphiqueTotalPaiements').getContext('2d');
+                                    var graphique = new Chart(ctx, {
+                                        type: 'line',
+                                        data: {
+                                            labels: dates, // Dates sur l'axe des abscisses
+                                            datasets: [{
+                                                label: 'Total des paiements par jour',
+                                                data: totalPaiements, // Données de total des paiements sur l'axe des ordonnées
+                                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                                borderColor: 'rgba(54, 162, 235, 1)',
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        }
+                                    });
+                                </script>
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="row mt-5 mb-5">
+                            <div class="col-12 text-primary">
+                                <h5>Liste des paiements :</h5>
+                            </div>
+                            <div class="col-12">
+                                <div class="row justify-content-center text-center p-3">
+                                    <div class="col-12">
+                                        <h5>Filtrage des paiements des stagiaires :</h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="date-debut">Depuis le :</label>
+                                        <input id="date-debut" type="date" class="form-control form-control-lg">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="date-fin">Jusqu'au :</label>
+                                        <input id="date-fin" type="date" class="form-control form-control-lg">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center text-center p-3">
+                                    <h5>Total des paiements filtrer = <span id="resultat" style="color: green;"></span>
+                                    </h5>
+                                </div>
+                                <div class="row p-3">
+                                    <div class="col-12">
+                                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">Date</th>
+                                                    <th class="text-center">Encaissé par</th>
+                                                    <th class="text-center">Montant</th>
+                                                    {{-- <th>Actions</th> --}}
+                                            </thead>
+
+                                            <tbody class="text-center">
+                                                @foreach ($paiements as $paiement)
+                                                    <tr>
+
+                                                        <td class="align-middle">{{ $paiement->date }}</td>
+                                                        <td class="align-middle">{{ $paiement->user }}</td>
+                                                        <td class="align-middle">{{ $paiement->montant }} DA</td>
+
+                                                    </tr>
+                                                @endforeach
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-<hr>
-
-    <div class="row">
-        <div class="col-6">
-            <h1>En ce mois-ci : {{ \Carbon\Carbon::now()->format('F') }}</h1>
-        </div>
-        <div class="col-6 justify-content-center text-center">
-            <h1 style="color: green" id="moi">{{ $totalMoi }} DA</h1>
-        </div>
-    </div>
-
-<hr>
-
-    <div class="row">
-        <div class="col-6">
-            <h1>Cette année : <span>{{ \Carbon\Carbon::now()->format('Y') }}</span></h1>
-            
-        </div>
-        <div class="col-6 justify-content-center text-center">
-            <h1 style="color: green" id="annee">{{ $totalAnnee }} DA</h1>
-        </div>
-    </div>
-
-<hr>
-    
 
 
-</div>
+    <script>
+        $(document).ready(function() {
+            const date_debut = document.querySelector('#date-debut');
+            const date_fin = document.querySelector('#date-fin');
+            const table = $('#example').DataTable({
+                processing: true,
+                // dom: '<"buttons-container"lBfrtip>', 
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ], // Specify the options
+                buttons: [],
+                language: {
+                    "lengthMenu": "Afficher _MENU_ éléments par page",
+                    "zeroRecords": "Aucun enregistrement trouvé",
+                    "info": "Page _PAGE_ sur _PAGES_",
+                    "infoEmpty": "Aucun enregistrement disponible",
+                    "infoFiltered": "(filtré de _MAX_ total des enregistrements)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                },
+                initComplete: function() {
+                    // Ajouter des styles personnalisés
+                    $('.dataTables_length select').css('width',
+                        '60px'); // ajustez la largeur selon vos besoins
+                },
+            });
+
+            // Fonction pour convertir une chaîne de texte en objet Date
+            function parseDate(input) {
+                var parts = input.split('-');
+                // Note : les mois sont 0-indexés
+                return new Date(parts[0], parts[1] - 1, parts[2]);
+            }
+
+            // Fonction pour calculer le total des montants dans le tableau
+            function calculerTotalMontant() {
+                var total = 0;
+                table.rows({
+                    search: 'applied'
+                }).every(function() {
+                    var data = this.data();
+                    // Extraction du montant de la troisième colonne (index 2)
+                    var montant = parseFloat(data[2].replace(' DA', '').replace(',', ''));
+                    total += montant;
+                });
+                return total.toFixed(2); // Renvoyer le total avec deux décimales
+            }
+
+            // Fonction pour mettre à jour le total affiché
+            function mettreAJourTotal() {
+                var total = calculerTotalMontant();
+                $('#resultat').text(total + ' DA').css('color', 'green');
+            }
+
+            // Calculer et mettre à jour le total lors du chargement initial de la page
+            mettreAJourTotal();
+
+            // Définition de la fonction de filtrage personnalisée
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    var date_debut_value = parseDate(date_debut.value);
+                    var date_fin_value = parseDate(date_fin.value);
+                    var date_paiement = parseDate(data[0]) || 0;
+
+                    if (
+                        (isNaN(date_debut_value) && isNaN(date_fin_value)) ||
+                        (isNaN(date_debut_value) && date_paiement <= date_fin_value) ||
+                        (date_fin_value <= date_paiement && isNaN(date_fin_value)) ||
+                        (date_debut_value <= date_paiement && date_paiement <= date_fin_value)
+                    ) {
+                        return true;
+                    }
+
+                    return false;
+                }
+            );
+
+            // Écouteurs d'événements pour redessiner le tableau lors de la modification des dates
+            date_debut.addEventListener('input', function() {
+                table.draw();
+                mettreAJourTotal();
+            });
+
+            date_fin.addEventListener('input', function() {
+                table.draw();
+                mettreAJourTotal();
+            });
+
+            // Événement de redessin du tableau pour mettre à jour le total après le filtrage
+            table.on('draw', function() {
+                mettreAJourTotal();
+            });
+        });
+    </script>
 
 
 
-    
     {{-- footer  --}}
     <div class="container" id="pied-page">
     @endsection

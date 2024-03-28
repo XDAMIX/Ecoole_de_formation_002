@@ -31,23 +31,48 @@
                 scrollY: '400px',
 
                 processing: true,
-
-                dom: '<"buttons-container"lBfrtip>', // Custom button container
+                // dom: '<"buttons-container"lBfrtip>', 
                 lengthMenu: [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ], // Specify the options
-              
-            
+                buttons: [],
+                language: {
+                    "lengthMenu": "Afficher _MENU_ éléments par page",
+                    "zeroRecords": "Aucun enregistrement trouvé",
+                    "info": "Page _PAGE_ sur _PAGES_",
+                    "infoEmpty": "Aucun enregistrement disponible",
+                    "infoFiltered": "(filtré de _MAX_ total des enregistrements)",
+                    "search": "Rechercher :",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    }
+                },
                 initComplete: function() {
                     // Ajouter des styles personnalisés
                     $('.dataTables_length select').css('width',
                         '60px'); // ajustez la largeur selon vos besoins
-                }
+                },
             });
         });
     </script>
 
+
+    <style>
+        .buttons-container {
+            text-align: left;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #titre-page {
+            margin-bottom: 20px;
+        }
+    </style>
 
     {{-- CSS  --}}
 
@@ -74,7 +99,7 @@
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     <div class="card-body">
-                        <table id="example" class="table table-striped table-bordered display " style="width:100%">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     {{-- <th >ID</th> --}}

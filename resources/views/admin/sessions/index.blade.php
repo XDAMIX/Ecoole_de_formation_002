@@ -26,32 +26,12 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 processing: true,
-                dom: '<"buttons-container"lBfrtip>', // Custom button container
+                // dom: '<"buttons-container"lBfrtip>', 
                 lengthMenu: [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ], // Specify the options
-                buttons: [{
-                        extend: 'excel',
-                        text: '<i class="fas fa-file-excel"></i> Excel',
-                        className: 'btn btn-dark'
-                    },
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"></i> PDF',
-                        className: 'btn btn-dark'
-                    },
-                    {
-                        extend: 'print',
-                        text: '<i class="fas fa-print"></i> Imprimer',
-                        className: 'btn btn-dark'
-                    },
-                    {
-                        extend: 'colvis',
-                        text: '<i class="fas fa-columns"></i> Affichage des Colonnes',
-                        className: 'btn btn-dark'
-                    },
-                ],
+                buttons: [],
                 language: {
                     "lengthMenu": "Afficher _MENU_ éléments par page",
                     "zeroRecords": "Aucun enregistrement trouvé",
@@ -70,7 +50,7 @@
                     // Ajouter des styles personnalisés
                     $('.dataTables_length select').css('width',
                         '60px'); // ajustez la largeur selon vos besoins
-                }
+                },
             });
         });
     </script>
@@ -103,7 +83,7 @@
             <div class="col-md-12">
                 <div class="card shadow" style="background-color: #ffff;">
                     <div class="card-body">
-                        <table id="example" class="table table-bordered " style="width:100%">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     {{-- <th  scope="col">N°</th> --}}
