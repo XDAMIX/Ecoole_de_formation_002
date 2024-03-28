@@ -245,8 +245,8 @@
 
                                                 </div>
 
-                                                <div class="col-12 col-md-6 form-group" id="tel">
-                                                    <label for="">Proféssion :</label>
+                                                <div class="col-12 col-md-12 form-group" id="tel">
+                                                    <label for="">Proféssion / Niveau d'études :</label>
 
                                                     <input type="text" name="profession"
                                                         class="form-control @if ($errors->get('profession')) is-invalid @endif"
@@ -323,7 +323,7 @@
 
                                         <div class="col-12 col-md-4 droite photo">
                                             <label>Photo:</label>
-                                            <div id="imagePreview"
+                                            <div class="shadow" id="imagePreview"
                                                 style="background-image:url({{ asset('storage/' . $etudiant->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 290px; width: 250px; margin-left:20px; margin-right:20px;">
                                             </div>
                                         </div>
