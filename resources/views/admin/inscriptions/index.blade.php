@@ -5,6 +5,11 @@
                         <script>
                             $(document).ready(function() {
                             $('#example').DataTable( {
+                                                // scroller
+                                                scrollCollapse: true,
+                                                scroller: true,
+                                                scrollY: 400 ,
+                                                // ----------
                                 dom: 'Bfrtip',
                                 buttons: [
                                      'excel', 'pdf', 'print',

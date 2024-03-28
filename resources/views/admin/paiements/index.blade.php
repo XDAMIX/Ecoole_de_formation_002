@@ -27,9 +27,11 @@
             new DataTable('#example', {
                 
                 paging: false,
+                         // scroller
                 scrollCollapse: true,
-                scrollY: '400px',
-
+                scroller: true,
+                scrollY: 400 ,
+                // ----------
                 processing: true,
                 // dom: '<"buttons-container"lBfrtip>', 
                 lengthMenu: [
