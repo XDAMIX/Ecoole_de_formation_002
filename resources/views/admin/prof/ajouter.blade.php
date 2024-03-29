@@ -49,8 +49,7 @@
                             <div class="row espace-inputs">
 
                                 <div class="col-md-12">
-                                    <h5 style="text-align: center"><i class="bi bi-person-fill"></i> informations
-                                        personnelles</h5>
+                                    <h5 style="text-align: center"><i class="bi bi-person-fill"></i> informations personnelles</h5>
                                     <hr>
                                 </div>
 
@@ -350,8 +349,7 @@
                                 </div>
 
                                 <div class="col-12 col-md-8 justify-content-center" style="">
-                                    <label for="">Veuillez choisir les Formations prise en charge par ce
-                                        profésseur:</label>
+                                    <label for="">Veuillez choisir les Formations prise en charge par ce profésseur:</label>
 
                                     <div class="input-group mb-3">
 
@@ -366,14 +364,8 @@
 
                                         <button class="btn btn-outline-secondary alpa" type="button"
                                             onclick="btn_add_click()">
-                                            <i class="bi bi-plus"></i><span class="btn-description">Ajouter à la
-                                                liste</span>
+                                            <i class="bi bi-plus"></i><span class="btn-description">Ajouter à la liste</span>
                                         </button>
-
-
-
-
-
 
                                     </div>
 
