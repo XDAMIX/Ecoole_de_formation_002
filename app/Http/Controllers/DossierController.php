@@ -26,9 +26,22 @@ class DossierController extends Controller
         $titre = $request->input('titre');
 
         Alert::success($titre, 'a bien été enregistré');
-        return redirect('/admin/dossier');
+
+        return response()->json(['titre' => $titre]);
+        // return redirect('/admin/dossier');
 
     }
+
+    public function index_ajax(){
+        $dossiers = Dossier::all();
+        return response()->json(['dossiers' => $dossiers]);
+    }
+    
+    public function supp_ajax($id){
+        $dossier= Dossier::find($id);
+        $dossier->delete();
+    }
+
 
     public function edit($id)
     {
