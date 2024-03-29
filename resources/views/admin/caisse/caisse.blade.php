@@ -33,7 +33,7 @@
     <div class="container-fluid" style="padding-top:10px;padding-bottom:80px;">
         <div class="row animate__animated animate__backInLeft">
             <div class="col-md-12">
-                <div class="card shadow" style="background-color: #ffff;">
+                <div class="card shadow" style="background-color: #ffff;padding:30px;">
                     <div class="card-body">
 
 
@@ -86,7 +86,7 @@
                                 <h5>Graphe des paiements par jour:</h5>
                             </div>
                             <div class="col-12">
-                                <canvas id="graphiqueTotalPaiementsJour" width="400" height="200"></canvas>
+                                <canvas id="graphiqueTotalPaiementsJour" width="800" height="400"></canvas>
                             </div>
                         </div>
                         
@@ -137,7 +137,7 @@
                                 <h5>Graphe des paiements par formation:</h5>
                             </div>
                             <div class="col-12">
-                                <canvas id="graphiqueTotalPaiementsFormation" width="400" height="200"></canvas>
+                                <canvas id="graphiqueTotalPaiementsFormation" width="800" height="400"></canvas>
                             </div>
                         </div>
                         
@@ -184,7 +184,7 @@
                         
 
 
-// fin des graphe 
+
 
 
 
@@ -208,7 +208,7 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center text-center p-3">
-                                    <h5>Total des paiements filtrer = <span id="resultat" style="color: green;"></span>
+                                    <h5>Total des paiements filtrés = <span id="resultat" style="color: green;"></span>
                                     </h5>
                                 </div>
                                 <div class="row p-3">

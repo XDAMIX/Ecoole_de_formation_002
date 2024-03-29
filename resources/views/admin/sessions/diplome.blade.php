@@ -8,15 +8,7 @@
     <!-- Favicons -->
     <link href="{{ public_path('school-icon.ico') }}" rel="icon" type="image/x-icon">
 
-    <!-- Google Fonts -->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> --}}
 
-
-    <!-- Include Bootstrap from CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-
-    <!-- Include Bootstrap Icons from CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <title>CERTIFICAT DE FORMATION</title>
 
     {{-- fonts --}}
@@ -78,7 +70,7 @@
         }
 
         .logo {
-            height: 50px;
+            height: 70px;
         }
 
 
@@ -117,9 +109,9 @@
         }
 
         .part {
-            position: relative;
             margin: 0;
             padding: 0;
+            width: 100%;
         }
 
         .colonne {
@@ -131,6 +123,7 @@
             margin: 0;
             padding: 0;
         }
+
     </style>
 </head>
 
@@ -138,51 +131,44 @@
 
 
 
-    <div class="part part1" style="width:100%; margin-top:70px;height:130px;">
-        <div class="parent text-center" style="float:right; margin-right:60px;">
-
-            <div class="colonne">
-                <img class="img-fluid logo" src="{{ public_path('storage/' . $informations->logo) }}" alt="logo">
-            </div>
-            <div class="colonne">
-                <h3 class="blue">{{ $informations->nom }}</h3>
-            </div>
-
-        </div>
-    </div>
+    <div class="part part1" style="margin-top:80px;margin-left:250px;margin-right:250px;height:100px;">
 
 
-
-
-    <div class="part part2" style="">
-
-        <div class="parent text-center" style="width:100%;height: 50px;">
-            <div class="colonne centre" style="float:right; margin-right:70px;">
-                <p  class="blue">CODE : <span class="simple">{{ $code }}</span> </p>
-            </div>
+        <div class="colonne" style="height: 70px;float:left;">
+            <img class="img-fluid logo" src="{{ public_path('storage/' . $informations->logo_couleurs) }}"
+                alt="logo">
         </div>
 
-        <div class="colonne centre" style="height:50px;">
-            <p class="blue">C'EST AVEC UN GRAND HONNEUR QUE</p>
+        <div class="colonne" style="height: 70px;float:left;margin-top:-10px;text-align:center;">
+            <p class="blue" style="font-family:sans-serif;font-size:22px;font-weight: bold; text-transform: uppercase;padding:0;margin-top:7px;">{{ $informations->nom }}</p>
+            <p class="blue" style="padding:0;margin:0;">Établissement agréé par l'état </p>
+            <p class="blue" style="padding:0;margin:0;">Agrément N° : {{ $informations->num_agrement }} | date : {{ $informations->date_agrement }} </p>
         </div>
 
-        <div class="colonne centre" style="height:50px;margin-top:-20px;">
-            <p class="gold">NOUS REMETTONS CE CERTIFICAT À</p>
-        </div>
 
-        <div class="colonne centre"  style="height:80px;margin-top:-20px;">
-            <p class="handfont gold">{{ $sexe }} : {{ $nom }} {{ $prenom }}</p>
-        </div>
+
 
     </div>
 
 
 
 
+    <div class="part part2" style="margin-top:160px;">
 
-    <div class="part part3" style="margin-top:90px;">
         <div class="colonne centre">
-            <p class="blue">Né(e) le : {{ $date_naissance }}<span>  à :  </span>  {{ $lieu_naissance }}</p>
+            <p class="blue">CODE : {{ $code }} </p>
+            <p class="handfont gold" style="margin-top:-20px;">{{ $sexe }} : {{ $nom }} {{ $prenom }}</p>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="part part3">
+        <div class="colonne centre">
+            <p class="blue">Né(e) le : {{ $date_naissance }}<span> à : </span> {{ $lieu_naissance }}</p>
 
         </div>
 
@@ -192,7 +178,8 @@
         </div>
 
         <div class="colonne centre">
-            <p class="blue"><span class="bold-text">{{ $formation }}</span> <span> ,  du :  </span> {{ $date_debut }} <span>   au :  </span> {{ $date_fin }}</p>
+            <p class="blue"><span class="bold-text">{{ $formation }}</span></p>
+            <p class="blue"><span> du : </span> {{ $date_debut }} <span> au : </span> {{ $date_fin }}</p>
 
         </div>
 
@@ -202,16 +189,13 @@
 
 
     <div class="part part4" style="">
-        <div class="parent text-center" style="float:right; margin-right:320px; margin-top:5px;">
-            <p  class="blue">{{ $wilaya }} le : {{ $date }}</p>
+        <div class="parent text-center" style="float:left; margin-left:270px; margin-top:24px;">
+            <p class="blue">{{ $wilaya }} le : {{ $date }}</p>
         </div>
     </div>
 
 
 
-    <!-- Include Bootstrap JavaScript from CDN -->
-
-    <script src="{{ public_path('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 

@@ -344,7 +344,7 @@ class SessionController extends Controller
         $date = $date->toDateString();
         $wilaya = $informations->wilaya;
         $titre = $etudiant->nom . '_' . $etudiant->prenom;
-        $backgroundImage = public_path('/certificats/certificat.jpg');
+        $backgroundImage = public_path('/certificats/diplome.png');
         $poppins = public_path('/fonts/font-poppins/Poppins-Regular.ttf');
         $poppins_bold = public_path('/fonts/font-poppins/Poppins-Bold.ttf');
         $greatvibes = public_path('/fonts/great-vibes/GreatVibes-Regular.ttf');
@@ -531,7 +531,7 @@ class SessionController extends Controller
             $date = $date->toDateString();
             $wilaya = $informations->wilaya;
             $titre = $etudiant->nom . '_' . $etudiant->prenom;
-            $backgroundImage = public_path('/certificats/certificat.jpg');
+            $backgroundImage = public_path('/certificats/diplome.png');
             $poppins = public_path('/fonts/font-poppins/Poppins-Regular.ttf');
             $poppins_bold = public_path('/fonts/font-poppins/Poppins-Bold.ttf');
             $greatvibes = public_path('/fonts/great-vibes/GreatVibes-Regular.ttf');
