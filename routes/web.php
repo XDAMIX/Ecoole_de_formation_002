@@ -286,6 +286,7 @@ Route::controller(TypePsController::class)->group(function () {
 // --------------------------------------------------------------------------
 Route::controller(PaiementController::class)->group(function () {
     Route::get('/admin/paiement', 'index');
+   
     Route::get('/admin/paiement/{id}/voir', 'show');
     Route::post('/admin/paiement/save/{id_etudiant}/{id_user}/{montant}', 'versement');
     Route::get('/admin/paiement/{id}/download', 'facture');
@@ -302,6 +303,9 @@ Route::controller(DossierController::class)->group(function () {
     Route::get('/admin/dossier/{id}/edit', 'edit');
     Route::put('/admin/dossier/{id}/update', 'update');
     Route::delete('/admin/dossier/{id}/delete', 'destroy');
+    // route ajax
+    Route::get('/admin/dossier_ajax', 'index_ajax');
+    Route::delete('/admin/dossier_ajax/{id}/delete', 'supp_ajax');
 });
 
 
