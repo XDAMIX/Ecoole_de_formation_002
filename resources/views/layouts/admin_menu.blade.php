@@ -197,6 +197,8 @@
                         {{-- <h6 class="collapse-header">Menu :</h6> --}}
                         <a class="collapse-item" href="{{ url('/admin/ecole') }}"><i
                                 class="fa-solid fa-bars submenu-i"></i>Réglages Informations</a>
+                        <a class="collapse-item" href="{{ url('/admin/dossier') }}"><i
+                                class="fa-solid fa-bars submenu-i"></i>Dossier a foutni</a>
                         {{-- <a class="collapse-item" href=""><i class="fa-solid fa-phone submenu-i"></i>Numéros de téléphones</a>
                                     <a class="collapse-item" href=""><i class="fa-solid fa-share-from-square submenu-i"></i>Réseaux sociaux</a> --}}
                     </div>
