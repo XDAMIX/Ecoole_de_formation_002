@@ -87,99 +87,104 @@
                             </div>
                             <div class="col-12">
                                 <canvas id="graphiqueTotalPaiementsJour" width="400" height="200"></canvas>
-                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                                <script>
-                                    // Extraction des données de $paiements_par_jour
-                                    var dates = [];
-                                    var totalPaiements = [];
-                                    <?php foreach ($paiements_par_jour as $paiement) { ?>
-                                    dates.push('<?php echo $paiement->date_paiement; ?>');
-                                    totalPaiements.push(<?php echo $paiement->total_paiements; ?>);
-                                    <?php } ?>
-
-                                    // Génération aléatoire de couleurs pour chaque ligne
-                                    var colors = [];
-                                    for (var i = 0; i < dates.length; i++) {
-                                        var randomColor = 'rgba(' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math.random() * 256) + ', ' +
-                                            Math.floor(Math.random() * 256) + ', 0.7)';
-                                        colors.push(randomColor);
-                                    }
-
-                                    // Création du graphique
-                                    var ctx = document.getElementById('graphiqueTotalPaiementsJour').getContext('2d');
-                                    var graphique = new Chart(ctx, {
-                                        type: 'bar',
-                                        data: {
-                                            labels: dates, // Dates sur l'axe des abscisses
-                                            datasets: [{
-                                                label: 'Total des paiements par jour',
-                                                data: totalPaiements, // Données de total des paiements sur l'axe des ordonnées
-                                                backgroundColor: colors, // Utilisation de la couleur générée aléatoirement
-                                                borderColor: colors, // Utilisation de la couleur générée aléatoirement
-                                                borderWidth: 1
-                                            }]
-                                        },
-                                        options: {
-                                            scales: {
-                                                y: {
-                                                    beginAtZero: true
-                                                }
-                                            }
-                                        }
-                                    });
-                                </script>
                             </div>
-
+                        </div>
+                        
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <script>
+                            // Extraction des données de $paiements_par_jour
+                            var dates = [];
+                            var totalPaiements = [];
+                            @foreach ($paiements_par_jour as $paiement)
+                                dates.push('{{ $paiement->date_paiement }}');
+                                totalPaiements.push({{ $paiement->total_paiements }});
+                            @endforeach
+                        
+                            // Génération aléatoire de couleurs pour chaque ligne
+                            var colors = [];
+                            for (var i = 0; i < dates.length; i++) {
+                                var randomColor = 'rgba(' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math.random() * 256) + ', ' +
+                                    Math.floor(Math.random() * 256) + ', 0.7)';
+                                colors.push(randomColor);
+                            }
+                        
+                            // Création du graphique des paiements par jour
+                            var ctx = document.getElementById('graphiqueTotalPaiementsJour').getContext('2d');
+                            var graphique = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: dates, // Dates sur l'axe des abscisses
+                                    datasets: [{
+                                        label: 'Total des paiements par jour',
+                                        data: totalPaiements, // Données de total des paiements sur l'axe des ordonnées
+                                        backgroundColor: colors, // Utilisation de la couleur générée aléatoirement
+                                        borderColor: colors, // Utilisation de la couleur générée aléatoirement
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                        
+                        <div class="row">
                             <div class="col-12 text-primary mt-5 mb-5">
                                 <h5>Graphe des paiements par formation:</h5>
                             </div>
                             <div class="col-12">
                                 <canvas id="graphiqueTotalPaiementsFormation" width="400" height="200"></canvas>
-                                <script>
-                                    // Extraction des données de $paiements_par_formation
-                                    var formations = [];
-                                    var totalPaiementsFormation = [];
-                                    <?php foreach ($paiements_par_formation as $paiement) { ?>
-                                    formations.push('<?php echo $paiement->titre; ?>');
-                                    totalPaiementsFormation.push(<?php echo $paiement->total_paiements; ?>);
-                                    <?php } ?>
-
-                                    // Génération aléatoire de couleurs pour chaque barre
-                                    var barColors = [];
-                                    for (var i = 0; i < formations.length; i++) {
-                                        var randomColor = 'rgba(' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math.random() * 256) + ', ' +
-                                            Math.floor(Math.random() * 256) + ', 0.7)';
-                                        barColors.push(randomColor);
-                                    }
-
-                                    // Création du graphique
-                                    var ctxFormation = document.getElementById('graphiqueTotalPaiementsFormation').getContext('2d');
-                                    var graphiqueFormation = new Chart(ctxFormation, {
-                                        type: 'doughnut', // Type de graphique en anneau pour représenter les revenus par formation
-                                        data: {
-                                            labels: formations, // Formations sur l'axe des abscisses
-                                            datasets: [{
-                                                label: 'Revenus par formation',
-                                                data: totalPaiementsFormation, // Données de revenus sur l'axe des ordonnées
-                                                backgroundColor: barColors, // Utilisation des couleurs générées aléatoirement
-                                                borderColor: 'rgba(54, 162, 235, 1)',
-                                                borderWidth: 1
-                                            }]
-                                        },
-                                        options: {
-                                            scales: {
-                                                y: {
-                                                    beginAtZero: true
-                                                }
-                                            }
-                                        }
-                                    });
-                                </script>
                             </div>
                         </div>
+                        
+                        <script>
+                            // Extraction des données de $paiements_par_formation
+                            var formations = [];
+                            var totalPaiementsFormation = [];
+                            @foreach ($paiements_par_formation as $paiement)
+                                formations.push('{{ $paiement->titre }}');
+                                totalPaiementsFormation.push({{ $paiement->total_paiements }});
+                            @endforeach
+                        
+                            // Génération aléatoire de couleurs pour chaque barre
+                            var barColors = [];
+                            for (var i = 0; i < formations.length; i++) {
+                                var randomColor = 'rgba(' + Math.floor(Math.random() * 256) + ', ' + Math.floor(Math.random() * 256) + ', ' +
+                                    Math.floor(Math.random() * 256) + ', 0.7)';
+                                barColors.push(randomColor);
+                            }
+                        
+                            // Création du graphique des paiements par formation
+                            var ctxFormation = document.getElementById('graphiqueTotalPaiementsFormation').getContext('2d');
+                            var graphiqueFormation = new Chart(ctxFormation, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: formations,
+                                    datasets: [{
+                                        label: 'Revenus par formation',
+                                        data: totalPaiementsFormation,
+                                        backgroundColor: barColors,
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                        
 
 
-
+// fin des graphe 
 
 
 
