@@ -31,6 +31,12 @@ class DossierController extends Controller
         // return redirect('/admin/dossier');
 
     }
+    public function store_ajax($titre){
+        $nvdossier = new Dossier();
+        $nvdossier->titre = $titre;
+        $nvdossier->save();
+
+    }
 
     public function index_ajax(){
         $dossiers = Dossier::all();
@@ -40,6 +46,15 @@ class DossierController extends Controller
     public function supp_ajax($id){
         $dossier= Dossier::find($id);
         $dossier->delete();
+    }
+
+
+    public function update_ajax($id,$titre)
+    {
+        $dossier =  Dossier::find($id);
+        $dossier->titre = $titre;
+        $dossier->save();
+        
     }
 
 
@@ -56,6 +71,7 @@ class DossierController extends Controller
         $dossier->save();
         return redirect('/admin/dossier');
     }
+    
 
     public function destroy($id)
     {

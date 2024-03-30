@@ -12,9 +12,12 @@
                 <h2>Dossier a fournir</h2>
             </div>
                         <div class="col-2 d-flex align-items-center">
-                <a href="{{ url('/admin/dossier/nouveau') }}" class="btn btn-success"><i class="fa-solid fa-plus fa-beat-fade"></i><span
-                        class="btn-description">Ajouter </span></a>
+
+
+                        <button type="button" onclick="add_formulaire()" class="btn btn-success"><i class="fa-solid fa-plus fa-beat-fade"></i><span
+                            class="btn-description">Ajouter </span></button>  
             </div>
+
         </div>
     </div>
 
@@ -72,36 +75,6 @@
                         </table>
                     </div>
 
-                    <div class="input-group mb-3">
-
-                        <form  id="addForm" class="add-form" action="{{ url('/admin/dossier/save') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            
-                               
-                                <input type="text" name="titre"
-                                    class="form-control @if ($errors->get('titre')) is-invalid @endif"
-                                    id="ValidationTitre" placeholder="le titre" value="{{ old('titre') }}" required>
-                                <div id="ValidationTitreFeedback" class="invalid-feedback">
-                                    @if ($errors->get('titre'))
-                                        @foreach ($errors->get('titre') as $message)
-                                            {{ $message }}
-                                        @endforeach
-                                    @endif
-                                </div>
-
-
-
-                         
-                            
-                        </form>
-                        <button class="btn btn-outline-secondary alpa" type="button"
-                            onclick="btn_add_click()">
-                            <i class="bi bi-plus"></i><span class="btn-description">Ajouter</span>
-                        </button>
-    
-                    </div>
-
-
                 </div>
 
             </div>
@@ -123,27 +96,10 @@
 </script>
 
 
-{{-- Fonction pour effectuer la requête AJAX pour ajouter  --}}
+
 
 <script>
-    function btn_add_click() {
-        $.ajax({
-            url: $('#addForm').attr('action'),
-            method: 'POST',
-            data: $('#addForm').serialize(),
-            success: function(response) {
-                AfficherDossiers();
-            },
-            error: function(xhr, status, error) {
-                // Gérer les erreurs ici
-            }
-        });
-    }
-
-</script>
-
-<script>
-    // Fonction pour effectuer la requête AJAX
+    // Fonction pour affichr le tableau
     function AfficherDossiers() {
     $.ajax({
         url: '/admin/dossier_ajax',
@@ -162,7 +118,7 @@
                     '<div class="container-fluid d-flex justify-content-center align-items-center">' +
                     '<div class="col-4">' +
                     '<form class="edit-form" action="" data-id="' + value.id +
-                    '" data-name="' + value.titre + '" method="GET">' +
+                    '" data-tite="' + value.titre + '" method="GET">' +
                     '@csrf' +
                     '<button type="button" onclick="edit_confirmation(this)"' +
                     'class="btn btn-outline-primary alpa shadow"><i class="bi bi-pen"></i></button>' +
@@ -192,8 +148,6 @@
 </script>
 
 
-
-
         {{-- script suppression  --}}
         <script>
             function supprimer_confirmation(button) {
@@ -209,7 +163,7 @@
                     Swal.fire({
                         title: "Êtes-vous sûr(e) de vouloir supprimer ce type ?",
                         text: name,
-                        icon: "question",
+                        icon: "error",
                         showCancelButton: true,
                         confirmButtonColor: "#198754",
                         cancelButtonColor: "#d33",
@@ -218,14 +172,14 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
-                            // form.action = `/admin/dossier/${id}/delete`;
-                            // form.submit();
 
                             ajax_supp(id);
 
                             Swal.fire({
-                                title: "Type supprimée !",
-                                icon: "success"
+                                showConfirmButton: false,
+                                                            icon: "success",
+                                                            
+                                                            timer: 1500
                             });
                         }
                     });
@@ -236,8 +190,7 @@
         </script>
 
 
-
-{{-- Fonction pour effectuer la requête AJAX pour supprimer --}}
+{{-- script pour effectuer la requête AJAX pour supprimer --}}
 
 <script>
     function ajax_supp(id) {
@@ -271,12 +224,16 @@
                 if (form) {
                     // Utilisez le formulaire pour extraire l'ID
                     const id = form.dataset.id;
-                    const name = form.dataset.name;
+                    const titre = form.dataset.tite;
 
                     Swal.fire({
-                        title: "Êtes-vous sûr(e) de vouloir modifier cet(te) stagiaire ?",
-                        text: name,
-                        icon: "question",
+                        title: "Êtes-vous sûr(e) de vouloir modifier ce document ?",
+                      
+                        icon: "warning",
+                        input: "text",
+                        inputValue : titre,
+                        inputPlaceholder: "Veuillez saisir le titre de nouveau document ici",
+
                         showCancelButton: true,
                         confirmButtonColor: "#198754",
                         cancelButtonColor: "#d33",
@@ -284,9 +241,29 @@
                         cancelButtonText: "Non",
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
-                            form.action = `/admin/dossier/${id}/edit`;
-                            form.submit();
+
+                                                            // ajaxe function 
+                                                            $.ajax({
+                                                            url : '/admin/dossier/' + id + '/' + result.value + 'update',
+                                                            method: 'PUT',
+                                                            headers: {
+                                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                        },
+                                                        success: function() {
+                                                        Swal.fire({
+                                                          
+                                                            showConfirmButton: false,
+                                                            icon: "success",
+                                                            
+                                                            timer: 1500
+                                                        })
+                                                        AfficherDossiers();
+                                                        },
+                                                        error: function(xhr, status, error) {
+                                                            console.error(error);
+                                                        }
+                                                    });
+
                         }
                     });
                 } else {
@@ -296,8 +273,50 @@
         </script>
 
 
+        {{-- script ajouter une formulaire   --}}
+        <script>
+            function add_formulaire(button) {
+                Swal.fire({
+                    title: "ajouter un nouveau document ",
+                    input: "text",
+                    inputPlaceholder: "Veuillez saisir le titre de nouveau document ici",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // ajax function 
+                        $.ajax({
+                            url: '/admin/dossier/' + result.value + '/save',
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function () {
+                                Swal.fire({
+                                    showConfirmButton: false,
+                                    icon: "success",
+                                    title: 'le nouveau document a bien été ajouté ',
+                                    timer: 1500
+                                })
+                                AfficherDossiers();
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    }
+                });
+            }
+        </script>
+        
+
+
 
         {{-- --------------------------------------------------------------------------------------------------------------------------------------------   --}}
+
 
 
 
