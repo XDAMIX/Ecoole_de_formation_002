@@ -283,11 +283,12 @@ Route::get('/actualites', [ActualitesController::class, 'index'])->name('actuali
 // --------------------------------------------------------------------------
 Route::controller(TypePsController::class)->group(function () {
     Route::get('/admin/types_p', 'index');
-    Route::get('/admin/types_p/nouveau', 'create');
-    Route::post('/admin/types_p/save', 'store');
-    Route::get('/admin/types_p/{id}/edit', 'edit');
-    Route::put('/admin/types_p/{id}/update', 'update');
-    Route::delete('/admin/types_p/{id}/delete', 'destroy');
+
+    // ajax 
+    Route::get('/admin/types_p_ajax', 'index_ajax');
+    Route::post('/admin/types_p/{titre}/save', 'store_ajax');
+    Route::put('/admin/types_p/{id}/{titre}update', 'update_ajax');
+    Route::delete('/admin/types_p_ajax/{id}/delete', 'supp_ajax');
 });
 
 // --------------------------------------------------------------------------
@@ -302,20 +303,16 @@ Route::controller(PaiementController::class)->group(function () {
 });
 
 // --------------------------------------------------------------------------
-// ---------                Route pour Dossier        ----------
+// ---------                Route pour Dossier                     ----------
 // --------------------------------------------------------------------------
 Route::controller(DossierController::class)->group(function () {
     Route::get('/admin/dossier', 'index');
-    Route::get('/admin/dossier/nouveau', 'create');
-    // Route::post('/admin/dossier/save', 'store');
-    Route::get('/admin/dossier/{id}/edit', 'edit');
-    // Route::put('/admin/dossier/{id}/update', 'update');
-    Route::delete('/admin/dossier/{id}/delete', 'destroy');
+
     // route ajax
     Route::get('/admin/dossier_ajax', 'index_ajax');
     Route::post('/admin/dossier/{titre}/save', 'store_ajax');
-    Route::delete('/admin/dossier_ajax/{id}/delete', 'supp_ajax');
     Route::put('/admin/dossier/{id}/{titre}update', 'update_ajax');
+    Route::delete('/admin/dossier_ajax/{id}/delete', 'supp_ajax');
 });
 
 
