@@ -156,7 +156,7 @@
     <div class="part part2" style="margin-top:160px;">
 
         <div class="colonne centre">
-            <p class="blue">CODE : {{ $code }} </p>
+            <p class="blue">CODE : <span style="font-family:sans-serif;">{{ $code }}</span>  </p>
             <p class="handfont gold" style="margin-top:-20px;">{{ $sexe }} : {{ $nom }} {{ $prenom }}</p>
         </div>
 

@@ -180,13 +180,13 @@ class SessionController extends Controller
         $session->save();
         // -------------------------------------
         $date_diplome = $stop_date->addDays(1);
-        $fin_date = Carbon::today();
         $debut_date = $session->date_debut;
+        $fin_date = Carbon::today();
         // modifier formation pour etudiants
         $etudiants = Etudiant::where('session_id', $id)->update(['date_debut_formation' => $debut_date]);
         $etudiants = Etudiant::where('session_id', $id)->whereNotIn('etat_formation', ['Exclu'])->update(['date_fin_formation' => $fin_date]);
 
-        $etudiants = Etudiant::where('session_id', $id)->update(['etat_formation' => 'fin-de-la-formation']);
+        $etudiants = Etudiant::where('session_id', $id)->whereNotIn('etat_formation', ['Exclu'])->update(['etat_formation' => 'fin-de-la-formation']);
         // modifier diplome pour etudiants
         $etudiants = Etudiant::where('session_id', $id)->whereNotIn('etat_formation', ['Exclu'])->update(['date_obt_diplome' => $date_diplome]);
 
@@ -318,6 +318,7 @@ class SessionController extends Controller
                 $join_formations->on('sessions.formation_id', '=', 'formations.id');
             })
             ->where('etudiants.id', $id_etudiant)
+            ->whereNotIn('etudiants.etat_formation', ['Exclu'])
             ->first([
                 'etudiants.*', 'sessions.nom as session', 'formations.titre as formation',
             ]);
