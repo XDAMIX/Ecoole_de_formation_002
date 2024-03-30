@@ -82,14 +82,24 @@
                         {{-- les graphes  --}}
 
                         <div class="row">
-                            <div class="col-12 text-primary mt-5 mb-5">
+
+                            <div class="col-6 text-primary mt-5 mb-5">
                                 <h5>Graphe des paiements par jour:</h5>
                             </div>
-                            <div class="col-12">
-                                <canvas id="graphiqueTotalPaiementsJour" width="800" height="400"></canvas>
+                            <div class="col-6 mt-5 mb-5">
+                                <label for="">Type de graphe :</label>
+                                <select name="graphe1" id="graphe1">
+                                    <option value="1">Bars</option>
+                                    <option value="2">Points</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 mt-5 mb-5">
+                                <canvas id="graphiqueTotalPaiementsJour"  width="" height=""
+                                style="height: 800px;"></canvas>
                             </div>
                         </div>
-                        
+
                         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                         <script>
                             // Extraction des données de $paiements_par_jour
@@ -99,7 +109,7 @@
                                 dates.push('{{ $paiement->date_paiement }}');
                                 totalPaiements.push({{ $paiement->total_paiements }});
                             @endforeach
-                        
+
                             // Génération aléatoire de couleurs pour chaque ligne
                             var colors = [];
                             for (var i = 0; i < dates.length; i++) {
@@ -107,7 +117,7 @@
                                     Math.floor(Math.random() * 256) + ', 0.7)';
                                 colors.push(randomColor);
                             }
-                        
+
                             // Création du graphique des paiements par jour
                             var ctx = document.getElementById('graphiqueTotalPaiementsJour').getContext('2d');
                             var graphique = new Chart(ctx, {
@@ -127,20 +137,37 @@
                                         y: {
                                             beginAtZero: true
                                         }
-                                    }
+                                    },
+                                    maintainAspectRatio: false,
+                                    responsive: true,
+                                    // aspectRatio: 1,
                                 }
                             });
                         </script>
-                        
+
+
+
+
+
                         <div class="row">
-                            <div class="col-12 text-primary mt-5 mb-5">
+
+                            <div class="col-6 text-primary mt-5 mb-5">
                                 <h5>Graphe des paiements par formation:</h5>
                             </div>
-                            <div class="col-12">
-                                <canvas id="graphiqueTotalPaiementsFormation" width="800" height="400"></canvas>
+                            <div class="col-6 mt-5 mb-5">
+                                <label for="">Type de graphe :</label>
+                                <select name="graphe2" id="graphe2">
+                                    <option value="1">Donut</option>
+                                    <option value="2">Bars</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 mt-5 mb-5">
+                                <canvas id="graphiqueTotalPaiementsFormation" width="" height=""
+                                    style="height: 800px;"></canvas>
                             </div>
                         </div>
-                        
+
                         <script>
                             // Extraction des données de $paiements_par_formation
                             var formations = [];
@@ -149,7 +176,7 @@
                                 formations.push('{{ $paiement->titre }}');
                                 totalPaiementsFormation.push({{ $paiement->total_paiements }});
                             @endforeach
-                        
+
                             // Génération aléatoire de couleurs pour chaque barre
                             var barColors = [];
                             for (var i = 0; i < formations.length; i++) {
@@ -157,7 +184,7 @@
                                     Math.floor(Math.random() * 256) + ', 0.7)';
                                 barColors.push(randomColor);
                             }
-                        
+
                             // Création du graphique des paiements par formation
                             var ctxFormation = document.getElementById('graphiqueTotalPaiementsFormation').getContext('2d');
                             var graphiqueFormation = new Chart(ctxFormation, {
@@ -177,11 +204,14 @@
                                         y: {
                                             beginAtZero: true
                                         }
-                                    }
+                                    },
+                                    maintainAspectRatio: false,
+                                    responsive: true,
+                                    // aspectRatio: 1,
                                 }
                             });
                         </script>
-                        
+
 
 
 
@@ -247,8 +277,8 @@
         </div>
     </div>
 
-
-
+    {{-- ---------------------------------------------------------------------------------------------------------------------- --}}
+    {{-- filtrage et calcul de revenu --}}
     <script>
         $(document).ready(function() {
             const date_debut = document.querySelector('#date-debut');
@@ -355,6 +385,88 @@
             });
         });
     </script>
+
+
+    {{-- ---------------------------------------------------------------------------------------------------------------------- --}}
+    {{-- pour les graphes  --}}
+
+    <script>
+        // Écouteur d'événements pour le changement de type de graphe pour graphiqueTotalPaiementsJour
+        document.getElementById('graphe1').addEventListener('change', function() {
+            var selectedType = this.value;
+            graphique.destroy(); // Destruction du graphique existant
+            graphique = new Chart(ctx, {
+                type: selectedType === '1' ? 'bar' : 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Total des paiements par jour',
+                        data: totalPaiements,
+                        backgroundColor: colors,
+                        borderColor: colors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        },
+                        maintainAspectRatio: false,
+                        responsive: true
+                    }
+                }
+            });
+            graphique.canvas.id = 'graphiqueTotalPaiementsJour'; // Attribution de l'ID
+            // Appliquer le style au canvas
+            // graphique.canvas.style.height = '600px'; // Définir la hauteur fixe
+            // graphique.canvas.style.width = '100%'; // Définir la hauteur fixe
+            // graphique.canvas.height = '600px'; // Définir la hauteur fixe
+            // graphique.canvas.width = '100%'; // Définir la hauteur fixe
+        });
+
+        // Écouteur d'événements pour le changement de type de graphe pour graphiqueTotalPaiementsFormation
+        document.getElementById('graphe2').addEventListener('change', function() {
+            var selectedType = this.value;
+            graphiqueFormation.destroy(); // Destruction du graphique existant
+            graphiqueFormation = new Chart(ctxFormation, {
+                type: selectedType === '1' ? 'doughnut' : 'bar',
+                data: {
+                    labels: formations,
+                    datasets: [{
+                        label: 'Revenus par formation',
+                        data: totalPaiementsFormation,
+                        backgroundColor: barColors,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        },
+                        maintainAspectRatio: false,
+                        responsive: true
+                    }
+                }
+            });
+            graphiqueFormation.canvas.id = 'graphiqueTotalPaiementsFormation'; // Attribution de l'ID
+            // Appliquer le style au canvas
+
+            // graphiqueFormation.canvas.style.height = '600px'; // Définir la hauteur fixe
+            // graphiqueFormation.canvas.style.width = '100%'; // Définir la hauteur fixe
+            // graphiqueFormation.canvas.height = '600px'; // Définir la hauteur fixe
+            // graphiqueFormation.canvas.width = '100%'; // Définir la hauteur fixe
+        });
+    </script>
+
+
+
+
+
+
+
 
 
 
