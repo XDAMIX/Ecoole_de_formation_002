@@ -273,7 +273,7 @@
         </script>
 
 
-        {{-- script ajouter une formulaire   --}}
+        {{-- script ajouter un document   --}}
         <script>
             function add_formulaire(button) {
                 Swal.fire({
