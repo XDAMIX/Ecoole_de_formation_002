@@ -19,6 +19,32 @@ class TypePsController extends Controller
 
     }
 
+    public function index_ajax()
+    {
+        $types = TypePs::all();
+        return response()->json(['types' => $types]);
+
+    }
+
+    public function supp_ajax($id){
+        $types= TypePs::find($id);
+        $types->delete();
+    }
+
+    public function update_ajax($id,$titre)
+    {
+        $type =  TypePs::find($id);
+        $type->titre = $titre;
+        $type->save();
+        
+    }
+
+    public function store_ajax($titre){
+        $nvtype = new TypePs();
+        $nvtype->titre = $titre;
+        $nvtype->save();
+
+    }
     
     public function create()
     {
