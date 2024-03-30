@@ -17,24 +17,44 @@ use Illuminate\Support\Facades\Response;
 use App\Models\Telephone;
 use App\Models\Information;
 
+use Illuminate\Support\Facades\DB;
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PaiementController extends Controller
 {
 public function index(){
-    $paiements =  TypePaiement::all();
     $etudiants =  Etudiant::leftJoin('sessions', function ($join_sessions) {
         $join_sessions->on('etudiants.session_id', '=', 'sessions.id');
     })
-        ->leftJoin('formations', function ($join_formations) {
-            $join_formations->on('sessions.formation_id', '=', 'formations.id');
-        })
-        ->orderBy('etudiants.id', 'DESC')
-        ->get([
-            'etudiants.*', 'sessions.nom as session', 'formations.titre as formation',
+    ->leftJoin('formations', function ($join_formations) {
+        $join_formations->on('sessions.formation_id', '=', 'formations.id');
+    })
+    ->orderBy('etudiants.id', 'DESC')
+    ->get([
+        'etudiants.*', 'sessions.nom as session', 'formations.titre as formation', 'etudiants.id as id',
+    ]);
+    
+
+    $paiements_etudiants = DB::table('etudiants')
+    ->leftJoin('paiements', 'etudiants.id', '=', 'paiements.etudiant_id')
+    ->select(
+        'etudiants.id',
+        'etudiants.prix_formation as prix_formation',
+        DB::raw('SUM(paiements.montant) as total_paiements')
+    )
+    ->groupBy('etudiants.id', 'etudiants.prix_formation')
+    ->get();
+    
+
+
+    return view('admin.paiements.index',[
+        'paiements_etudiants'=>$paiements_etudiants ,
+         'etudiants'=>$etudiants
         ]);
-    return view('admin.paiements.index',['paiments'=>$paiements , 'etudiants'=>$etudiants]);
 }
+
+
 
 public function show($id){
     $etudiant = Etudiant::find($id);

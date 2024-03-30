@@ -27,7 +27,7 @@
                 // scroller
                 scrollCollapse: true,
                 scroller: true,
-                scrollY: 400 ,
+                scrollY: 400,
                 // ----------
                 // dom: '<"buttons-container"lBfrtip>', 
                 lengthMenu: [
@@ -56,7 +56,7 @@
                 },
             });
         });
-    </script>  
+    </script>
 
 
     <style>
@@ -101,10 +101,10 @@
                             <thead>
                                 <tr>
                                     {{-- <th >ID</th> --}}
-                                    <th >Photo</th>
+                                    <th>Photo</th>
                                     <th>Nom</th>
                                     <th>Prénom</th>
-                                    {{-- <th >Wilaya</th> --}}
+                                    <th>État de Paiement</th>
                                     {{-- <th>email</th> --}}
                                     {{-- <th>Tel</th> --}}
                                     <th>Formation</th>
@@ -118,43 +118,73 @@
                                 @foreach ($etudiants as $etudiant)
                                     <tr>
                                         {{-- <td class=" align-middle">{{ $etudiant->id }}</td> --}}
-                                        <td class=" align-middle" style="width:80px;"><div style="background-image:url({{ asset('storage/' . $etudiant->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;"></div></td>
+                                        <td class=" align-middle" style="width:80px;">
+                                            <div
+                                                style="background-image:url({{ asset('storage/' . $etudiant->photo) }});background-size: cover;background-position: center;background-repeat: no-repeat;  height: 80px; width: 70px; margin-left:5px; margin-right:5px;">
+                                            </div>
+                                        </td>
                                         <td class=" align-middle">{{ $etudiant->nom }}</td>
                                         <td class=" align-middle">{{ $etudiant->prenom }}</td>
 
-                                        <td class=" align-middle">{{ $etudiant->formation }}</td>
-                                        <td class=" align-middle">{{ $etudiant->session }}</td>
+                                        {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
+                                        
 
-                                        <td class=" align-middle" style="width:100px;">
+                                        <td class="align-middle">
+                                            <div class="progress">
+                                                @foreach ($paiements_etudiants as $paiement_etudiant)
+                                                    @if ($paiement_etudiant->id == $etudiant->id)
+                                                        @php
+                                                            // Calcul du pourcentage de paiements par rapport au prix de la formation
+                                                            $pourcentage = ($paiement_etudiant->total_paiements / $paiement_etudiant->prix_formation) * 100;
+                                                            // Arrondir à deux décimales si le résultat est décimal
+                                                            $pourcentage = is_float($pourcentage) ? round($pourcentage, 2) : $pourcentage;
+                                                        @endphp
+                                                        <div class="progress-bar @if($pourcentage == 0) bg-danger @else bg-success @endif" role="progressbar" style="width: {{ $pourcentage == 0 ? 100 : $pourcentage }}%;" aria-valuenow="{{ $pourcentage }}" aria-valuemin="0" aria-valuemax="100">
+                                                            {{ $pourcentage }}%
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                        
+                                        
+                                        
 
-                                            <div class="container">
-                                                <div class="row">
+                                {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
 
-                                                    <div class="col-12">
-                                                        {{-- show button    --}}
-                                                        <form class="show-form"
-                                                            action="{{ url('/admin/paiement/' . $etudiant->id . '/voir') }}"
-                                                            method="GET">
-                                                            @csrf
-                                                            <button type="submit"
-                                                                class="btn btn-outline-info alpa shadow" style="width: 70px">
-                                                                <i class="bi bi-currency-dollar"></i></button>
-                                                        </form>
-                                                    </div>
+                                <td class=" align-middle">{{ $etudiant->formation }}</td>
+                                <td class=" align-middle">{{ $etudiant->session }}</td>
 
+                                <td class=" align-middle" style="width:100px;">
 
+                                    <div class="container">
+                                        <div class="row">
 
-                                                </div>
+                                            <div class="col-12">
+                                                {{-- show button    --}}
+                                                <form class="show-form"
+                                                    action="{{ url('/admin/paiement/' . $etudiant->id . '/voir') }}"
+                                                    method="GET">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-info alpa shadow"
+                                                        style="width: 70px">
+                                                        <i class="bi bi-currency-dollar"></i></button>
+                                                </form>
                                             </div>
 
 
 
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </div>
+
+
+
+                                </td>
+                                </tr>
                                 @endforeach
 
                             </tbody>
-                        
+
                         </table>
                     </div>
                 </div>
@@ -171,85 +201,85 @@
 
 
 
-        {{-- script suppression  --}}
-        <script>
-            function supprimer_confirmation(button) {
-                // Utilisez le bouton pour obtenir le formulaire parent
-                const form = button.closest('.delete-form');
+    {{-- script suppression  --}}
+    <script>
+        function supprimer_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.delete-form');
 
-                // Vérifiez si le formulaire a été trouvé
-                if (form) {
-                    // Utilisez le formulaire pour extraire l'ID
-                    const id = form.dataset.id;
-                    const name = form.dataset.name;
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id = form.dataset.id;
+                const name = form.dataset.name;
 
-                    Swal.fire({
-                        title: "Êtes-vous sûr(e) de vouloir supprimer cet(te) stagiaire ?",
-                        text: name,
-                        icon: "question",
-                        showCancelButton: true,
-                        confirmButtonColor: "#198754",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Oui, Supprime-le",
-                        cancelButtonText: "Non, Annuler",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
-                            form.action = `/admin/etudiant/${id}/delete`;
-                            form.submit();
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir supprimer cet(te) stagiaire ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui, Supprime-le",
+                    cancelButtonText: "Non, Annuler",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                        form.action = `/admin/etudiant/${id}/delete`;
+                        form.submit();
 
-                            Swal.fire({
-                                title: "Etudiant supprimée !",
-                                icon: "success"
-                            });
-                        }
-                    });
-                } else {
-                    console.error("Le formulaire n'a pas été trouvé.");
-                }
+                        Swal.fire({
+                            title: "Etudiant supprimée !",
+                            icon: "success"
+                        });
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
             }
-        </script>
+        }
+    </script>
 
 
 
 
-        {{-- script modifier  --}}
-        <script>
-            function edit_confirmation(button) {
-                // Utilisez le bouton pour obtenir le formulaire parent
-                const form = button.closest('.edit-form');
+    {{-- script modifier  --}}
+    <script>
+        function edit_confirmation(button) {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form = button.closest('.edit-form');
 
-                // Vérifiez si le formulaire a été trouvé
-                if (form) {
-                    // Utilisez le formulaire pour extraire l'ID
-                    const id = form.dataset.id;
-                    const name = form.dataset.name;
+            // Vérifiez si le formulaire a été trouvé
+            if (form) {
+                // Utilisez le formulaire pour extraire l'ID
+                const id = form.dataset.id;
+                const name = form.dataset.name;
 
-                    Swal.fire({
-                        title: "Êtes-vous sûr(e) de vouloir modifier cet(te) stagiaire ?",
-                        text: name,
-                        icon: "question",
-                        showCancelButton: true,
-                        confirmButtonColor: "#198754",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Oui",
-                        cancelButtonText: "Non",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
-                            form.action = `/admin/etudiant/${id}/edit`;
-                            form.submit();
-                        }
-                    });
-                } else {
-                    console.error("Le formulaire n'a pas été trouvé.");
-                }
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir modifier cet(te) stagiaire ?",
+                    text: name,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Mettez à jour l'action du formulaire avec l'ID et soumettez-le
+                        form.action = `/admin/etudiant/${id}/edit`;
+                        form.submit();
+                    }
+                });
+            } else {
+                console.error("Le formulaire n'a pas été trouvé.");
             }
-        </script>
+        }
+    </script>
 
 
 
-        {{-- --------------------------------------------------------------------------------------------------------------------------------------------   --}}
+    {{-- --------------------------------------------------------------------------------------------------------------------------------------------   --}}
 
 
 
@@ -257,6 +287,6 @@
 
 
 
-        {{-- footer  --}}
-        <div class="container" id="pied-page">
-        @endsection
+    {{-- footer  --}}
+    <div class="container" id="pied-page">
+    @endsection

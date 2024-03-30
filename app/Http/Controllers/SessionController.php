@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use PhpParser\NodeVisitor\FirstFindingVisitor;
 
+
 use PDF;
 use Carbon\Carbon;
 
@@ -27,6 +28,7 @@ class SessionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+ 
     }
 
 
