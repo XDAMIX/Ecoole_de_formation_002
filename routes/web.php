@@ -30,6 +30,9 @@ use App\Http\Controllers\FormationsController;
 use App\Http\Controllers\FormulaireController;
 use App\Models\Prof;
 
+
+use App\Http\Middleware\IncreaseExecutionTime;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -161,8 +164,14 @@ Route::controller(SessionController::class)->group(function () {
     Route::post('/admin/session/voir/{id_session}/{id_etudiant}/delete_etudiant', 'delete_etudiant');
     Route::post('/admin/session/voir/{id_session}/{id_etudiant}/reprendre_etudiant', 'reprendre_etudiant');
     // certificat etudiant 
-    Route::get('/admin/session/voir/{id_session}/{id_etudiant}/certificat_etudiant', 'certificat_etudiant');
-    Route::get('/admin/session/voir/{id_session}/certificats_session', 'certificats_session');
+    // Route::get('/admin/session/voir/{id_session}/{id_etudiant}/certificat_etudiant', 'certificat_etudiant');
+    // Route::get('/admin/session/voir/{id_session}/certificats_session', 'certificats_session');
+});
+
+Route::middleware(IncreaseExecutionTime::class)->group(function () {
+    // Définissez vos routes ici
+    Route::get('/admin/session/voir/{id_session}/{id_etudiant}/certificat_etudiant', [SessionController::class, 'certificat_etudiant']);
+    Route::get('/admin/session/voir/{id_session}/certificats_session', [SessionController::class, 'certificats_session']);
 });
 
 
