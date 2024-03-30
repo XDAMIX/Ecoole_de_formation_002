@@ -82,9 +82,18 @@
                         {{-- les graphes  --}}
 
                         <div class="row">
-                            <div class="col-12 text-primary mt-5 mb-5">
+
+                            <div class="col-6 text-primary mt-5 mb-5">
                                 <h5>Graphe des paiements par jour:</h5>
                             </div>
+                            <div class="col-6 mt-5 mb-5">
+                                <label for="">Type de graphe :</label>
+                                <select name="graphe2" id="graphe2">
+                                    <option value="1">Bars</option>
+                                    <option value="1">Points</option>
+                                </select>
+                            </div>
+
                             <div class="col-12">
                                 <canvas id="graphiqueTotalPaiementsJour" width="800" height="400"></canvas>
                             </div>
@@ -133,9 +142,18 @@
                         </script>
                         
                         <div class="row">
-                            <div class="col-12 text-primary mt-5 mb-5">
+
+                            <div class="col-6 text-primary mt-5 mb-5">
                                 <h5>Graphe des paiements par formation:</h5>
                             </div>
+                            <div class="col-6 mt-5 mb-5">
+                                <label for="">Type de graphe :</label>
+                                <select name="graphe2" id="graphe2">
+                                    <option value="1">Bars</option>
+                                    <option value="1">Donut</option>
+                                </select>
+                            </div>
+
                             <div class="col-12">
                                 <canvas id="graphiqueTotalPaiementsFormation" width="800" height="400"></canvas>
                             </div>
