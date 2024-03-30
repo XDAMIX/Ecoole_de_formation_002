@@ -285,8 +285,7 @@ Route::controller(TypePsController::class)->group(function () {
 // ---------                Route pour  paiement       ----------
 // --------------------------------------------------------------------------
 Route::controller(PaiementController::class)->group(function () {
-    Route::get('/admin/paiement', 'index');
-   
+    Route::get('/admin/paiement', 'index'); 
     Route::get('/admin/paiement/{id}/voir', 'show');
     Route::post('/admin/paiement/save/{id_etudiant}/{id_user}/{montant}', 'versement');
     Route::get('/admin/paiement/{id}/download', 'facture');
@@ -299,13 +298,15 @@ Route::controller(PaiementController::class)->group(function () {
 Route::controller(DossierController::class)->group(function () {
     Route::get('/admin/dossier', 'index');
     Route::get('/admin/dossier/nouveau', 'create');
-    Route::post('/admin/dossier/save', 'store');
+    // Route::post('/admin/dossier/save', 'store');
     Route::get('/admin/dossier/{id}/edit', 'edit');
-    Route::put('/admin/dossier/{id}/update', 'update');
+    // Route::put('/admin/dossier/{id}/update', 'update');
     Route::delete('/admin/dossier/{id}/delete', 'destroy');
     // route ajax
     Route::get('/admin/dossier_ajax', 'index_ajax');
+    Route::post('/admin/dossier/{titre}/save', 'store_ajax');
     Route::delete('/admin/dossier_ajax/{id}/delete', 'supp_ajax');
+    Route::put('/admin/dossier/{id}/{titre}update', 'update_ajax');
 });
 
 
