@@ -174,7 +174,7 @@
                                                     data-id="{{ $session->id }}" data-name="{{ $session->nom }}"
                                                     method="POST">
                                                     @csrf
-                                                    <button type="button" class="btn btn-warning alpa shadow"
+                                                    <button type="button" class="btn btn-warning alpa shadow" style="padding: 10px 20px;"
                                                         onclick="plus_confirmation(this)"><i class="bi bi-plus-circle-fill"
                                                             style="font-size: 30px; padding-right:5px;"></i><br>Faire
                                                         prolonger</button>
