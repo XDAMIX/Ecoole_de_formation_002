@@ -192,7 +192,8 @@ padding: 0;
                             <tr>
                                 <td class=" align-middle">{{ $paiement->user }}</td>
 
-                                <td class=" align-middle" style="text-align: center;">{{ $paiement->date }}</td>
+                                <td class="align-middle" style="text-align: center;">{{ \Carbon\Carbon::parse($paiement->date)->format('d/m/20y ') }}</td>
+
                                 
                                 <td class=" align-middle" style="text-align: center;">{{ $paiement->montant }} DA</td>
 

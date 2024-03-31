@@ -272,45 +272,52 @@
     </script>
 
 
-    {{-- script ajouter un document   --}}
-    <script>
-        function add_formulaire(button) {
-            Swal.fire({
-                title: "ajouter un nouveau document ",
-                input: "text",
-                inputPlaceholder: "Veuillez saisir le titre de nouveau document ici",
-                showCancelButton: true,
-                confirmButtonColor: "#198754",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Oui",
-                cancelButtonText: "Non",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // ajax function 
-                    $.ajax({
-                        url: '/admin/dossier/' + result.value + '/save',
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function() {
-                            Swal.fire({
-                                showConfirmButton: false,
-                                icon: "success",
-                                title: 'le nouveau document a bien été ajouté ',
-                                timer: 1500
-                            })
-                            AfficherDossiers();
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
-                }
-            });
-        }
-    </script>
+        {{-- script ajouter un document   --}}
+        <script>
+            function add_formulaire(button) {
+                Swal.fire({
+                    title: "ajouter un nouveau document ",
+                    input: "text",
+                    inputPlaceholder: "Veuillez saisir le titre de nouveau document ici",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // ajax function 
+                        $.ajax({
+                            url: '/admin/dossier/' + result.value + '/save',
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function () {
+                                Swal.fire({
+                                    showConfirmButton: false,
+                                    icon: "success",
+                                    title: 'le nouveau document a bien été ajouté ',
+                                    timer: 1500
+                                })
+                                AfficherDossiers();
+                            },
+                            error: function (xhr, status, error) {
+                                Swal.fire({
+                                    showConfirmButton: false,
+                                    icon: "success",
+                                    title: 'noooooo',
+                                    timer: 1500
+                                })
 
+                                console.error(error);
+                            }
+                        });
+                    }
+                });
+            }
+        </script>
+        
 
 
 
