@@ -9,6 +9,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class DossierController extends Controller
 {
+    public function __construct()
+    {
+       $this->middleware('auth'); 
+    } 
+    
     public function index(){
         $dossiers = Dossier::all();
         return view('admin.ecole.dossier.index',['dossiers'=>$dossiers]);
