@@ -62,8 +62,8 @@
               </div> --}}
               <div class="card-body">
   
-<form action="{{url('/inscription/save')}}" method="POST">
-@csrf
+                <form class="inscription-form" action="{{url('/inscription/save')}}" method="POST">
+                    @csrf
 
 
 
@@ -317,22 +317,66 @@
 <div class="row formulaire-btn">
     <div class="col-12 form-group">
 
-        <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Valider</span></button>
-        {{-- <button type="submit" class="btn btn-primary alpa"><i class="bi bi-check2 icons"></i><span>Enregistrer</span></button> --}}
-        {{-- <button type="submit" class="form-control btn btn-primary">Submit</button> --}}
+        {{-- <button type="submit" class="btn btn-outline-success alpa"><i class="bi bi-check2 icons"></i><span>Valider</span></button> --}}
+        
+        <button type="button" onclick="sauvegarder()"
+        class="btn btn-success alpa shadow"><i
+            class="bi bi-check2"></i><span class="btn-description">Valider</span></button>
 
     </div>
 </div>
 
 </form>
 
+
+
+{{-- form de redirection --}}
+<form class="redirect-form" action="{{ url('/') }}" method="GET"></form>
 </div>
 </div>
 
             </div>
         </div>
 
-
+    {{-- script sauvegarder  --}}
+    <script>
+        async function sauvegarder() {
+            // Utilisez le bouton pour obtenir le formulaire parent
+            const form1 = document.querySelector('.inscription-form');
+            const form2 = document.querySelector('.redirect-form');
+  
+            // Vérifiez si le formulaire a été trouvé
+            if (form1 && form2) {
+  
+                Swal.fire({
+                    title: "Êtes-vous sûr(e) de vouloir enregistrer cette inscription ?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#198754",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non",
+                }).then(async (result) => {
+                    try {
+                        if (result.isConfirmed) {
+                            // Soumettre le premier formulaire
+                            await form1.submit();
+  
+                            // Attendez que le premier formulaire soit soumis avant de soumettre le deuxième
+                            await new Promise(resolve => setTimeout(resolve,
+                            10000)); // 5 seconde de délai (ajustez si nécessaire)
+  
+                            form2.submit();
+                        }
+                    } catch (error) {
+                        console.error("Erreur lors de la soumission du formulaire : ", error);
+                    }
+                });
+            } else {
+                console.error("Il y a une erreur !");
+            }
+        }
+    </script>
 
 
 

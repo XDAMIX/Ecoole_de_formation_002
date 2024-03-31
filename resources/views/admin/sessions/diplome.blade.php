@@ -142,7 +142,7 @@
         <div class="colonne" style="height: 70px;float:left;margin-top:-10px;text-align:center;">
             <p class="blue" style="font-family:sans-serif;font-size:22px;font-weight: bold; text-transform: uppercase;padding:0;margin-top:7px;">{{ $informations->nom }}</p>
             <p class="blue" style="padding:0;margin:0;">Établissement agréé par l'état </p>
-            <p class="blue" style="padding:0;margin:0;">Agrément N° : {{ $informations->num_agrement }} | date : {{ $informations->date_agrement }} </p>
+            <p class="blue" style="padding:0;margin:0;">Agrément N° : {{ $informations->num_agrement }} | date : {{ \Carbon\Carbon::parse($informations->date_agrement)->format('d/m/20y') }} </p>
         </div>
 
 
@@ -168,7 +168,7 @@
 
     <div class="part part3">
         <div class="colonne centre">
-            <p class="blue">Né(e) le : {{ $date_naissance }}<span> à : </span> {{ $lieu_naissance }}</p>
+            <p class="blue">Né(e) le : {{ \Carbon\Carbon::parse($date_naissance)->format('d/m/20y')  }}<span> à : </span> {{ $lieu_naissance }}</p>
 
         </div>
 
@@ -179,7 +179,7 @@
 
         <div class="colonne centre">
             <p class="blue"><span class="bold-text">{{ $formation }}</span></p>
-            <p class="blue"><span> du : </span> {{ $date_debut }} <span> au : </span> {{ $date_fin }}</p>
+            <p class="blue"><span> du : </span> {{ \Carbon\Carbon::parse($date_debut)->format('d/m/20y')  }} <span> au : </span> {{ \Carbon\Carbon::parse($date_fin)->format('d/m/20y')  }}</p>
 
         </div>
 
@@ -190,7 +190,7 @@
 
     <div class="part part4" style="">
         <div class="parent text-center" style="float:left; margin-left:270px; margin-top:24px;">
-            <p class="blue">{{ $wilaya }} le : {{ $date }}</p>
+            <p class="blue">{{ $wilaya }} le : {{ \Carbon\Carbon::parse($date )->format('d/m/20y') }}</p>
         </div>
     </div>
 

@@ -7,11 +7,13 @@
                 <a href="{{ url('/admin/session') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                         class="btn-description">Retour</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center">
+            <div class="col-8  text-center">
                 <h2>Informations de la session</h2>
             </div>
         </div>
     </div>
+
+ 
 
 
 
@@ -24,11 +26,7 @@
                 <div class="card shadow" style="background-color: #ffff;">
                     <div class="card-body">
 
-                        <div class="row">
-                            <div class="col-12">
-                                <h3 style="padding-top:10px; padding-bottom:10px;">Informations de la session</h3>
-                            </div>
-                        </div>
+
 
                         {{-- ---------------------------------------------------------- --}}
 
@@ -113,12 +111,12 @@
 
 
                                     <div class="col-12 infos text-center">
-                                        <h6 class="font-weight-bold ">Date de Début : {{ $session->date_debut }}</h6>
+                                        <h6 class="font-weight-bold ">Date de Début : {{ \Carbon\Carbon::parse($session->date_debut)->format('d/m/20y')  }}</h6>
 
                                     </div>
 
                                     <div class="col-12 infos text-center">
-                                        <h6 class="font-weight-bold ">Date de Fin : {{ $session->date_fin }}</h6>
+                                        <h6 class="font-weight-bold ">Date de Fin : {{ \Carbon\Carbon::parse($session->date_fin)->format('d/m/20y')  }}</h6>
 
                                     </div>
 
@@ -224,14 +222,12 @@
                                     </div>
 
                                     <div class="col-12 ">
-                                        <h5 class="infos text-center font-weight-bold"><i class="bi bi-phone"></i> N° tel
-                                            :</h5>
-                                        <h5 class="infos text-center">{{ $session->tel_prof }} </h5>
+                                        <h5 class="infos1 text-center font-weight-bold"><i class="bi bi-phone"></i> N° tel : {{ $session->tel_prof }}</h5>
+                                        
                                     </div>
                                     <div class="col-12 ">
-                                        <h5 class="infos text-center font-weight-bold"><i class="bi bi-envelope"></i>
-                                            e-mail :</h5>
-                                        <h5 class="infos text-center">{{ $session->email_prof }}</h5>
+                                        <h5 class="infos1 text-center font-weight-bold"><i class="bi bi-envelope"></i>e-mail : {{ $session->email_prof }}</h5>
+                                        
                                     </div>
 
                                 </div>
@@ -413,6 +409,14 @@
             height: 30px;
             /* background-color: #a31616; */
         }
+        .infos1 {
+            font-size: 15x;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            height: 30px;
+            /* background-color: #a31616; */
+        }
+        
 
         .photo {
             text-align: center;

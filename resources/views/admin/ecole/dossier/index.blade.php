@@ -304,6 +304,13 @@
                                 AfficherDossiers();
                             },
                             error: function (xhr, status, error) {
+                                Swal.fire({
+                                    showConfirmButton: false,
+                                    icon: "success",
+                                    title: 'noooooo',
+                                    timer: 1500
+                                })
+
                                 console.error(error);
                             }
                         });
