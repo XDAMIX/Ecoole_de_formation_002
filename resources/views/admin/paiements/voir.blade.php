@@ -150,29 +150,17 @@
                                     </div>
                                     <div class="col-md-3 text-center">
                                         <h6>Verssé :</h6>
-                                        <p>{{ $total }} DA</p>
+                                        <p > <span id="total">{{ $total }} </span> DA</p>
                                     </div>
                                     <div class="col-md-3 text-center">
-                                        <h6>Reste :</h6>
-                                        <p>{{ $reste }} DA</p>
+                                        <h6 >Reste :</h6>
+                                        <p ><span id="reste" >{{ $reste }}  </span> DA</p>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-12 text-center">
+                                    <div class="col-12 text-center" id="bouton_resul">
                                         {{-- ajouter button    --}}
-                                        <form class="add-form" action="" 
-                                            data-etudiant="{{ $etudiant->id }}"
-                                            data-user="{{ auth()->user()->id }}" 
-                                            data-reste="{{ $reste }}" 
-                                            method="POST">
-                                            @csrf
-                                            <button type="button" class="btn btn-outline-success alpa shadow"
-                                                style="margin-bottom:30px;" onclick="versement(this)">
-                                                <i class="bi bi-plus-circle" style="padding-right: 5px;"></i> Ajouter un nouveau Versement </button>
-                                        </form>
-
-    
 
                                     </div>
                                 </div>
@@ -190,18 +178,8 @@
                                                
                                             </thead>
 
-                                            <tbody class="text-center">
-                                                @foreach ($paiements as $paiement)
-                                                    <tr>
+                                            <tbody id="tableau" class="text-center">
 
-                                                        <td class="align-middle">{{ $paiement->date }}</td>
-                                                        <td class="align-middle">{{ $paiement->user }}</td>
-                                                        <td class="align-middle">{{ $paiement->montant }} DA</td>
-
-
- 
-                                                    </tr>
-                                                @endforeach
 
                                             </tbody>
 
@@ -287,7 +265,7 @@
         </script>
 
         {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
-
+   
         <script>
             function versement(button) {
 
@@ -302,7 +280,7 @@
                 var userID = button.parentElement.dataset.user;
 
                 var Reste = button.parentElement.dataset.reste;
-
+                var rest_a = {{ $reste }} ;
                 if(Reste > 0){
 
 
@@ -310,7 +288,7 @@
                 Swal.fire({
                     title: "Ajouter un versement :",
                     input: "number", // Utilisez "number" pour un champ de saisie de nombre
-                    inputLabel: "(En Dinars) :",
+                    inputLabel: "le reste à payer : " + rest_a +" DA",
                     inputPlaceholder: "Veuillez saisir le montant versé ici",
                     inputAttributes: {
                         min: 1,
@@ -336,13 +314,13 @@
                             icon: "success",
                             timer: 5000, // Time in milliseconds
                             showConfirmButton: false
-                         });
-                                         // Redirect to another page after 1 second 
-                            setTimeout(function() {
-                            form2.action = "/admin/paiement/" + etudiantID + "/voir";
-                            
-                            form2.submit();
-                             }, 5000);
+                        });
+                        setTimeout(function(){
+
+                            AfficherPaiement();
+                        },3000);
+
+
                         }
 
                     }
@@ -354,53 +332,72 @@
             }
         </script>
 
+
+
+
 <script>
-    function frais_examen(button) {
-        // Récupérer l'ID de l'étudiant
-        var etudiantId = '{{ $etudiant->id }}';
-        //envoyer vers valider paiement
-        const form = document.getElementsByClassName('examen-valider')[0];
-        const form2 = document.getElementById('form2');
-
-        if (form) {
-            Swal.fire({
-                title: "Paiement des frais d'examen d'état",
-                icon: "info",
-                showCancelButton: true,
-                confirmButtonColor: "#198754",
-                cancelButtonColor: "#d33",
-                cancelButtonText: "Non",
-                confirmButtonText: "Oui, Valider"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.action = "/admin/paiement/" + etudiantId + "/btn_ex";
-                    form.submit();
-
-                    Swal.fire({
-                        title: "Paiement éffectué",
-                        text: "Votre paiement a été effectué avec succès",
-                        icon: "success",
-                        timer: 5000, // Time in milliseconds
-                        showConfirmButton: false
-                    });
-
-                    // Redirect to another page after 1 second 
-                    setTimeout(function() {
-                        form2.action = "/admin/paiement/" + etudiantId + "/voir";
-                        form2.submit();
-                    }, 5000);
-                }
-            });
-        } else {
-            console.error("Le formulaire n'a pas été trouvé.");
-        }
-    }
+    $(document).ready(function() {
+            // Appeler la fonction au chargement de la page
+            AfficherPaiement();
+});
 </script>
 
 
 
 
+<script>
+    // Fonction pour afficher le tableau
+    function AfficherPaiement() {
+        $.ajax({
+            url: '/admin/paiement_ajax/{{ $etudiant->id }}/voir', // Correction de l'URL
+            type: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                $('#tableau').empty();
+                $.each(response.paiements, function(key, value) { // Correction de response.paiments à response.paiements
+                    var newRow = '<tr>' +
+                        '<td class="align-middle">' + value.date + '</td>' +
+                        '<td class="align-middle">' + value.user + '</td>' +
+                        '<td class="align-middle">' + value.montant + ' DA</td>' +
+                        '</tr>';
+                    $('#tableau').append(newRow);
+                });
 
+                $('#reste').text(response.reste); 
+                $('#total').text(response.total); 
+
+
+                if (parseInt(response.reste) === 0) {
+                    $('#bouton_resul').html(`
+                        <h4 style="text-align: center;font-size: 20px;color: #e82121; margin:30px; "> 
+                            <i class="fa-solid fa-ban fa-fade  fa-2xl"  style="color: #e82121;"></i>
+                           pas de versement à effectuer
+                        </h4>
+                    `);
+                } else {
+                    $('#bouton_resul').html(`
+                        <form class="add-form" action="" 
+                            data-etudiant="{{ $etudiant->id }}"
+                            data-user="{{ auth()->user()->id }}" 
+                            data-reste="{{ $reste }}" 
+                            method="POST">
+                            @csrf
+                            <button type="button" class="btn btn-outline-success alpa shadow"
+                                style="margin-bottom:30px;" onclick="versement(this)">
+                                <i class="bi bi-plus-circle" style="padding-right: 5px;"></i> Ajouter un nouveau Versement </button>
+                        </form>
+                    `);
+                }
+              },
+                error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+    </script>
+    
 
 
 

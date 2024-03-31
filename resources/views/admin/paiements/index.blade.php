@@ -139,7 +139,9 @@
                                                             // Arrondir à deux décimales si le résultat est décimal
                                                             $pourcentage = is_float($pourcentage) ? round($pourcentage, 2) : $pourcentage;
                                                         @endphp
-                                                        <div class="progress-bar @if($pourcentage == 0) bg-danger @else bg-success @endif" role="progressbar" style="width: {{ $pourcentage == 0 ? 100 : $pourcentage }}%;" aria-valuenow="{{ $pourcentage }}" aria-valuemin="0" aria-valuemax="100">
+                                                        {{-- <div class="progress-bar @if($pourcentage == 0) bg-danger @else bg-success @endif" role="progressbar" style="width: {{ $pourcentage == 0 ? 100 : $pourcentage }}%;" aria-valuenow="{{ $pourcentage }}" aria-valuemin="0" aria-valuemax="100"> --}}
+                                                        <div class="progress-bar @if($pourcentage == 0) bg-danger @elseif($pourcentage == 100) bg-success @endif" role="progressbar" style="width: {{ $pourcentage == 0 ? 100 : $pourcentage }}%;" aria-valuenow="{{ $pourcentage }}" aria-valuemin="0" aria-valuemax="100">
+                                                    
                                                             {{ $pourcentage }}%
                                                         </div>
                                                     @endif

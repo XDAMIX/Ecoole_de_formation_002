@@ -61,6 +61,7 @@ public function index(){
 
 
 
+
 public function show($id){
     $etudiant = Etudiant::find($id);
     $session_id = $etudiant->session_id;
@@ -90,6 +91,44 @@ public function show($id){
 
     ]);
 }
+
+public function show_ajax($id){
+    $etudiant = Etudiant::find($id);
+    $session_id = $etudiant->session_id;
+    $session_etudiant = Session::find($session_id);
+    $formation_id = $session_etudiant->formation_id;
+    $formation_etudiant = Formation::find($formation_id);
+
+    $paiements_etudiant = Paiement::leftJoin('users', function ($join_users) {
+        $join_users->on('paiements.user_id', '=', 'users.id');
+    })
+        ->where('paiements.etudiant_id', $id)
+        ->get([
+            'paiements.*', 'users.name as user', 'paiements.date_paiement as date', 'paiements.montant as montant',
+        ]);
+
+    $paiements = Paiement::where('etudiant_id', $id)->get();
+
+    $total_montant = $paiements->sum('montant');
+    $prix_formation = $etudiant->prix_formation;
+
+    $le_reste = $prix_formation - $total_montant;
+        
+
+    // return view('admin.paiements.voir', ['etudiant' => $etudiant, 'session' => $session_etudiant,
+    //  'formation' => $formation_etudiant, 'paiements' => $paiements_etudiant,
+    //  'total' => $total_montant, 'reste' => $le_reste,
+
+    // ]);
+
+    return response()->json(['etudiant' => $etudiant, 'session' => $session_etudiant,
+    'formation' => $formation_etudiant, 'paiements' => $paiements_etudiant,
+    'total' => $total_montant, 'reste' => $le_reste,]);
+}
+
+
+
+
 public function show_inscription($id){
     $etudiant = Etudiant::find($id);
     $session_id = $etudiant->session_id;
@@ -191,17 +230,14 @@ public function versement($id_etudiant,$id_user,$montant){
                 'Content-Length' => strlen($pdfOutput),
     
             ]);
+
+
             return $response;
 
-
-
-    // --------------------------------------------------------
-
-
-    // Alert::success('Le paiement a été effectué avec succès');
-        // return redirect('/admin/paiement/'.$id_etudiant.'/voir');
-
 }
+
+
+
 public function facture($id)
 {
 
