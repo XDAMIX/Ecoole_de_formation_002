@@ -24,29 +24,18 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
-    {{-- assets  --}}
+    {{-- CSS  --}}
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
-
-
-
-    {{-- bootstrap --}}
-    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-
-
-    {{-- autres assets --}}
+    {{-- <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
+    {{-- <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
 
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
+    {{-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
 
 
     {{-- fichiers de theme  --}}
@@ -58,56 +47,20 @@
     @vite(['resources/sass/admin.scss', 'resources/js/admin.js', 'resources/css/admin.css'])
 
 
-    {{-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --}}
 
 
-    {{-- ---------------------------------------------------------------------------------------------------------------------------------------------------------   --}}
-
-    {{-- REMARQUE !!  --}}
-
-    {{-- Lire depuis le dossier ressource  --}}
-    {{-- @vite(['resources/autres/vendor/.....']) --}}
-
-    {{-- Lire depuis le dossier public --}}
-    {{-- <link href="{{ asset('assets/vendor/......') }}" rel="stylesheet"> --}}
-    {{-- <link href="{{ public_path('assets/vendor/......') }}" rel="stylesheet"> --}}
 
     {{-- ---------------------------------------------------------------------------------------------------------------------------------------------------------   --}}
+    <!-- Inclure jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-
-    {{-- tarika jadida  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
     {{-- css datatables  --}}
-    
+
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css" rel="stylesheet">
-    
-    <link href="https://cdn.datatables.net/searchpanes/2.5.0/css/searchPanes.bootstrap4.min.css" rel="stylesheet">
-    
-    
-    {{-- css datatables  --}}
-
-    {{-- <link href="https://cdn.datatables.net/v/bs4/jszip-3.10.1/dt-2.0.3/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/b-print-3.0.1/r-3.0.1/sb-1.7.0/sp-2.3.0/datatables.min.css" rel="stylesheet">
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/dt-2.0.3/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/b-print-3.0.1/r-3.0.1/sb-1.7.0/sp-2.3.0/datatables.min.js"></script>
-     --}}
-
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
-
-    {{-- scripts par ordre --}}
-
-
-    {{-- bootstrap js  --}}
-    {{-- <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script> --}}
-
-
 
     {{-- datatables  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -124,8 +77,8 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"></script>
 
-    {{-- sweetalert2  --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 </head>
 
@@ -432,9 +385,9 @@
                 </div>
             </li>
 
-                                    {{-- ------------------------ --}}
-                                    {{-- --------paiement-------- --}}
-                                    {{-- ------------------------ --}}
+            {{-- ------------------------ --}}
+            {{-- --------paiement-------- --}}
+            {{-- ------------------------ --}}
             {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ url('/admin/paiement') }}" >
                     <i class="fa-solid fa-people-group"></i>
@@ -630,7 +583,8 @@
                                 <a class="btn btn-danger shadow" href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                     style="width: 180px;border-radius: 40px; padding:10px 20px;"><i
-                                        class="fa-solid fa-right-from-bracket" style="margin-right:10px;"></i>Déconnecter</a>
+                                        class="fa-solid fa-right-from-bracket"
+                                        style="margin-right:10px;"></i>Déconnecter</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     class="d-none">
                                     @csrf
@@ -638,7 +592,8 @@
                             </div>
 
                             <div class="col-6" style="text-align: center;">
-                                <button class="btn btn-success shadow" type="button" data-bs-dismiss="modal" style="width: 180px;border-radius: 40px; padding:10px 20px;"><i
+                                <button class="btn btn-success shadow" type="button" data-bs-dismiss="modal"
+                                    style="width: 180px;border-radius: 40px; padding:10px 20px;"><i
                                         class="fa-solid fa-x" style="margin-right:10px;"></i>Annuler</button>
                             </div>
 
@@ -659,18 +614,44 @@
 
 
 
-        
+
 
 
         {{-- --------------------------------------------------------------------------------------------------------------------------------- --}}
 
+
+
+
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
-          {{-- avec l'aide de chatgpt --}}
-  <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}" rel="stylesheet"></script>
-  <script src="{{ asset('assets/vendor/aos/aos.js') }}" rel="stylesheet"></script>
-  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script>
-  <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}" rel="stylesheet"></script>
-  <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}" rel="stylesheet"></script>
+        {{-- avec l'aide de chatgpt --}}
+        <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}" rel="stylesheet"></script>
+        <script src="{{ asset('assets/vendor/aos/aos.js') }}" rel="stylesheet"></script>
+        <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" rel="stylesheet"></script>
+        <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}" rel="stylesheet"></script>
+        <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}" rel="stylesheet"></script>
+
+
+        {{-- datatables  --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.js"></script>
+        <script src="https://cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"></script>
+
+        {{-- sweetalert2  --}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 
 

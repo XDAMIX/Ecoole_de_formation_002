@@ -26,10 +26,10 @@
 
 
                             <div class="row entete">
-                                <div class="col-2 col-md-1 d-flex align-items-center">
+                                <div class="col-1 d-flex align-items-center">
                                     <h4><i class="bi bi-buildings icons"></i></h4>
                                 </div>
-                                <div class="col-8 col-md-11 d-flex align-items-center">
+                                <div class="col-11 d-flex align-items-center">
                                     <h4>Informations de l'école :</h4>
                                 </div>
                             </div>
@@ -97,7 +97,8 @@
                                         </p>
                                     </div>
                                     <div class="col-12 col-md-8">
-                                        <p class="data">N° {{ $information->num_agrement }} | Date {{ $information->date_agrement }}</p>
+                                        <p class="data">N° {{ $information->num_agrement }} | Date
+                                            {{ $information->date_agrement }}</p>
                                     </div>
                                 </div>
 
@@ -110,36 +111,37 @@
                                     <p class="titre"><i class="bi bi-file-image icons"></i>Logo:</p>
                                 </div>
                                 <div class="col-12" style="text-align: center;">
-                                    <img src="{{ asset('storage/' . $information->logo_couleurs) }}" alt="..." class="img-fluid"
-                                        style="width:300px;">
+                                    <img src="{{ asset('storage/' . $information->logo_couleurs) }}" alt="..."
+                                        class="img-fluid" style="width:300px;">
                                 </div>
                             </div>
 
 
                             {{-- bouton modifier --}}
-                            <div class="row fin-section">
-                                <div class="col-10 col-md-10 d-flex align-items-center">
-                                    <h6>Modifier les informations de l'école :</h6>
-                                </div>
-                                <div class="col-2 col-md-2 d-flex align-items-center">
-
-                                    {{-- edit button    --}}
-                                    <form class="informations-edit-form" action="" data-id="{{ $information->id }}"
-                                        data-name="{{ $information->nom }}" method="GET">
-                                        @csrf
-                                        <button type="button" onclick="informations_edit_confirmation(this)"
-                                            class="btn btn-outline-primary alpa shadow" style="margin-bottom: 5px;"><i
-                                                class="bi bi-pen"></i><br><span
-                                                class="btn-description">Modifier</span></button>
-                                    </form>
-
+                            <div class="col-12">
+                                <div class="row fin-section">
+                                    <div class="col-10 d-flex align-items-center">
+                                        <h6>Modifier les informations de l'école :</h6>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center">
+    
+                                        {{-- edit button    --}}
+                                        <form class="informations-edit-form" action="" data-id="{{ $information->id }}"
+                                            data-name="{{ $information->nom }}" method="GET">
+                                            @csrf
+                                            <button type="button" onclick="informations_edit_confirmation(this)"
+                                                class="btn btn-outline-primary btn-lg shadow mt-3 ml-1"><i
+                                                    class="bi bi-pen"></i></button>
+                                        </form>
+    
+                                    </div>
                                 </div>
                             </div>
+
+                        </div>
                     @endforeach
 
 
-                    <!-- row -->
-                </div>
             </div>
             <!-- fin informations ecole -->
 
@@ -153,10 +155,10 @@
             <div class="container section">
 
                 <div class="row entete">
-                    <div class="col-2 col-md-1 d-flex align-items-center">
+                    <div class="col-1 d-flex align-items-center">
                         <h4><i class="bi bi-buildings icons"></i></h4>
                     </div>
-                    <div class="col-10 col-md-11 d-flex align-items-center">
+                    <div class="col-11 d-flex align-items-center">
                         <h4>Numéros de téléphones :</h4>
                     </div>
                 </div>
@@ -165,34 +167,34 @@
                 @foreach ($telephones as $telephone)
                     <div class="row d-flex align-items-center" style="margin-bottom: 20px;">
 
-                        <div class="col-10 col-md-6">
-                            <p class="titre"><i class="bi bi-telephone icons"></i>{{ $telephone->operateur }}</p>
+                        <div class="col-10 d-flex align-items-center">
+                            <p class="titre"><i class="bi bi-telephone icons"></i>{{ $telephone->operateur }} : </p>
 
-                            <p class="numeros data">{{ $telephone->numero }}</p>
+                            <p class="numeros data"> {{ $telephone->numero }}</p>
                         </div>
 
-                        <div class="col-2 col-md-6">
+                        <div class="col-2 d-flex align-items-center">
                             <div class="row">
-                                <div class="col-12 col-md-3">
+                                <div class="col-12 col-md-6">
                                     {{-- edit button    --}}
                                     <form class="tel-edit-form" action="" data-id="{{ $telephone->id }}"
                                         data-name="{{ $telephone->operateur }} {{ $telephone->numero }}" method="GET">
                                         @csrf
                                         <button type="button" onclick="tel_edit_confirmation(this)"
-                                            class="btn btn-outline-primary alpa shadow" style="margin-bottom: 5px;"><i
-                                                class="bi bi-pen"></i> <br><span
-                                                class="btn-description">Modifier</span></button>
+                                            class="btn btn-outline-primary btn-lg shadow mt-3 mr-3 ml-1">
+                                            <i class="bi bi-pen"></i></button>
                                     </form>
                                 </div>
-                                <div class="col-12 col-md-3">
+                            
+                            
+                                <div class="col-12 col-md-6">
                                     {{-- delete button  --}}
                                     <form class="tel-delete-form" action="" data-id="{{ $telephone->id }}"
                                         data-name="{{ $telephone->operateur }} {{ $telephone->numero }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" onclick="tel_supprimer_confirmation(this)"
-                                            class="btn btn-outline-danger alpa shadow"><i class="bi bi-trash3"></i><br>
-                                            <span class="btn-description">Supprimer</span></button>
+                                            class="btn btn-outline-danger btn-lg shadow mt-3 mr-3 ml-1"><i class="bi bi-trash3"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -208,12 +210,12 @@
 
                 {{-- bouton ajouter --}}
                 <div class="row fin-section">
-                    <div class="col-10 col-md-10 d-flex align-items-center">
+                    <div class="col-10 d-flex align-items-center">
                         <h6>Ajouter un nouveau numéro de téléphone :</h6>
                     </div>
-                    <div class="col-2 col-md-2 d-flex align-items-center">
-                        <a href="{{ url('/admin/tel/nouveau') }}" class="btn btn-outline-success alpa shadow"><i
-                                class="bi bi-plus"></i><br><span class="btn-description">Ajouter</span></a>
+                    <div class="col-2 d-flex align-items-center">
+                        <a href="{{ url('/admin/tel/nouveau') }}" class="btn btn-outline-success btn-lg shadow mt-1 ml-1">
+                            <i class="bi bi-plus-circle"></i></a>
                     </div>
                 </div>
 
@@ -230,10 +232,10 @@
             <div class="container section">
 
                 <div class="row entete">
-                    <div class="col-2 col-md-1 d-flex align-items-center">
+                    <div class="col-1 d-flex align-items-center">
                         <h4><i class="bi bi-buildings icons"></i></h4>
                     </div>
-                    <div class="col-10 col-md-11 d-flex align-items-center">
+                    <div class="col-11 d-flex align-items-center">
                         <h4>Liens vers vos comptes sur les réseaux sociaux :</h4>
                     </div>
 
@@ -242,35 +244,33 @@
                 @foreach ($liens as $lien)
                     <div class="row d-flex align-items-center">
 
-                        <div class="col-10 col-md-6">
+                        <div class="col-10">
                             <p class="titre"><i class="bi bi-globe icons"></i>{{ $lien->reseau_social }}</p>
                             <p class="data">Lien :<a href="{{ url($lien->lien) }}"
                                     target="_blank">{{ $lien->lien }}</a></p>
                         </div>
 
-                        <div class="col-2 col-md-6">
+                        <div class="col-2">
 
                             <div class="row">
-                                <div class="col-12 col-md-3">
+                                <div class="col-12 col-md-6">
                                     {{-- edit button    --}}
                                     <form class="rs-edit-form" action="" data-id="{{ $lien->id }}"
                                         data-name="{{ $lien->reseau_social }}" method="GET">
                                         @csrf
                                         <button type="button" onclick="rs_edit_confirmation(this)"
-                                            class="btn btn-outline-primary alpa shadow" style="margin-bottom: 5px;"><i
-                                                class="bi bi-pen"></i> <br><span
-                                                class="btn-description">Modifier</span></button>
+                                            class="btn btn-outline-primary btn-lg shadow mt-3 mr-3 ml-1">
+                                            <i class="bi bi-pen"></i></button>
                                     </form>
                                 </div>
-                                <div class="col-12 col-md-3">
+                                <div class="col-12 col-md-6">
                                     {{-- delete button  --}}
                                     <form class="rs-delete-form" action="" data-id="{{ $lien->id }}"
                                         data-name="{{ $lien->reseau_social }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" onclick="rs_supprimer_confirmation(this)"
-                                            class="btn btn-outline-danger alpa shadow"><i class="bi bi-trash3"></i><br>
-                                            <span class="btn-description">Supprimer</span></button>
+                                            class="btn btn-outline-danger btn-lg shadow mt-3 mr-3 ml-1"><i class="bi bi-trash3"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -293,16 +293,16 @@
             <div class="container section">
 
                 <div class="row entete">
-                    <div class="col-2 col-md-1 d-flex align-items-center">
+                    <div class="col-1 d-flex align-items-center">
                         <h4><i class="bi bi-buildings icons"></i></h4>
                     </div>
-                    <div class="col-10 col-md-11 d-flex align-items-center">
+                    <div class="col-11 d-flex align-items-center">
                         <h4>Autres informations :</h4>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-md-12">
+                    <div class="col-12">
                         <p class="titre"><i class="bi bi-globe icons"></i>Banner d'acceuil sur le site web :</p>
                     </div>
                 </div>
@@ -313,8 +313,8 @@
                             style="background-image: url(  {{ asset('storage/' . $acceuil->photo) }} );background-size: cover;background-repeat: no-repeat; text-align:center ;height:500px;padding-top:50px;padding-bottom:50px;">
                             <div class="titres"
                                 style="height:100%;width:100%;padding:50px;text-align: center;background-color: #ffff;opacity: 0.6;">
-                                <img src="{{ asset('storage/' . $information->logo) }}" alt="..." class="img-fluid"
-                                    style="width:200px;margin-bottom:20px;">
+                                <img src="{{ asset('storage/' . $information->logo_couleurs) }}" alt="..."
+                                    class="img-fluid" style="width:200px;margin-bottom:20px;">
                                 <h2>{{ $acceuil->titre }}</h2>
                                 <p>
                                     {{ $acceuil->sous_titre1 }}
@@ -327,17 +327,17 @@
                 </div>
                 {{-- bouton modifier --}}
                 <div class="row fin-section">
-                    <div class="col-10 col-md-10 d-flex align-items-center">
+                    <div class="col-10 d-flex align-items-center">
                         <h6>Modifier le Banner d'acceuil sur le site web :</h6>
                     </div>
-                    <div class="col-2 col-md-2 d-flex align-items-center">
+                    <div class="col-2 d-flex align-items-center">
                         {{-- edit button    --}}
                         <form class="banner-edit-form" action="" data-id="{{ $acceuil->id }}"
                             data-name="{{ $acceuil->titre }}" method="GET">
                             @csrf
                             <button type="button" onclick="banner_edit_confirmation(this)"
-                                class="btn btn-outline-primary alpa shadow" style="margin-bottom: 5px;"><i
-                                    class="bi bi-pen"></i> <br><span class="btn-description">Modifier</span></button>
+                                class="btn btn-outline-primary btn-lg shadow mt-3 ml-1" style="margin-bottom: 5px;"><i
+                                    class="bi bi-pen"></i></button>
                         </form>
                     </div>
                 </div>

@@ -23,6 +23,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PaiementController extends Controller
 {
+    public function __construct()
+    {
+       $this->middleware('auth'); 
+    }
+    
 public function index(){
     $etudiants =  Etudiant::leftJoin('sessions', function ($join_sessions) {
         $join_sessions->on('etudiants.session_id', '=', 'sessions.id');
