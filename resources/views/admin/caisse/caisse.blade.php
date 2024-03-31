@@ -89,14 +89,13 @@
                             <div class="col-6 mt-5 mb-5">
                                 <label for="">Type de graphe :</label>
                                 <select name="graphe1" id="graphe1">
-                                    <option value="1">Bars</option>
+                                    <option value="1" selected>Bars</option>
                                     <option value="2">Points</option>
                                 </select>
                             </div>
 
-                            <div class="col-12 mt-5 mb-5">
-                                <canvas id="graphiqueTotalPaiementsJour"  width="" height=""
-                                style="height: 800px;"></canvas>
+                            <div class="col-12 mt-5 mb-5 text-center">
+                                <canvas class="text-center" id="graphiqueTotalPaiementsJour"></canvas>
                             </div>
                         </div>
 
@@ -136,11 +135,12 @@
                                     scales: {
                                         y: {
                                             beginAtZero: true
-                                        }
-                                    },
-                                    maintainAspectRatio: false,
-                                    responsive: true,
-                                    // aspectRatio: 1,
+                                        },
+                                        maintainAspectRatio: false,
+                                        responsive: true,
+                                        width: '100%',
+                                        height: '300'
+                                    }
                                 }
                             });
                         </script>
@@ -157,14 +157,13 @@
                             <div class="col-6 mt-5 mb-5">
                                 <label for="">Type de graphe :</label>
                                 <select name="graphe2" id="graphe2">
-                                    <option value="1">Donut</option>
+                                    <option value="1" selected>Donut</option>
                                     <option value="2">Bars</option>
                                 </select>
                             </div>
 
-                            <div class="col-12 mt-5 mb-5">
-                                <canvas id="graphiqueTotalPaiementsFormation" width="" height=""
-                                    style="height: 800px;"></canvas>
+                            <div class="col-12 mt-5 mb-5 text-center">
+                                <canvas class="text-center" id="graphiqueTotalPaiementsFormation"></canvas>
                             </div>
                         </div>
 
@@ -203,11 +202,12 @@
                                     scales: {
                                         y: {
                                             beginAtZero: true
-                                        }
-                                    },
-                                    maintainAspectRatio: false,
-                                    responsive: true,
-                                    // aspectRatio: 1,
+                                        },
+                                        maintainAspectRatio: false,
+                                        responsive: true,
+                                        width: '100%',
+                                        height: '300'
+                                    }
                                 }
                             });
                         </script>
@@ -413,16 +413,14 @@
                             beginAtZero: true
                         },
                         maintainAspectRatio: false,
-                        responsive: true
+                        responsive: true,
+                        width: '100%',
+                        height: '300'
                     }
                 }
             });
             graphique.canvas.id = 'graphiqueTotalPaiementsJour'; // Attribution de l'ID
-            // Appliquer le style au canvas
-            // graphique.canvas.style.height = '600px'; // Définir la hauteur fixe
-            // graphique.canvas.style.width = '100%'; // Définir la hauteur fixe
-            // graphique.canvas.height = '600px'; // Définir la hauteur fixe
-            // graphique.canvas.width = '100%'; // Définir la hauteur fixe
+
         });
 
         // Écouteur d'événements pour le changement de type de graphe pour graphiqueTotalPaiementsFormation
@@ -447,26 +445,29 @@
                             beginAtZero: true
                         },
                         maintainAspectRatio: false,
-                        responsive: true
+                        responsive: true,
+                        width: '100%',
+                        height: '300'
                     }
                 }
             });
             graphiqueFormation.canvas.id = 'graphiqueTotalPaiementsFormation'; // Attribution de l'ID
-            // Appliquer le style au canvas
 
-            // graphiqueFormation.canvas.style.height = '600px'; // Définir la hauteur fixe
-            // graphiqueFormation.canvas.style.width = '100%'; // Définir la hauteur fixe
-            // graphiqueFormation.canvas.height = '600px'; // Définir la hauteur fixe
-            // graphiqueFormation.canvas.width = '100%'; // Définir la hauteur fixe
         });
     </script>
 
 
-
-
-
-
-
+<style>
+    #graphiqueTotalPaiementsFormation {
+    height: 500px !important;
+    text-align: center !important;
+    /* width: 100% !important; */
+}
+    #graphiqueTotalPaiementsJour {
+    height: 500px !important;
+    width: 100% !important;
+}
+</style>
 
 
 

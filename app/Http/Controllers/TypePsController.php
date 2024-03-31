@@ -12,6 +12,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 class TypePsController extends Controller
 {
 
+    public function __construct()
+    {
+       $this->middleware('auth'); 
+    }
+    
     public function index()
     {
         $types = TypePs::all();
