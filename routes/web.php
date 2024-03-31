@@ -297,9 +297,15 @@ Route::controller(TypePsController::class)->group(function () {
 Route::controller(PaiementController::class)->group(function () {
     Route::get('/admin/paiement', 'index'); 
     Route::get('/admin/paiement/{id}/voir', 'show');
-    Route::post('/admin/paiement/save/{id_etudiant}/{id_user}/{montant}', 'versement');
+    Route::post('/admin/paiement/save/{id_etudiant}/{id_user}/{montant}', 'versement');  
     Route::get('/admin/paiement/{id}/download', 'facture');
+   
+    // ajax
 
+    Route::get('/admin/paiement_ajax/{id}/voir', 'show_ajax');
+
+    // Route::get('/admin/paiement_ajax /admin/paiement_ajax', 'index_ajax'); 
+    // Route::post('/admin/paiement/save/{id_etudiant}/{id_user}/{montant}', 'versement_ajax');
 });
 
 // --------------------------------------------------------------------------
