@@ -7,7 +7,7 @@
             <a href="{{ url('/admin/messages') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                     class="btn-description">Retour</span></a>
         </div>
-        <div class="col-10 d-flex align-items-center">
+        <div class="col-10 d-flex align-items-center pl-5">
             <h2>Lire le message</h2>
         </div>
     </div>

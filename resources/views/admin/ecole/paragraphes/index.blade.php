@@ -6,7 +6,7 @@
                 <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
                         class="btn-description">Acceuil</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center">
+            <div class="col-10 d-flex align-items-center pl-5">
                 <h2>Présentation de l'école</h2>
             </div>
         </div>

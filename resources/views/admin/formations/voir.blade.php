@@ -7,7 +7,7 @@
             <a href="{{ url('/admin/formations') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                     class="btn-description">Retour</span></a>
         </div>
-        <div class=" d-flex align-items-center justify-content-center">
+        <div class=" d-flex align-items-center justify-content-center pl-5">
             <h1>{{ $formation->titre }}</h1>
             {{-- <h2>informations de la formation</h2> --}}
         </div>

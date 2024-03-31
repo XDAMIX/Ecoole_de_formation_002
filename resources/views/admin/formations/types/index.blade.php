@@ -8,7 +8,7 @@
                 <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
                         class="btn-description">Acceuil</span></a>
             </div>
-            <div class="col-8  text-center">
+            <div class="col-8  d-flex align-items-center pl-5">
                 <h2>type des paiements</h2>
             </div>
                         <div class="col-2 d-flex align-items-center">

@@ -10,7 +10,7 @@
             <div class="col-8  text-center">
                 <h2>Témoignages</h2>
             </div>
-                        <div class="col-2 d-flex align-items-center">
+                        <div class="col-2 d-flex align-items-center pl-5">
                 <a href="{{ url('/admin/temoignages/nouveau') }}" class="btn btn-success"><i class="fa-solid fa-plus fa-beat-fade"></i><span
                         class="btn-description">Ajouter </span></a>
             </div>

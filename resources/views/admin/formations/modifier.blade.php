@@ -22,7 +22,7 @@
                 <a href="{{ url('/admin/formations') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                         class="btn-description">Retour</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center">
+            <div class="col-10 d-flex align-items-center pl-5">
                 <h2>Modifier les informations de la formation</h2>
             </div>
         </div>
