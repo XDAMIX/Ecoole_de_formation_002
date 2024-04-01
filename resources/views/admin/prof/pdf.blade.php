@@ -47,17 +47,17 @@ ini_set('display_errors', 1);
 
     <div class="container-fluid" id="entete">
         {{-- logo et nom de ecole  --}}
-        <div class="row justify-content-center text-center">
-            <div class="col col-11">
+        <div class="row ">
+            <div class="col col-11  float-left">
                 {{-- <img class="img-fluid" src="{{public_path('storage/'.$informations->logo)}}" alt="logo" style="height: 100px;"> --}}
-                <img class="img-fluid" src="{{ public_path('storage/' . $informations->logo_couleurs) }}" alt="logo"
+                <img class="img-fluid " src="{{ public_path('storage/' . $informations->logo_couleurs) }}" alt="logo"
                     style="height: 100px;">
 
             </div>
             {{-- <div class="col col-11">
                 <h1 style="font-weight: bold;padding-top:10px;">{{ $informations->nom }}</h1>
             </div> --}}
-            <div class="col col-11">
+            <div class="col col-11 justify-content-center text-center">
                 <h3>Fiche Profésseur</h3>
             </div>
         </div>
