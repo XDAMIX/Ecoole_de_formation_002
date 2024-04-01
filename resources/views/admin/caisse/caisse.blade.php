@@ -7,7 +7,7 @@
                 <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
                         class="btn-description">Acceuil</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center">
+            <div class="col-8  text-center">
                 <h2>Calcul du revenu</h2>
             </div>
         </div>
@@ -38,8 +38,9 @@
 
 
                         <div class="row mt-1 mb-5">
-                            <div class="col-12 text-primary">
-                                <h5>Résumé des paiements :</h5>
+                            <div class="col-12 text-center text-primary">
+                              
+                                <h5 style="font-size: 35px">Résumé des paiements :</h5>
                             </div>
                         </div>
                         <hr>
