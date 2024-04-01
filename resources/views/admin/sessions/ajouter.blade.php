@@ -7,7 +7,7 @@
                 <a href="{{ url('/admin/session') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                         class="btn-description">Retour</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center pl-5">
+            <div class="col-8  text-center">
                 <h2>Ajouter une nouvelle session</h2>
             </div>
         </div>

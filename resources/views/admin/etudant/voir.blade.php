@@ -6,7 +6,7 @@
                 <a href="{{ url('/admin/etudiant') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                         class="btn-description">Retour</span></a>
             </div>
-            <div class="col-10 text-center">
+            <div class="col-8  text-center">
                 <h2>Voir les informations de stagiaire</h2>
             </div>
         </div>

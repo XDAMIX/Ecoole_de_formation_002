@@ -6,7 +6,7 @@
                 <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
                         class="btn-description">Acceuil</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center pl-5">
+            <div class="col-8  text-center">
                 <h2>Liste des inscriptions en-ligne</h2>
             </div>
         </div>
@@ -18,39 +18,44 @@
 
 
 
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                processing: true,
-                    // dom: '<"buttons-container"lBfrtip>', 
-                    lengthMenu: [
-                        [10, 25, 50, -1],
-                        [10, 25, 50, "All"]
-                    ], // Specify the options
-                    buttons: [
-                    ],
-                    language: {
-                        "lengthMenu": "Afficher _MENU_ éléments par page",
-                        "zeroRecords": "Aucun enregistrement trouvé",
-                        "info": "Page _PAGE_ sur _PAGES_",
-                        "infoEmpty": "Aucun enregistrement disponible",
-                        "infoFiltered": "(filtré de _MAX_ total des enregistrements)",
-                        "search": "Rechercher :",
-                        "paginate": {
-                            "first": "Premier",
-                            "last": "Dernier",
-                            "next": "Suivant",
-                            "previous": "Précédent"
-                        }
-                    },
-                    initComplete: function() {
-                        // Ajouter des styles personnalisés
-                        $('.dataTables_length select').css('width',
-                            '60px'); // ajustez la largeur selon vos besoins
-                    },
-            });
+   {{-- javascript DataTables --}}
+   <script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            processing: true,
+            // scroller
+            scrollCollapse: true,
+            scroller: true,
+            scrollY: 400 ,
+            // ----------
+            // dom: '<"buttons-container"lBfrtip>', 
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ], // Specify the options
+            buttons: [],
+            language: {
+                "lengthMenu": "Afficher _MENU_ éléments par page",
+                "zeroRecords": "Aucun enregistrement trouvé",
+                "info": "Page _PAGE_ sur _PAGES_",
+                "infoEmpty": "Aucun enregistrement disponible",
+                "infoFiltered": "(filtré de _MAX_ total des enregistrements)",
+                "search": "Rechercher :",
+                "paginate": {
+                    "first": "Premier",
+                    "last": "Dernier",
+                    "next": "Suivant",
+                    "previous": "Précédent"
+                }
+            },
+            initComplete: function() {
+                // Ajouter des styles personnalisés
+                $('.dataTables_length select').css('width',
+                    '60px'); // ajustez la largeur selon vos besoins
+            },
         });
-    </script>
+    });
+</script>  
 
 
     <style>

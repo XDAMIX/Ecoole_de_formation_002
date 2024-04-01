@@ -7,7 +7,7 @@
                 <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
                         class="btn-description">Acceuil</span></a>
             </div>
-            <div class="col-10 text-center">
+            <div class="col-8 text-center">
                 <h2>Foire au questions</h2>
             </div>
         </div>
