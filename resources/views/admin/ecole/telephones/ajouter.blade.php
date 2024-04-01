@@ -7,7 +7,7 @@
         <div class="col-2 d-flex align-items-center">
             <a href="{{ url('/admin/ecole') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span class="btn-description">Retour</span></a>
         </div>
-        <div class="col-10 d-flex align-items-center pl-5">
+        <div class="col-10 text-center">
             <h2>Ajouter un numéro de téléphone</h2>
         </div>
     </div>

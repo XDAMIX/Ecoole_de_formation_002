@@ -10,7 +10,7 @@
             <div class="col-8  d-flex align-items-center  pl-5">
                 <h2>Dossier a fournir</h2>
             </div>
-            <div class="col-2 d-flex align-items-center">
+            <div class="col-2  text-center">
 
 
                 <button type="button" onclick="add_formulaire()" class="btn btn-success"><i

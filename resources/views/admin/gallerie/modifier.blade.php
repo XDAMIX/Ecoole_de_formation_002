@@ -8,7 +8,7 @@
                 <a href="{{ url('/admin/gallerie') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                         class="btn-description">Retour</span></a>
             </div>
-            <div class="col-10 d-flex align-items-center pl-5">
+            <div class="col-10 text-center">
                 <h2>Modifier les informations de l'actualité</h2>
             </div>
         </div>
