@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container">
-        
+
         {{-- teste résumé --}}
         {{-- --------------------------------------------------------------------------------------------------------------------------------------- --}}
-        
+
         <div class="row animate__animated animate__backInLeft" style="padding: 0;margin:0;">
 
             <!-- Earnings (Monthly) Card Example -->
@@ -16,7 +16,8 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 text-center">
                                     Formations</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['formations'] }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['formations'] }}
+                                </div>
                             </div>
                             <div class="col-auto" style="padding-right: 5px;">
                                 <i class="fas fa-award fa-2x text-gray-300"></i>
@@ -34,7 +35,8 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1 text-center">
                                     Sessions</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['sessions'] }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['sessions'] }}
+                                </div>
                             </div>
                             <div class="col-auto" style="padding-right: 5px;">
                                 <i class="fas fa-people-group fa-2x text-gray-300"></i>
@@ -43,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-2 col-md-6 mb-1">
                 <div class="card border-left-success shadow h-80 py-2">
@@ -70,11 +72,12 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1 text-center">
                                     Stagiaires</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['etudiants'] }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['etudiants'] }}
                                 </div>
-                                <div class="col-auto" style="padding-right: 5px;">
-                                    <i class="fas fa-address-card fa-2x text-gray-300"></i>
-                                </div>
+                            </div>
+                            <div class="col-auto" style="padding-right: 5px;">
+                                <i class="fas fa-address-card fa-2x text-gray-300"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +91,8 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1 text-center">
                                     Inscriptions</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['inscriptions'] }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">
+                                    {{ $totals['inscriptions'] }}</div>
                             </div>
                             <div class="col-auto" style="padding-right: 5px;">
                                 <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
@@ -106,9 +110,10 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1 text-center">
                                     Messages</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['messages'] }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{ $totals['messages'] }}
                                 </div>
-                                <div class="col-auto" style="padding-right: 5px;">
+                            </div>
+                            <div class="col-auto" style="padding-right: 5px;">
                                 <i class="fas fa-envelope fa-2x text-gray-300"></i>
                             </div>
                         </div>
@@ -125,24 +130,24 @@
 
         <div class="row">
             <div class="col-12 text-center ">
-                
+
+                @foreach ($informations as $information)
                 <div class="logo animate__animated animate__swing">
-                    @foreach ($informations as $information)
-                    <img src="{{ asset('storage/' . $information->logo_couleurs) }}" class="img-fluid" alt="logo"
-                    style="height: 150px;margin-bottom:30px;">
-                    @endforeach
+                        <img src="{{ asset('storage/' . $information->logo_couleurs) }}" class="img-fluid" alt="logo"
+                            style="height: 150px;margin-bottom:30px;">
                 </div>
-                <div class="col-12 text-center">
-                    <h1>{{$information->nom}}</h1>
+                <div class="col-12 text-center font-weight-bold">
+                    <h1>{{ $information->nom }}</h1>
                 </div>
+                @endforeach
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                 @endif
-                @auth
+                {{-- @auth
                     {{ __('Bienvenue ') }} <b>{{ Auth::user()->name }}</b>{{ __(' Vous êtes maintenant connecté') }}
-                @endauth
+                @endauth --}}
 
             </div>
         </div>
@@ -162,7 +167,7 @@
     <div class="container" style="width:100%;position: fixed;bottom:0;text-align:center;">
         <div class="row">
             <div class="col-12" style="text-align:center;">
-                <p>Copyright &copy; Infinity-Concepts 2022</p>
+                <p>Copyright &copy; bitech-dz.com 2024</p>
             </div>
         </div>
     </div>
@@ -177,8 +182,8 @@
 
     <style>
         /* .card {
-            text-align: center;
-            background-color: white;
-        } */
+                text-align: center;
+                background-color: white;
+            } */
     </style>
 @endsection

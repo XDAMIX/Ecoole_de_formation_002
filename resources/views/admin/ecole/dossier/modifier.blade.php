@@ -22,7 +22,7 @@
                 <a href="{{ url('/admin/types_p') }}" class="btn btn-dark"><i class="bi bi-arrow-left"></i><span
                         class="btn-description">Retour</span></a>
             </div>
-            <div class="d-flex align-items-center justify-content-center">
+            <div class="col-10  text-center">
                 <h2>Modifier le ficher a fourni {{ $dossier->titre }}</h2>
             </div>
         </div>
