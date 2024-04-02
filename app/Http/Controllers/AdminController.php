@@ -10,6 +10,8 @@ use App\Models\Prof;
 use App\Models\Etudiant;
 use App\Models\Inscription;
 use App\Models\Message;
+use App\Models\Acceuil;
+use App\Models\Lien;
 
 class AdminController extends Controller
 {
@@ -31,8 +33,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $listeinformations = Information::all();
-        if ($listeinformations === null) {
+        $lesinformations = Information::all();
+
+        $acceuil = Acceuil::all();
+        $liens = Lien::all();
+
+        if ($lesinformations->isEmpty()) {
 
             $information = new Information();
 
@@ -47,6 +53,49 @@ class AdminController extends Controller
     
             $information->save();
         }
+        if ($acceuil->isEmpty()) {
+
+            $acceuil = new Acceuil();
+            $acceuil->titre = 'Titre ici';
+            $acceuil->sous_titre1 = 'Sous-titre ici';
+            $acceuil->sous_titre2 = 'Paragraphe ici';
+            $acceuil->photo = '';
+    
+            $acceuil->save();
+        }
+        if ($liens->isEmpty()) {
+
+            $lien1 = new Lien();
+            $lien1->reseau_social = 'Facebook';
+            $lien1->lien = '';
+            $lien1->save();
+
+            $lien2 = new Lien();
+            $lien2->reseau_social = 'Instagram';
+            $lien2->lien = '';
+            $lien2->save();
+
+            $lien3 = new Lien();
+            $lien3->reseau_social = 'Linkedin';
+            $lien3->lien = '';
+            $lien3->save();
+
+            $lien4 = new Lien();
+            $lien4->reseau_social = 'Youtube';
+            $lien4->lien = '';
+            $lien4->save();
+
+            $lien5 = new Lien();
+            $lien5->reseau_social = 'Tiktok';
+            $lien5->lien = '';
+            $lien5->save();
+
+            $lien6 = new Lien();
+            $lien6->reseau_social = 'Twitter';
+            $lien6->lien = '';
+            $lien6->save();
+        }
+
 
 
         $total_formations = Formation::count();
@@ -67,7 +116,7 @@ class AdminController extends Controller
             'messages' => $total_messages
         ];
         // return $totals;
-        return view('admin.index',[ 'informations'=>$listeinformations,'totals'=>$totals]);
+        return view('admin.index',[ 'informations'=>$lesinformations,'totals'=>$totals]);
         
     }
 

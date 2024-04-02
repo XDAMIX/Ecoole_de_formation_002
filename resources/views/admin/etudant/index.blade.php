@@ -7,7 +7,7 @@
                 <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
                         class="btn-description">Acceuil</span></a>
             </div>
-            <div class="col-8  text-center">
+            <div class="col-8 text-center">
                 <h2>Liste des Stagiaires</h2>
             </div>
                         <div class="col-2 d-flex align-items-center">
@@ -121,7 +121,7 @@
                                             <div class="container">
                                                 <div class="row">
 
-                                                    <div class="col-4">
+                                                    <div class="col-12 col-md-4">
                                                         {{-- show button    --}}
                                                         <form class="show-form"
                                                             action="{{ url('/admin/etudiant/' . $etudiant->id . '/voir') }}"
@@ -133,7 +133,7 @@
                                                         </form>
                                                     </div>
 
-                                                    <div class="col-4">
+                                                    <div class="col-12 col-md-4">
                                                         {{-- edit button    --}}
                                                         <form class="edit-form" action="" data-id="{{ $etudiant->id }}"
                                                             data-name="{{ $etudiant->nom . ' ' . $etudiant->prenom }}"
@@ -147,7 +147,7 @@
 
                                                     {{-- validate button  --}}
 
-                                                    <div class="col-4">
+                                                    <div class="col-12 col-md-4">
                                                         {{-- delete button  --}}
                                                         <form class="delete-form" action=""
                                                             data-id="{{ $etudiant->id }}"

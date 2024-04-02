@@ -44,13 +44,15 @@ class WebsiteController extends Controller
         $ListeTem = Temoignage::all();
         $ListeBanners = Banner::all();
         $ListeQuestions = Question::all();
-        $acceuil = Acceuil::all()->first();
-        $informations = Information::all()->first();
+
+        $acceuil = Acceuil::all();
+        $informations = Information::all();
         $liens = Lien::all();
+
         $telephones = Telephone::all();
         $paragraphes = Paragraphe::all();
 
-        if ($informations === null) {
+        if ($informations->isEmpty()) {
 
             $information = new Information();
 
@@ -65,19 +67,48 @@ class WebsiteController extends Controller
     
             $information->save();
         }
-        if ($acceuil === null) {
+        if ($acceuil->isEmpty()) {
 
             $acceuil = new Acceuil();
-            $acceuil->titre = '';
-            $acceuil->sous_titre1 = '';
-            $acceuil->sous_titre2 = '';
+            $acceuil->titre = 'Titre ici';
+            $acceuil->sous_titre1 = 'Sous-titre ici';
+            $acceuil->sous_titre2 = 'Paragraphe ici';
             $acceuil->photo = '';
     
             $acceuil->save();
         }
+        if ($liens->isEmpty()) {
+
+            $lien = new Lien();
+            $lien->reseau_social = 'Facebook';
+            $lien->lien = '';
+            $lien->save();
+
+            $lien = new Lien();
+            $lien->reseau_social = 'Instagram';
+            $lien->lien = '';
+            $lien->save();
+
+            $lien = new Lien();
+            $lien->reseau_social = 'Linkedin';
+            $lien->lien = '';
+            $lien->save();
+
+            $lien = new Lien();
+            $lien->reseau_social = 'Youtube';
+            $lien->lien = '';
+            $lien->save();
+
+            $lien = new Lien();
+            $lien->reseau_social = 'Tiktok';
+            $lien->lien = '';
+            $lien->save();
+        }
+
 
         $acceuil = Acceuil::all()->first();
         $informations = Information::all()->first();
+        $liens = Lien::all();
 
         return view('index', [
             'formations' => $ListeFormations, 'photos' => $ListePhotos, 'temoignages' => $ListeTem, 'banners' => $ListeBanners,

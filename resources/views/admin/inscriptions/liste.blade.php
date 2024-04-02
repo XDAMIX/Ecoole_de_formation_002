@@ -117,7 +117,7 @@
                                             <div class="container">
                                                 <div class="row">
 
-                                                    <div class="col-3">
+                                                    <div class="col-12 col-md-3">
                                                         {{-- show button    --}}
                                                         <form class="show-form" action="{{url('/admin/inscription/'.$inscription->id.'/voir')}}" method="GET">
                                                             @csrf
@@ -125,7 +125,7 @@
                                                         </form>
                                                     </div>
 
-                                                    <div class="col-3">
+                                                    <div class="col-12 col-md-3">
                                                         {{-- edit button    --}}
                                                         <form class="edit-form" action=""
                                                             data-id="{{ $inscription->id }}"
@@ -139,7 +139,7 @@
                                                     </div>
                                                     
                                                     {{-- validate button  --}}
-                                                    <div class="col-3">
+                                                    <div class="col-12 col-md-3">
                                                         <form class="validate-form" action=""
                                                             data-id="{{ $inscription->id }}"
                                                             data-name="{{ $inscription->nom . ' ' . $inscription->prenom }}"
@@ -151,7 +151,7 @@
                                                         </form>
                                                     </div>
 
-                                                    <div class="col-3">
+                                                    <div class="col-12 col-md-3">
                                                         {{-- delete button  --}}
                                                         <form class="delete-form" action=""
                                                             data-id="{{ $inscription->id }}"

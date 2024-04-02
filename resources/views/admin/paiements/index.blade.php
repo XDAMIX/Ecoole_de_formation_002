@@ -3,7 +3,7 @@
     {{-- retour à l'acceuil  --}}
     <div class="container" id="titre-page">
         <div class="row">
-            <div class="col-2 d-flex align-items-center">
+            <div class="col-2 d-flex align-items-center pl-5">
                 <a href="{{ url('/admin/') }}" class="btn btn-dark"><i class="bi bi-house"></i><span
                         class="btn-description">Acceuil</span></a>
             </div>
