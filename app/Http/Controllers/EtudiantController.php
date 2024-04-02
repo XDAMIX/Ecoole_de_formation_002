@@ -338,7 +338,6 @@ class EtudiantController extends Controller
         $totalAnnee = Paiement::whereYear('date_paiement', $annee)->sum('montant');
 
 
-        
         $paiements = Paiement::leftJoin('users', function ($join_users) {
             $join_users->on('paiements.user_id', '=', 'users.id');
         })
