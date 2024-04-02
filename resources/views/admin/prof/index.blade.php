@@ -119,7 +119,7 @@
                                             <div class="container">
                                                 <div class="row">
 
-                                                    <div class="col-4">
+                                                    <div class="col-12 col-md-4">
                                                         {{-- show button    --}}
                                                         <form class="show-form"
                                                             action="{{ url('/admin/prof/' . $prof->id . '/voir') }}"
@@ -131,7 +131,7 @@
                                                         </form>
                                                     </div>
 
-                                                    <div class="col-4">
+                                                    <div class="col-12 col-md-4">
                                                         {{-- edit button    --}}
                                                         <form class="edit-form" action=""
                                                             data-id="{{ $prof->id }}"
@@ -146,7 +146,7 @@
 
                                                     {{-- validate button  --}}
 
-                                                    <div class="col-4">
+                                                    <div class="col-12 col-md-4">
                                                         {{-- delete button  --}}
                                                         <form class="delete-form" action=""
                                                             data-id="{{ $prof->id }}"

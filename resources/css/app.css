@@ -5,11 +5,11 @@
 /* Variables */
 /* ============================================ */
 :root{
-  --color1: #FFFFFF;
+  --color1: #ffffff;
   --color2: #c4bfbf86;
-  --color3: #000000;
-  --color4: rgb(241, 124, 7);
-  --color5: rgb(2, 4, 8);
+  --color3: #3a3a3a;
+  --color4: rgb(98, 221, 96);
+  --color5: rgb(61, 109, 207);
 
 
   --fontfr1: 'Gloock', serif;

@@ -29,8 +29,9 @@
 
                                 <div class="truncate-text" id="truncate-text{{ $paragraphe->id }}">
                                     <p class="texte">{{ $paragraphe->paragraphe }}</p>
-                                    <button class="btn btn-light" onclick="toggleText({{ $paragraphe->id }})">Lire la
-                                        suite</button>
+
+                                    {{-- expand button  --}}
+                                    <button id="truncate-button{{ $paragraphe->id }}" class="btn btn-light" onclick="toggleText({{ $paragraphe->id }})">voir plus</button>
                                 </div>
                             </div>
 
@@ -434,7 +435,7 @@
                 &copy; Copyright <strong><span>{{ $informations->nom }}</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Designed by <a href="#">bitech</a>
+                Designed by <a href="#">bitech-dz</a>
             </div>
         </div>
     </footer>
@@ -517,15 +518,25 @@
 
 
 {{-- ---------------------------------------------------------------------------------------------------- --}}
+
 <script>
     function toggleText(id) {
         console.log("***ToggleText function called***");
         console.log('id : ' + id);
 
         var element = document.querySelector("#truncate-text" + id);
+        var bouton = document.querySelector("#truncate-button" + id);
 
         if (element) {
             element.classList.toggle("expanded");
+            if(bouton.textContent == 'voir plus'){
+                
+                bouton.textContent = "voir moin";
+            }
+            else {
+                
+                bouton.textContent = "voir plus";
+            }
             console.log("L'élément a été trouvé et la classe est switché");
         } else {
             console.error();

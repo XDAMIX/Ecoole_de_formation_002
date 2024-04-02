@@ -21,7 +21,7 @@
 
         <div class="row animate__animated animate__backInLeft">
 
-            <div class="card shadow">
+            <div class="card shadow" style="background-color: #ffff;">
                 {{-- <div class="card-header">
           <h5>Nouvelle Publicité :</h5>
         </div> --}}

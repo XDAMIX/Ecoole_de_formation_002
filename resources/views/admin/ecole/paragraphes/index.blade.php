@@ -30,9 +30,12 @@
                             <div class="col-md-6">
                                 <img src="{{ url('storage/' . $paragraphe->photo) }}" class="img-fluid" alt="image">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 truncate-text" id="truncate-text{{ $paragraphe->id }}">
                                 <h5 class="titre" style="padding-top: 15px; ">{{ $paragraphe->sous_titre }}</h5>
-                                <p class="data">{{ $paragraphe->paragraphe }}</p>
+                                <p class="data texte">{{ $paragraphe->paragraphe }}</p>
+
+                                {{-- expand button  --}}
+                                <button id="truncate-button{{ $paragraphe->id }}" class="btn btn-light" onclick="toggleText({{ $paragraphe->id }})">voir plus</button>
                             </div>
 
                         </div>
@@ -175,6 +178,63 @@
     </script>
 
 
+
+    {{-- -------------------------------------------------------------- --}}
+    <script>
+        function toggleText(id) {
+            console.log("***ToggleText function called***");
+            console.log('id : ' + id);
+
+            var element = document.querySelector("#truncate-text" + id);
+            var bouton = document.querySelector("#truncate-button" + id);
+
+            if (element) {
+                element.classList.toggle("expanded");
+                if(bouton.textContent == 'voir plus'){
+                    
+                    bouton.textContent = "voir moin";
+                }
+                else {
+                    
+                    bouton.textContent = "voir plus";
+                }
+                console.log("L'élément a été trouvé et la classe est switché");
+            } else {
+                console.error();
+                ("L'élément n'a pas été trouvé.");
+            }
+        }
+    </script>
+
+    <style>
+        .truncate-text .texte {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 300;
+            /* Limit to three lines */
+            -webkit-box-orient: vertical;
+            max-height: calc(6em * 3);
+            /* Adjust the line height accordingly */
+            transition: max-height 0.3s ease;
+            /* Add a smooth transition effect */
+        }
+
+        .truncate-text.expanded .texte {
+            max-height: none;
+            -webkit-line-clamp: 500;
+            /* Allow the full height for the expanded state */
+        }
+
+        .truncate-text.expanded button {
+            display: inline-block;
+            /* Hide the "Lire la suite" button by default */
+        }
+
+        .truncate-text button {
+            display: inline-block;
+            /* Display the "Lire la suite" button in expanded mode */
+        }
+    </style>
 
     {{-- -------------------------------------------------------------- --}}
 
