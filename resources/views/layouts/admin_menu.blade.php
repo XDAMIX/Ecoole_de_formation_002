@@ -471,22 +471,21 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('storage/public/images/user.png') }}">
+                                    class="mr-2 d-none d-lg-inline text-gray-900 small text-center">{{ Auth::user()->name }} <br> 
+                                    <span class="text-gray-600">{{ Auth::user()->email }} </span> </span>
+
+                                <img class="img-profile rounded-circle" style="height: 60px;width:60px;"
+                                    src="{{ asset('storage/' . Auth::user()->photo) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-bs-labelledby="userDropdown">
-                                {{-- <a class="dropdown-item" href="#">
-                                                <i class="fa-solid fa-user text-gray-400"></i>
-                                                Profil
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <i class="fa-solid fa-user-plus text-gray-400"></i>
-                                                Ajouter un nouveau utilisateur
-                                            </a>
-                                            <div class="dropdown-divider"></div> --}}
+                                <a class="dropdown-item" href="{{ url('/admin/user/'. Auth::user()->id ) }}">
+                                    <i class="fa-solid fa-user text-gray-400"></i>
+                                    Mon Profil
+                                </a>
+
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="" data-bs-toggle="modal"
                                     data-bs-target="#logoutModal">
                                     <i class="fa-solid fa-right-from-bracket text-gray-400"></i>

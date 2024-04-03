@@ -24,6 +24,7 @@ use App\Http\Controllers\TypePsController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\DossierController;
 use App\Http\Controllers\ValideController;
+use App\Http\Controllers\UserController;
 
 
 use App\Http\Controllers\FormationsController;
@@ -319,6 +320,18 @@ Route::controller(DossierController::class)->group(function () {
     Route::post('/admin/dossier/{titre}/save', 'store_ajax');
     Route::put('/admin/dossier/{id}/{titre}update', 'update_ajax');
     Route::delete('/admin/dossier_ajax/{id}/delete', 'supp_ajax');
+});
+// --------------------------------------------------------------------------
+// ---------                Route pour users                     ----------
+// --------------------------------------------------------------------------
+Route::controller(UserController::class)->group(function () {
+
+    Route::get('/admin/user/{id}', 'show');
+    Route::get('/admin/user/{id}/edit', 'edit');
+    Route::put('/admin/user/{id}/update', 'update');
+    Route::get('/admin/user/{id}/mot-de-passe', 'motDePasse');
+    Route::put('/admin/user/{id}/changer-mot-de-passe', 'changerMotDePasse');
+
 });
 
 
