@@ -26,7 +26,7 @@
                     <form class="changer-mdp" action="{{ url('/admin/user/' . $user->id . '/changer-mot-de-passe') }}" data-id="{{ $user->id }}"
                         data-name="{{ $user->name }}" method="POST"
                         enctype="multipart/form-data">
-                        
+
                         @csrf
                         @method('PUT')
 
@@ -34,7 +34,7 @@
 
                             <!-- Champ pour le mot de passe actuel -->
                             <div class="col-12 form-group">
-                                <label for="mot_de_passe_actuel">Mot de passe actuel</label>
+                                <label for="mot_de_passe_actuel">Mot de passe actuel :</label>
                                 <input type="password" name="mot_de_passe_actuel" id="mot_de_passe_actuel"
                                     class="form-control">
                                 @error('mot_de_passe_actuel')
@@ -44,8 +44,8 @@
 
                             <!-- Champ pour le nouveau mot de passe -->
                             <div class="col-12 form-group">
-                                <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
-                                <input type="text" name="nouveau_mot_de_passe" id="nouveau_mot_de_passe"
+                                <label for="nouveau_mot_de_passe">Nouveau mot de passe :</label>
+                                <input type="password" name="nouveau_mot_de_passe" id="nouveau_mot_de_passe"
                                     class="form-control">
                                 @error('nouveau_mot_de_passe')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -54,9 +54,12 @@
 
                             <!-- Champ pour la confirmation du nouveau mot de passe -->
                             <div class="col-12 form-group">
-                                <label for="nouveau_mot_de_passe_confirmation">Confirmer le nouveau mot de passe</label>
-                                <input type="text" name="nouveau_mot_de_passe_confirmation"
+                                <label for="nouveau_mot_de_passe_confirmation">Confirmer le nouveau mot de passe :</label>
+                                <input type="password" name="nouveau_mot_de_passe_confirmation"
                                     id="nouveau_mot_de_passe_confirmation" class="form-control">
+                                    @error('nouveau_mot_de_passe_confirmation')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
 
