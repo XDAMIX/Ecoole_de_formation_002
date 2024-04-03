@@ -182,6 +182,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        // pour le menu de l'admin 
+        App\Providers\MenuServiceProvider::class,
+
         /*
         * Package Service Providers...
         */
