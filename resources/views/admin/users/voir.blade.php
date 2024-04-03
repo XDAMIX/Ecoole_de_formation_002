@@ -27,7 +27,7 @@
                     <div class="row">
 
                         <div class="col-12 d-flex justify-content-center text-center pt-3 pb-3">
-                            <h5 class="text-success" style="text-transform: uppercase;">Utilisateur Actuel</h5>
+                            <h5 class="text-secondary" style="text-transform: uppercase;">Utilisateur Actuel</h5>
                         </div>
 
                         <div class="col-6" id="cote-gauche">
