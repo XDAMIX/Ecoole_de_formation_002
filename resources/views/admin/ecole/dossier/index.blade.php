@@ -121,7 +121,7 @@
                             '" data-tite="' + value.titre + '" method="GET">' +
                             '@csrf' +
                             '<button type="button" onclick="edit_confirmation(this)"' +
-                            'class="btn btn-outline-primary alpa shadow"><i class="bi bi-pen"></i></button>' +
+                            'class="btn btn-outline-primary alpa shadow mr-2"><i class="bi bi-pen"></i></button>' +
                             '</form>' +
                             '</div>' +
                             '<div class="col-4">' +
@@ -130,7 +130,7 @@
                             '@csrf' +
                             '@method('DELETE')' +
                             '<button type="button" onclick="supprimer_confirmation(this)"' +
-                            'class="btn btn-outline-danger alpa shadow"><i class="bi bi-trash3"></i></button>' +
+                            'class="btn btn-outline-danger alpa shadow ml-2"><i class="bi bi-trash3"></i></button>' +
                             '</form>' +
                             '</div>' +
                             '</div>' +

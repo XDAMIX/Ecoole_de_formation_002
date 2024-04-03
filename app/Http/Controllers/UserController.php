@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -34,7 +35,7 @@ class UserController extends Controller
             $user->photo = $request->photo->store('/public/images/users');
         }
         $user->save();
-
+        Alert::success( 'Vos informations ont été modifiées avec succès')->position('center')->autoClose(2000);
         return view('admin.users.voir', compact('user'));
     }
 
@@ -50,7 +51,9 @@ class UserController extends Controller
         // Valider les données
         $request->validate([
             'mot_de_passe_actuel' => 'required',
-            'nouveau_mot_de_passe' => 'required|string|min:8|confirmed',
+            // 'nouveau_mot_de_passe' => 'required|string|min:8|confirmed',
+            'nouveau_mot_de_passe' => 'required|string|min:8',
+            'nouveau_mot_de_passe_confirmation' => 'required|string|min:8',
         ]);
 
         // Trouver l'utilisateur
@@ -58,16 +61,26 @@ class UserController extends Controller
 
         // Vérifier que le mot de passe actuel correspond
         if (!Hash::check($request->input('mot_de_passe_actuel'), $user->password)) {
-            return response()->json(['message' => 'Le mot de passe actuel est incorrect !'], 400);
+            Alert::error( 'Le mot de passe actuel est incorrect')->position('center')->autoClose(2000);
+            return view('admin.users.changer', compact('user'));
         }
-
+        
         // Mettre à jour le mot de passe
         else {
-            $user->password = Hash::make($request->input('nouveau_mot_de_passe'));
-            $user->save();
-            // return response()->json(['message' => 'Le mot de passe actuel est correct, le mot de passe est changé avec succes'], 400);
+            $nouveaupassword = $request->input('nouveau_mot_de_passe');
+            $confirmpassword = $request->input('nouveau_mot_de_passe_confirmation');
+
+            if($nouveaupassword !== $confirmpassword){
+                Alert::error( 'Le mot de passe de confirmation ne correspond pas au nouveau mot de passe')->position('center')->autoClose(3000);
+                return view('admin.users.changer', compact('user'));
+            }
+            else{
+                $user->password = Hash::make($request->input('nouveau_mot_de_passe'));
+                $user->save();
+                Alert::success( 'Votre mot de passe a été modifié avec succès')->position('center')->autoClose(2000);
+                return view('admin.users.voir', compact('user'));
+            }
         }
 
-        return view('admin.users.voir', compact('user'));
     }
 }
