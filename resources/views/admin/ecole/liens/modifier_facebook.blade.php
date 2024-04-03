@@ -54,8 +54,10 @@
                                         class="btn-description">Enregistrer</span></button>
                                 </div>
                                 <div class="col-6">
-                                    <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/ecole' }}"><i
-                                            class="bi bi-x"></i><span class="btn-description">Annuler</span></a>
+                                    <a class="btn btn-outline-danger alpa shadow" href="{{ '/admin/ecole' }}">
+                                        <i class="bi bi-x"></i>
+                                        <span class="btn-description">Annuler</span>
+                                    </a>
                                 </div>
                             </div>
 

@@ -37,6 +37,7 @@ return array(
     'App\\Http\\Controllers\\TelephoneController' => $baseDir . '/app/Http/Controllers/TelephoneController.php',
     'App\\Http\\Controllers\\TemoignageController' => $baseDir . '/app/Http/Controllers/TemoignageController.php',
     'App\\Http\\Controllers\\TypePsController' => $baseDir . '/app/Http/Controllers/TypePsController.php',
+    'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Controllers\\WebsiteController' => $baseDir . '/app/Http/Controllers/WebsiteController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',

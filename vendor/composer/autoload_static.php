@@ -623,6 +623,7 @@ class ComposerStaticInitda57ae409123d235317f6ea01c50f106
         'App\\Http\\Controllers\\TelephoneController' => __DIR__ . '/../..' . '/app/Http/Controllers/TelephoneController.php',
         'App\\Http\\Controllers\\TemoignageController' => __DIR__ . '/../..' . '/app/Http/Controllers/TemoignageController.php',
         'App\\Http\\Controllers\\TypePsController' => __DIR__ . '/../..' . '/app/Http/Controllers/TypePsController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\WebsiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebsiteController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
