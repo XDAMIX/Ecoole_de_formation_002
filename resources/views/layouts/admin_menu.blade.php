@@ -93,23 +93,44 @@
         <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/admin') }}">
+
+            
+  
+            
+            {{-- <a class="logo me-auto" data-bs-toggle="offcanvas" href="#offcanvasWithBothOptions" role="button" aria-controls="offcanvasWithBothOptions">
+                <img src="{{asset('storage/'.$information->logo_blanc)}}" alt="logo">
+              </a> --}}
+             
+
+
+              <div class="row m-2">
+                <a href="/admin">
+                  <div class="col-12" style="background-image:url({{ asset('storage/' . $information->logo_blanc) }});background-size:contain ;background-position: center;background-repeat: no-repeat;height:50px;">                       
+                  </div>
+                </a>
+              </div>
+
+
+            {{-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/admin') }}"> --}}
+                {{-- <div class="sidebar-brand-icon "> --}}
+
+                    {{-- <img style="height: 50px;" src="{{asset('storage/'.$information->logo_blanc)}}" alt="logo"> --}}
+                {{-- </div> --}}
+                {{-- <div class="sidebar-brand-text mx-2" style="font-size: 12px;">{{ config('app.name', 'Laravel') }}</div> --}}
+
+            {{-- </a> --}}
+            {{-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/admin') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                 </div>
                 <div class="sidebar-brand-text mx-2" style="font-size: 12px;">{{ config('app.name', 'Laravel') }}</div>
 
-            </a>
+            </a> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            {{-- <li class="nav-item active">
-                            <a class="nav-link" href="{{ url('/admin') }}">
-                                <i class="fa-solid fa-house"></i>
-                                <span>Dashboard</span></a>
-                        </li> --}}
+    
 
             <!-- Divider -->
             <hr class="sidebar-divider">
