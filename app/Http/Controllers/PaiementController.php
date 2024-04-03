@@ -51,6 +51,7 @@ public function index(){
     ->groupBy('etudiants.id', 'etudiants.prix_formation')
     ->get();
     
+    
 
 
     return view('admin.paiements.index',[
